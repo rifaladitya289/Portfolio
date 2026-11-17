@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio – Nama Kamu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!--
+ FILE YANG DIPASANG DI FOLDER assets/ (semua opsional, kalau belum ada otomatis pakai placeholder):
+  assets/hero-bg.jpg       latar hero (pemandangan / gunung)
+  assets/hero-person.png   foto orang tanpa background untuk hero
+  assets/about.png         foto cutout untuk bagian About
+  assets/profile.jpg       foto di kartu "Find Me"
+  assets/projects/1.jpg..  gambar proyek    assets/certs/1.jpg..  sertifikat    assets/awards/1.jpg..  penghargaan
+  cv.pdf                   file CV
+-->
+<script src="js/fit.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav id="nav"><span id="pill"></span>
+  <span id="mascot"><svg viewBox="0 0 24 28"><circle cx="12" cy="11" r="10" fill="currentColor"/><circle cx="8.3" cy="10" r="1.7" fill="var(--eye)"/><circle cx="15.7" cy="10" r="1.7" fill="var(--eye)"/><path d="M9 20l3 7 3-7z" fill="currentColor"/></svg></span>
+  <a href="#home" class="on">Home</a><a href="#about">About</a><a href="#portfolio">Portfolio</a><a href="#contact">Contact</a>
+</nav>
+<div id="wipe"></div>
+
+<!-- HOME -->
+<section id="home">
+  <div class="stage">
+    <video id="heroVid" class="vid" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true" disablepictureinpicture>
+      <source src="assets/hero-bg.mp4" type="video/mp4"><source src="assets/hero-bg.webm" type="video/webm">
+    </video>
+    <div class="layer l-bg" data-s="0.12"></div>
+    <div class="layer mount" data-s="0.15"></div>
+    <div class="layer hero-t" data-s="-0.12"><h1>WELCOME TO MY PORTFOLIO</h1></div>
+    <div class="vshade"></div>
+    <div class="layer person" data-s="0.04"><i></i><img src="assets/hero-person.png" alt="" onerror="this.remove()"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="topo"></div>
+  <h2 class="sec-title">About Me</h2>
+  <div class="about-grid">
+    <div class="a-left"><h2>Hi, I'm <span>Nama Kamu</span></h2><p style="height:14px"></p><a class="btn" href="cv.pdf">View CV</a></div>
+    <div class="a-photo"><i></i><img src="assets/about.png" alt="" onerror="this.remove()"></div>
+    <div class="a-right"><p>Sebagai mahasiswa/pelajar yang berfokus pada teknologi, aku membangun pengalaman digital yang tidak hanya fungsional, tetapi juga menarik dan berdampak.</p><a class="btn" href="#portfolio">View Projects</a></div>
+  </div>
+
+  <div class="tl">
+    <div><h3>Education</h3>
+      <div class="list" tabindex="0" aria-label="Education">
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">UN</i>Nama Universitas</span><time>2025 – Present</time></div><strong>Nama Jurusan / Program Studi</strong><div class="sub">Fakultas kamu<em>Undergraduate</em></div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">SM</i>Nama SMA / SMK</span><time>2022 – 2025</time></div><strong>Jurusan sekolah</strong><div class="sub">Kota<em>SMK</em></div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">SP</i>Nama SMP</span><time>2019 – 2022</time></div><strong>Sekolah Menengah Pertama</strong><div class="sub">Kota<em>SMP</em></div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">SD</i>Nama SD</span><time>2013 – 2019</time></div><strong>Sekolah Dasar</strong><div class="sub">Kota<em>SD</em></div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">TK</i>Nama TK</span><time>2011 – 2013</time></div><strong>Pendidikan Anak Usia Dini</strong><div class="sub">Kota<em>TK</em></div></div>
+      </div>
+    </div>
+    <div><h3>Experience</h3>
+      <div class="list" tabindex="0" aria-label="Experience">
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">OR</i>Nama Organisasi</span><time>2026</time></div><strong>Posisi / Role</strong><div class="sub">Divisi<em>Committee</em></div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">KM</i>Nama Komunitas</span><time>2025</time></div><strong>Posisi / Role</strong><div class="sub">Divisi<em>Community</em></div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">PT</i>Nama Perusahaan</span><time>2025</time></div><strong>Posisi / Role</strong><div class="sub">Departemen<em>Internship</em></div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">AK</i>Nama Kampus</span><time>2024</time></div><strong>Teaching Assistant</strong><div class="sub">Mata kuliah<em>Academic</em></div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">VL</i>Nama Kegiatan</span><time>2023</time></div><strong>Volunteer</strong><div class="sub">Bidang<em>Volunteer</em></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="folders">
+    <button class="folder" data-tab="projects"><div class="back"></div><div class="peek" id="pk-projects"></div><div class="front"><b id="n-projects">0</b>Projects<i class="go">↗</i></div></button>
+    <button class="folder" data-tab="certs"><div class="back"></div><div class="peek" id="pk-certs"></div><div class="front"><b id="n-certs">0</b>Certificates<i class="go">↗</i></div></button>
+    <button class="folder" data-tab="awards"><div class="back"></div><div class="peek" id="pk-awards"></div><div class="front"><b id="n-awards">0</b>Awards<i class="go">↗</i></div></button>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="topo l"></div>
+  <h2 class="sec-title">Portofolio</h2>
+  <div class="tabs" id="tabs">
+    <button data-tab="projects" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>Projects</button>
+    <button data-tab="certs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.500-7"/></svg>Certificates</button>
+    <button data-tab="awards"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 21h8"/></svg>Awards</button>
+  </div>
+  <div id="stageP"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="topo l"></div>
+  <div class="cols">
+    <div class="stack">
+      <div class="box">
+        <h2>Hubungi</h2><p class="s">Ada yang mau didiskusikan? Langsung kirim pesan aja ya!</p>
+        <form id="msgForm"><input type="text" name="n" placeholder="Nama Anda" required><input type="email" name="e" placeholder="Email Anda" required><textarea name="m" placeholder="Pesan Anda" required></textarea><button class="btn w">Kirim Pesan</button></form>
+      </div>
+      <div class="box find">
+        <h3 style="font-family:var(--f-body);font-size:1.05rem;margin-bottom:4px">Find Me</h3>
+        <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:#0a66c2">in</i><span><b>Let's Connect</b><small>on LinkedIn</small></span><i class="ex">↗</i></a>
+        <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:linear-gradient(45deg,#f9a03f,#e1306c,#833ab4)">ig</i><span><b>Instagram</b><small>@username</small></span><i class="ex">↗</i></a>
+        <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:#111">gh</i><span><b>GitHub</b><small>@username</small></span><i class="ex">↗</i></a>
+        <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:#000">tt</i><span><b>TikTok</b><small>@username</small></span><i class="ex">↗</i></a>
+        <div class="pfp"><img src="assets/profile.jpg" alt="" onerror="this.remove()">Foto profil</div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="box">
+        <h2>Tulis Komentar</h2>
+        <form id="cmtForm">
+          <label class="f">Nama</label><input type="text" name="n" placeholder="Masukkan nama kamu" required>
+          <label class="f">Komentar</label><textarea name="c" placeholder="Tulis komentar kamu di sini..." required></textarea>
+          <label class="f">Foto Profil (opsional)</label>
+          <label class="file"><input type="file" name="p" accept="image/*"><span id="fname">Choose Profile Photo</span></label>
+          <p class="hintf">Max file: 1MB</p>
+          <button class="btn w">Kirim Komentar</button>
+        </form>
+      </div>
+      <div class="box cmt"><h3>Komentar (<span id="cn">0</span>)</h3><div class="clist" id="cmts"></div></div>
+    </div>
+  </div>
+</section>
+<footer>© 2026 Nama Kamu</footer>
+<div id="lb"><div><img alt=""><p></p></div></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
 
