@@ -161,7 +161,7 @@ body{min-height:100%;overscroll-behavior:none}
 /* SMOOTH SPIDER-MAN REVEAL */
 @property --reveal-size{
   syntax:"<length>";
-  inherits:false;
+  inherits:true;
   initial-value:0px;
 }
 .a-photo{
