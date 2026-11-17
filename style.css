@@ -2146,7 +2146,7 @@ body.portfolio-modal-open{overflow:hidden}
 
 /* CONTACT — CINEMATIC EDITORIAL REBUILD */
 #contact.contact-cinematic{
-  min-height:100vh;height:auto;overflow:hidden;isolation:isolate;
+  min-height:100vh;height:auto;overflow-x:hidden;overflow-y:auto;isolation:isolate;
   padding:clamp(112px,12vh,150px) clamp(22px,7vw,110px) 64px;
   background:radial-gradient(ellipse at 78% 24%,rgba(54,91,164,.22),transparent 42%),linear-gradient(135deg,#071329 0%,#040914 55%,#08152b 100%);
 }
