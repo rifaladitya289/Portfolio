@@ -1430,3 +1430,86 @@ body.portfolio-modal-open{overflow:hidden}
   #pageTrack>section:not(#home) .ambient-motion-bg{transform:none;transition:none}
 }
 
+/* ABOUT COLLECTION CARDS — REBUILT FOR CLEAR HIERARCHY */
+#about .folders{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-items:stretch;
+  gap:18px!important;
+  width:100%;
+  max-width:1120px;
+  margin:30px auto 0!important;
+}
+#about .folder{
+  display:block;
+  position:relative;
+  width:100%!important;
+  min-width:0!important;
+  height:174px!important;
+  min-height:174px;
+  overflow:hidden;
+  border:1px solid rgba(151,177,235,.22)!important;
+  border-radius:17px!important;
+  background:linear-gradient(145deg,rgba(23,40,75,.94),rgba(7,14,30,.98))!important;
+  box-shadow:0 16px 38px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.045);
+  text-align:left;
+  isolation:isolate;
+  transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
+}
+#about .folder::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(115deg,rgba(111,146,220,.14),transparent 48%),linear-gradient(0deg,rgba(3,8,19,.72),transparent 80%);
+}
+#about .folder .back{display:none!important}
+#about .folder .peek{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  border-radius:0!important;opacity:.22!important;
+  background:radial-gradient(circle at 85% 18%,rgba(140,170,245,.65),transparent 44%)!important;
+  transform:none!important;
+}
+#about .folder:nth-child(2) .peek{background:radial-gradient(circle at 85% 18%,rgba(128,160,235,.62),transparent 44%)!important}
+#about .folder:nth-child(3) .peek{background:radial-gradient(circle at 85% 18%,rgba(164,174,224,.62),transparent 44%)!important}
+#about .folder .front{
+  position:absolute!important;inset:0!important;z-index:2;
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+  justify-content:flex-end!important;gap:0!important;
+  padding:19px 20px!important;
+  border:0!important;border-radius:0!important;background:transparent!important;
+  backdrop-filter:none!important;
+  color:#f3f6ff!important;font:650 1rem/1.25 var(--f-head)!important;
+  letter-spacing:.01em!important;
+}
+#about .folder .front b{
+  display:block!important;margin:0 0 8px!important;
+  color:#b9ccff!important;font:750 2.15rem/.95 var(--f-head)!important;
+  letter-spacing:-.055em!important;
+}
+#about .folder .go{
+  position:absolute!important;right:17px!important;bottom:17px!important;
+  display:grid!important;place-items:center;
+  width:34px!important;height:34px!important;
+  border:1px solid rgba(177,199,247,.3)!important;border-radius:50%!important;
+  background:rgba(117,151,224,.13)!important;color:#e3ebff!important;
+  font-style:normal;font-size:.9rem;
+}
+#about .folder:hover,#about .folder:focus-visible{
+  transform:translateY(-5px)!important;
+  border-color:rgba(164,190,250,.58)!important;
+  box-shadow:0 24px 48px rgba(0,0,0,.32),0 0 26px rgba(80,118,205,.12)!important;
+}
+#about .folder:hover .peek,#about .folder:focus-visible .peek{opacity:.38!important;transform:scale(1.04)!important}
+@media(max-width:700px){
+  #about .folders{
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+    margin-top:22px!important;
+  }
+  #about .folder{
+    height:112px!important;min-height:112px;
+    border-radius:15px!important;
+  }
+  #about .folder .front{padding:15px 18px!important}
+  #about .folder .front b{font-size:1.8rem!important;margin-bottom:5px!important}
+  #about .folder .go{right:16px!important;bottom:16px!important}
+}
+
