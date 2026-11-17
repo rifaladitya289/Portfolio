@@ -141,7 +141,22 @@ function fitLists(){
     focusList(l);
   });
 }
-$$(".tl .list").forEach(l=>l.addEventListener("scroll",()=>requestAnimationFrame(()=>focusList(l)),{passive:true}));
+$(".tl .list").forEach(l=>{
+  l.addEventListener("scroll",()=>requestAnimationFrame(()=>focusList(l)),{passive:true});
+  l.addEventListener("click",e=>{
+    const item=e.target.closest(".item");
+    if(!item||!l.contains(item))return;
+    const items=$(".item",l);
+    const first=items[0];
+    const top=item.offsetTop-first.offsetTop;
+    l.scrollTo({top,behavior:"smooth"});
+    items.forEach(x=>{
+      const active=x===item;
+      x.classList.toggle("act",active);
+      x.style.opacity=active?1:.68;
+    });
+  });
+});
 fitLists();addEventListener("load",fitLists);addEventListener("resize",fitLists);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitLists);
 
