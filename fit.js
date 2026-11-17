@@ -1,21 +1,18 @@
-/* Responsif otomatis: HP, tablet, desktop, dan "Situs desktop" di HP */
+/* DESKTOP CANVAS MODE
+   Mempertahankan layout desktop pada layar HP.
+   Pengguna tetap dapat memperbesar halaman dengan gesture browser.
+*/
 (function(){
-  var root = document.documentElement;
-
+  var root=document.documentElement;
   function fit(){
-    var width = root.clientWidth || window.innerWidth;
-    var height = window.innerHeight;
-
-    /* Jangan paksa zoom: biarkan browser menentukan lebar viewport desktop/mobile. */
-    root.style.zoom = "1";
-    root.style.setProperty("--u", (width / 100) + "px");
-    root.style.setProperty("--h", (height / 100) + "px");
-
-    /* Layout compact hanya aktif ketika viewport memang sempit. */
-    root.classList.toggle("compact", width < 760);
+    var width=root.clientWidth||1200;
+    var height=window.innerHeight;
+    root.style.zoom="1";
+    root.style.setProperty("--u",(width/100)+"px");
+    root.style.setProperty("--h",(height/100)+"px");
+    root.classList.remove("compact");
   }
-
   fit();
-  window.addEventListener("resize", fit);
-  window.addEventListener("orientationchange", fit);
+  window.addEventListener("resize",fit,{passive:true});
+  window.addEventListener("orientationchange",fit,{passive:true});
 })();
