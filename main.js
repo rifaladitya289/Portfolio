@@ -429,3 +429,50 @@ renderC();
     item.click();
   });
 })();
+
+
+// ---------- STAGE 5: real pointer + touch interaction ----------
+(function(){
+  const root=document.documentElement;
+  const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fine=window.matchMedia&&window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+  const targets=".btn,.arr,.tabs button,.card,.folder,.pol,nav a,.find a";
+  if(fine&&!reduce)root.classList.add("has-interactive-pointer");
+
+  // Spotlight follows the actual pointer, including dynamically rendered cards.
+  document.addEventListener("pointermove",e=>{
+    if(e.pointerType!=="mouse"||reduce)return;
+    const el=e.target.closest(targets);
+    if(!el)return;
+    const r=el.getBoundingClientRect();
+    el.style.setProperty("--ix",(e.clientX-r.left)+"px");
+    el.style.setProperty("--iy",(e.clientY-r.top)+"px");
+  },{passive:true});
+
+  // Touch devices get a visible, temporary response instead of hover-only effects.
+  let activeTimer=0;
+  function activate(el,x,y){
+    if(!el)return;
+    const r=el.getBoundingClientRect();
+    el.style.setProperty("--ix",(x-r.left)+"px");
+    el.style.setProperty("--iy",(y-r.top)+"px");
+    el.classList.remove("touch-active");
+    void el.offsetWidth;
+    el.classList.add("touch-active");
+    clearTimeout(activeTimer);
+    activeTimer=setTimeout(()=>el.classList.remove("touch-active"),720);
+  }
+  document.addEventListener("pointerdown",e=>{
+    const el=e.target.closest(targets);
+    if(!el)return;
+    activate(el,e.clientX,e.clientY);
+  },{passive:true});
+
+  // Keyboard focus receives the same spotlight state for accessible navigation.
+  document.addEventListener("focusin",e=>{
+    const el=e.target.closest(targets);
+    if(!el)return;
+    el.style.setProperty("--ix","50%");
+    el.style.setProperty("--iy","50%");
+  });
+})();
