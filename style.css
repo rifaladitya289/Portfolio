@@ -1345,3 +1345,56 @@ body.portfolio-modal-open{overflow:hidden}
 @keyframes portfolio-shimmer{0%{transform:translateX(-120%);opacity:0}18%{opacity:.8}100%{transform:translateX(120%);opacity:0}}
 @media(hover:none){#stageP .work-card:hover .work-image{box-shadow:none}#stageP .work-card:hover .art-window{transform:perspective(700px) rotateY(-9deg) rotateX(3deg)}}
 @media(prefers-reduced-motion:reduce){#tabs button,.btn,.arr,.featured-work,.work-card,.lb-close,#stageP .art-window,#stageP .art-orbit{transition:none!important}#stageP.portfolio-shimmer-in .work-image:before,#stageP.portfolio-shimmer-in .featured-preview:before{animation:none!important}}
+
+ 
+/* MICRO MOTION — refined, restrained motion language */
+@keyframes gs-rise-in{
+  from{opacity:0;transform:translate3d(0,14px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@keyframes gs-soft-glow{
+  0%,100%{opacity:.48}
+  50%{opacity:.82}
+}
+@keyframes gs-orbit-breathe{
+  0%,100%{opacity:.68}
+  50%{opacity:1}
+}
+#stageP .category-copy{
+  animation:gs-rise-in .55s cubic-bezier(.2,.7,.25,1) both;
+}
+#stageP .featured-work{
+  animation:gs-rise-in .62s .06s cubic-bezier(.2,.7,.25,1) both;
+}
+#stageP .work-card{
+  animation:gs-rise-in .56s calc(.1s + (var(--card-order,0) * 65ms)) cubic-bezier(.2,.7,.25,1) both;
+}
+#stageP .work-card:nth-child(1){--card-order:0}
+#stageP .work-card:nth-child(2){--card-order:1}
+#stageP .work-card:nth-child(3){--card-order:2}
+#stageP .work-card:nth-child(4){--card-order:3}
+#stageP .work-card:nth-child(5){--card-order:4}
+#stageP .work-card:nth-child(6){--card-order:5}
+#stageP .work-card:nth-child(7){--card-order:6}
+#stageP .work-card:nth-child(8){--card-order:7}
+#stageP .work-card:nth-child(9){--card-order:8}
+#stageP .art-caption{transition:letter-spacing .35s ease,opacity .35s ease}
+#stageP .work-card:hover .art-caption{letter-spacing:.27em;opacity:1}
+#stageP .work-card:hover .work-meta h3{transform:translateX(3px);color:#fff}
+#stageP .work-meta h3{transition:transform .32s ease,color .32s ease}
+#stageP .work-arrow{display:inline-block;transition:transform .32s cubic-bezier(.2,.75,.25,1),color .32s ease}
+#stageP .work-card:hover .work-arrow{transform:translate(4px,-4px);color:#e2ebff}
+#stageP .art-orbit{animation:gs-orbit-breathe 5.5s ease-in-out infinite}
+#stageP .work-card:hover .art-orbit{animation-play-state:paused}
+#tabs button svg{transition:transform .32s cubic-bezier(.2,.75,.25,1)}
+#tabs button:hover svg{transform:translateY(-2px) rotate(-4deg)}
+#tabs button.on svg{filter:drop-shadow(0 0 6px rgba(178,202,255,.35))}
+.btn,.arr,.lb-close,.work-open{transition:transform .28s cubic-bezier(.2,.75,.25,1),filter .28s ease,box-shadow .28s ease!important}
+.btn:hover,.arr:hover{filter:brightness(1.12)}
+.btn:active,.arr:active,.lb-close:active{transform:scale(.96)!important}
+#lb .lb-art{animation:gs-rise-in .35s ease both}
+#lb.on>div{animation:gs-rise-in .38s cubic-bezier(.2,.7,.25,1) both}
+@media(prefers-reduced-motion:reduce){
+  #stageP .category-copy,#stageP .featured-work,#stageP .work-card,#stageP .art-orbit,#lb .lb-art,#lb.on>div{animation:none!important}
+  #stageP .work-meta h3,#stageP .work-arrow,#stageP .art-caption,#tabs button svg{transition:none!important}
+}
