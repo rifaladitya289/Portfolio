@@ -24,18 +24,84 @@ document.documentElement.style.setProperty("--topo-l",topo("#d3d9e6"));
   const im=new Image();im.onload=()=>document.body.classList.add(cls);im.src=src;
 });
 
-// ---------- Video latar hero (loop, autoplay, hemat baterai) ----------
+// ---------- Video latar hero (soft crossfade saat mengulang) ----------
 (function(){
-  const v=$("#heroVid");if(!v)return;
-  v.muted=true;
+  const first=$("#heroVid");if(!first)return;
+  const stage=first.closest(".stage");
+  const FADE_MS=650;
+  const TRIGGER_SEC=.78;
+  let active=first,standby=null,fading=false,raf=0;
+
+  first.muted=true;
   const ok=()=>document.body.classList.add("has-vid");
-  v.addEventListener("loadeddata",ok);if(v.readyState>=2)ok();
-  const play=()=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};
-  if(matchMedia("(prefers-reduced-motion:reduce)").matches){v.removeAttribute("autoplay");v.pause();return}
-  play();
-  ["touchstart","click","scroll"].forEach(e=>addEventListener(e,()=>{if(v.paused)play()},{once:true,passive:true}));
-  document.addEventListener("visibilitychange",()=>document.hidden?v.pause():play());
-  new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?play():v.pause())).observe($(".stage"));
+  first.addEventListener("loadeddata",ok);if(first.readyState>=2)ok();
+
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches){
+    first.removeAttribute("autoplay");first.pause();return;
+  }
+
+  // Video kedua disiapkan di belakang layar untuk memulai dari frame pertama.
+  standby=first.cloneNode(true);
+  standby.removeAttribute("id");
+  standby.removeAttribute("autoplay");
+  standby.autoplay=false;
+  standby.muted=true;
+  standby.preload="auto";
+  standby.classList.add("is-hidden");
+  standby.pause();
+  stage.insertBefore(standby,first.nextSibling);
+  standby.load();
+
+  function playActive(){
+    if(document.hidden)return;
+    const p=active.play();
+    if(p&&p.catch)p.catch(()=>{});
+  }
+
+  function finishFade(){
+    const previous=active;
+    active=standby;
+    standby=previous;
+    previous.pause();
+    try{previous.currentTime=0}catch(e){}
+    previous.classList.add("is-hidden");
+    active.classList.remove("is-hidden");
+    fading=false;
+  }
+
+  function startFade(){
+    if(fading||standby.readyState<2)return;
+    fading=true;
+    try{standby.currentTime=0}catch(e){}
+    const p=standby.play();
+    const reveal=()=>{
+      standby.classList.remove("is-hidden");
+      active.classList.add("is-hidden");
+      window.setTimeout(finishFade,FADE_MS);
+    };
+    if(p&&typeof p.then==="function")p.then(reveal).catch(()=>{fading=false});
+    else reveal();
+  }
+
+  function checkLoop(){
+    if(!document.hidden&&!fading&&!active.paused&&Number.isFinite(active.duration)){
+      const remaining=active.duration-active.currentTime;
+      if(remaining>0&&remaining<=TRIGGER_SEC&&standby.readyState>=2)startFade();
+    }
+    raf=requestAnimationFrame(checkLoop);
+  }
+
+  playActive();
+  if(!raf)raf=requestAnimationFrame(checkLoop);
+  ["touchstart","click","scroll"].forEach(e=>addEventListener(e,()=>{if(active.paused)playActive()},{once:true,passive:true}));
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden){active.pause();standby.pause()}
+    else playActive();
+  });
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting)playActive();
+    else{active.pause();standby.pause()}
+  })).observe(stage);
 })();
 
 // ---------- Parallax hero ----------
