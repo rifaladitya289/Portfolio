@@ -41,11 +41,9 @@ body.light #mascot{color:#111;--eye:#fff}
 .hero-t h1{font-size:var(--fs-hero);line-height:1.02;text-shadow:0 6px 40px rgba(0,0,0,.4)}
 .hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:var(--fs-small);color:#c9d3ea}
 /* ABOUT */
-#about{position:relative;background:#04070f;isolation:isolate;overflow:hidden}
-#about>.about-bg-video{position:absolute;top:50%;left:50%;display:block;width:var(--about-video-width,100vh);height:var(--about-video-height,100vw);max-width:none;object-fit:contain;object-position:center;transform:translate(-50%,-50%) rotate(90deg);transform-origin:center;z-index:0;opacity:1;filter:none;image-rendering:auto;pointer-events:none}
-#about>.about-bg-overlay{position:absolute;inset:0;z-index:1;pointer-events:none;background:rgba(4,7,15,.12)}
-#about>.topo{display:none}
-#about>.sec-title,#about>.about-grid,#about>.tl,#about>.folders{position:relative;z-index:2}
+#about{position:relative;background:linear-gradient(145deg,#091326 0%,#04070f 52%,#08101f 100%);isolation:isolate;overflow:hidden}
+#about>.topo{opacity:.38}
+#about>.sec-title,#about>.about-grid,#about>.tl,#about>.folders{position:relative;z-index:1}
 .about-grid{display:grid;grid-template-columns:1fr minmax(200px,.9fr) 1fr;gap:24px;align-items:end;max-width:1100px;margin:0 auto;position:relative}
 .a-left h2{font-size:var(--fs-title);line-height:1.08}.a-left h2 span{color:var(--blue);display:block}
 .a-right p{color:#c3cbe0;font-size:1.02rem;line-height:1.7;margin-bottom:20px}
