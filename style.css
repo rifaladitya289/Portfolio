@@ -1077,3 +1077,44 @@ body.portfolio-modal-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
  #stageP .work-card,#stageP .work-image img,#lb,#lb>div{transition:none!important}
 }
+
+
+/* FINAL OVERRIDE · FORCE VISIBLE NAVY PORTFOLIO BACKDROP */
+#pageTrack>#portfolio{
+  background:
+    radial-gradient(ellipse at 78% 10%,rgba(43,91,190,.25),transparent 38%),
+    radial-gradient(ellipse at 12% 82%,rgba(30,61,130,.2),transparent 42%),
+    linear-gradient(145deg,#071126 0%,#030711 58%,#09162d 100%) !important;
+  color:#edf2ff!important;
+}
+#portfolio::before{
+  background:linear-gradient(135deg,rgba(4,10,27,.28),rgba(5,12,31,.42) 55%,rgba(8,14,35,.3))!important;
+}
+#portfolio::after{opacity:.24!important}
+#portfolio .portfolio-banner-top span,
+#portfolio .portfolio-banner-bottom p{color:#aab9d8!important}
+#portfolio .portfolio-banner-bottom a{color:#dce6ff!important}
+#portfolio .portfolio-banner-title{color:#f5f7ff!important}
+#portfolio .tabs{background:rgba(14,26,51,.9)!important;border:1px solid rgba(139,166,225,.24)!important}
+#portfolio .tabs button{color:#cbd6ee!important}
+#portfolio .tabs button.on{background:#3159a8!important;color:#fff!important}
+#stageP .category-copy h2{color:#f0f4ff!important}
+#stageP .category-copy p{color:#aab8d3!important}
+#stageP .category-total strong{color:#9bb6ff!important}
+#stageP .category-total span{color:#8e9fbe!important}
+#stageP .work-card{
+  background:linear-gradient(145deg,rgba(20,34,63,.96),rgba(9,17,34,.98))!important;
+  border:1px solid rgba(126,155,220,.24)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.24)!important;
+}
+#stageP .work-card:hover,#stageP .work-card:focus-visible{
+  border-color:rgba(135,166,244,.65)!important;
+  box-shadow:0 22px 48px rgba(0,0,0,.36),0 0 0 1px rgba(106,143,229,.14)!important;
+}
+#stageP .work-image{background:linear-gradient(135deg,#14264b,#263f72)!important}
+#stageP .work-meta h3{color:#f0f4ff!important}
+#stageP .work-meta p{color:#aab8d3!important}
+#stageP .work-type{color:#91adf0!important}
+#stageP .work-meta{border-color:rgba(155,177,224,.2)!important}
+#stageP .work-arrow{color:#a8beff!important}
+#stageP .portfolio-endline{border-color:rgba(155,177,224,.2)!important;color:#899bbd!important}
