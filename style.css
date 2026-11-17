@@ -185,3 +185,10 @@ body{min-height:100%;overscroll-behavior:none}
 }
 .a-photo.is-revealing{--reveal-size:76px}
 @media(prefers-reduced-motion:reduce){.a-photo .about-spider{transition:none}}
+
+
+/* Slightly enlarge the Spider-Man layer to cover more of the back area */
+.a-photo .about-spider{
+  transform:scale(1.08);
+  transform-origin:center bottom;
+}
