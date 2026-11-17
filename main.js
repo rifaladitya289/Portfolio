@@ -340,3 +340,51 @@ renderC();
     card.style.setProperty("--tilt-y","0deg");
   },{passive:true});
 })();
+
+
+// ---------- Stage 3: cinematic reveal when sections enter view ----------
+(function(){
+  const root=document.documentElement;
+  const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const groups=[
+    ["#about",[".sec-title",".about-grid",".tl>div",".folders"]],
+    ["#portfolio",[".sec-title",".tabs","#stageP"]],
+    ["#contact",[".cols>.stack","footer"]]
+  ];
+  const targets=[];
+  groups.forEach(([sectionSelector,selectors])=>{
+    const section=$(sectionSelector);
+    if(!section)return;
+    selectors.forEach(selector=>{
+      $$(selector,section).forEach(el=>{
+        if(!el.classList.contains("cinematic-reveal")){
+          el.classList.add("cinematic-reveal");
+          targets.push({el,root:section});
+        }
+      });
+    });
+  });
+  if(!targets.length)return;
+  root.classList.add("cinematic-ready");
+  if(reduce||!("IntersectionObserver" in window)){
+    targets.forEach(({el})=>el.classList.add("is-visible"));
+    return;
+  }
+  const observers=new Map();
+  groups.forEach(([sectionSelector])=>{
+    const section=$(sectionSelector);
+    if(!section)return;
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting)return;
+        entry.target.classList.add("is-visible");
+        io.unobserve(entry.target);
+      });
+    },{root:section,threshold:.08,rootMargin:"0px 0px -6% 0px"});
+    observers.set(section,io);
+  });
+  targets.forEach(({el,root:section},index)=>{
+    el.style.setProperty("--reveal-delay",Math.min(index%4,3)*75+"ms");
+    observers.get(section)?.observe(el);
+  });
+})();
