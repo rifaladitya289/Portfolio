@@ -1,16 +1,12 @@
-/* DESKTOP CANVAS MODE
-   Mempertahankan layout desktop pada layar HP.
-   Pengguna tetap dapat memperbesar halaman dengan gesture browser.
-*/
+/* RESPONSIVE VIEWPORT FOUNDATION
+   Mengikuti ukuran layar asli tanpa memaksa kanvas desktop pada HP. */
 (function(){
   var root=document.documentElement;
   function fit(){
-    var width=root.clientWidth||1200;
-    var height=window.innerHeight;
-    root.style.zoom="1";
+    var width=root.clientWidth||window.innerWidth||1200;
+    var height=window.innerHeight||800;
     root.style.setProperty("--u",(width/100)+"px");
     root.style.setProperty("--h",(height/100)+"px");
-    root.classList.remove("compact");
   }
   fit();
   window.addEventListener("resize",fit,{passive:true});
