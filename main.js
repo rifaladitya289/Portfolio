@@ -1,1 +1,126 @@
+// ================= DATA (ganti dengan datamu) =================
+const DATA = {
+  projects:[1,2,3].map(i=>({t:"Proyek "+i,d:"Deskripsi singkat proyek.",img:`assets/projects/${i}.jpg`,url:""})),
+  certs:[1,2,3].map(i=>({t:"Sertifikat "+i,d:"Penyelenggara, 2026",img:`assets/certs/${i}.jpg`})),
+  awards:[1,2,3,4,5].map(i=>({t:"Penghargaan "+i,d:"Juara / Finalis",img:`assets/awards/${i}.jpg`}))
+};
+const SOCIAL_NOTE="";
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// ---------- Latar garis topografi (dibuat otomatis) ----------
+function topo(stroke){
+  const W=1200,H=900;let d="";
+  for(let i=0;i<26;i++){let p="";const y0=-60+i*38;
+    for(let x=0;x<=W;x+=30){const y=y0+Math.sin(x/170+i*.55)*34+Math.sin(x/70+i*1.3)*10+Math.cos(x/320-i*.2)*40;p+=(x?"L":"M")+x+" "+y.toFixed(1)}
+    d+=`<path d="${p}"/>`}
+  return `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='${W}' height='${H}' viewBox='0 0 ${W} ${H}' fill='none' stroke='${stroke}' stroke-width='1.2'>${d}</svg>`)}")`;
+}
+document.documentElement.style.setProperty("--topo-d",topo("#16264d"));
+document.documentElement.style.setProperty("--topo-l",topo("#d3d9e6"));
+
+// ---------- Cek aset gambar (hero, person, about) ----------
+[["assets/hero-bg.jpg","has-hero"],["assets/hero-person.png","has-person"],["assets/about.png","has-about"]].forEach(([src,cls])=>{
+  const im=new Image();im.onload=()=>document.body.classList.add(cls);im.src=src;
+});
+
+// ---------- Video latar hero (loop, autoplay, hemat baterai) ----------
+(function(){
+  const v=$("#heroVid");if(!v)return;
+  v.muted=true;
+  const ok=()=>document.body.classList.add("has-vid");
+  v.addEventListener("loadeddata",ok);if(v.readyState>=2)ok();
+  const play=()=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches){v.removeAttribute("autoplay");v.pause();return}
+  play();
+  ["touchstart","click","scroll"].forEach(e=>addEventListener(e,()=>{if(v.paused)play()},{once:true,passive:true}));
+  document.addEventListener("visibilitychange",()=>document.hidden?v.pause():play());
+  new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?play():v.pause())).observe($(".stage"));
+})();
+
+// ---------- Parallax hero ----------
+const layers=$$(".layer");
+function parallax(){const z=parseFloat(document.documentElement.style.zoom)||1,y=scrollY/z;layers.forEach(l=>l.style.transform=`translateY(${y*l.dataset.s}px)`)}
+addEventListener("scroll",parallax,{passive:true});parallax();
+
+// ---------- Navbar: pill, maskot, tema terang/gelap, transisi wipe ----------
+const links=$$("nav a"),pill=$("#pill"),mas=$("#mascot");
+function movePill(a){pill.style.left=a.offsetLeft+"px";pill.style.width=a.offsetWidth+"px";mas.style.left=(a.offsetLeft+a.offsetWidth/2-12)+"px"}
+let lastSec="home";
+function wipe(){const w=$("#wipe");w.classList.remove("go");void w.offsetWidth;w.classList.add("go")}
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const id=e.target.id,a=links.find(x=>x.hash==="#"+id);
+  links.forEach(x=>x.classList.toggle("on",x===a));movePill(a);
+  document.body.classList.toggle("light",id==="portfolio"||id==="contact");
+  if(id==="portfolio"&&lastSec==="about")wipe();
+  lastSec=id;
+}),{rootMargin:"-45% 0px -45% 0px",threshold:0});
+$$("section").forEach(s=>io.observe(s));
+addEventListener("load",()=>movePill($("nav a.on")));addEventListener("resize",()=>movePill($("nav a.on")));
+
+// ---------- Timeline: 3 item tampil, sisanya di-scroll + efek fokus ----------
+const SHOW=3;
+function focusList(l){
+  const it=$$(".item",l),st=l.scrollTop;let k=0,best=1e9;
+  it.forEach((x,i)=>{const d=Math.abs(x.offsetTop-it[0].offsetTop-st);if(d<best){best=d;k=i}});
+  it.forEach((x,i)=>{const d=Math.abs(i-k);x.classList.toggle("act",d===0);x.style.opacity=d===0?1:d===1?.55:.28});
+}
+function fitLists(){
+  $$(".tl .list").forEach(l=>{
+    const it=$$(".item",l);
+    if(it.length>SHOW){
+      l.style.height=(it[SHOW].offsetTop-it[0].offsetTop)+"px";
+    }else l.style.height="auto";
+    focusList(l);
+  });
+}
+$$(".tl .list").forEach(l=>l.addEventListener("scroll",()=>requestAnimationFrame(()=>focusList(l)),{passive:true}));
+fitLists();addEventListener("load",fitLists);addEventListener("resize",fitLists);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitLists);
+
+// ---------- Folder & Portfolio ----------
+["projects","certs","awards"].forEach(k=>{
+  $("#n-"+k).textContent=DATA[k].length;
+  const im=document.createElement("img");im.src=DATA[k][0].img;im.alt="";im.onerror=()=>im.remove();$("#pk-"+k).appendChild(im);
+});
+const ROT=[[6,34,-6],[36,2,4],[64,30,7],[18,56,-3],[50,58,5]];
+function openLb(i){$("#lb img").src=i.img;$("#lb img").onerror=()=>{$("#lb img").removeAttribute("src")};$("#lb p").textContent=i.t;$("#lb").classList.add("on")}
+$("#lb").addEventListener("click",()=>$("#lb").classList.remove("on"));
+let cur="projects";
+function showTab(k){
+  cur=k;$$("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===k));
+  const box=$("#stageP"),list=DATA[k],label=k==="certs"?"View Certificate":k==="projects"?"View Project":"View Photo";
+  if(k==="awards"){
+    box.innerHTML='<div class="collage">'+list.map((i,n)=>{const r=ROT[n%5];return `<div class="pol" data-i="${n}" style="left:${r[0]}%;top:${r[1]}%;transform:rotate(${r[2]}deg)"><div class="ph">Foto<img src="${i.img}" alt="${esc(i.t)}" onerror="this.remove()"></div></div>`}).join("")+'</div>';
+    $$(".pol",box).forEach(p=>p.addEventListener("click",()=>openLb(list[p.dataset.i])));
+  }else{
+    box.innerHTML='<div class="rail-wrap"><button class="arr p" aria-label="Sebelumnya">‹</button><div class="rail" id="rail">'+list.map((i,n)=>`<article class="card" tabindex="0" data-i="${n}"><div class="ph">Gambar<img src="${i.img}" alt="${esc(i.t)}" onerror="this.remove()"><div class="ov"><span>${label}</span></div></div><div class="b"><strong>${esc(i.t)}</strong><p>${esc(i.d)}</p></div></article>`).join("")+'</div><button class="arr n" aria-label="Berikutnya">›</button></div>';
+    const r=$("#rail");$(".arr.p",box).onclick=()=>r.scrollBy({left:-320,behavior:"smooth"});$(".arr.n",box).onclick=()=>r.scrollBy({left:320,behavior:"smooth"});
+    $$(".card",box).forEach(c=>c.addEventListener("click",()=>{const i=list[c.dataset.i];i.url?window.open(i.url,"_blank","noopener"):openLb(i)}));
+  }
+}
+$$("#tabs [data-tab]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+$$(".folder").forEach(b=>b.addEventListener("click",()=>{showTab(b.dataset.tab);$("#portfolio").scrollIntoView({behavior:"smooth"})}));
+showTab("projects");
+
+// ---------- Kontak & komentar (sementara disimpan di browser) ----------
+const KEY="portfolio-komentar-v2";
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
+function renderC(){
+  const a=load();$("#cn").textContent=a.length;
+  $("#cmts").innerHTML=a.length?a.map(c=>`<div class="c"><div class="av">${c.p?`<img src="${c.p}" alt="">`:esc(c.n.slice(0,1).toUpperCase())}</div><div class="t"><div><b>${esc(c.n)}</b><small>${esc(c.d)}</small></div><p>${esc(c.c)}</p></div></div>`).join(""):'<p class="s" style="color:#8a95ad;font-size:.85rem">Belum ada komentar. Jadilah yang pertama!</p>';
+}
+function shrink(file){return new Promise(res=>{
+  if(!file||file.size>1048576)return res("");
+  const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement("canvas");c.width=c.height=64;const x=c.getContext("2d"),s=Math.min(im.width,im.height);x.drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,64,64);res(c.toDataURL("image/jpeg",.8))};im.onerror=()=>res("");im.src=fr.result};fr.onerror=()=>res("");fr.readAsDataURL(file)})}
+$("#cmtForm input[type=file]").addEventListener("change",e=>{const f=e.target.files[0];$("#fname").textContent=f?(f.size>1048576?"File lebih dari 1MB":f.name):"Choose Profile Photo"});
+$("#cmtForm").addEventListener("submit",async e=>{
+  e.preventDefault();const f=e.target,p=await shrink(f.p.files[0]),a=load();
+  a.unshift({n:f.n.value,c:f.c.value,p,d:new Date().toLocaleDateString("id-ID",{day:"2-digit",month:"short",year:"numeric"})});
+  try{localStorage.setItem(KEY,JSON.stringify(a))}catch(x){}
+  f.reset();$("#fname").textContent="Choose Profile Photo";renderC();
+});
+$("#msgForm").addEventListener("submit",e=>{e.preventDefault();alert("Pesan terkirim! (Hubungkan ke EmailJS/Formspree agar masuk ke emailmu.)");e.target.reset()});
+renderC();
 
