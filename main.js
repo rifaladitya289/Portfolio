@@ -130,7 +130,7 @@ const SHOW=3;
 function focusList(l){
   const it=$$(".item",l),st=l.scrollTop;let k=0,best=1e9;
   it.forEach((x,i)=>{const d=Math.abs(x.offsetTop-it[0].offsetTop-st);if(d<best){best=d;k=i}});
-  it.forEach((x,i)=>{const d=Math.abs(i-k);x.classList.toggle("act",d===0);x.style.opacity=d===0?1:d===1?.55:.28});
+  it.forEach((x,i)=>{const d=Math.abs(i-k);x.classList.toggle("act",d===0);x.style.opacity=d===0?1:d===1?.82:.68});
 }
 function fitLists(){
   $$(".tl .list").forEach(l=>{
