@@ -139,6 +139,22 @@ document.addEventListener("click",e=>{
   const id=a.getAttribute("href").slice(1);
   if(panels.some(p=>p.id===id)){e.preventDefault();goTo(id)}
 });
+// ---------- Swipe horizontal khusus layar sentuh ---------- 
+let swipeStart=null;
+viewport.addEventListener("touchstart",e=>{
+  if(e.touches.length!==1){swipeStart=null;return}
+  swipeStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+},{passive:true});
+viewport.addEventListener("touchend",e=>{
+  if(!swipeStart||!e.changedTouches.length)return;
+  const dx=e.changedTouches[0].clientX-swipeStart.x;
+  const dy=e.changedTouches[0].clientY-swipeStart.y;
+  swipeStart=null;
+  if(Math.abs(dx)<48||Math.abs(dx)<Math.abs(dy)*1.2)return;
+  const current=Math.max(0,Math.min(panels.length-1,Math.round(viewport.scrollLeft/viewport.clientWidth)));
+  const next=Math.max(0,Math.min(panels.length-1,current+(dx<0?1:-1)));
+  if(next!==current)goTo(panels[next].id);
+},{passive:true});
 let scrollTick=0;
 viewport.addEventListener("scroll",()=>{
   if(scrollTick)return;
