@@ -1013,7 +1013,7 @@ html.cinematic-ready .cinematic-reveal.is-visible{
 #about>.ambient-motion-bg,#portfolio>.ambient-motion-bg,#contact>.ambient-motion-bg{
   position:absolute;inset:-4%;z-index:0;width:108%;height:108%;
   object-fit:cover;object-position:center;pointer-events:none;
-  opacity:.54;filter:blur(9px) brightness(.52) saturate(.82);
+  opacity:.54;filter:blur(9px) brightness(.48) saturate(.92) hue-rotate(205deg);
   transform:scale(1.045);
 }
 #about::before,#portfolio::before,#contact::before{
@@ -1118,3 +1118,15 @@ body.portfolio-modal-open{overflow:hidden}
 #stageP .work-meta{border-color:rgba(155,177,224,.2)!important}
 #stageP .work-arrow{color:#a8beff!important}
 #stageP .portfolio-endline{border-color:rgba(155,177,224,.2)!important;color:#899bbd!important}
+
+
+/* AMBIENT VIDEO SOURCE FIX — use the existing uploaded background */
+#about>.ambient-motion-bg,#portfolio>.ambient-motion-bg,#contact>.ambient-motion-bg{
+  display:block!important;
+  opacity:.66!important;
+  filter:blur(10px) brightness(.48) saturate(.95) hue-rotate(205deg)!important;
+  mix-blend-mode:normal!important;
+}
+#about::before,#portfolio::before,#contact::before{
+  background:linear-gradient(135deg,rgba(4,10,27,.48),rgba(5,12,31,.62) 55%,rgba(8,14,35,.5))!important;
+}
