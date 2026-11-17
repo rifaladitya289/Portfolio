@@ -189,6 +189,6 @@ body{min-height:100%;overscroll-behavior:none}
 
 /* Slightly enlarge the Spider-Man layer to cover more of the back area */
 .a-photo .about-spider{
-  transform:scale(1.08);
+  transform:scale(1.22);
   transform-origin:center bottom;
 }
