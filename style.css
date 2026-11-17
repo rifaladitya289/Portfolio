@@ -27,7 +27,7 @@ body.light #mascot{color:#111;--eye:#fff}
 #home{padding:0;height:calc(var(--h,1vh)*130);min-height:0}
 .stage{position:sticky;top:0;height:calc(var(--h,1vh)*100);overflow:hidden;background:linear-gradient(#1b2b4a,#3a5a86 55%,#0e1830)}
 .layer{position:absolute;inset:0;will-change:transform}
-.l-bg{background:url("../assets/hero-bg.jpg") center/cover no-repeat}
+.l-bg{background:url("assets/bg/hero-poster.jpg") center/cover no-repeat}
 .mount{background:linear-gradient(160deg,transparent 40%,#cfd9ea 41%,#6d84ad 58%,#16233f 80%);clip-path:polygon(0 100%,0 62%,22% 48%,38% 30%,50% 18%,64% 34%,80% 46%,100% 58%,100% 100%)}
 .person{display:flex;align-items:flex-end;justify-content:center}
 .person img,.person i{height:calc(var(--h,1vh)*52);max-width:calc(var(--u,1vw)*70);object-fit:contain}

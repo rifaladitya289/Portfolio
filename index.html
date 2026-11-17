@@ -8,16 +8,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!--
- FILE YANG DIPASANG DI FOLDER assets/ (semua opsional, kalau belum ada otomatis pakai placeholder):
-  assets/hero-bg.jpg       latar hero (pemandangan / gunung)
-  assets/hero-person.png   foto orang tanpa background untuk hero
-  assets/about.png         foto cutout untuk bagian About
-  assets/profile.jpg       foto di kartu "Find Me"
-  assets/projects/1.jpg..  gambar proyek    assets/certs/1.jpg..  sertifikat    assets/awards/1.jpg..  penghargaan
-  cv.pdf                   file CV
+ STRUKTUR ASET:
+  assets/bg/hero-bg.mp4 dan hero-bg.webm   video background hero
+  assets/bg/hero-poster.jpg                poster/fallback background hero
+  assets/images/hero-person.png            foto cutout untuk hero (opsional)
+  assets/images/about.png                  foto cutout untuk About (opsional)
+  assets/images/profile.jpg                foto profil bagian Find Me (opsional)
+  assets/logo/                             simpan logo website di sini
+  assets/projects/1.jpg, 2.jpg, 3.jpg      gambar proyek
+  assets/certs/1.jpg, 2.jpg, 3.jpg         sertifikat
+  assets/awards/1.jpg, 2.jpg, ...          penghargaan
+  cv.pdf                                   file CV di root repository
 -->
-<script src="js/fit.js"></script>
-<link rel="stylesheet" href="css/style.css">
+<script src="fit.js"></script>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -30,14 +34,14 @@
 <!-- HOME -->
 <section id="home">
   <div class="stage">
-    <video id="heroVid" class="vid" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" aria-hidden="true" disablepictureinpicture>
-      <source src="assets/hero-bg.mp4" type="video/mp4"><source src="assets/hero-bg.webm" type="video/webm">
+    <video id="heroVid" class="vid" autoplay muted loop playsinline preload="auto" poster="assets/bg/hero-poster.jpg" aria-hidden="true" disablepictureinpicture>
+      <source src="assets/bg/hero-bg.mp4" type="video/mp4"><source src="assets/bg/hero-bg.webm" type="video/webm">
     </video>
     <div class="layer l-bg" data-s="0.12"></div>
     <div class="layer mount" data-s="0.15"></div>
     <div class="layer hero-t" data-s="-0.12"><h1>WELCOME TO MY PORTFOLIO</h1></div>
     <div class="vshade"></div>
-    <div class="layer person" data-s="0.04"><i></i><img src="assets/hero-person.png" alt="" onerror="this.remove()"></div>
+    <div class="layer person" data-s="0.04"><i></i><img src="assets/images/hero-person.png" alt="" onerror="this.remove()"></div>
   </div>
 </section>
 
@@ -47,7 +51,7 @@
   <h2 class="sec-title">About Me</h2>
   <div class="about-grid">
     <div class="a-left"><h2>Hi, I'm <span>Nama Kamu</span></h2><p style="height:14px"></p><a class="btn" href="cv.pdf">View CV</a></div>
-    <div class="a-photo"><i></i><img src="assets/about.png" alt="" onerror="this.remove()"></div>
+    <div class="a-photo"><i></i><img src="assets/images/about.png" alt="" onerror="this.remove()"></div>
     <div class="a-right"><p>Sebagai mahasiswa/pelajar yang berfokus pada teknologi, aku membangun pengalaman digital yang tidak hanya fungsional, tetapi juga menarik dan berdampak.</p><a class="btn" href="#portfolio">View Projects</a></div>
   </div>
 
@@ -106,7 +110,7 @@
         <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:linear-gradient(45deg,#f9a03f,#e1306c,#833ab4)">ig</i><span><b>Instagram</b><small>@username</small></span><i class="ex">↗</i></a>
         <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:#111">gh</i><span><b>GitHub</b><small>@username</small></span><i class="ex">↗</i></a>
         <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:#000">tt</i><span><b>TikTok</b><small>@username</small></span><i class="ex">↗</i></a>
-        <div class="pfp"><img src="assets/profile.jpg" alt="" onerror="this.remove()">Foto profil</div>
+        <div class="pfp"><img src="assets/images/profile.jpg" alt="" onerror="this.remove()">Foto profil</div>
       </div>
     </div>
     <div class="stack">
@@ -128,7 +132,7 @@
 <footer>© 2026 Nama Kamu</footer>
 <div id="lb"><div><img alt=""><p></p></div></div>
 
-<script src="js/main.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
 
