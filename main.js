@@ -115,22 +115,11 @@ function movePill(a){pill.style.left=a.offsetLeft+"px";pill.style.width=a.offset
 let lastSec="home";
 function wipe(){const w=$("#wipe");w.classList.remove("go");void w.offsetWidth;w.classList.add("go")}
 const viewport=$("#pageViewport"),panels=$$("#pageTrack>section");
-function animatePanelTransition(from,id){
-  const fromIndex=panels.findIndex(p=>p.id===from);
-  const toIndex=panels.findIndex(p=>p.id===id);
-  if(fromIndex<0||toIndex<0||fromIndex===toIndex)return;
-  const target=panels[toIndex];
-  panels.forEach(p=>p.classList.remove("page-arrive-next","page-arrive-prev"));
-  target.classList.add(toIndex>fromIndex?"page-arrive-next":"page-arrive-prev");
-  window.setTimeout(()=>target.classList.remove("page-arrive-next","page-arrive-prev"),900);
-}
 function activate(id){
   const a=links.find(x=>x.hash==="#"+id);
   if(!a)return;
-  if(id!==lastSec)animatePanelTransition(lastSec,id);
   links.forEach(x=>x.classList.toggle("on",x===a));movePill(a);
   document.body.classList.toggle("light",id==="portfolio"||id==="contact");
-  if(id==="portfolio"&&lastSec==="about")wipe();
   lastSec=id;
 }
 function goTo(id){
