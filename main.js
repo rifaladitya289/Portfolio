@@ -362,13 +362,33 @@ $("#cmtForm").addEventListener("submit",async e=>{
   try{localStorage.setItem(KEY,JSON.stringify(a))}catch(x){}
   f.reset();$("#fname").textContent="Choose Profile Photo";renderC();
 });
-$("#msgForm").addEventListener("submit",e=>{
-  e.preventDefault();
-  const feedback=$("#msgFeedback");
-  if(feedback)feedback.textContent="Form demo aktif, tetapi belum terhubung ke layanan email. Pesan belum dikirim.";
-  const button=e.target.querySelector("button");
-  if(button){const label=button.querySelector("span");if(label){const old=label.textContent;label.textContent="Not connected yet";button.disabled=true;window.setTimeout(()=>{label.textContent=old;button.disabled=false},1800)}}
-});
+(function(){
+ const form=$("#msgForm");if(!form)return;
+ const fields=[...form.querySelectorAll("input,textarea")],bar=$("#contactProgress"),label=$("#contactProgressLabel"),feedback=$("#msgFeedback");
+ function update(){
+  let done=0;
+  fields.forEach(field=>{
+   const wrap=field.closest(".contact-field"),filled=field.value.trim().length>0,valid=filled&&field.checkValidity();
+   if(filled)done++;
+   if(wrap){wrap.classList.toggle("is-filled",filled);wrap.classList.toggle("is-valid",valid);wrap.classList.toggle("is-invalid",filled&&!valid)}
+  });
+  const pct=Math.round(done/fields.length*100);if(bar)bar.style.width=pct+"%";if(label)label.textContent=pct+"% completed";
+ }
+ fields.forEach(field=>{field.addEventListener("input",update);field.addEventListener("blur",update)});
+ const spotlight=document.createElement("div");spotlight.className="contact-spotlight";$("#contact").prepend(spotlight);
+ $("#contact").addEventListener("pointermove",e=>{
+  if(e.pointerType!=="mouse")return;
+  const rect=$("#contact").getBoundingClientRect();
+  $("#contact").style.setProperty("--spot-x",(e.clientX-rect.left)+"px");
+  $("#contact").style.setProperty("--spot-y",(e.clientY-rect.top)+"px");
+ },{passive:true});
+ form.addEventListener("submit",e=>{
+  e.preventDefault();update();
+  if(!form.checkValidity()){form.reportValidity();if(feedback)feedback.textContent="Periksa kembali data yang masih belum valid.";return;}
+  if(feedback)feedback.textContent="Semua data sudah valid. Form ini belum terhubung ke layanan email, jadi pesan belum dikirim.";
+ });
+ update();
+})();
 renderC();
 
 
