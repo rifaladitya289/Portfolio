@@ -253,14 +253,8 @@ $(".tl .list").forEach(l=>{
 fitLists();addEventListener("load",fitLists);addEventListener("resize",fitLists);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitLists);
 
-// ---------- Folder & Portfolio: Projects / Designs / Visuals ----------
-["projects","designs","visuals"].forEach(k=>{
-  const count=$("#n-"+k),peek=$("#pk-"+k);
-  if(count)count.textContent=DATA[k].length;
-  if(peek&&DATA[k][0]){
-    const im=document.createElement("img");im.src=DATA[k][0].img;im.alt="";im.onerror=()=>im.remove();peek.appendChild(im);
-  }
-});
+// ---------- Portfolio folders: counts only; artwork is generated with CSS ----------
+["projects","designs","visuals"].forEach(k=>{const count=$("#n-"+k);if(count)count.textContent=DATA[k].length;});
 const $lb=$("#lb");
 // Detail viewer: click card to inspect artwork and project information.
 (function(){
@@ -277,8 +271,8 @@ const $lb=$("#lb");
   $lb.addEventListener("click",e=>{if(e.target===$lb)closeLb()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLb()});
   window.stxOpenPortfolioDetail=function(item){
-    const img=panel.querySelector("img"),caption=panel.querySelector("p");
-    img.src=item.img;img.alt=item.t;img.onerror=()=>img.removeAttribute("src");
+    const art=panel.querySelector(".lb-art"),caption=panel.querySelector("p");
+    art.className="lb-art "+(item.type.includes("DESIGN")?"art-design":item.type.includes("ARTWORK")||item.type.includes("LOGO")?"art-visual":"art-project");
     caption.textContent=item.t+" — "+item.d;
     type.textContent=item.type||"CREATIVE WORK";
     tools.textContent=item.tools||"";
@@ -300,7 +294,7 @@ function showTab(k){
     <div class="work-image"><img src="${item.img}" alt="${esc(item.t)}" loading="lazy" onerror="this.parentElement.classList.add('image-missing');this.remove()"><span class="work-index">0${n+1}</span><span class="work-open" aria-hidden="true">↗</span></div>
     <div class="work-meta"><div><span class="work-type">${esc(item.type||"CREATIVE WORK")}</span><h3>${esc(item.t)}</h3><p>${esc(item.d)}</p></div><span class="work-arrow">↗</span></div>
   </article>`).join("");
-  const featured=k==="projects"&&list.length?`<button class="featured-work" type="button" data-feature="0"><span class="featured-label">FEATURED PROJECT <i>✳</i></span><span class="featured-preview"><img src="${list[0].img}" alt="" loading="lazy" onerror="this.remove()"><span class="featured-number">01</span></span><span class="featured-bottom"><span><small>SPOTLIGHT / 2026</small><strong>${esc(list[0].t)}</strong><em>${esc(list[0].d)}</em></span><b>Explore ↗</b></span></button>`:"";
+  const featured=k==="projects"&&list.length?`<button class="featured-work" type="button" data-feature="0"><span class="featured-label">FEATURED PROJECT <i>✳</i></span><span class="featured-preview art-project"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="featured-number">01</span></span><span class="featured-bottom"><span><small>SPOTLIGHT / 2026</small><strong>${esc(list[0].t)}</strong><em>${esc(list[0].d)}</em></span><b>Explore ↗</b></span></button>`:"";
   box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","visuals"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(total).padStart(2,"0")}</strong><span>ITEMS</span></div></div>
   ${featured}
   <div class="work-grid ${k==="visuals"?"visual-grid":""}">${cards}</div>
