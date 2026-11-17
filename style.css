@@ -257,3 +257,50 @@ nav a:hover{transform:translateY(-1px)}
   :root{--motion-fast:0ms;--motion-base:0ms;--motion-slow:0ms}
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:0.01ms!important;animation-duration:0.01ms!important;animation-iteration-count:1!important}
 }
+
+
+/* ===== STAGE 2 · COMPONENT MICRO-INTERACTIONS ===== */
+.card{
+  --tilt-x:0deg;--tilt-y:0deg;
+  transform:perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transform-style:preserve-3d;
+}
+.card:hover,.card:focus-visible{
+  transform:perspective(900px) translateY(-5px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+}
+.card .ph img{transition:transform 560ms var(--motion-ease),filter 360ms ease}
+.card:hover .ph img,.card:focus-visible .ph img{transform:scale(1.045);filter:saturate(1.06)}
+.card .ov{transition:opacity var(--motion-base) ease,backdrop-filter var(--motion-base) ease}
+.card .ov span{transition:transform var(--motion-base) var(--motion-spring),box-shadow var(--motion-base) ease;transform:translateY(7px) scale(.96)}
+.card:hover .ov span,.card:focus-visible .ov span{transform:translateY(0) scale(1);box-shadow:0 7px 18px rgba(47,107,255,.28)}
+.card.is-pressed,.pol.is-pressed,.folder.is-pressed,.btn.is-pressed,.tabs button.is-pressed,.arr.is-pressed{filter:brightness(.96)}
+.card.is-pressed{transform:perspective(900px) scale(.985) rotateX(var(--tilt-x)) rotateY(var(--tilt-y))}
+.tabs svg{transition:transform var(--motion-base) var(--motion-spring)}
+.tabs button:hover svg,.tabs button:focus-visible svg{transform:translateY(-2px) rotate(-5deg)}
+.tabs button.on svg{filter:drop-shadow(0 2px 4px rgba(0,0,0,.16))}
+.folder .go{transition:transform var(--motion-base) var(--motion-spring),background var(--motion-base) ease}
+.folder:hover .go,.folder:focus-visible .go{transform:translate(2px,-2px);background:rgba(47,107,255,.28)}
+.item{transition:opacity var(--motion-base) ease,transform var(--motion-base) var(--motion-ease)}
+.item:hover{transform:translateX(3px)}
+.item .lg{transition:transform var(--motion-base) var(--motion-spring),background var(--motion-base) ease}
+.item:hover .lg{transform:scale(1.1) rotate(-5deg);background:#263d79}
+.find .ic{transition:transform var(--motion-base) var(--motion-spring),box-shadow var(--motion-base) ease}
+.find a:hover .ic{transform:scale(1.08) rotate(-4deg);box-shadow:0 4px 12px rgba(47,107,255,.18)}
+.box input,.box textarea{transition:border-color var(--motion-fast) ease,box-shadow var(--motion-fast) ease,background var(--motion-fast) ease}
+.box input:focus,.box textarea:focus{background:#fff}
+.file:active{transform:scale(.99)}
+.c{animation:comment-enter 360ms var(--motion-ease) both}
+@keyframes comment-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+#lb{visibility:hidden;transition:opacity var(--motion-base) ease,visibility 0s linear var(--motion-base)}
+#lb.on{visibility:visible;transition:opacity var(--motion-base) ease,visibility 0s}
+#lb>div{transform:translateY(8px) scale(.985);transition:transform var(--motion-slow) var(--motion-ease)}
+#lb.on>div{transform:translateY(0) scale(1)}
+@media(hover:none){
+  .card,.card:hover,.card:focus-visible{transform:none}
+  .card:hover .ph img{transform:none;filter:none}
+  .card:hover .ov span{transform:none}
+  .item:hover,.find a:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .card,.card .ph img,.card .ov span,.tabs svg,.folder .go,.item,.item .lg,.find .ic,.c,#lb>div{animation:none!important;transition:none!important;transform:none!important}
+}
