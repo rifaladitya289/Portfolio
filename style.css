@@ -1006,3 +1006,24 @@ html.cinematic-ready .cinematic-reveal.is-visible{
   #portfolio .portfolio-banner-title{font-size:clamp(3.2rem,12vw,5.5rem)!important;margin:23px 0 17px!important}
   #portfolio .portfolio-banner-bottom p,#portfolio .portfolio-banner-bottom a{font-size:.55rem;letter-spacing:.08em}
 }
+
+
+/* AMBIENT MOTION BACKGROUND — shared by About, Portfolio and Contact */
+#about,#portfolio,#contact{position:relative;isolation:isolate;overflow:hidden}
+#about>.ambient-motion-bg,#portfolio>.ambient-motion-bg,#contact>.ambient-motion-bg{
+  position:absolute;inset:-4%;z-index:0;width:108%;height:108%;
+  object-fit:cover;object-position:center;pointer-events:none;
+  opacity:.54;filter:blur(9px) brightness(.52) saturate(.82);
+  transform:scale(1.045);
+}
+#about::before,#portfolio::before,#contact::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(135deg,rgba(4,10,27,.76),rgba(5,12,31,.84) 55%,rgba(8,14,35,.78));
+}
+#about>.topo,#portfolio>.topo,#contact>.topo{z-index:0;opacity:.12!important}
+#about>.about-heading,#about>.about-grid,#about>.about-section-label,#about>.tl,#about>.folders,
+#portfolio>.portfolio-heading,#portfolio>#tabs,#portfolio>#stageP,
+#contact>.cols,#contact>footer{position:relative;z-index:2}
+@media(prefers-reduced-motion:reduce){
+  #about>.ambient-motion-bg,#portfolio>.ambient-motion-bg,#contact>.ambient-motion-bg{display:none}
+}
