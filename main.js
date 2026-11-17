@@ -125,7 +125,11 @@ addEventListener("scroll",parallax,{passive:true});parallax();
 const links=$$("nav a"),pill=$("#pill"),mas=$("#mascot");
 function movePill(a){pill.style.left=a.offsetLeft+"px";pill.style.width=a.offsetWidth+"px";mas.style.left=(a.offsetLeft+a.offsetWidth/2-12)+"px"}
 let lastSec="home";
-function wipe(){const w=$("#wipe");w.classList.remove("go");void w.offsetWidth;w.classList.add("go")}
+function wipe(){
+  const w=$("#wipe");if(!w)return;
+  w.classList.remove("go");void w.offsetWidth;w.classList.add("go");
+  w.addEventListener("animationend",()=>w.classList.remove("go"),{once:true});
+}
 const viewport=$("#pageViewport"),panels=$$("#pageTrack>section");
 function activate(id){
   const a=links.find(x=>x.hash==="#"+id);
