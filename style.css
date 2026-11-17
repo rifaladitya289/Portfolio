@@ -964,3 +964,7 @@ html.cinematic-ready .cinematic-reveal.is-visible{
  .featured-work,.work-card,#tabs button{transition:none!important}
  .featured-work:hover,.work-card:hover{transform:none}
 }
+
+
+/* DESKTOP MODE · KEEP PORTFOLIO CONTENT SCROLLABLE */
+#pageTrack>#portfolio{overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}
