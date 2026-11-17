@@ -262,16 +262,32 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitLists);
   }
 });
 const $lb=$("#lb");
-function openLb(item){
-  const img=$lb.querySelector("img"),caption=$lb.querySelector("p");
-  img.src=item.img;img.alt=item.t;img.onerror=()=>img.removeAttribute("src");
-  caption.textContent=item.t+" — "+item.d;
-  $lb.classList.add("on");
-  document.body.classList.add("portfolio-modal-open");
-}
+// Detail viewer: click card to inspect artwork and project information.
+(function(){
+  const panel=$lb.querySelector("div");
+  if(!panel)return;
+  const close=document.createElement("button");
+  close.type="button";close.className="lb-close";close.setAttribute("aria-label","Close preview");close.textContent="×";
+  const meta=document.createElement("div");meta.className="lb-meta";
+  const type=document.createElement("span");type.className="lb-type";
+  const tools=document.createElement("span");tools.className="lb-tools";
+  panel.append(close,meta);
+  meta.append(type,tools);
+  close.addEventListener("click",e=>{e.stopPropagation();closeLb()});
+  $lb.addEventListener("click",e=>{if(e.target===$lb)closeLb()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLb()});
+  window.stxOpenPortfolioDetail=function(item){
+    const img=panel.querySelector("img"),caption=panel.querySelector("p");
+    img.src=item.img;img.alt=item.t;img.onerror=()=>img.removeAttribute("src");
+    caption.textContent=item.t+" — "+item.d;
+    type.textContent=item.type||"CREATIVE WORK";
+    tools.textContent=item.tools||"";
+    $lb.classList.add("on");document.body.classList.add("portfolio-modal-open");
+    close.focus();
+  };
+})();
+function openLb(item){window.stxOpenPortfolioDetail?.(item)}
 function closeLb(){$lb.classList.remove("on");document.body.classList.remove("portfolio-modal-open")}
-$lb.addEventListener("click",closeLb);
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLb()});
 let cur="projects";
 function showTab(k){
   if(!DATA[k])return;
