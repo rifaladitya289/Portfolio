@@ -23,7 +23,10 @@ document.documentElement.style.setProperty("--topo-l",topo("#d3d9e6"));
 (function(){
   const section=$("#about"),video=section&&$(".about-bg-video",section);
   if(!section||!video)return;
-  const fit=()=>{video.style.height=section.offsetHeight+"px"};
+  const fit=()=>{
+    video.style.width=section.offsetHeight+"px";
+    video.style.height=section.offsetWidth+"px";
+  };
   fit();
   if("ResizeObserver" in window)new ResizeObserver(fit).observe(section);
   window.addEventListener("load",fit,{once:true});
