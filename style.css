@@ -1870,3 +1870,109 @@ body.portfolio-modal-open{overflow:hidden}
   #about .btn,#contact .btn,#contact .find>a{transition:none}
 }
 
+
+
+/* CINEMATIC RESPONSIVE REFINEMENT — non-home pages */
+#about,#portfolio,#contact{scrollbar-width:thin;scrollbar-color:rgba(132,160,225,.35) transparent}
+#about .about-grid,#about .tl>div,#portfolio .featured-work,#portfolio .work-card,#contact .box{
+  transform-origin:center;
+}
+#about .a-photo{overflow:hidden}
+#about .a-photo:before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 35%,rgba(115,151,232,.2),transparent 62%);
+}
+#about .a-photo .about-base,#about .a-photo .about-spider{z-index:1}
+#about .about-grid{position:relative}
+#about .about-grid:before{
+  content:"";position:absolute;left:-8%;right:-8%;top:12%;height:72%;
+  pointer-events:none;z-index:-1;
+  background:radial-gradient(ellipse,rgba(67,103,184,.12),transparent 68%);
+  filter:blur(18px);
+}
+#about .tl>div,#contact .box{
+  transition:transform .55s cubic-bezier(.2,.75,.2,1),border-color .4s,box-shadow .4s;
+}
+#about .tl>div:hover,#contact .box:hover{
+  transform:translateY(-4px);
+  border-color:rgba(155,184,247,.38)!important;
+  box-shadow:0 30px 70px rgba(0,0,0,.28),0 0 30px rgba(84,119,198,.09);
+}
+#portfolio .work-card{transition:transform .55s cubic-bezier(.2,.75,.2,1)}
+#portfolio .work-card:hover{transform:translateY(-6px)}
+#portfolio .work-image{overflow:hidden}
+#portfolio .work-image:before{
+  content:"";position:absolute;inset:-30%;pointer-events:none;
+  background:linear-gradient(115deg,transparent 38%,rgba(194,213,255,.12) 50%,transparent 62%);
+  transform:translateX(-65%);transition:transform .9s cubic-bezier(.2,.7,.2,1);
+}
+#portfolio .work-card:hover .work-image:before{transform:translateX(65%)}
+#contact .cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+#contact .box{min-width:0}
+#contact input,#contact textarea,#contact button{max-width:100%}
+@media (min-width:701px) and (max-width:1050px){
+  #pageTrack>section{padding-left:clamp(24px,4vw,48px);padding-right:clamp(24px,4vw,48px)}
+  #about .about-grid{grid-template-columns:minmax(0,1fr) minmax(210px,.8fr);gap:20px 5%}
+  #about .a-photo{height:270px}
+  #about .tl{gap:16px}
+  #about .tl>div{padding:18px}
+  #contact .cols{gap:16px}
+  #contact .box{padding:22px!important}
+  #portfolio .work-grid{gap:28px 20px}
+}
+@media (max-width:700px){
+  #pageViewport{height:100dvh;touch-action:pan-x pan-y}
+  #pageTrack>section{padding-left:19px;padding-right:19px;padding-top:92px;padding-bottom:54px}
+  #pageTrack>#home{padding:0}
+  #about .about-heading{align-items:flex-end;gap:10px}
+  #about .about-heading-main{min-width:0}
+  #about .about-heading .sec-title{font-size:clamp(2.8rem,14vw,4.5rem);overflow-wrap:anywhere}
+  #about .about-heading-note{max-width:250px}
+  #about .about-grid{
+    grid-template-columns:minmax(0,1fr) minmax(100px,.68fr);
+    grid-template-areas:"copy portrait" "bio bio";
+    gap:15px 12px;padding:22px 16px;border:1px solid rgba(155,181,240,.16);
+    background:linear-gradient(135deg,rgba(17,32,61,.52),rgba(4,10,23,.28));
+  }
+  #about .a-left{grid-area:copy;min-width:0}
+  #about .a-photo{grid-area:portrait;height:210px;min-height:0}
+  #about .a-right{grid-area:bio}
+  #about .a-left h2{font-size:clamp(1.45rem,7vw,2.15rem);overflow-wrap:anywhere}
+  #about .a-right p{font-size:.84rem;line-height:1.8}
+  #about .about-section-label{font-size:.52rem;letter-spacing:.1em;gap:8px}
+  #about .tl{grid-template-columns:1fr;gap:14px;margin-top:30px}
+  #about .tl>div{padding:17px}
+  #about .list{height:auto;max-height:310px}
+  #about .folders{grid-template-columns:1fr;gap:12px}
+  #about .folder{height:104px}
+  #portfolio .portfolio-type-banner{padding-top:12px}
+  #portfolio .portfolio-banner-top{font-size:.52rem;letter-spacing:.12em}
+  #portfolio .portfolio-banner-title{font-size:clamp(2.8rem,14vw,4.6rem);line-height:.98}
+  #portfolio .portfolio-banner-bottom{gap:12px;align-items:flex-start}
+  #portfolio .portfolio-banner-bottom p,#portfolio .portfolio-banner-bottom a{font-size:.54rem;letter-spacing:.1em}
+  #portfolio #tabs{display:flex;overflow-x:auto;max-width:100%;gap:20px}
+  #portfolio #tabs button{white-space:nowrap;flex:0 0 auto}
+  #portfolio .category-copy{gap:12px}
+  #portfolio .featured-work{width:100%}
+  #portfolio .work-grid{grid-template-columns:1fr}
+  #portfolio .visual-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #portfolio .work-card{min-width:0}
+  #contact .cols{grid-template-columns:1fr;gap:15px}
+  #contact .stack{gap:15px}
+  #contact .box{padding:20px!important}
+  #contact input:not([type=file]),#contact textarea{font-size:16px!important}
+  #contact footer{padding-bottom:24px}
+  #about .tl>div:hover,#contact .box:hover,#portfolio .work-card:hover{transform:none}
+}
+@media(max-width:380px){
+  #pageTrack>section{padding-left:15px;padding-right:15px}
+  #about .about-heading .sec-title{font-size:2.65rem}
+  #about .about-index strong{font-size:2.2rem}
+  #portfolio .visual-grid{grid-template-columns:1fr}
+  #portfolio .portfolio-banner-bottom{flex-direction:column}
+  #contact .box{padding:17px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #about .tl>div,#contact .box,#portfolio .work-card,#portfolio .work-image:before{transition:none!important}
+  #about .tl>div:hover,#contact .box:hover,#portfolio .work-card:hover{transform:none}
+}
