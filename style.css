@@ -1,15 +1,15 @@
 :root{
 /* ===== FONT & UKURAN: ubah di sini saja ===== */
---f-head:"Playfair Display",Georgia,"Times New Roman",serif;
---f-body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+--f-head:"Sora",system-ui,-apple-system,"Segoe UI",sans-serif;
+--f-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 --fs-hero:clamp(2.6rem,calc(var(--u,1vw)*11),7rem);
 --fs-title:clamp(2.4rem,calc(var(--u,1vw)*8),4rem);
 --fs-sub:1.25rem;--fs-body:1rem;--fs-ui:.875rem;--fs-small:.8rem;
 --bg:#04070f;--blue:#2f6bff;--ink:#eef2ff;--mute:#8d99b8;--light:#f4f6fb;--dark-ink:#0d1426}
 *{box-sizing:border-box;margin:0;padding:0}
-h1,h2,h3{font-family:var(--f-head);font-weight:700;letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--f-head);font-weight:700;letter-spacing:-.025em;font-optical-sizing:auto}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;height:auto;overflow-y:auto}
-body{font-family:var(--f-body);font-size:var(--fs-body);line-height:1.6;background:var(--bg);color:var(--ink);overflow-x:hidden;overflow-x:clip;min-height:100%}
+body{font-family:var(--f-body);font-size:var(--fs-body);font-optical-sizing:auto;font-feature-settings:"kern";line-height:1.6;background:var(--bg);color:var(--ink);overflow-x:hidden;overflow-x:clip;min-height:100%}
 section{position:relative;min-height:calc(var(--h,1vh)*100);padding:110px clamp(20px,calc(var(--u,1vw)*6),90px) 80px}
 .topo{position:absolute;inset:0;pointer-events:none;background:var(--topo-d) center/cover}
 .topo.l{background-image:var(--topo-l)}
