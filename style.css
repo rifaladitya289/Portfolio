@@ -2304,3 +2304,23 @@ body.portfolio-modal-open{overflow:hidden}
 @media(hover:hover) and (pointer:fine){#contact .contact-spotlight{opacity:1}}
 @media(max-width:700px){#contact .contact-status{font-size:.48rem;padding:5px 8px}#contact .contact-closing{grid-template-columns:1fr;align-items:start;margin-top:48px}#contact .contact-closing p{font-size:clamp(2.8rem,13vw,4.5rem)}#contact .contact-closing a{justify-self:start}}
 @media(prefers-reduced-motion:reduce){#contact .contact-progress span,#contact .contact-closing a{transition:none}}
+
+
+/* CINEMATIC PAGE + INDIVIDUAL CARD TRANSITIONS */
+#portfolio .portfolio-category{animation:portfolio-category-enter .72s cubic-bezier(.2,.75,.2,1) both}
+@keyframes portfolio-category-enter{from{opacity:0;filter:blur(8px);transform:translateY(18px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
+#portfolio .work-card.card-enter{opacity:0;animation:work-card-enter .72s cubic-bezier(.2,.75,.2,1) both;animation-delay:calc(var(--card-index,0)*85ms + 120ms);will-change:transform,opacity}
+@keyframes work-card-enter{from{opacity:0;transform:translate3d(0,28px,0) scale(.975);filter:blur(7px)}to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}}
+#portfolio .work-card{transform-origin:50% 65%;transition:transform .45s cubic-bezier(.2,.75,.2,1),filter .45s ease,box-shadow .45s ease}
+@media(hover:hover) and (pointer:fine){
+ #portfolio .work-card:hover{transform:translateY(-8px) scale(1.012);filter:brightness(1.08);z-index:2}
+ #portfolio .work-card:hover .work-image{filter:saturate(1.12)}
+ #portfolio .work-card:hover .work-open{transform:translate(3px,-3px) rotate(4deg)}
+ #portfolio .featured-work{transition:transform .5s cubic-bezier(.2,.75,.2,1),filter .5s ease,box-shadow .5s ease}
+ #portfolio .featured-work:hover{transform:translateY(-5px);filter:brightness(1.06);box-shadow:0 24px 70px rgba(0,0,0,.22)}
+}
+#portfolio .work-card:focus-visible,#portfolio .featured-work:focus-visible{outline:2px solid rgba(151,190,255,.9);outline-offset:5px}
+@media(prefers-reduced-motion:reduce){
+ #portfolio .portfolio-category,#portfolio .work-card.card-enter{animation:none;opacity:1;filter:none;transform:none}
+ #portfolio .work-card,#portfolio .featured-work{transition:none}
+}
