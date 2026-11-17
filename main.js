@@ -286,7 +286,7 @@ function showTab(k){
   const feature=$(".featured-work",box);
   if(feature)feature.addEventListener("click",()=>openLb(list[0]));
 }
-$$("#tabs [data-tab]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+$("#tabs").addEventListener("click",e=>{const button=e.target.closest("button[data-tab]");if(button&&$("#tabs").contains(button))showTab(button.dataset.tab)});
 $$(".folder").forEach(b=>b.addEventListener("click",()=>{
   showTab(b.dataset.tab);
   const index=panels.findIndex(p=>p.id==="portfolio");
