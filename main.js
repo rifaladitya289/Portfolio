@@ -171,7 +171,7 @@ addEventListener("resize",()=>{
   if(index>=0)viewport.scrollLeft=index*viewport.clientWidth;
 });
 
-// ---------- Spider-Man reveal: pointer tracking yang lebih halus ---------- 
+// ---------- Spider-Man reveal: smooth pointer + touch morph ---------- 
 (function(){
   const photo=$("#spiderReveal");
   if(!photo)return;
@@ -188,18 +188,21 @@ addEventListener("resize",()=>{
   }
   function track(){
     const dx=targetX-currentX,dy=targetY-currentY;
-    currentX+=dx*.38;currentY+=dy*.38;
+    currentX+=dx*.24;currentY+=dy*.24;
     photo.style.setProperty("--reveal-x",currentX+"px");
     photo.style.setProperty("--reveal-y",currentY+"px");
-    if(Math.abs(dx)>.25||Math.abs(dy)>.25)raf=requestAnimationFrame(track);
+    if(Math.abs(dx)>.18||Math.abs(dy)>.18)raf=requestAnimationFrame(track);
     else raf=0;
   }
   function hide(){
-    active=false;photo.classList.remove("is-revealing");
+    active=false;
+    photo.classList.remove("is-revealing");
   }
-  photo.addEventListener("pointermove",setTarget);
+  photo.addEventListener("pointermove",e=>{
+    if(e.pointerType==="mouse"||active)setTarget(e);
+  });
   photo.addEventListener("pointerdown",setTarget);
-  photo.addEventListener("pointerleave",hide);
+  photo.addEventListener("pointerleave",e=>{if(e.pointerType==="mouse")hide()});
   photo.addEventListener("pointerup",e=>{if(e.pointerType!=="mouse")hide()});
   photo.addEventListener("pointercancel",hide);
 })();
