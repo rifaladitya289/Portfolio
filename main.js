@@ -284,3 +284,20 @@ $("#cmtForm").addEventListener("submit",async e=>{
 $("#msgForm").addEventListener("submit",e=>{e.preventDefault();alert("Pesan terkirim! (Hubungkan ke EmailJS/Formspree agar masuk ke emailmu.)");e.target.reset()});
 renderC();
 
+
+
+// ---------- Global Motion Foundation: pointer feedback + reduced motion ----------
+(function(){
+  const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.documentElement.classList.add("motion-ready");
+  if(reduce)return;
+  const selector=".btn,.arr,.tabs button,.card,.folder,.pol";
+  document.addEventListener("pointermove",e=>{
+    if(e.pointerType!=="mouse")return;
+    const el=e.target.closest(selector);
+    if(!el)return;
+    const r=el.getBoundingClientRect();
+    el.style.setProperty("--motion-x",(e.clientX-r.left)+"px");
+    el.style.setProperty("--motion-y",(e.clientY-r.top)+"px");
+  },{passive:true});
+})();
