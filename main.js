@@ -252,7 +252,7 @@ function showTab(k){
   cur=k;$$("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===k));
   const box=$("#stageP"),list=DATA[k],label=k==="certs"?"View Certificate":k==="projects"?"View Project":"View Photo";
   if(k==="awards"){
-    box.innerHTML='<div class="collage">'+list.map((i,n)=>{const r=ROT[n%5];return `<div class="pol" data-i="${n}" style="left:${r[0]}%;top:${r[1]}%;transform:rotate(${r[2]}deg)"><div class="ph">Foto<img src="${i.img}" alt="${esc(i.t)}" onerror="this.remove()"></div></div>`}).join("")+'</div>';
+    box.innerHTML='<div class="collage">'+list.map((i,n)=>{const r=ROT[n%5];return `<div class="pol" tabindex="0" role="button" aria-label="${esc(i.t)}" data-i="${n}" style="left:${r[0]}%;top:${r[1]}%;transform:rotate(${r[2]}deg)"><div class="ph">Foto<img src="${i.img}" alt="${esc(i.t)}" onerror="this.remove()"></div></div>`}).join("")+'</div>';
     $$(".pol",box).forEach(p=>p.addEventListener("click",()=>openLb(list[p.dataset.i])));
   }else{
     box.innerHTML='<div class="rail-wrap"><button class="arr p" aria-label="Sebelumnya">‹</button><div class="rail" id="rail">'+list.map((i,n)=>`<article class="card" tabindex="0" data-i="${n}"><div class="ph">Gambar<img src="${i.img}" alt="${esc(i.t)}" onerror="this.remove()"><div class="ov"><span>${label}</span></div></div><div class="b"><strong>${esc(i.t)}</strong><p>${esc(i.d)}</p></div></article>`).join("")+'</div><button class="arr n" aria-label="Berikutnya">›</button></div>';
@@ -386,5 +386,46 @@ renderC();
   targets.forEach(({el,root:section},index)=>{
     el.style.setProperty("--reveal-delay",Math.min(index%4,3)*75+"ms");
     observers.get(section)?.observe(el);
+  });
+})();
+
+
+// ---------- Stage 4: tactile feedback, media arrival & keyboard activation ----------
+(function(){
+  const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const rippleTargets=".btn,.arr,.tabs button,.card,.pol";
+  document.addEventListener("pointerdown",e=>{
+    if(reduce)return;
+    const el=e.target.closest(rippleTargets);
+    if(!el)return;
+    const rect=el.getBoundingClientRect();
+    const ripple=document.createElement("span");
+    const size=Math.ceil(Math.hypot(rect.width,rect.height)*2);
+    ripple.className="stx-ripple";
+    ripple.style.left=(e.clientX-rect.left)+"px";
+    ripple.style.top=(e.clientY-rect.top)+"px";
+    ripple.style.setProperty("--ripple-scale",String(size/12));
+    el.appendChild(ripple);
+    ripple.addEventListener("animationend",()=>ripple.remove(),{once:true});
+  },{passive:true});
+
+  // Beri transisi ringan saat gambar berhasil dimuat.
+  function markImage(img){
+    if(img&&img.naturalWidth>0)img.classList.add("media-arrived");
+  }
+  document.addEventListener("load",e=>{
+    if(e.target instanceof HTMLImageElement)markImage(e.target);
+  },true);
+  document.querySelectorAll("img").forEach(img=>{
+    if(img.complete)markImage(img);
+  });
+
+  // Elemen kartu dapat dibuka dengan Enter atau Space, bukan hanya pointer.
+  document.addEventListener("keydown",e=>{
+    if(e.key!=="Enter"&&e.key!==" ")return;
+    const item=e.target.closest(".card[tabindex],.pol[tabindex]");
+    if(!item)return;
+    e.preventDefault();
+    item.click();
   });
 })();
