@@ -130,6 +130,18 @@ const viewport=$("#pageViewport"),panels=$$("#pageTrack>section");
 function activate(id){
   const a=links.find(x=>x.hash==="#"+id);
   if(!a)return;
+  const changed=lastSec!==id;
+  if(changed){
+    const panel=panels.find(p=>p.id===id);
+    if(panel){
+      const direction=panels.findIndex(p=>p.id===id)>panels.findIndex(p=>p.id===lastSec)?"next":"prev";
+      panel.classList.remove("page-arrive-next","page-arrive-prev");
+      void panel.offsetWidth;
+      panel.classList.add(direction==="next"?"page-arrive-next":"page-arrive-prev");
+      window.setTimeout(()=>panel.classList.remove("page-arrive-next","page-arrive-prev"),900);
+    }
+    if(!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches))wipe();
+  }
   links.forEach(x=>x.classList.toggle("on",x===a));movePill(a);
   document.body.classList.toggle("light",id==="portfolio"||id==="contact");
   lastSec=id;
@@ -552,3 +564,52 @@ renderC();
     },360);
   },180000);
 })();
+
+// ---------- Stage 5: scroll craft + masked typography ----------
+(function(){
+  const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const selectors=[
+    "#home .hero-copy h1",
+    "#home .hero-description",
+    "#home .hero-quote",
+    "#about .about-heading-main",
+    "#about .a-left h2",
+    "#about .a-right p",
+    "#portfolio .portfolio-banner-title",
+    "#portfolio .portfolio-banner-bottom",
+    "#contact .box h2",
+    "#contact .box h3"
+  ];
+  const targets=selectors.flatMap(selector=>$$(selector));
+  targets.forEach(el=>el.classList.add("text-mask-reveal"));
+  if(reduce||!("IntersectionObserver" in window)){
+    targets.forEach(el=>el.classList.add("text-mask-visible"));
+    return;
+  }
+  const homeTargets=targets.filter(el=>el.closest("#home"));
+  homeTargets.forEach(el=>el.classList.add("text-mask-visible"));
+  ["#about","#portfolio","#contact"].forEach(selector=>{
+    const section=$(selector);
+    if(!section)return;
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting)return;
+        entry.target.classList.add("text-mask-visible");
+        io.unobserve(entry.target);
+      });
+    },{root:section,threshold:.12,rootMargin:"0px 0px -5% 0px"});
+    targets.filter(el=>el.closest(selector)).forEach(el=>io.observe(el));
+  });
+  // Subtle scroll depth for ambient layers; no layout or navigation changes.
+  panels.forEach(panel=>{
+    let raf=0;
+    panel.addEventListener("scroll",()=>{
+      if(raf)return;
+      raf=requestAnimationFrame(()=>{
+        raf=0;
+        panel.style.setProperty("--scroll-depth",Math.min(panel.scrollTop,900));
+      });
+    },{passive:true});
+  });
+})();
+
