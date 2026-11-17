@@ -329,7 +329,9 @@ function showTab(k){
   box.classList.add("portfolio-shimmer-in");
   box.addEventListener("animationend",e=>{if(e.animationName==="portfolio-shimmer")box.classList.remove("portfolio-shimmer-in")},{once:true});
   const count=$("#portfolioCount");if(count)count.textContent=String(DATA.projects.length+DATA.designs.length+DATA.visuals.length).padStart(2,"0");
-  $$(".work-card",box).forEach(card=>{
+  $(".work-card",box).forEach((card,index)=>{
+    card.style.setProperty("--card-index",index);
+    card.classList.add("card-enter");
     const open=()=>openLb(list[Number(card.dataset.i)]);
     card.addEventListener("click",open);
     card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}});
