@@ -2541,3 +2541,21 @@ body.portfolio-modal-open{overflow:hidden}
  #portfolio .visual-grid .work-card:nth-child(2){width:88%;margin-left:auto!important}
 }
 @media(prefers-reduced-motion:reduce){#portfolio .work-card,#portfolio .work-image:before,#portfolio .art-window,#portfolio .work-open,#portfolio .work-arrow{transition:none!important}}
+
+
+/* ABOUT RESTORE — Education and Tech Stack are editorial timelines, not cards */
+#about .tl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(34px,6vw,86px);max-width:1120px;margin:clamp(38px,5vw,64px) auto 0}
+#about .tl>div{position:relative;min-width:0;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
+#about .tl>div::before{display:none!important}
+#about .tl h3{display:flex;align-items:center;gap:12px;margin:0 0 24px;color:#f2f5ff;font:650 clamp(1.05rem,1.5vw,1.28rem)/1.2 var(--f-head);letter-spacing:-.025em}
+#about .tl h3::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(150,174,230,.28),transparent)}
+#about .list{height:auto!important;max-height:none!important;overflow:visible!important;padding:3px 8px 4px 14px;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+#about .item{margin-left:11px;padding:2px 0 23px 27px;border-left:1px solid rgba(129,157,220,.32);background:transparent!important;border-radius:0!important;box-shadow:none!important}
+#about .num{left:-12px;top:1px;width:22px;height:22px;background:#101d3a;border:1px solid #6684c9;color:#d6e1ff;font:700 .62rem var(--f-head)}
+#about .item.act .num{background:#dce7ff;color:#101a32;border-color:#dce7ff}
+#about .item .org{color:#e9efff;font-size:.82rem;letter-spacing:.005em}
+#about .lg{flex-basis:27px;height:27px;border-radius:50%;background:rgba(38,61,112,.5);border:1px solid rgba(154,180,239,.24);color:#cbd9ff}
+#about .item strong{margin:9px 0 4px;color:#fff;font:600 .92rem/1.45 var(--f-body)}
+#about .item .sub{color:#9baac9;font-size:.72rem;letter-spacing:.015em}
+#about .item time{background:transparent;border:0;border-left:1px solid rgba(143,173,239,.35);padding-left:10px;color:#c6d7ff}
+@media(max-width:700px){#about .tl{grid-template-columns:1fr;gap:34px}#about .list{height:auto!important}}
