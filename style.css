@@ -361,3 +361,49 @@ html.cinematic-ready .cinematic-reveal.is-visible{
 @media(prefers-reduced-motion:reduce){
   .stx-ripple,.media-arrived{animation:none!important}
 }
+
+
+/* ===== STAGE 5 · REAL INTERACTIVE EXPERIENCE ===== */
+.btn,.arr,.tabs button,.card,.folder,.pol,nav a,.find a{
+  --ix:50%;--iy:50%;
+}
+.btn::before,.arr::before,.tabs button::before,.card::before,
+.folder::after,.pol::before,.find a::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:radial-gradient(180px circle at var(--ix) var(--iy),rgba(255,255,255,.24),transparent 72%);
+  transition:opacity 220ms ease;
+}
+.card::before{z-index:1}
+.folder::after{z-index:1;border-radius:inherit}
+.pol::before{z-index:2}
+.find a::before{border-radius:9px}
+.has-interactive-pointer .btn:hover::before,
+.has-interactive-pointer .arr:hover::before,
+.has-interactive-pointer .tabs button:hover::before,
+.has-interactive-pointer .card:hover::before,
+.has-interactive-pointer .folder:hover::after,
+.has-interactive-pointer .pol:hover::before,
+.has-interactive-pointer .find a:hover::before,
+.btn:focus-visible::before,.arr:focus-visible::before,
+.tabs button:focus-visible::before,.card:focus-visible::before,
+.folder:focus-visible::after,.pol:focus-visible::before{opacity:1}
+.card.touch-active::before,.folder.touch-active::after,
+.btn.touch-active::before,.arr.touch-active::before,
+.tabs button.touch-active::before,.pol.touch-active::before,
+.find a.touch-active::before{opacity:1}
+.card.touch-active .ov{opacity:1}
+.card.touch-active .ov span{transform:translateY(0) scale(1)}
+.card.touch-active .ph img{transform:scale(1.035)}
+.folder.touch-active .peek{transform:translateY(-18px) rotate(-1deg)}
+.btn.touch-active,.tabs button.touch-active,.arr.touch-active,.pol.touch-active{
+  filter:brightness(1.08)
+}
+.tabs button.touch-active{transform:scale(.97)}
+@media(hover:none){
+  .card.touch-active{box-shadow:0 18px 38px rgba(13,20,38,.22)}
+  .card.touch-active .ov{backdrop-filter:blur(2px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .btn::before,.arr::before,.tabs button::before,.card::before,
+  .folder::after,.pol::before,.find a::before{display:none}
+}
