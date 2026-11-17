@@ -362,7 +362,13 @@ $("#cmtForm").addEventListener("submit",async e=>{
   try{localStorage.setItem(KEY,JSON.stringify(a))}catch(x){}
   f.reset();$("#fname").textContent="Choose Profile Photo";renderC();
 });
-$("#msgForm").addEventListener("submit",e=>{e.preventDefault();alert("Pesan terkirim! (Hubungkan ke EmailJS/Formspree agar masuk ke emailmu.)");e.target.reset()});
+$("#msgForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const feedback=$("#msgFeedback");
+  if(feedback)feedback.textContent="Form demo aktif, tetapi belum terhubung ke layanan email. Pesan belum dikirim.";
+  const button=e.target.querySelector("button");
+  if(button){const label=button.querySelector("span");if(label){const old=label.textContent;label.textContent="Not connected yet";button.disabled=true;window.setTimeout(()=>{label.textContent=old;button.disabled=false},1800)}}
+});
 renderC();
 
 
