@@ -20,7 +20,7 @@ document.documentElement.style.setProperty("--topo-d",topo("#16264d"));
 document.documentElement.style.setProperty("--topo-l",topo("#d3d9e6"));
  
 // ---------- Cek aset gambar (hero, person, about) ----------
-[["assets/bg/poster.jpg","has-hero"],["assets/images/hero-person.png","has-person"],["assets/my.jpg","has-about"]].forEach(([src,cls])=>{
+[["assets/bg/poster.jpg","has-hero"],["assets/images/hero-person.png","has-person"],["assets/my-transparent.png","has-about"]].forEach(([src,cls])=>{
   const im=new Image();im.onload=()=>document.body.classList.add(cls);im.src=src;
 });
 
@@ -124,6 +124,27 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
 }),{rootMargin:"-45% 0px -45% 0px",threshold:0});
 $$("section").forEach(s=>io.observe(s));
 addEventListener("load",()=>movePill($("nav a.on")));addEventListener("resize",()=>movePill($("nav a.on")));
+
+// ---------- Spider-Man reveal: mengikuti cursor dan sentuhan ---------- 
+(function(){
+  const photo=$("#spiderReveal");
+  if(!photo)return;
+  const spider=$(".about-spider",photo);
+  if(!spider)return;
+  function move(e){
+    const r=photo.getBoundingClientRect();
+    const x=Math.max(0,Math.min(r.width,e.clientX-r.left));
+    const y=Math.max(0,Math.min(r.height,e.clientY-r.top));
+    photo.style.setProperty("--reveal-x",x+"px");
+    photo.style.setProperty("--reveal-y",y+"px");
+    photo.classList.add("is-revealing");
+  }
+  photo.addEventListener("pointermove",move);
+  photo.addEventListener("pointerdown",e=>{move(e);});
+  photo.addEventListener("pointerleave",()=>photo.classList.remove("is-revealing"));
+  photo.addEventListener("pointerup",e=>{if(e.pointerType!=="mouse")photo.classList.remove("is-revealing");});
+  photo.addEventListener("pointercancel",()=>photo.classList.remove("is-revealing"));
+})();
 
 // ---------- Timeline: 3 item tampil, sisanya di-scroll + efek fokus ----------
 const SHOW=3;
