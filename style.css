@@ -2056,3 +2056,89 @@ body.portfolio-modal-open{overflow:hidden}
   #nav a{padding:8px 9px;font-size:.68rem}
   #portfolio #tabs button{padding:9px 9px}
 }
+
+
+/* GALLAGHER'S STUDIO — CONSISTENT TYPE SYSTEM (non-home) */
+:root{
+  --type-display:var(--f-head);
+  --type-interface:var(--f-body);
+  --type-hero:clamp(3.1rem,8.6vw,7rem);
+  --type-h1:clamp(2.55rem,6.2vw,4.8rem);
+  --type-h2:clamp(1.65rem,3.2vw,2.55rem);
+  --type-h3:clamp(1.12rem,1.8vw,1.42rem);
+  --type-lead:clamp(.98rem,1.25vw,1.1rem);
+  --type-body:clamp(.9rem,1vw,1rem);
+  --type-ui:clamp(.76rem,.9vw,.88rem);
+  --type-caption:clamp(.64rem,.72vw,.74rem);
+}
+#about,#portfolio,#contact{
+  font-family:var(--type-interface);
+  font-size:var(--type-body);
+  line-height:1.72;
+  font-weight:400;
+  letter-spacing:0;
+  font-kerning:normal;
+}
+#about h1,#about h2,#about h3,
+#portfolio h1,#portfolio h2,#portfolio h3,
+#contact h1,#contact h2,#contact h3{
+  font-family:var(--type-display)!important;
+  font-weight:700;
+  line-height:1.12;
+  letter-spacing:-.045em;
+  text-wrap:balance;
+}
+#about p,#portfolio p,#contact p{
+  font-family:var(--type-interface);
+  font-size:var(--type-body);
+  line-height:1.75;
+  letter-spacing:0;
+  font-weight:400;
+  text-wrap:pretty;
+}
+#about button,#about a,#about input,#about textarea,
+#portfolio button,#portfolio a,
+#contact button,#contact a,#contact input,#contact textarea,
+#nav a{
+  font-family:var(--type-interface);
+  letter-spacing:normal;
+}
+#about .sec-title,#portfolio .portfolio-banner-title{
+  font-family:var(--type-display)!important;
+  font-size:var(--type-hero);
+  line-height:.94;
+  letter-spacing:-.075em;
+  font-weight:800;
+}
+#about .a-left h2{font-size:var(--type-h1);line-height:1.02;letter-spacing:-.06em}
+#about .tl h3,#about .folder h3,#portfolio .work-card h3,#contact .box h2,#contact .box h3{
+  font-size:var(--type-h3);
+  line-height:1.25;
+  letter-spacing:-.035em;
+}
+#about .about-heading-note,#portfolio .portfolio-banner-bottom p,
+#portfolio .portfolio-banner-bottom a,#portfolio .work-meta,
+#contact label,#contact .find small{
+  font-size:var(--type-caption);
+  line-height:1.5;
+  font-weight:600;
+  letter-spacing:.1em;
+}
+#portfolio .portfolio-banner-bottom p{font-family:var(--type-interface)}
+#portfolio .category-copy p,#portfolio .work-card p,#portfolio .featured-work p{
+  font-size:var(--type-body);line-height:1.7;letter-spacing:0;
+}
+#portfolio #tabs button,#contact .btn,#about .btn{
+  font-size:var(--type-ui);font-weight:650;letter-spacing:.045em;
+}
+#contact input,#contact textarea{
+  font-size:var(--type-body);line-height:1.55;font-family:var(--type-interface);
+}
+#contact .box h2{font-size:var(--type-h2)}
+@media(max-width:700px){
+  #about,#portfolio,#contact{line-height:1.68}
+  #about .sec-title,#portfolio .portfolio-banner-title{font-size:clamp(2.65rem,13.5vw,4.5rem)}
+  #about .a-left h2{font-size:clamp(1.65rem,7.4vw,2.35rem)}
+  #about p,#portfolio p,#contact p{font-size:clamp(.88rem,3.6vw,.96rem)}
+  #portfolio #tabs button{font-size:.68rem;letter-spacing:.035em}
+}
