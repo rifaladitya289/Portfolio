@@ -48,12 +48,12 @@ body.light #mascot{color:#111;--eye:#fff}
 .a-left h2{font-size:var(--fs-title);line-height:1.08}.a-left h2 span{color:var(--blue);display:block}
 .a-right p{color:#c3cbe0;font-size:1.02rem;line-height:1.7;margin-bottom:20px}
 .a-photo{display:flex;align-items:flex-end;justify-content:center;min-height:260px;-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
-.a-photo{position:relative;--reveal-x:50%;--reveal-y:50%;--reveal-size:92px;touch-action:pan-y}
-.a-photo img{width:100%;max-height:calc(var(--h,1vh)*55);object-fit:contain}
+.a-photo{position:relative;--reveal-x:50%;--reveal-y:50%;--reveal-size:118px;touch-action:pan-y;isolation:isolate}
+.a-photo img{display:block;width:100%;max-height:calc(var(--h,1vh)*55);object-fit:contain}
 .a-photo .about-base{position:relative;z-index:1}
-.a-photo .about-spider{position:absolute;z-index:2;left:0;bottom:0;width:100%;height:100%;max-height:calc(var(--h,1vh)*55);object-fit:contain;pointer-events:none;opacity:1;-webkit-mask-image:radial-gradient(circle var(--reveal-size) at var(--reveal-x) var(--reveal-y),#000 0 68%,transparent 100%);mask-image:radial-gradient(circle var(--reveal-size) at var(--reveal-x) var(--reveal-y),#000 0 68%,transparent 100%);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
-.a-photo.is-revealing{--reveal-size:104px}
-.a-photo .about-spider{transition:mask-position .04s linear,-webkit-mask-position .04s linear}
+.a-photo .about-spider{position:absolute;z-index:2;left:0;bottom:0;width:100%;height:100%;max-height:calc(var(--h,1vh)*55);object-fit:contain;pointer-events:none;opacity:0;-webkit-mask-image:radial-gradient(circle var(--reveal-size) at var(--reveal-x) var(--reveal-y),#000 0 58%,rgba(0,0,0,.9) 72%,transparent 100%);mask-image:radial-gradient(circle var(--reveal-size) at var(--reveal-x) var(--reveal-y),#000 0 58%,rgba(0,0,0,.9) 72%,transparent 100%);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;transition:opacity .22s ease;will-change:opacity}
+.a-photo.is-revealing{--reveal-size:132px}
+.a-photo.is-revealing .about-spider{opacity:1}
 
 .a-photo i{width:70%;height:260px;border-radius:50% 50% 8px 8px/40% 40% 8px 8px;background:linear-gradient(#1d3a7a,#04070f)}
 .has-about .a-photo i{display:none}
