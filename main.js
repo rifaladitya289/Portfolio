@@ -1,8 +1,8 @@
 // ================= DATA (ganti dengan datamu) =================
 const DATA = {
-  projects:[1,2,3].map(i=>({t:"Proyek "+i,d:"Deskripsi singkat proyek.",img:`assets/projects/${i}.jpg`,url:""})),
-  certs:[1,2,3].map(i=>({t:"Sertifikat "+i,d:"Penyelenggara, 2026",img:`assets/certs/${i}.jpg`})),
-  awards:[1,2,3,4,5].map(i=>({t:"Penghargaan "+i,d:"Juara / Finalis",img:`assets/awards/${i}.jpg`}))
+  projects:[1,2,3].map(i=>({t:"Project "+String(i).padStart(2,"0"),d:"A digital project showcase. Replace this sample with your project description.",img:`assets/projects/${i}.jpg`,type:"DIGITAL PROJECT",tools:"HTML · CSS · JAVASCRIPT",url:""})),
+  designs:[1,2,3].map(i=>({t:"Design Study "+String(i).padStart(2,"0"),d:"A website interface and UI/UX concept. Replace this sample with your design details.",img:`assets/designs/${i}.jpg`,type:"UI / UX DESIGN",tools:"LAYOUT · TYPOGRAPHY · VISUAL SYSTEM"})),
+  visuals:[1,2,3,4,5,6].map(i=>({t:"Visual Work "+String(i).padStart(2,"0"),d:"A visual exploration. Replace this sample with the artwork description.",img:`assets/visuals/${i}.jpg`,type:"VISUAL ART",tools:"GRAPHIC · COMPOSITION · ART DIRECTION"}))
 };
 const SOCIAL_NOTE="";
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -241,29 +241,57 @@ $(".tl .list").forEach(l=>{
 fitLists();addEventListener("load",fitLists);addEventListener("resize",fitLists);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitLists);
 
-// ---------- Folder & Portfolio ----------
-["projects","certs","awards"].forEach(k=>{
-  $("#n-"+k).textContent=DATA[k].length;
-  const im=document.createElement("img");im.src=DATA[k][0].img;im.alt="";im.onerror=()=>im.remove();$("#pk-"+k).appendChild(im);
+// ---------- Folder & Portfolio: Projects / Designs / Visuals ----------
+["projects","designs","visuals"].forEach(k=>{
+  const count=$("#n-"+k),peek=$("#pk-"+k);
+  if(count)count.textContent=DATA[k].length;
+  if(peek&&DATA[k][0]){
+    const im=document.createElement("img");im.src=DATA[k][0].img;im.alt="";im.onerror=()=>im.remove();peek.appendChild(im);
+  }
 });
-const ROT=[[6,34,-6],[36,2,4],[64,30,7],[18,56,-3],[50,58,5]];
-function openLb(i){$("#lb img").src=i.img;$("#lb img").onerror=()=>{$("#lb img").removeAttribute("src")};$("#lb p").textContent=i.t;$("#lb").classList.add("on")}
-$("#lb").addEventListener("click",()=>$("#lb").classList.remove("on"));
+const $lb=$("#lb");
+function openLb(item){
+  const img=$lb.querySelector("img"),caption=$lb.querySelector("p");
+  img.src=item.img;img.alt=item.t;img.onerror=()=>img.removeAttribute("src");
+  caption.textContent=item.t+" — "+item.d;
+  $lb.classList.add("on");
+  document.body.classList.add("portfolio-modal-open");
+}
+function closeLb(){$lb.classList.remove("on");document.body.classList.remove("portfolio-modal-open")}
+$lb.addEventListener("click",closeLb);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLb()});
 let cur="projects";
 function showTab(k){
-  cur=k;$$("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.tab===k));
-  const box=$("#stageP"),list=DATA[k],label=k==="certs"?"View Certificate":k==="projects"?"View Project":"View Photo";
-  if(k==="awards"){
-    box.innerHTML='<div class="collage">'+list.map((i,n)=>{const r=ROT[n%5];return `<div class="pol" tabindex="0" role="button" aria-label="${esc(i.t)}" data-i="${n}" style="left:${r[0]}%;top:${r[1]}%;transform:rotate(${r[2]}deg)"><div class="ph">Foto<img src="${i.img}" alt="${esc(i.t)}" onerror="this.remove()"></div></div>`}).join("")+'</div>';
-    $$(".pol",box).forEach(p=>p.addEventListener("click",()=>openLb(list[p.dataset.i])));
-  }else{
-    box.innerHTML='<div class="rail-wrap"><button class="arr p" aria-label="Sebelumnya">‹</button><div class="rail" id="rail">'+list.map((i,n)=>`<article class="card" tabindex="0" data-i="${n}"><div class="ph">Gambar<img src="${i.img}" alt="${esc(i.t)}" onerror="this.remove()"><div class="ov"><span>${label}</span></div></div><div class="b"><strong>${esc(i.t)}</strong><p>${esc(i.d)}</p></div></article>`).join("")+'</div><button class="arr n" aria-label="Berikutnya">›</button></div>';
-    const r=$("#rail");$(".arr.p",box).onclick=()=>r.scrollBy({left:-320,behavior:"smooth"});$(".arr.n",box).onclick=()=>r.scrollBy({left:320,behavior:"smooth"});
-    $$(".card",box).forEach(c=>c.addEventListener("click",()=>{const i=list[c.dataset.i];i.url?window.open(i.url,"_blank","noopener"):openLb(i)}));
-  }
+  if(!DATA[k])return;
+  cur=k;
+  $$("#tabs button").forEach(b=>{const active=b.dataset.tab===k;b.classList.toggle("on",active);b.setAttribute("aria-selected",String(active))});
+  const box=$("#stageP"),list=DATA[k],total=list.length;
+  const names={projects:"Digital Projects",designs:"Interface & Experience Design",visuals:"Visual Explorations"};
+  const descriptions={projects:"Websites, applications, and digital products built from ideas.",designs:"Website layouts, dashboards, and interface concepts shaped with intention.",visuals:"Graphic works, identities, posters, and experiments in visual storytelling."};
+  const cards=list.map((item,n)=>`<article class="work-card" tabindex="0" role="button" aria-label="Open ${esc(item.t)}" data-i="${n}">
+    <div class="work-image"><img src="${item.img}" alt="${esc(item.t)}" loading="lazy" onerror="this.parentElement.classList.add('image-missing');this.remove()"><span class="work-index">0${n+1}</span><span class="work-open" aria-hidden="true">↗</span></div>
+    <div class="work-meta"><div><span class="work-type">${esc(item.type||"CREATIVE WORK")}</span><h3>${esc(item.t)}</h3><p>${esc(item.d)}</p></div><span class="work-arrow">↗</span></div>
+  </article>`).join("");
+  const featured=k==="projects"&&list.length?`<button class="featured-work" type="button" data-feature="0"><span class="featured-label">FEATURED PROJECT <i>✳</i></span><span class="featured-preview"><img src="${list[0].img}" alt="" loading="lazy" onerror="this.remove()"><span class="featured-number">01</span></span><span class="featured-bottom"><span><small>SPOTLIGHT / 2026</small><strong>${esc(list[0].t)}</strong><em>${esc(list[0].d)}</em></span><b>Explore ↗</b></span></button>`:"";
+  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","visuals"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(total).padStart(2,"0")}</strong><span>ITEMS</span></div></div>
+  ${featured}
+  <div class="work-grid ${k==="visuals"?"visual-grid":""}">${cards}</div>
+  <div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>END OF COLLECTION · ${String(total).padStart(2,"0")} WORKS</span></div></div>`;
+  const count=$("#portfolioCount");if(count)count.textContent=String(DATA.projects.length+DATA.designs.length+DATA.visuals.length).padStart(2,"0");
+  $$(".work-card",box).forEach(card=>{
+    const open=()=>openLb(list[Number(card.dataset.i)]);
+    card.addEventListener("click",open);
+    card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}});
+  });
+  const feature=$(".featured-work",box);
+  if(feature)feature.addEventListener("click",()=>openLb(list[0]));
 }
 $$("#tabs [data-tab]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
-$$(".folder").forEach(b=>b.addEventListener("click",()=>{showTab(b.dataset.tab);$("#portfolio").scrollIntoView({behavior:"smooth"})}));
+$$(".folder").forEach(b=>b.addEventListener("click",()=>{
+  showTab(b.dataset.tab);
+  const index=panels.findIndex(p=>p.id==="portfolio");
+  if(index>=0)viewport.scrollTo({left:index*viewport.clientWidth,behavior:"smooth"});
+}));
 showTab("projects");
 
 // ---------- Kontak & komentar (sementara disimpan di browser) ----------
