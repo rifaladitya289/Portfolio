@@ -130,7 +130,7 @@
   <div class="topo l"></div>
   <div class="contact-shell">
     <header class="contact-intro">
-      <div class="contact-eyebrow"><span class="contact-pulse"></span> GALLAGHER'S STUDIO <i>— OPEN TO IDEAS</i></div>
+      <div class="contact-eyebrow"><span class="contact-pulse"></span> GALLAGHER'S STUDIO <i>— OPEN TO IDEAS</i><b class="contact-status">IDEAS WELCOME</b></div>
       <p class="contact-index">04 <span>/ CONTACT</span></p>
       <h1>LET'S MAKE<br><em>SOMETHING</em><br>MATTER<span class="contact-dot">.</span></h1>
       <p class="contact-lead">Punya ide, pertanyaan, atau ingin berkolaborasi? Ceritakan rencanamu. Mari mulai percakapan yang bermakna.</p>
@@ -147,7 +147,8 @@
         <div class="contact-card-head"><span>START A CONVERSATION</span><b>01 — 02</b></div>
         <h2>Tell me about<br>your <em>idea.</em></h2>
         <p class="contact-card-copy">Isi detail singkat di bawah ini. Aku akan tahu apa yang ingin kamu diskusikan.</p>
-        <form id="msgForm" class="contact-form">
+        <form id="msgForm" class="contact-form" novalidate>
+          <div class="contact-progress" aria-label="Form completion"><span id="contactProgress"></span></div><p class="contact-progress-label" id="contactProgressLabel">0% completed</p>
           <label class="contact-field"><span>YOUR NAME</span><input type="text" name="n" placeholder="Nama kamu" autocomplete="name" required></label>
           <label class="contact-field"><span>EMAIL ADDRESS</span><input type="email" name="e" placeholder="nama@email.com" autocomplete="email" required></label>
           <label class="contact-field"><span>MESSAGE</span><textarea name="m" placeholder="Ceritakan ide atau pertanyaanmu..." rows="4" required></textarea></label>
@@ -176,7 +177,7 @@
 </main></div>
 <div id="lb"><div><div class="lb-art art-project"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span></div><p></p></div></div>
 
-<script src="main.js?v=contact-cinematic-v1-20261118"></script>
+<script src="main.js?v=contact-interactive-v2-20261118"></script>
 </body>
 </html>
 
