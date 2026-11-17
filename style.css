@@ -407,3 +407,6 @@ html.cinematic-ready .cinematic-reveal.is-visible{
   .btn::before,.arr::before,.tabs button::before,.card::before,
   .folder::after,.pol::before,.find a::before{display:none}
 }
+
+/* Keep the card's action layer above its interactive spotlight. */
+.card .ov{z-index:2}
