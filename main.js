@@ -171,25 +171,37 @@ addEventListener("resize",()=>{
   if(index>=0)viewport.scrollLeft=index*viewport.clientWidth;
 });
 
-// ---------- Spider-Man reveal: mengikuti cursor dan sentuhan ---------- 
+// ---------- Spider-Man reveal: pointer tracking yang lebih halus ---------- 
 (function(){
   const photo=$("#spiderReveal");
   if(!photo)return;
-  const spider=$(".about-spider",photo);
-  if(!spider)return;
-  function move(e){
+  let targetX=0,targetY=0,currentX=0,currentY=0,raf=0,active=false;
+  function setTarget(e){
     const r=photo.getBoundingClientRect();
-    const x=Math.max(0,Math.min(r.width,e.clientX-r.left));
-    const y=Math.max(0,Math.min(r.height,e.clientY-r.top));
-    photo.style.setProperty("--reveal-x",x+"px");
-    photo.style.setProperty("--reveal-y",y+"px");
-    photo.classList.add("is-revealing");
+    targetX=Math.max(0,Math.min(r.width,e.clientX-r.left));
+    targetY=Math.max(0,Math.min(r.height,e.clientY-r.top));
+    if(!active){
+      currentX=targetX;currentY=targetY;active=true;
+      photo.classList.add("is-revealing");
+    }
+    if(!raf)raf=requestAnimationFrame(track);
   }
-  photo.addEventListener("pointermove",move);
-  photo.addEventListener("pointerdown",e=>{move(e);});
-  photo.addEventListener("pointerleave",()=>photo.classList.remove("is-revealing"));
-  photo.addEventListener("pointerup",e=>{if(e.pointerType!=="mouse")photo.classList.remove("is-revealing");});
-  photo.addEventListener("pointercancel",()=>photo.classList.remove("is-revealing"));
+  function track(){
+    const dx=targetX-currentX,dy=targetY-currentY;
+    currentX+=dx*.38;currentY+=dy*.38;
+    photo.style.setProperty("--reveal-x",currentX+"px");
+    photo.style.setProperty("--reveal-y",currentY+"px");
+    if(Math.abs(dx)>.25||Math.abs(dy)>.25)raf=requestAnimationFrame(track);
+    else raf=0;
+  }
+  function hide(){
+    active=false;photo.classList.remove("is-revealing");
+  }
+  photo.addEventListener("pointermove",setTarget);
+  photo.addEventListener("pointerdown",setTarget);
+  photo.addEventListener("pointerleave",hide);
+  photo.addEventListener("pointerup",e=>{if(e.pointerType!=="mouse")hide()});
+  photo.addEventListener("pointercancel",hide);
 })();
 
 // ---------- Timeline: 3 item tampil, sisanya di-scroll + efek fokus ----------
