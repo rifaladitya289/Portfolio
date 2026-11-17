@@ -336,3 +336,28 @@ html.cinematic-ready .cinematic-reveal.is-visible{
 @media(hover:none){
   html.cinematic-ready .cinematic-reveal{filter:none}
 }
+
+
+/* ===== STAGE 4 · INTERACTION FINISHING ===== */
+.btn,.arr,.tabs button,.card,.pol{position:relative;isolation:isolate}
+.arr,.tabs button,.pol{overflow:hidden}
+.stx-ripple{
+  position:absolute;z-index:2;pointer-events:none;border-radius:50%;
+  width:12px;height:12px;opacity:.42;background:rgba(255,255,255,.8);
+  transform:translate(-50%,-50%) scale(0);
+  animation:stx-ripple-out 560ms cubic-bezier(.2,.7,.25,1) forwards;
+}
+@keyframes stx-ripple-out{
+  0%{transform:translate(-50%,-50%) scale(0);opacity:.42}
+  75%{opacity:.16}
+  100%{transform:translate(-50%,-50%) scale(var(--ripple-scale,12));opacity:0}
+}
+.media-arrived{animation:media-arrive 620ms var(--motion-ease) both}
+@keyframes media-arrive{
+  from{opacity:.35;filter:blur(3px);transform:scale(1.018)}
+  to{opacity:1;filter:blur(0);transform:scale(1)}
+}
+.card:focus-visible,.pol:focus-visible{outline-offset:4px}
+@media(prefers-reduced-motion:reduce){
+  .stx-ripple,.media-arrived{animation:none!important}
+}
