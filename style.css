@@ -623,3 +623,10 @@ html.cinematic-ready .cinematic-reveal.is-visible{
 @media(prefers-reduced-motion:reduce){
   #about .tl>div,#about .folder,#portfolio .card,#contact .box,#contact .find a{transition:none!important}
 }
+
+
+/* ===== TRANSITION CLEANUP · REMOVE COMPETING PANEL EFFECTS ===== */
+#pageTrack>section.page-arrive-next>*,#pageTrack>section.page-arrive-prev>*{
+  animation:none!important;
+}
+#wipe{display:none!important}
