@@ -302,7 +302,7 @@ function showTab(k){
   const box=$("#stageP"),list=DATA[k],total=list.length;
   const names={projects:"Digital Projects",designs:"Interface & Experience Design",visuals:"Visual Explorations"};
   const descriptions={projects:"Websites, applications, and digital products built from ideas.",designs:"Website layouts, dashboards, and interface concepts shaped with intention.",visuals:"Graphic works, identities, posters, and experiments in visual storytelling."};
-  const cards=list.map((item,n)=>`<article class="work-card" tabindex="0" role="button" aria-label="Open ${esc(item.t)}" data-i="${n}">
+  const cards=list.map((item,n)=>`<article class="work-card ${k==='projects'&&n===0?'is-featured-duplicate':''}" tabindex="0" role="button" aria-label="Open ${esc(item.t)}" data-i="${n}">
     <div class="work-image ${k==="designs"?"art-design":k==="visuals"?"art-visual":"art-project"}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="art-caption">${esc(item.type||"CREATIVE WORK")}</span><span class="work-index">0${n+1}</span><span class="work-open" aria-hidden="true">↗</span></div>
     <div class="work-meta"><div><span class="work-type">${esc(item.type||"CREATIVE WORK")}</span><h3>${esc(item.t)}</h3><p>${esc(item.d)}</p></div><span class="work-arrow">↗</span></div>
   </article>`).join("");
