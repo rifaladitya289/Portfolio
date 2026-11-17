@@ -114,16 +114,46 @@ const links=$$("nav a"),pill=$("#pill"),mas=$("#mascot");
 function movePill(a){pill.style.left=a.offsetLeft+"px";pill.style.width=a.offsetWidth+"px";mas.style.left=(a.offsetLeft+a.offsetWidth/2-12)+"px"}
 let lastSec="home";
 function wipe(){const w=$("#wipe");w.classList.remove("go");void w.offsetWidth;w.classList.add("go")}
-const io=new IntersectionObserver(es=>es.forEach(e=>{
-  if(!e.isIntersecting)return;
-  const id=e.target.id,a=links.find(x=>x.hash==="#"+id);
+const viewport=$("#pageViewport"),panels=$$("#pageTrack>section");
+function activate(id){
+  const a=links.find(x=>x.hash==="#"+id);
+  if(!a)return;
   links.forEach(x=>x.classList.toggle("on",x===a));movePill(a);
   document.body.classList.toggle("light",id==="portfolio"||id==="contact");
   if(id==="portfolio"&&lastSec==="about")wipe();
   lastSec=id;
-}),{rootMargin:"-45% 0px -45% 0px",threshold:0});
-$$("section").forEach(s=>io.observe(s));
-addEventListener("load",()=>movePill($("nav a.on")));addEventListener("resize",()=>movePill($("nav a.on")));
+}
+function goTo(id){
+  const index=panels.findIndex(p=>p.id===id);
+  if(index<0)return;
+  viewport.scrollTo({left:index*viewport.clientWidth,behavior:"smooth"});
+  activate(id);
+}
+links.forEach(a=>a.addEventListener("click",e=>{
+  const id=a.hash.slice(1);
+  if(panels.some(p=>p.id===id)){e.preventDefault();goTo(id)}
+}));
+document.addEventListener("click",e=>{
+  const a=e.target.closest('a[href^="#"]');
+  if(!a||a.closest("nav"))return;
+  const id=a.getAttribute("href").slice(1);
+  if(panels.some(p=>p.id===id)){e.preventDefault();goTo(id)}
+});
+let scrollTick=0;
+viewport.addEventListener("scroll",()=>{
+  if(scrollTick)return;
+  scrollTick=requestAnimationFrame(()=>{
+    scrollTick=0;
+    const index=Math.max(0,Math.min(panels.length-1,Math.round(viewport.scrollLeft/viewport.clientWidth)));
+    activate(panels[index].id);
+  });
+},{passive:true});
+addEventListener("load",()=>{movePill($("nav a.on"));activate("home")});
+addEventListener("resize",()=>{
+  const active=$("nav a.on");movePill(active);
+  const index=panels.findIndex(p=>"#"+p.id===active.hash);
+  if(index>=0)viewport.scrollLeft=index*viewport.clientWidth;
+});
 
 // ---------- Spider-Man reveal: mengikuti cursor dan sentuhan ---------- 
 (function(){
