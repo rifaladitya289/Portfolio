@@ -607,7 +607,7 @@ renderC();
       if(raf)return;
       raf=requestAnimationFrame(()=>{
         raf=0;
-        panel.style.setProperty("--scroll-depth",Math.min(panel.scrollTop,900));
+        panel.style.setProperty("--scroll-shift",(Math.min(panel.scrollTop,900)*-.035)+"px");
       });
     },{passive:true});
   });
