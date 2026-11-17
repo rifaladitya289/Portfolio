@@ -1,8 +1,20 @@
 // ================= DATA (ganti dengan datamu) =================
 const DATA = {
-  projects:[1,2,3].map(i=>({t:"Project "+String(i).padStart(2,"0"),d:"A digital project showcase. Replace this sample with your project description.",img:`assets/projects/${i}.jpg`,type:"DIGITAL PROJECT",tools:"HTML · CSS · JAVASCRIPT",url:""})),
-  designs:[1,2,3].map(i=>({t:"Design Study "+String(i).padStart(2,"0"),d:"A website interface and UI/UX concept. Replace this sample with your design details.",img:`assets/designs/${i}.jpg`,type:"UI / UX DESIGN",tools:"LAYOUT · TYPOGRAPHY · VISUAL SYSTEM"})),
-  visuals:[1,2,3,4,5,6].map(i=>({t:"Visual Work "+String(i).padStart(2,"0"),d:"A visual exploration. Replace this sample with the artwork description.",img:`assets/visuals/${i}.jpg`,type:"VISUAL ART",tools:"GRAPHIC · COMPOSITION · ART DIRECTION"}))
+  projects:[
+    {t:"StudyTrack X",d:"A student productivity platform for learning, schedules, tasks, and personal progress.",img:"assets/projects/1.jpg",type:"DIGITAL PROJECT",tools:"HTML · CSS · JAVASCRIPT",url:""},
+    {t:"Gallagher's Studio",d:"A cinematic personal portfolio showcasing digital work and creative identity.",img:"assets/projects/2.jpg",type:"PERSONAL PORTFOLIO",tools:"HTML · CSS · JAVASCRIPT",url:""},
+    {t:"STADIUM AI",d:"An AI-versus-AI football match simulation concept.",img:"assets/projects/3.jpg",type:"GAME PROTOTYPE",tools:"ANDROID · GAME CONCEPT",url:""}
+  ],
+  designs:[
+    {t:"Portfolio UI",d:"A cinematic portfolio interface concept.",img:"assets/designs/1.jpg",type:"WEB UI DESIGN",tools:"LAYOUT · TYPOGRAPHY"},
+    {t:"Dashboard UI",d:"A student dashboard interface concept.",img:"assets/designs/2.jpg",type:"DASHBOARD DESIGN",tools:"UI · UX"},
+    {t:"Game UI",d:"A football simulation interface concept.",img:"assets/designs/3.jpg",type:"GAME INTERFACE",tools:"UI · VISUAL SYSTEM"}
+  ],
+  visuals:[
+    {t:"Automotive Emblem",d:"A minimal automotive-inspired emblem design.",img:"assets/visuals/1.jpg",type:"LOGO DESIGN",tools:"GRAPHIC · IDENTITY"},
+    {t:"Suit Artwork",d:"A superhero suit design exploration.",img:"assets/visuals/2.jpg",type:"CHARACTER ARTWORK",tools:"DIGITAL ART"},
+    {t:"Digital Artwork",d:"A minimalist digital visual exploration.",img:"assets/visuals/3.jpg",type:"DIGITAL ARTWORK",tools:"COMPOSITION · COLOR"}
+  ]
 };
 const SOCIAL_NOTE="";
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
