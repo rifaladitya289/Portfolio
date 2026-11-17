@@ -21,7 +21,7 @@
   cv.pdf                                   file CV di root repository
 -->
 <script src="fit.js?v=responsive-v2-20261118"></script>
-<link rel="stylesheet" href="style.css?v=type-system-v1-20261118">
+<link rel="stylesheet" href="style.css?v=contact-cinematic-v1-20261118">
 </head>
 <body>
 
@@ -125,44 +125,58 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="contact-cinematic">
   <video class="ambient-motion-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="assets/bg/gallaghers-ambient-navy.mp4" type="video/mp4"></video>
   <div class="topo l"></div>
-  <div class="cols">
-    <div class="stack">
-      <div class="box">
-        <h2>Hubungi</h2><p class="s">Ada yang mau didiskusikan? Langsung kirim pesan aja ya!</p>
-        <form id="msgForm"><input type="text" name="n" placeholder="Nama Anda" required><input type="email" name="e" placeholder="Email Anda" required><textarea name="m" placeholder="Pesan Anda" required></textarea><button class="btn w">Kirim Pesan</button></form>
+  <div class="contact-shell">
+    <header class="contact-intro">
+      <div class="contact-eyebrow"><span class="contact-pulse"></span> GALLAGHER'S STUDIO <i>— OPEN TO IDEAS</i></div>
+      <p class="contact-index">04 <span>/ CONTACT</span></p>
+      <h1>LET'S MAKE<br><em>SOMETHING</em><br>MATTER<span class="contact-dot">.</span></h1>
+      <p class="contact-lead">Punya ide, pertanyaan, atau ingin berkolaborasi? Ceritakan rencanamu. Mari mulai percakapan yang bermakna.</p>
+      <div class="contact-orbit" aria-hidden="true"><span></span><i></i><b></b></div>
+      <div class="contact-socials">
+        <a href="#" target="_blank" rel="noopener"><span>01</span><b>LinkedIn</b><i>↗</i></a>
+        <a href="#" target="_blank" rel="noopener"><span>02</span><b>Instagram</b><i>↗</i></a>
+        <a href="#" target="_blank" rel="noopener"><span>03</span><b>GitHub</b><i>↗</i></a>
+        <a href="#" target="_blank" rel="noopener"><span>04</span><b>TikTok</b><i>↗</i></a>
       </div>
-      <div class="box find">
-        <h3 style="font-family:var(--f-body);font-size:1.05rem;margin-bottom:4px">Find Me</h3>
-        <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:#0a66c2">in</i><span><b>Let's Connect</b><small>on LinkedIn</small></span><i class="ex">↗</i></a>
-        <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:linear-gradient(45deg,#f9a03f,#e1306c,#833ab4)">ig</i><span><b>Instagram</b><small>@username</small></span><i class="ex">↗</i></a>
-        <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:#111">gh</i><span><b>GitHub</b><small>@username</small></span><i class="ex">↗</i></a>
-        <a href="#" target="_blank" rel="noopener"><i class="ic" style="background:#000">tt</i><span><b>TikTok</b><small>@username</small></span><i class="ex">↗</i></a>
-        <div class="pfp"><img src="assets/images/profile.jpg" alt="" onerror="this.remove()">Foto profil</div>
-      </div>
-    </div>
-    <div class="stack">
-      <div class="box">
-        <h2>Tulis Komentar</h2>
-        <form id="cmtForm">
-          <label class="f">Nama</label><input type="text" name="n" placeholder="Masukkan nama kamu" required>
-          <label class="f">Komentar</label><textarea name="c" placeholder="Tulis komentar kamu di sini..." required></textarea>
-          <label class="f">Foto Profil (opsional)</label>
-          <label class="file"><input type="file" name="p" accept="image/*"><span id="fname">Choose Profile Photo</span></label>
-          <p class="hintf">Max file: 1MB</p>
-          <button class="btn w">Kirim Komentar</button>
+    </header>
+    <div class="contact-right">
+      <div class="contact-form-card">
+        <div class="contact-card-head"><span>START A CONVERSATION</span><b>01 — 02</b></div>
+        <h2>Tell me about<br>your <em>idea.</em></h2>
+        <p class="contact-card-copy">Isi detail singkat di bawah ini. Aku akan tahu apa yang ingin kamu diskusikan.</p>
+        <form id="msgForm" class="contact-form">
+          <label class="contact-field"><span>YOUR NAME</span><input type="text" name="n" placeholder="Nama kamu" autocomplete="name" required></label>
+          <label class="contact-field"><span>EMAIL ADDRESS</span><input type="email" name="e" placeholder="nama@email.com" autocomplete="email" required></label>
+          <label class="contact-field"><span>MESSAGE</span><textarea name="m" placeholder="Ceritakan ide atau pertanyaanmu..." rows="4" required></textarea></label>
+          <div class="contact-submit-row"><small>Pesan melalui form ini belum terhubung ke email.</small><button class="contact-send" type="submit"><span>Send message</span><i>↗</i></button></div>
+          <p class="contact-feedback" id="msgFeedback" aria-live="polite"></p>
         </form>
       </div>
-      <div class="box cmt"><h3>Komentar (<span id="cn">0</span>)</h3><div class="clist" id="cmts"></div></div>
+      <div class="contact-lower">
+        <div class="contact-note"><span>ALSO, LEAVE A NOTE</span><p>Bagikan komentar singkat untuk halaman ini.</p></div>
+        <details class="contact-comment">
+          <summary><span>Write a public comment</span><i>＋</i></summary>
+          <form id="cmtForm" class="contact-comment-form">
+            <label class="contact-field"><span>NAME</span><input type="text" name="n" placeholder="Nama kamu" required></label>
+            <label class="contact-field"><span>COMMENT</span><textarea name="c" placeholder="Tulis komentar kamu..." rows="3" required></textarea></label>
+            <label class="contact-field"><span>PROFILE PHOTO (OPTIONAL)</span><label class="file"><input type="file" name="p" accept="image/*"><span id="fname">Choose Profile Photo</span></label></label>
+            <small class="hintf">Max file: 1MB</small>
+            <button class="contact-send contact-send-small" type="submit"><span>Post comment</span><i>↗</i></button>
+          </form>
+        </details>
+        <div class="contact-comments"><h3>COMMUNITY NOTES <span id="cn">0</span></h3><div class="clist" id="cmts"></div></div>
+      </div>
     </div>
   </div>
+</section>
 <footer>© 2026 Nama Kamu</footer>
 </main></div>
 <div id="lb"><div><div class="lb-art art-project"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span></div><p></p></div></div>
 
-<script src="main.js?v=glass-nav-hotfix-v3-20261118"></script>
+<script src="main.js?v=contact-cinematic-v1-20261118"></script>
 </body>
 </html>
 
