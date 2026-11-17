@@ -1415,7 +1415,7 @@ body.portfolio-modal-open{overflow:hidden}
   filter:blur(0);
 }
 #pageTrack>section:not(#home) .ambient-motion-bg{
-  transform:translate3d(0,calc(var(--scroll-depth,0px) * -.035),0) scale(1.045);
+  transform:translate3d(0,var(--scroll-shift,0px),0) scale(1.045);
   transition:transform .18s linear;
   will-change:transform;
 }
