@@ -1398,3 +1398,35 @@ body.portfolio-modal-open{overflow:hidden}
   #stageP .category-copy,#stageP .featured-work,#stageP .work-card,#stageP .art-orbit,#lb .lb-art,#lb.on>div{animation:none!important}
   #stageP .work-meta h3,#stageP .work-arrow,#stageP .art-caption,#tabs button svg{transition:none!important}
 }
+
+/* SCROLL CRAFT + TEXT MASKING */
+.text-mask-reveal{
+  clip-path:inset(0 0 100% 0);
+  opacity:0;
+  transform:translate3d(0,18px,0);
+  filter:blur(5px);
+  transition:clip-path .9s cubic-bezier(.2,.75,.2,1),opacity .65s ease,transform .85s cubic-bezier(.2,.75,.2,1),filter .8s ease;
+  will-change:clip-path,transform,opacity;
+}
+.text-mask-reveal.text-mask-visible{
+  clip-path:inset(0 0 0 0);
+  opacity:1;
+  transform:translate3d(0,0,0);
+  filter:blur(0);
+}
+#pageTrack>section:not(#home) .ambient-motion-bg{
+  transform:translate3d(0,calc(var(--scroll-depth,0px) * -.035),0) scale(1.045);
+  transition:transform .18s linear;
+  will-change:transform;
+}
+#pageTrack>section.page-arrive-next>*,
+#pageTrack>section.page-arrive-prev>*{
+  will-change:transform,opacity,filter;
+}
+@media(prefers-reduced-motion:reduce){
+  .text-mask-reveal,.text-mask-reveal.text-mask-visible{
+    clip-path:none;opacity:1;transform:none;filter:none;transition:none;will-change:auto;
+  }
+  #pageTrack>section:not(#home) .ambient-motion-bg{transform:none;transition:none}
+}
+
