@@ -19,21 +19,6 @@ function topo(stroke){
 document.documentElement.style.setProperty("--topo-d",topo("#16264d"));
 document.documentElement.style.setProperty("--topo-l",topo("#d3d9e6"));
  
-// ---------- Ukuran video background About mengikuti seluruh konten ----------
-(function(){
-  const section=$("#about"),video=section&&$(".about-bg-video",section);
-  if(!section||!video)return;
-  const fit=()=>{
-    video.style.width=section.offsetHeight+"px";
-    video.style.height=section.offsetWidth+"px";
-  };
-  fit();
-  if("ResizeObserver" in window)new ResizeObserver(fit).observe(section);
-  window.addEventListener("load",fit,{once:true});
-  window.addEventListener("resize",fit,{passive:true});
-})();
-
-
 // ---------- Cek aset gambar (hero, person, about) ----------
 [["assets/bg/poster.jpg","has-hero"],["assets/images/hero-person.png","has-person"],["assets/images/about.png","has-about"]].forEach(([src,cls])=>{
   const im=new Image();im.onload=()=>document.body.classList.add(cls);im.src=src;
