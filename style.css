@@ -192,3 +192,68 @@ body{min-height:100%;overscroll-behavior:none}
   transform:scale(1.12);
   transform-origin:center bottom;
 }
+
+
+/* ===== GALLAGHER'S GLOBAL MOTION FOUNDATION · STAGE 1 ===== */
+:root{
+  --motion-fast:160ms;
+  --motion-base:240ms;
+  --motion-slow:420ms;
+  --motion-ease:cubic-bezier(.22,.8,.25,1);
+  --motion-spring:cubic-bezier(.2,.85,.25,1.25);
+  --motion-ring:rgba(47,107,255,.28);
+}
+html{scroll-behavior:smooth}
+body{ -webkit-tap-highlight-color:transparent }
+:where(a,button,[role="button"],input,textarea,select,[tabindex]):focus-visible{
+  outline:2px solid rgba(91,139,255,.9);
+  outline-offset:3px;
+}
+:where(button,a,[role="button"]){
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.btn,.arr,.folder,.tabs button,.card,.pol,nav a,.find a,.file{
+  transition:
+    transform var(--motion-base) var(--motion-ease),
+    box-shadow var(--motion-base) var(--motion-ease),
+    background-color var(--motion-base) var(--motion-ease),
+    border-color var(--motion-base) var(--motion-ease),
+    color var(--motion-fast) ease,
+    filter var(--motion-base) var(--motion-ease);
+}
+.btn{position:relative;isolation:isolate;overflow:hidden;box-shadow:0 5px 16px rgba(47,107,255,.18)}
+.btn::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(130px circle at var(--motion-x,50%) var(--motion-y,50%),rgba(255,255,255,.22),transparent 72%);
+  opacity:0;transition:opacity var(--motion-base) ease;
+}
+.btn:hover,.btn:focus-visible{transform:translateY(-2px);box-shadow:0 10px 24px rgba(47,107,255,.28)}
+.btn:hover::after,.btn:focus-visible::after{opacity:1}
+.btn:active,.arr:active,.tabs button:active,.folder:active{transform:scale(.97)}
+.arr:hover{transform:translateY(-50%) scale(1.08);box-shadow:0 9px 22px rgba(47,107,255,.32)}
+.tabs button:not(.on):hover{background:rgba(47,107,255,.08);transform:translateY(-1px)}
+nav a:hover{transform:translateY(-1px)}
+.card{transition:transform var(--motion-base) var(--motion-ease),box-shadow var(--motion-base) var(--motion-ease)}
+.card:hover,.card:focus-visible{transform:translateY(-5px);box-shadow:0 18px 38px rgba(13,20,38,.2)}
+.folder:hover,.folder:focus-visible{filter:brightness(1.08)}
+.pol:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.find a{border-radius:9px;padding-left:8px;padding-right:8px}
+.find a:hover{background:rgba(47,107,255,.07);transform:translateX(3px)}
+.box input:focus,.box textarea:focus{
+  outline:none;border-color:var(--blue);
+  box-shadow:0 0 0 3px var(--motion-ring);
+  transition:border-color var(--motion-fast),box-shadow var(--motion-fast);
+}
+.file:hover{border-color:#aabdf5;background:#f0f4ff}
+#lb{opacity:0;transition:opacity var(--motion-base) ease}
+#lb.on{opacity:1}
+#lb img{transform:scale(.97);transition:transform var(--motion-slow) var(--motion-ease)}
+#lb.on img{transform:scale(1)}
+@media(hover:none){
+  .btn:hover,.card:hover,.folder:hover,.find a:hover{transform:none;filter:none}
+}
+@media(prefers-reduced-motion:reduce){
+  :root{--motion-fast:0ms;--motion-base:0ms;--motion-slow:0ms}
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:0.01ms!important;animation-duration:0.01ms!important;animation-iteration-count:1!important}
+}
