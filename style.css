@@ -183,12 +183,12 @@ body{min-height:100%;overscroll-behavior:none}
   transition:--reveal-size .18s ease-out;
   will-change:mask-image;
 }
-.a-photo.is-revealing{--reveal-size:48px}
+.a-photo.is-revealing{--reveal-size:32px}
 @media(prefers-reduced-motion:reduce){.a-photo .about-spider{transition:none}}
 
 
 /* Slightly enlarge the Spider-Man layer to cover more of the back area */
 .a-photo .about-spider{
-  transform:scale(1.22);
+  transform:scale(1.32);
   transform-origin:center bottom;
 }
