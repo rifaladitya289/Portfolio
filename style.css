@@ -547,3 +547,79 @@ html.cinematic-ready .cinematic-reveal.is-visible{
   .hero-quote{max-width:320px;margin-top:12px;font-size:.78rem;min-height:2.8em}
 }
 @media(prefers-reduced-motion:reduce){.hero-quote{transition:none}}
+
+
+/* ===== GALLAGHER'S STUDIO · SHARED CINEMATIC VISUAL LANGUAGE ===== */
+#about,#portfolio,#contact{position:relative;isolation:isolate;overflow:hidden}
+#about::before,#portfolio::before,#contact::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 12% 12%,rgba(66,112,214,.17),transparent 42%),
+    radial-gradient(ellipse at 88% 82%,rgba(81,119,210,.12),transparent 38%);
+}
+#about::after,#portfolio::after,#contact::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.22;
+  background-image:linear-gradient(rgba(114,145,205,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(114,145,205,.12) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:linear-gradient(135deg,rgba(0,0,0,.7),transparent 78%);
+}
+#about>.topo,#portfolio>.topo,#contact>.topo{z-index:0;opacity:.24;mix-blend-mode:soft-light}
+#about>.sec-title,#about>.about-grid,#about>.tl,#about>.folders,
+#portfolio>.sec-title,#portfolio>.tabs,#portfolio>#stageP,
+#contact>.cols,#contact>footer{position:relative;z-index:1}
+#about>.sec-title,#portfolio>.sec-title{
+  width:max-content;max-width:100%;margin-left:auto;margin-right:auto;
+  text-shadow:0 8px 28px rgba(31,62,125,.18);
+}
+#about>.sec-title::after,#portfolio>.sec-title::after{
+  content:"";display:block;width:48px;height:2px;margin:13px auto 0;
+  background:linear-gradient(90deg,transparent,#6f95ee,transparent);
+  box-shadow:0 0 14px rgba(92,137,242,.5);
+}
+#about .a-photo{filter:drop-shadow(0 18px 34px rgba(37,85,175,.18))}
+#about .tl>div,#about .folder{
+  transition:transform .45s cubic-bezier(.22,.8,.25,1),filter .35s ease;
+}
+#about .tl>div:hover{transform:translateY(-3px)}
+#about .folder{box-shadow:0 14px 34px rgba(0,0,0,.2)}
+#portfolio{
+  background:
+    radial-gradient(ellipse at 50% -15%,rgba(91,130,220,.17),transparent 52%),
+    linear-gradient(145deg,#f1f4fb 0%,#e8edf7 48%,#f5f6fb 100%);
+}
+#portfolio .sec-title{color:#17233e}
+#portfolio .tabs{border:1px solid rgba(103,129,183,.2);box-shadow:0 14px 38px rgba(25,43,79,.14),inset 0 1px rgba(255,255,255,.9)}
+#portfolio .rail{scrollbar-color:rgba(67,103,177,.4) transparent}
+#portfolio .card{
+  border:1px solid rgba(113,139,192,.22);
+  box-shadow:0 16px 38px rgba(20,38,75,.12);
+  transition:transform .45s cubic-bezier(.22,.8,.25,1),box-shadow .45s ease,border-color .3s ease;
+}
+#portfolio .card:hover{
+  border-color:rgba(84,125,213,.56);
+  box-shadow:0 24px 52px rgba(20,42,90,.2),0 0 0 1px rgba(94,135,225,.1);
+}
+#contact{
+  background:
+    radial-gradient(ellipse at 5% 5%,rgba(92,130,218,.17),transparent 44%),
+    linear-gradient(145deg,#eef2fa 0%,#e7ecf6 52%,#f4f6fb 100%);
+}
+#contact .box{
+  position:relative;border:1px solid rgba(113,139,192,.2);
+  box-shadow:0 18px 42px rgba(20,38,75,.12),inset 0 1px rgba(255,255,255,.9);
+  transition:transform .4s cubic-bezier(.22,.8,.25,1),box-shadow .4s ease,border-color .3s ease;
+}
+#contact .box:hover{
+  transform:translateY(-3px);border-color:rgba(84,125,213,.42);
+  box-shadow:0 24px 48px rgba(20,42,90,.16),inset 0 1px rgba(255,255,255,.95);
+}
+#contact .box h2{letter-spacing:-.025em}
+#contact .find a{transition:transform .3s ease,background .3s ease,box-shadow .3s ease}
+#contact .find a:hover{transform:translateX(4px);box-shadow:0 8px 20px rgba(34,61,112,.1)}
+#contact footer{color:rgba(35,49,78,.58);letter-spacing:.12em}
+@media(hover:none){
+  #about .tl>div:hover,#contact .box:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  #about .tl>div,#about .folder,#portfolio .card,#contact .box,#contact .find a{transition:none!important}
+}
