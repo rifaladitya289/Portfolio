@@ -1312,3 +1312,36 @@ body.portfolio-modal-open{overflow:hidden}
 #lb .lb-art.art-design{background:linear-gradient(135deg,#192b4d,#070d1b)}
 #lb .lb-art.art-visual{background:radial-gradient(circle at 50% 50%,#263d68,#050914 65%)}
 @media(max-width:700px){#stageP .work-image{height:clamp(155px,45vw,225px)}#stageP .work-meta h3{font-size:1rem!important}}
+
+
+/* INTERACTION POLISH — buttons, portfolio cards, touch and keyboard */
+#tabs button,.btn,.arr,.featured-work,.work-card,.lb-close{ -webkit-tap-highlight-color:transparent;touch-action:manipulation; }
+#tabs button,.btn,.arr,.featured-work,.work-card,.lb-close{transition:transform .28s cubic-bezier(.2,.75,.25,1),background .28s ease,border-color .28s ease,box-shadow .28s ease,color .28s ease,filter .28s ease!important}
+#tabs button:hover{transform:translateY(-2px);filter:brightness(1.12)}
+#tabs button:active,.btn:active,.arr:active,.featured-work:active,.work-card:active,.lb-close:active{transform:scale(.975)}
+#tabs button:focus-visible,.btn:focus-visible,.arr:focus-visible,.featured-work:focus-visible,.work-card:focus-visible,.lb-close:focus-visible{outline:2px solid #9dbaff;outline-offset:4px}
+#stageP .work-card{cursor:pointer}
+#stageP .work-card:hover .work-image{border-color:rgba(164,192,255,.56);box-shadow:0 22px 48px rgba(0,0,0,.28),0 0 0 1px rgba(117,153,226,.12)}
+#stageP .work-card:hover .art-window{transform:perspective(700px) rotateY(-4deg) rotateX(1deg) translateY(-5px);box-shadow:22px 25px 0 rgba(91,126,189,.12),0 30px 55px rgba(0,0,0,.42)}
+#stageP .art-window{transition:transform .5s cubic-bezier(.2,.75,.25,1),box-shadow .5s ease}
+#stageP .work-card:hover .art-orbit{transform:scale(1.055) rotate(12deg);border-color:rgba(184,207,255,.48)}
+#stageP .art-orbit{transition:transform .7s ease,border-color .4s ease}
+#stageP .work-card:hover .work-open{transform:translate(2px,-2px);box-shadow:0 5px 18px rgba(0,0,0,.25)}
+#stageP .work-open{transition:transform .28s ease,box-shadow .28s ease}
+#stageP .featured-work{cursor:pointer;overflow:hidden}
+#stageP .featured-work:hover{transform:translateY(-4px);border-color:rgba(162,190,248,.48);box-shadow:0 24px 55px rgba(0,0,0,.32)}
+#stageP .featured-work:hover .featured-bottom>b{transform:translateX(4px);color:#fff}
+#stageP .featured-bottom>b{transition:transform .28s ease,color .28s ease}
+#stageP .work-card.touch-active .work-image,#stageP .featured-work.touch-active .featured-preview{border-color:rgba(174,199,255,.7);filter:brightness(1.16)}
+#tabs button.touch-active,.btn.touch-active,.arr.touch-active,.lb-close.touch-active{filter:brightness(1.2);box-shadow:0 0 0 2px rgba(153,184,255,.25)}
+.work-card.is-pressed,.featured-work.is-pressed,.btn.is-pressed,.arr.is-pressed,#tabs button.is-pressed{transform:scale(.985)}
+#lb .lb-close{cursor:pointer}
+#lb .lb-close:hover{transform:rotate(90deg);background:#314f88;color:#fff}
+#stageP .work-card,#stageP .featured-work,#tabs button,.btn,.arr{position:relative;isolation:isolate}
+#stageP .work-card,#stageP .featured-work{overflow:visible}
+#stageP .work-image,.featured-preview{position:relative}
+#stageP .work-image:before,.featured-preview:before{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 20%,rgba(185,207,255,.22) 48%,transparent 76%);transform:translateX(-120%);opacity:0}
+#stageP.portfolio-shimmer-in .work-image:before,#stageP.portfolio-shimmer-in .featured-preview:before{animation:portfolio-shimmer 850ms ease-out both}
+@keyframes portfolio-shimmer{0%{transform:translateX(-120%);opacity:0}18%{opacity:.8}100%{transform:translateX(120%);opacity:0}}
+@media(hover:none){#stageP .work-card:hover .work-image{box-shadow:none}#stageP .work-card:hover .art-window{transform:perspective(700px) rotateY(-9deg) rotateX(3deg)}}
+@media(prefers-reduced-motion:reduce){#tabs button,.btn,.arr,.featured-work,.work-card,.lb-close,#stageP .art-window,#stageP .art-orbit{transition:none!important}#stageP.portfolio-shimmer-in .work-image:before,#stageP.portfolio-shimmer-in .featured-preview:before{animation:none!important}}
