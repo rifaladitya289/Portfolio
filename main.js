@@ -123,7 +123,12 @@ addEventListener("scroll",parallax,{passive:true});parallax();
 
 // ---------- Navbar: pill, maskot, tema terang/gelap, transisi wipe ----------
 const links=$$("nav a"),pill=$("#pill"),mas=$("#mascot");
-function movePill(a){pill.style.left=a.offsetLeft+"px";pill.style.width=a.offsetWidth+"px";mas.style.left=(a.offsetLeft+a.offsetWidth/2-12)+"px"}
+function movePill(a){
+  if(!a||!pill)return;
+  pill.style.left=a.offsetLeft+"px";
+  pill.style.width=a.offsetWidth+"px";
+  if(mas)mas.style.left=(a.offsetLeft+a.offsetWidth/2-12)+"px";
+}
 let lastSec="home";
 function wipe(){
   const w=$("#wipe");if(!w)return;
@@ -153,7 +158,7 @@ function activate(id){
 function goTo(id){
   const index=panels.findIndex(p=>p.id===id);
   if(index<0)return;
-  viewport.scrollTo({left:index*viewport.clientWidth,behavior:"smooth"});
+  viewport.scrollTo({left:index*viewport.clientWidth,top:0,behavior:"smooth"});
   activate(id);
 }
 links.forEach(a=>a.addEventListener("click",e=>{
@@ -191,7 +196,11 @@ viewport.addEventListener("scroll",()=>{
     activate(panels[index].id);
   });
 },{passive:true});
-addEventListener("load",()=>{movePill($("nav a.on"));activate("home")});
+addEventListener("load",()=>{
+  movePill($("nav a.on"));
+  activate("home");
+  if($("#stageP")&&!$("#stageP").children.length)showTab("projects");
+});
 addEventListener("resize",()=>{
   const active=$("nav a.on");movePill(active);
   const index=panels.findIndex(p=>"#"+p.id===active.hash);
