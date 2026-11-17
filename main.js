@@ -299,6 +299,10 @@ function showTab(k){
   ${featured}
   <div class="work-grid ${k==="visuals"?"visual-grid":""}">${cards}</div>
   <div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>END OF COLLECTION · ${String(total).padStart(2,"0")} WORKS</span></div></div>`;
+  box.classList.remove("portfolio-shimmer-in");
+  void box.offsetWidth;
+  box.classList.add("portfolio-shimmer-in");
+  box.addEventListener("animationend",e=>{if(e.animationName==="portfolio-shimmer")box.classList.remove("portfolio-shimmer-in")},{once:true});
   const count=$("#portfolioCount");if(count)count.textContent=String(DATA.projects.length+DATA.designs.length+DATA.visuals.length).padStart(2,"0");
   $$(".work-card",box).forEach(card=>{
     const open=()=>openLb(list[Number(card.dataset.i)]);
@@ -343,7 +347,7 @@ renderC();
   const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.documentElement.classList.add("motion-ready");
   if(reduce)return;
-  const selector=".btn,.arr,.tabs button,.card,.folder,.pol";
+  const selector=".btn,.arr,.tabs button,.card,.folder,.pol,.work-card,.featured-work,#tabs button,.lb-close";
   document.addEventListener("pointermove",e=>{
     if(e.pointerType!=="mouse")return;
     const el=e.target.closest(selector);
@@ -358,7 +362,7 @@ renderC();
 // ---------- Stage 2: delegated press feedback + subtle 3D card tilt ----------
 (function(){
   const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const pressSelector=".btn,.arr,.tabs button,.card,.folder,.pol";
+  const pressSelector=".btn,.arr,.tabs button,.card,.folder,.pol,.work-card,.featured-work,#tabs button,.lb-close";
   let pressed=null;
   document.addEventListener("pointerdown",e=>{
     const el=e.target.closest(pressSelector);
@@ -445,7 +449,7 @@ renderC();
 // ---------- Stage 4: tactile feedback, media arrival & keyboard activation ----------
 (function(){
   const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const rippleTargets=".btn,.arr,.tabs button,.card,.pol";
+  const rippleTargets=".btn,.arr,.tabs button,.card,.pol,.work-card,.featured-work,#tabs button,.lb-close";
   document.addEventListener("pointerdown",e=>{
     if(reduce)return;
     const el=e.target.closest(rippleTargets);
@@ -488,7 +492,7 @@ renderC();
   const root=document.documentElement;
   const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const fine=window.matchMedia&&window.matchMedia("(hover:hover) and (pointer:fine)").matches;
-  const targets=".btn,.arr,.tabs button,.card,.folder,.pol,nav a,.find a";
+  const targets=".btn,.arr,.tabs button,.card,.folder,.pol,nav a,.find a,.work-card,.featured-work,#tabs button,.lb-close";
   if(fine&&!reduce)root.classList.add("has-interactive-pointer");
 
   // Spotlight follows the actual pointer, including dynamically rendered cards.
