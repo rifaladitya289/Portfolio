@@ -1124,7 +1124,7 @@ body.portfolio-modal-open{overflow:hidden}
 #about>.ambient-motion-bg,#portfolio>.ambient-motion-bg,#contact>.ambient-motion-bg{
   display:block!important;
   opacity:.66!important;
-  filter:blur(10px) brightness(.48) saturate(.95) hue-rotate(205deg)!important;
+  filter:blur(10px) brightness(.48) saturate(.95)!important;
   mix-blend-mode:normal!important;
 }
 #about::before,#portfolio::before,#contact::before{
