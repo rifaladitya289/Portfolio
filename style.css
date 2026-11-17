@@ -157,3 +157,10 @@ body{min-height:100%;overscroll-behavior:none}
 #pageTrack>#contact{padding-bottom:0}
 #pageTrack>footer{flex:0 0 0;width:0;height:0;padding:0;overflow:hidden}
 @media(prefers-reduced-motion:reduce){#pageViewport{scroll-behavior:auto;scroll-snap-type:x proximity}}
+
+/* ALIGN BOTH PORTRAIT LAYERS FOR THE POINTER REVEAL */
+.a-photo{display:block;width:100%;height:300px;min-height:0;overflow:hidden;-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
+.a-photo img,.a-photo .about-base,.a-photo .about-spider{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:contain;object-position:center bottom}
+.a-photo .about-base{z-index:1}
+.a-photo .about-spider{z-index:2;clip-path:circle(0 at var(--reveal-x) var(--reveal-y));-webkit-clip-path:circle(0 at var(--reveal-x) var(--reveal-y));-webkit-mask-image:none;mask-image:none;transition:clip-path .04s linear,-webkit-clip-path .04s linear}
+.a-photo.is-revealing .about-spider{clip-path:circle(var(--reveal-size) at var(--reveal-x) var(--reveal-y));-webkit-clip-path:circle(var(--reveal-size) at var(--reveal-x) var(--reveal-y))}
