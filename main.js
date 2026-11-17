@@ -105,7 +105,7 @@ document.documentElement.style.setProperty("--topo-l",topo("#d3d9e6"));
 })();
 
 // ---------- Parallax hero ----------
-const layers=$$(".layer");
+const layers=$(".layer, .vid");
 function parallax(){const z=parseFloat(document.documentElement.style.zoom)||1,y=scrollY/z;layers.forEach(l=>l.style.transform=`translateY(${y*l.dataset.s}px)`)}
 addEventListener("scroll",parallax,{passive:true});parallax();
 
