@@ -529,3 +529,21 @@ html.cinematic-ready .cinematic-reveal.is-visible{
   .hero-copy,.hero-live{animation:none!important}
   .hero-primary,.hero-primary span,.hero-secondary{transition:none!important}
 }
+
+
+/* ===== ROTATING CINEMATIC MOTIVATION ===== */
+.hero-quote{
+  min-height:1.6em;max-width:470px;margin:15px 0 0;
+  color:rgba(199,214,246,.72);
+  font:italic 500 clamp(.78rem,1.05vw,.94rem)/1.65 var(--f-body);
+  letter-spacing:.025em;
+  opacity:1;transform:translateY(0);
+  transition:opacity 360ms ease,transform 360ms ease;
+}
+.hero-quote::before{content:"“";color:#8daeff;margin-right:5px;font-size:1.15em}
+.hero-quote::after{content:"”";color:#8daeff;margin-left:3px;font-size:1.15em}
+.hero-quote.is-changing{opacity:0;transform:translateY(7px)}
+@media(max-width:700px){
+  .hero-quote{max-width:320px;margin-top:12px;font-size:.78rem;min-height:2.8em}
+}
+@media(prefers-reduced-motion:reduce){.hero-quote{transition:none}}
