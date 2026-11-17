@@ -301,3 +301,42 @@ renderC();
     el.style.setProperty("--motion-y",(e.clientY-r.top)+"px");
   },{passive:true});
 })();
+
+
+// ---------- Stage 2: delegated press feedback + subtle 3D card tilt ----------
+(function(){
+  const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const pressSelector=".btn,.arr,.tabs button,.card,.folder,.pol";
+  let pressed=null;
+  document.addEventListener("pointerdown",e=>{
+    const el=e.target.closest(pressSelector);
+    if(!el)return;
+    pressed=el;el.classList.add("is-pressed");
+  },{passive:true});
+  function release(){
+    if(pressed){pressed.classList.remove("is-pressed");pressed=null}
+  }
+  document.addEventListener("pointerup",release,{passive:true});
+  document.addEventListener("pointercancel",release,{passive:true});
+  document.addEventListener("pointerout",e=>{
+    if(pressed&&e.target===pressed&&!pressed.contains(e.relatedTarget))release();
+  },{passive:true});
+  if(reduce)return;
+  const maxTilt=4;
+  document.addEventListener("pointermove",e=>{
+    if(e.pointerType!=="mouse")return;
+    const card=e.target.closest(".card");
+    if(!card)return;
+    const r=card.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width;
+    const py=(e.clientY-r.top)/r.height;
+    card.style.setProperty("--tilt-y",((px-.5)*maxTilt*2).toFixed(2)+"deg");
+    card.style.setProperty("--tilt-x",((.5-py)*maxTilt*2).toFixed(2)+"deg");
+  },{passive:true});
+  document.addEventListener("pointerout",e=>{
+    const card=e.target.closest(".card");
+    if(!card||card.contains(e.relatedTarget))return;
+    card.style.setProperty("--tilt-x","0deg");
+    card.style.setProperty("--tilt-y","0deg");
+  },{passive:true});
+})();
