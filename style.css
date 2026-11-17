@@ -1279,3 +1279,36 @@ body.portfolio-modal-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   #about .folder,#stageP .work-card,#stageP .work-image img{transition:none!important}
 }
+
+
+/* GALLAGHER'S STUDIO — CSS-generated portfolio artwork */
+#stageP .work-card{padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible}
+#stageP .work-card:hover,#stageP .work-card:focus-visible{transform:translateY(-5px);box-shadow:none!important}
+#stageP .work-image{height:clamp(175px,25vw,270px);border:1px solid rgba(166,190,244,.17);border-radius:3px!important;overflow:hidden;background:linear-gradient(145deg,#101e3c,#050a16)!important;isolation:isolate}
+#stageP .work-image:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,8,19,.82),transparent 62%),radial-gradient(circle at 72% 30%,rgba(91,130,205,.22),transparent 38%);z-index:0;pointer-events:none}
+.art-orbit{position:absolute;width:54%;aspect-ratio:1;right:8%;top:5%;border:1px solid rgba(167,194,246,.25);border-radius:50%;box-shadow:0 0 55px rgba(79,119,198,.12),inset 0 0 45px rgba(79,119,198,.08)}
+.art-orbit:before,.art-orbit:after{content:"";position:absolute;inset:13%;border:1px solid rgba(167,194,246,.18);border-radius:50%;transform:rotateX(65deg) rotate(-25deg)}
+.art-orbit:after{inset:28%;transform:rotateX(65deg) rotate(35deg)}
+.art-window{position:absolute;z-index:1;left:10%;top:17%;width:64%;height:59%;border:1px solid rgba(184,204,242,.38);background:linear-gradient(135deg,rgba(23,39,70,.94),rgba(6,13,27,.94));box-shadow:18px 18px 0 rgba(91,126,189,.08),0 24px 50px rgba(0,0,0,.35);transform:perspective(700px) rotateY(-9deg) rotateX(3deg);padding:13px}
+.art-window i{display:inline-block;width:5px;height:5px;border-radius:50%;background:#91aee9;margin-right:5px;opacity:.8}
+.art-window b{display:block;position:absolute;left:10%;right:10%;top:28%;height:52%;border:1px solid rgba(157,185,239,.3);background:linear-gradient(135deg,rgba(75,106,164,.28),rgba(10,20,42,.08))}
+.art-design .art-window{background:linear-gradient(135deg,#e4e7ed,#aab9d2);border-color:#e9efff;box-shadow:18px 18px 0 rgba(124,151,198,.13),0 24px 50px rgba(0,0,0,.3)}
+.art-design .art-window i{background:#526b9d}
+.art-design .art-window b{background:linear-gradient(135deg,#c4d2e8 0 35%,#536b91 35% 57%,#d6dfec 57%);border-color:rgba(30,49,82,.2)}
+.art-design .art-orbit{border-color:rgba(199,216,246,.28)}
+.art-visual .art-window{left:20%;top:14%;width:60%;height:65%;transform:perspective(700px) rotateY(8deg);background:linear-gradient(145deg,#111b32,#03060d);box-shadow:0 0 35px rgba(99,132,206,.17)}
+.art-visual .art-window b{background:radial-gradient(circle at 50% 45%,rgba(112,147,221,.55),transparent 22%),linear-gradient(135deg,#111d38,#03060d)}
+.art-caption{position:absolute;z-index:3;left:14px;bottom:13px;font-size:.55rem;letter-spacing:.2em;color:#d5e1ff}
+#stageP .work-index{z-index:4;top:12px;left:12px;background:rgba(4,10,23,.72);border:1px solid rgba(173,197,242,.2)}
+#stageP .work-open{z-index:4;opacity:1;transform:none;background:rgba(220,232,255,.92)}
+#stageP .work-meta{padding:14px 1px 12px!important;border-bottom:1px solid rgba(166,190,244,.18)!important}
+#stageP .work-meta h3{font-size:1.16rem!important;letter-spacing:-.025em}
+#stageP .featured-preview{height:clamp(205px,34vw,390px);background:radial-gradient(ellipse at 70% 45%,#243d6d,#0a1328 55%,#050a15)!important}
+#stageP .featured-preview .art-window{width:48%;height:65%;left:12%;top:13%}
+#stageP .featured-preview .art-orbit{width:40%;right:12%;top:8%}
+#stageP .featured-number{z-index:3}
+#lb .lb-art{position:relative;display:block;height:clamp(190px,38vw,360px);overflow:hidden;background:radial-gradient(ellipse at 70% 40%,#263f70,#081226 60%,#030711);border:1px solid rgba(166,190,244,.22)}
+#lb .lb-art .art-window{height:65%}
+#lb .lb-art.art-design{background:linear-gradient(135deg,#192b4d,#070d1b)}
+#lb .lb-art.art-visual{background:radial-gradient(circle at 50% 50%,#263d68,#050914 65%)}
+@media(max-width:700px){#stageP .work-image{height:clamp(155px,45vw,225px)}#stageP .work-meta h3{font-size:1rem!important}}
