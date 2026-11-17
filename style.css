@@ -158,9 +158,30 @@ body{min-height:100%;overscroll-behavior:none}
 #pageTrack>footer{flex:0 0 0;width:0;height:0;padding:0;overflow:hidden}
 @media(prefers-reduced-motion:reduce){#pageViewport{scroll-behavior:auto;scroll-snap-type:x proximity}}
 
-/* ALIGN BOTH PORTRAIT LAYERS FOR THE POINTER REVEAL */
-.a-photo{display:block;width:100%;height:300px;min-height:0;overflow:hidden;-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
-.a-photo img,.a-photo .about-base,.a-photo .about-spider{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:contain;object-position:center bottom}
+/* SMOOTH SPIDER-MAN REVEAL */
+@property --reveal-size{
+  syntax:"<length>";
+  inherits:false;
+  initial-value:0px;
+}
+.a-photo{
+  display:block;width:100%;height:300px;min-height:0;overflow:hidden;
+  --reveal-size:0px;--reveal-x:50%;--reveal-y:50%;
+  -webkit-mask-image:linear-gradient(#000 70%,transparent);
+  mask-image:linear-gradient(#000 70%,transparent);
+}
+.a-photo img,.a-photo .about-base,.a-photo .about-spider{
+  position:absolute;inset:0;width:100%;height:100%;max-height:none;
+  object-fit:contain;object-position:center bottom;
+}
 .a-photo .about-base{z-index:1}
-.a-photo .about-spider{z-index:2;clip-path:circle(0 at var(--reveal-x) var(--reveal-y));-webkit-clip-path:circle(0 at var(--reveal-x) var(--reveal-y));-webkit-mask-image:none;mask-image:none;transition:clip-path .04s linear,-webkit-clip-path .04s linear}
-.a-photo.is-revealing .about-spider{clip-path:circle(var(--reveal-size) at var(--reveal-x) var(--reveal-y));-webkit-clip-path:circle(var(--reveal-size) at var(--reveal-x) var(--reveal-y))}
+.a-photo .about-spider{
+  z-index:2;pointer-events:none;
+  -webkit-mask-image:radial-gradient(circle var(--reveal-size) at var(--reveal-x) var(--reveal-y),#000 0%,#000 62%,transparent 100%);
+  mask-image:radial-gradient(circle var(--reveal-size) at var(--reveal-x) var(--reveal-y),#000 0%,#000 62%,transparent 100%);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  transition:--reveal-size .18s ease-out;
+  will-change:mask-image;
+}
+.a-photo.is-revealing{--reveal-size:76px}
+@media(prefers-reduced-motion:reduce){.a-photo .about-spider{transition:none}}
