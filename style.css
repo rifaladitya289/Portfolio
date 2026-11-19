@@ -2639,3 +2639,37 @@ body.portfolio-modal-open{overflow:hidden}
   }
   #about .tl>div{background:transparent!important}
 }
+
+
+/* ABOUT — REMOVE THE LAYERS THAT MADE THE COLLECTIONS LOOK LIKE SOLID CARDS */
+#about .about-grid{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+}
+#about .about-grid::before{display:none!important}
+#about .tl>div,
+#about .tl>div:hover{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+#about .folder,
+#about .folder:hover{
+  background:transparent!important;
+  border:1px solid rgba(160,185,245,.13)!important;
+  box-shadow:none!important;
+  transform:none!important;
+  overflow:hidden!important;
+}
+#about .folder::before{display:none!important}
+#about .folder .back{display:none!important}
+#about .folder .peek{opacity:0!important;background:transparent!important}
+#about .folder .front{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+#about .folder .go{background:transparent!important;box-shadow:none!important}
