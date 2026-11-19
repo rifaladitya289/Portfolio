@@ -76,3 +76,19 @@
   .gs-intro-ambient,.gs-intro-particle{animation:none!important}
   #gsIntro,#gsBrand{transition-duration:.01ms!important}
 }
+
+/* Wordmark contracts into the compact two-line header identity during docking. */
+#gsIntroWordmark.gs-wordmark-docking{
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  text-align:left;transform:none;filter:none;white-space:nowrap;overflow:visible;
+}
+#gsIntroWordmark.gs-wordmark-docking .gs-intro-name{
+  font-size:11px;line-height:1.15;letter-spacing:.12em;
+}
+#gsIntroWordmark.gs-wordmark-docking .gs-intro-studio{
+  margin-top:3px;font-size:7px;line-height:1;letter-spacing:.38em;padding-left:0;
+}
+#gsIntroWordmark.gs-wordmark-docking .gs-intro-rule{display:none}
+@media(max-width:700px){
+  #gsIntroWordmark.gs-wordmark-docking .gs-intro-name{font-size:10px}
+}
