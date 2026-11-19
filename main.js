@@ -259,7 +259,7 @@ function fitLists(){
     focusList(l);
   });
 }
-$(".tl .list").forEach(l=>{
+$( ".tl .list").forEach(l=>{
   l.addEventListener("scroll",()=>requestAnimationFrame(()=>focusList(l)),{passive:true});
   l.addEventListener("click",e=>{
     const item=e.target.closest(".item");
@@ -329,7 +329,7 @@ function showTab(k){
   box.classList.add("portfolio-shimmer-in");
   box.addEventListener("animationend",e=>{if(e.animationName==="portfolio-shimmer")box.classList.remove("portfolio-shimmer-in")},{once:true});
   const count=$("#portfolioCount");if(count)count.textContent=String(DATA.projects.length+DATA.designs.length+DATA.visuals.length).padStart(2,"0");
-  $(".work-card",box).forEach((card,index)=>{
+  $( ".work-card",box).forEach((card,index)=>{
     card.style.setProperty("--card-index",index);
     card.classList.add("card-enter");
     const open=()=>openLb(list[Number(card.dataset.i)]);
