@@ -98,20 +98,22 @@
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 
-  /* Soft synthesized UI sounds. Audio is created only after a user gesture. */
-  let audio=null,lastHover=0;
-  function getAudio(){
+  /* AudioContext is unlocked on the first real user gesture, then reused. */
+  let audio=null,audioUnlocked=false,lastHover=0;
+  function unlockAudio(){
     if(!audio){
       const Ctx=window.AudioContext||window.webkitAudioContext;
-      if(!Ctx)return null;
+      if(!Ctx)return;
       audio=new Ctx();
     }
-    if(audio.state==="suspended")audio.resume().catch(()=>{});
-    return audio;
+    if(audio.state==="running"){audioUnlocked=true;return;}
+    audio.resume().then(()=>{audioUnlocked=audio.state==="running";}).catch(()=>{});
   }
+  document.addEventListener("pointerdown",unlockAudio,{capture:true,passive:true});
+  document.addEventListener("keydown",unlockAudio,{capture:true});
   function tone(freq,duration,volume,shape){
-    const ctx=getAudio();if(!ctx)return;
-    const osc=ctx.createOscillator(),gain=ctx.createGain();
+    if(!audio||!audioUnlocked||audio.state!=="running")return;
+    const ctx=audio,osc=ctx.createOscillator(),gain=ctx.createGain();
     osc.type=shape||"sine";osc.frequency.setValueAtTime(freq,ctx.currentTime);
     gain.gain.setValueAtTime(.0001,ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),ctx.currentTime+.012);
