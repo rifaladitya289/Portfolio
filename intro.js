@@ -93,10 +93,10 @@
     const blue=logo.querySelector(".gs-mark-blue");
     const lightFill=logo.querySelector(".gs-mark-fill-light");
     const blueFill=logo.querySelector(".gs-mark-fill-blue");
-    const top=intro.querySelector(".gs-letterbox-top");
-    const bottom=intro.querySelector(".gs-letterbox-bottom");
-    animate(top,[{transform:"scaleY(1)"},{transform:"scaleY(0)"}],{duration:1050,delay:180,easing:ease});
-    animate(bottom,[{transform:"scaleY(1)"},{transform:"scaleY(0)"}],{duration:1050,delay:180,easing:ease});
+    const topBar=intro.querySelector(".gs-letterbox-top");
+    const bottomBar=intro.querySelector(".gs-letterbox-bottom");
+    animate(topBar,[{transform:"scaleY(1)"},{transform:"scaleY(0)"}],{duration:1050,delay:180,easing:ease});
+    animate(bottomBar,[{transform:"scaleY(1)"},{transform:"scaleY(0)"}],{duration:1050,delay:180,easing:ease});
     animate(logo,[{transform:"translate(-50%,-50%) scale(.94)",filter:"drop-shadow(0 0 3px rgba(217,165,102,0))"},{transform:"translate(-50%,-50%) scale(1)",filter:"drop-shadow(0 0 25px rgba(217,165,102,.2)"},{transform:"translate(-50%,-50%) scale(.88)",filter:"drop-shadow(0 0 18px rgba(217,165,102,.16)"}],{duration:6500,delay:250,easing:ease});
     animate(hex,[{strokeDashoffset:1},{strokeDashoffset:0}],{duration:1900,delay:650,easing:"cubic-bezier(.4,0,.2,1)"});
     animate(light,[{strokeDashoffset:1},{strokeDashoffset:0}],{duration:1500,delay:2050,easing:ease});
