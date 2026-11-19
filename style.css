@@ -3395,3 +3395,10 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
   )!important;
 }
 #about .a-photo.is-revealing{--reveal-size:72px!important}
+
+
+/* ABOUT PORTRAIT · ALIGN SPIDER-MAN WITH BASE PORTRAIT */
+#about .a-photo .about-spider{
+  transform:translateY(4.5%) scale(1.16)!important;
+  transform-origin:center bottom!important;
+}
