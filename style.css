@@ -3049,3 +3049,49 @@ body.gs-motion-ready .gs-reveal.gs-visible{
   #pageTrack>section.page-arrive-prev>*{animation:none!important;filter:none!important;transform:none!important}
   #wipe.go,#wipe.go:after{animation:none!important}
 }
+
+
+/* ===== ABOUT COLLECTION FOLDERS · LAYERED ENTRANCE MOTION ===== */
+#about .folders .folder.gs-reveal{
+  opacity:1!important;
+  animation:none!important;
+}
+#about .folders .folder.gs-reveal:not(.gs-visible) .back,
+#about .folders .folder.gs-reveal:not(.gs-visible) .peek,
+#about .folders .folder.gs-reveal:not(.gs-visible) .front{
+  opacity:0;
+}
+#about .folders .folder.gs-visible .back{
+  animation:gs-folder-back-in .72s cubic-bezier(.18,.76,.22,1) both;
+}
+#about .folders .folder.gs-visible .peek{
+  animation:gs-folder-peek-in .82s cubic-bezier(.18,.76,.22,1) .13s both;
+}
+#about .folders .folder.gs-visible .front{
+  animation:gs-folder-front-in .76s cubic-bezier(.18,.76,.22,1) .25s both;
+}
+@keyframes gs-folder-back-in{
+  from{opacity:0;transform:translate3d(0,28px,0) scale(.9)}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes gs-folder-peek-in{
+  from{opacity:0;transform:translate3d(0,34px,0) rotate(-5deg) scale(.88);filter:blur(8px)}
+  to{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1);filter:blur(0)}
+}
+@keyframes gs-folder-front-in{
+  from{opacity:0;transform:translate3d(0,24px,0) scale(.94);filter:blur(6px)}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
+}
+@media(max-width:700px){
+  #about .folders .folder.gs-visible .back{animation-duration:.58s}
+  #about .folders .folder.gs-visible .peek{animation-duration:.66s}
+  #about .folders .folder.gs-visible .front{animation-duration:.62s}
+}
+@media(prefers-reduced-motion:reduce){
+  #about .folders .folder.gs-reveal:not(.gs-visible) .back,
+  #about .folders .folder.gs-reveal:not(.gs-visible) .peek,
+  #about .folders .folder.gs-reveal:not(.gs-visible) .front{opacity:1}
+  #about .folders .folder.gs-visible .back,
+  #about .folders .folder.gs-visible .peek,
+  #about .folders .folder.gs-visible .front{animation:none!important;opacity:1!important;filter:none!important}
+}
