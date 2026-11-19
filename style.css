@@ -5,7 +5,10 @@
 --fs-hero:clamp(2.6rem,calc(var(--u,1vw)*11),7rem);
 --fs-title:clamp(2.4rem,calc(var(--u,1vw)*8),4rem);
 --fs-sub:1.25rem;--fs-body:1rem;--fs-ui:.875rem;--fs-small:.8rem;
---bg:#04070f;--blue:#2f6bff;--ink:#eef2ff;--mute:#8d99b8;--light:#f4f6fb;--dark-ink:#0d1426}
+--bg:#04070f;--blue:#2f6bff;--ink:#eef2ff;--mute:#8d99b8;--light:#f4f6fb;--dark-ink:#0d1426;
+  /* Fine topographic contour texture shared by About, Portfolio and Contact */
+  --topo-l:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 700'%3E%3Cg fill='none' stroke='%23b9ccef' stroke-width='1' opacity='.72'%3E%3Cpath d='M-80 90 C80 10 170 30 250 100 S420 190 540 105 760 10 980 85'/%3E%3Cpath d='M-90 120 C70 40 180 65 260 130 S420 220 550 135 770 40 990 115'/%3E%3Cpath d='M-100 150 C60 70 190 95 270 160 S430 250 560 165 780 70 1000 145'/%3E%3Cpath d='M-90 420 C40 330 160 340 260 410 S430 520 560 435 790 330 990 405'/%3E%3Cpath d='M-100 450 C30 360 170 370 270 440 S440 550 570 465 800 360 1000 435'/%3E%3Cpath d='M-110 480 C20 390 180 400 280 470 S450 580 580 495 810 390 1010 465'/%3E%3Cpath d='M160 -50 C90 70 120 160 210 230 S300 390 220 510 140 650 210 760'/%3E%3Cpath d='M190 -60 C120 60 150 170 240 240 S330 400 250 520 170 660 240 770'/%3E%3Cpath d='M220 -70 C150 50 180 180 270 250 S360 410 280 530 200 670 270 780'/%3E%3C/g%3E%3C/svg%3E");
+}
 *{box-sizing:border-box;margin:0;padding:0}
 h1,h2,h3{font-family:var(--f-head);font-weight:700;letter-spacing:-.025em;font-optical-sizing:auto}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;height:auto;overflow-y:auto}
@@ -2745,7 +2748,7 @@ body.portfolio-modal-open{overflow:hidden}
     linear-gradient(180deg,rgba(3,8,22,.62) 0%,rgba(4,10,27,.42) 42%,rgba(3,8,20,.72) 100%),
     radial-gradient(ellipse at 50% 35%,rgba(32,65,132,.13),transparent 68%)!important;
 }
-#about>.topo,#portfolio>.topo,#contact>.topo{z-index:1!important;opacity:.035!important}
+#about>.topo,#portfolio>.topo,#contact>.topo{z-index:1!important;opacity:.18!important;background-repeat:no-repeat!important;background-size:cover!important;mix-blend-mode:screen!important}
 #about>:not(.ambient-motion-bg):not(.topo),
 #portfolio>:not(.ambient-motion-bg):not(.topo),
 #contact>:not(.ambient-motion-bg):not(.topo){
