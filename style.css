@@ -3398,10 +3398,15 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
 
 
 /* ABOUT PORTRAIT · ALIGN SPIDER-MAN WITH BASE PORTRAIT */
-#about .a-photo .about-spider,
-#about .a-photo .about-base{
-  transform:translateY(1.5%) scale(1.30) scaleX(-1)!important;
-  transform-origin:center bottom!important;
+/* ABOUT PORTRAIT · MATCHED FULL-HEIGHT CROP + MIRROR */
+#about .a-photo .about-base,
+#about .a-photo .about-spider{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center bottom!important;
+  transform:scaleX(-1)!important;
+  transform-origin:center center!important;
 }
 
 
