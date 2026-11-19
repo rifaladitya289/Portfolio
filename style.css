@@ -2698,3 +2698,23 @@ body.portfolio-modal-open{overflow:hidden}
 #about::before,#portfolio::before,#contact::before{
   background:linear-gradient(135deg,rgba(3,8,20,.22),rgba(3,8,20,.34) 55%,rgba(3,8,20,.24))!important;
 }
+
+
+/* PAGE VIDEO — place footage above decorative topo lines, below content */
+#about>.ambient-motion-bg,#portfolio>.ambient-motion-bg,#contact>.ambient-motion-bg{
+  display:block!important;position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;object-fit:cover!important;
+  object-position:center!important;opacity:1!important;filter:none!important;
+  -webkit-filter:none!important;transform:none!important;z-index:1!important;
+  pointer-events:none!important;
+}
+#about>.topo,#portfolio>.topo,#contact>.topo{
+  z-index:0!important;opacity:.08!important;pointer-events:none!important;
+}
+#about::before,#portfolio::before,#contact::before{
+  z-index:0!important;background:rgba(3,8,20,.12)!important;
+}
+#about>.about-heading,#about>.about-grid,#about>.about-section-label,#about>.tl,#about>.folders,
+#portfolio>.portfolio-heading,#portfolio>#tabs,#portfolio>#stageP,#contact>.contact-shell{
+  position:relative!important;z-index:2!important;
+}
