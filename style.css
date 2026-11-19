@@ -2928,3 +2928,51 @@ body.portfolio-modal-open{overflow:hidden}
   #about .folder .front b{font-size:1.25rem!important}
   #about .folder .go{right:6px!important;bottom:6px!important;width:20px!important;height:19px!important;font-size:.65rem!important}
 }
+
+
+/* ===== GALLAGHER'S STUDIO · RESPONSIVE MOTION SYSTEM ===== */
+.gs-reveal{opacity:1;transform:none;filter:none}
+body.gs-motion-ready .gs-reveal:not(.gs-visible){
+  opacity:0;
+  transform:translate3d(0,22px,0) scale(.992);
+  filter:blur(7px);
+}
+body.gs-motion-ready .gs-reveal.gs-visible{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+  transition:opacity .72s ease,transform .82s cubic-bezier(.2,.75,.2,1),filter .72s ease;
+  transition-delay:var(--gs-delay,0ms);
+}
+#home .gs-opening{animation:gs-opening .95s cubic-bezier(.2,.75,.2,1) both}
+@keyframes gs-opening{from{opacity:0;transform:translate3d(0,16px,0);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+.gs-interactive{ -webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.gs-interactive:focus-visible{outline:2px solid rgba(154,184,255,.78);outline-offset:4px}
+#about .folder,#portfolio .work-card,#portfolio .featured-work{
+  transition:transform .48s cubic-bezier(.2,.75,.2,1),filter .48s ease,box-shadow .48s ease;
+}
+#about .folder:active,#portfolio .work-card:active,#portfolio .featured-work:active,
+.gs-interactive:active{transform:scale(.985)}
+#about .folder .go,.contact-send,.btn,.hero-primary,.hero-secondary{
+  transition:transform .32s cubic-bezier(.2,.8,.2,1),background-color .32s ease,border-color .32s ease,box-shadow .32s ease;
+}
+@media(hover:hover) and (pointer:fine){
+  #about .folder:hover{transform:translateY(-5px)}
+  #portfolio .work-card:hover{transform:translateY(-5px)}
+  .gs-interactive:hover{filter:brightness(1.08)}
+}
+@media(max-width:900px){
+  body.gs-motion-ready .gs-reveal:not(.gs-visible){transform:translate3d(0,16px,0) scale(.996);filter:blur(5px)}
+  body.gs-motion-ready .gs-reveal.gs-visible{transition-duration:.62s}
+}
+@media(max-width:600px){
+  body.gs-motion-ready .gs-reveal:not(.gs-visible){transform:translate3d(0,12px,0);filter:blur(4px)}
+  body.gs-motion-ready .gs-reveal.gs-visible{transition-duration:.52s;transition-delay:min(var(--gs-delay,0ms),360ms)}
+  #about .folder:active,#portfolio .work-card:active,#portfolio .featured-work:active{transform:scale(.975)}
+}
+@media(prefers-reduced-motion:reduce){
+  body.gs-motion-ready .gs-reveal,body.gs-motion-ready .gs-reveal:not(.gs-visible),body.gs-motion-ready .gs-reveal.gs-visible,
+  #home .gs-opening,#about .folder,#portfolio .work-card,#portfolio .featured-work,.gs-interactive{
+    animation:none!important;transition:none!important;transform:none!important;filter:none!important;opacity:1!important
+  }
+}
