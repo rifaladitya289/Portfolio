@@ -21,7 +21,7 @@
 #gsIntroLogo .gs-mark-blue{stroke:#7892f1;stroke-width:3.5;stroke-linejoin:round}
 #gsIntroLogo .gs-mark-fill-light{fill:#fff;opacity:0}
 #gsIntroLogo .gs-mark-fill-blue{fill:#1b2f7d;opacity:0}
-#gsIntroWordmark{position:absolute;top:calc(43% + min(30vw,185px) + var(--gs-center-shift,0px));left:0;right:0;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translateY(18px);filter:blur(6px);color:#fff;white-space:nowrap;transform-origin:top left}
+#gsIntroWordmark{position:absolute;top:calc(43% + min(30vw,185px) + var(--gs-center-shift,0px));left:50%;right:auto;width:max-content;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translate(-50%,18px);filter:blur(6px);color:#fff;white-space:nowrap;transform-origin:top left}
 .gs-intro-name{font:400 clamp(18px,4.5vw,29px)/1.2 Montserrat,Inter,sans-serif;letter-spacing:.19em}
 .gs-intro-studio{margin-top:8px;color:#b9c2ed;font:300 clamp(9px,2vw,12px)/1.2 Montserrat,Inter,sans-serif;letter-spacing:.48em;padding-left:.48em}
 .gs-intro-rule{width:0;height:1px;margin-top:16px;background:linear-gradient(90deg,transparent,#d9a566,transparent)}
