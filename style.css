@@ -2598,3 +2598,44 @@ body.portfolio-modal-open{overflow:hidden}
   #about .tl>div{border-radius:10px}
   #about .folder{border-radius:9px}
 }
+
+
+/* ABOUT — FINAL TRANSPARENT CARD OVERRIDE
+   Placed last to override the earlier premium panel styles. */
+#about .about-grid,
+#about .about-grid:hover{
+  background:transparent!important;
+  border:1px solid rgba(146,174,230,.10)!important;
+  box-shadow:none!important;
+}
+#about .tl>div,
+#about .tl>div:hover{
+  background:transparent!important;
+  border:1px solid rgba(146,174,230,.10)!important;
+  box-shadow:none!important;
+  transform:none!important;
+  backdrop-filter:none!important;
+}
+#about .folder,
+#about .folder:hover{
+  background:transparent!important;
+  border:1px solid rgba(146,174,230,.10)!important;
+  box-shadow:none!important;
+  transform:none!important;
+  backdrop-filter:none!important;
+}
+#about .folder .front{
+  background:transparent!important;
+  backdrop-filter:none!important;
+}
+#about .about-grid:before{
+  opacity:0!important;
+  filter:none!important;
+}
+@media(max-width:700px){
+  #about .about-grid{
+    background:transparent!important;
+    border-color:rgba(146,174,230,.10)!important;
+  }
+  #about .tl>div{background:transparent!important}
+}
