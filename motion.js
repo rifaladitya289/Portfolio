@@ -63,6 +63,28 @@
       if(intro)intro.classList.add("gs-opening");
     }
   }
+
+  /* Replay staggered reveals whenever a page panel is entered again. */
+  function enablePageReplay(){
+    if(reduce||!("IntersectionObserver"in window))return;
+    const viewport=document.getElementById("pageViewport");
+    const sections=[...document.querySelectorAll("#pageTrack>section")];
+    if(!viewport||!sections.length)return;
+    let activePanel=null;
+    const pageObserver=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting||entry.intersectionRatio<.58)return;
+        if(activePanel===entry.target)return;
+        activePanel=entry.target;
+        entry.target.querySelectorAll(".gs-reveal").forEach(el=>{
+          el.classList.remove("gs-visible");
+          if(observer)observer.observe(el);
+        });
+      });
+    },{root:viewport,threshold:[.58,.75]});
+    sections.forEach(section=>pageObserver.observe(section));
+  }
+
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 
   /* Soft synthesized UI sounds. Audio is created only after a user gesture. */
