@@ -106,7 +106,7 @@
     animate(light,[{opacity:1},{opacity:.12}],{duration:650,delay:3650});
     animate(blue,[{opacity:1},{opacity:.22}],{duration:650,delay:3750});
     animate(document.getElementById("gsIntroFlare"),[{opacity:0,transform:"scaleX(0)"},{opacity:.85,transform:"scaleX(1)",offset:.48},{opacity:0,transform:"scaleX(1)"}],{duration:1350,delay:4050,easing:ease});
-    animate(word,[{opacity:0,transform:"translateY(16px)",filter:"blur(5px)"},{opacity:1,transform:"translateY(0)",filter:"blur(0)"}],{duration:1150,delay:5950,easing:ease});
+    animate(word,[{opacity:0,transform:"translate(-50%,16px)",filter:"blur(5px)"},{opacity:1,transform:"translate(-50%,0)",filter:"blur(0)"}],{duration:1150,delay:5950,easing:ease});
     animate(word.querySelector(".gs-intro-rule"),[{width:"0px",opacity:0},{width:"112px",opacity:1}],{duration:850,delay:6850,easing:ease});
     animate(document.querySelector(".gs-intro-tagline"),[{opacity:0,transform:"translateY(7px)"},{opacity:.72,transform:"translateY(0)"}],{duration:1000,delay:7200,easing:ease});
     window.setTimeout(dockBrand,8250);
