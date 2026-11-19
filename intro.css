@@ -22,8 +22,8 @@
 #gsIntroLogo .gs-mark-fill-light{fill:#fff;opacity:0}
 #gsIntroLogo .gs-mark-fill-blue{fill:#1b2f7d;opacity:0}
 #gsIntroWordmark{position:absolute;top:calc(43% + min(30vw,185px) + var(--gs-center-shift,0px));left:50%;right:auto;width:max-content;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translate(-50%,18px);filter:blur(6px);color:#fff;white-space:nowrap;transform-origin:top left}
-.gs-intro-name{font:400 clamp(18px,4.5vw,29px)/1.2 Montserrat,Inter,sans-serif;letter-spacing:.19em}
-.gs-intro-studio{margin-top:8px;color:#b9c2ed;font:300 clamp(9px,2vw,12px)/1.2 Montserrat,Inter,sans-serif;letter-spacing:.48em;padding-left:.48em}
+.gs-intro-name{font:400 clamp(18px,4.5vw,29px)/1.2 Montserrat,Inter,sans-serif;letter-spacing:.19em;text-indent:.095em}
+.gs-intro-studio{margin-top:8px;color:#b9c2ed;font:300 clamp(9px,2vw,12px)/1.2 Montserrat,Inter,sans-serif;letter-spacing:.48em;padding-left:.48em;text-indent:.24em}
 .gs-intro-rule{width:0;height:1px;margin-top:16px;background:linear-gradient(90deg,transparent,#d9a566,transparent)}
 .gs-intro-tagline{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 58px);text-align:center;color:#c5c7d3;font:300 9px/1.5 Montserrat,Inter,sans-serif;letter-spacing:.22em;opacity:0}
 .gs-intro-flare{position:absolute;z-index:4;left:18%;right:18%;top:43%;height:1px;opacity:0;transform:scaleX(0);transform-origin:center;background:linear-gradient(90deg,transparent,rgba(236,192,132,.55) 38%,rgba(255,255,255,.85) 50%,rgba(150,175,255,.45) 62%,transparent);filter:blur(1px) drop-shadow(0 0 12px rgba(255,235,200,.45));pointer-events:none}
@@ -35,7 +35,7 @@
 @media(max-width:700px){#gsBrand{top:12px;left:14px}#gsBrand svg{width:27px;height:27px;flex-basis:27px}.gs-brand-copy strong{font-size:10px}#nav{top:66px}}
 @media(prefers-reduced-motion:reduce){.gs-intro-bg,.gs-intro-ambient{animation:none!important}#gsIntro,#gsBrand{transition-duration:.01ms!important}}
 /* Compact identity styling is applied only after the wordmark docks. */
-#gsIntroWordmark.gs-wordmark-docking{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;transform:none;filter:none;white-space:nowrap;overflow:visible}
+#gsIntroWordmark.gs-wordmark-docking{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;transform:none;filter:none;white-space:nowrap;overflow:visible;width:auto!important;height:auto!important}
 #gsIntroWordmark.gs-wordmark-docking .gs-intro-name{font-size:11px;line-height:1.15;letter-spacing:.12em}
 #gsIntroWordmark.gs-wordmark-docking .gs-intro-studio{margin-top:3px;font-size:7px;line-height:1;letter-spacing:.38em;padding-left:0}
 #gsIntroWordmark.gs-wordmark-docking .gs-intro-rule{display:none}
