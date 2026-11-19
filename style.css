@@ -2803,3 +2803,31 @@ body.portfolio-modal-open{overflow:hidden}
 @media(max-width:700px){
   #about .a-photo{height:245px!important;min-height:245px!important}
 }
+
+
+/* ABOUT COLLECTION LINKS — restore open, non-card presentation */
+#about .folders{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:clamp(18px,4vw,54px)!important;margin:18px auto 0!important;padding:10px 0!important}
+#about .folder,#about .folder:hover,#about .folder:focus-visible{
+  width:100%!important;height:88px!important;min-height:0!important;padding:0!important;margin:0!important;
+  border:0!important;border-radius:0!important;outline:0!important;background:transparent!important;
+  box-shadow:none!important;transform:none!important;overflow:visible!important
+}
+#about .folder .back,#about .folder .peek{display:none!important}
+#about .folder .front{
+  position:relative!important;inset:auto!important;width:100%!important;height:100%!important;
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+  gap:7px!important;padding:10px 4px!important;border:0!important;border-radius:0!important;
+  background:transparent!important;backdrop-filter:none!important;box-shadow:none!important;color:#eaf0ff!important;
+  font:650 .95rem var(--f-head)!important;letter-spacing:.015em!important
+}
+#about .folder .front b{margin:0!important;font:700 1.8rem/.95 var(--f-head)!important;color:#a9c1ff!important;text-shadow:0 0 22px rgba(112,151,240,.22)!important}
+#about .folder .go{right:4px!important;bottom:13px!important;width:auto!important;height:auto!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:rgba(183,204,255,.7)!important;font-size:1rem!important}
+#about .folder:hover .front b,#about .folder:focus-visible .front b{color:#d0ddff!important}
+#about .folder:hover .go,#about .folder:focus-visible .go{transform:translate(3px,-2px)!important}
+@media(max-width:700px){
+  #about .folders{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+  #about .folder{height:76px!important}
+  #about .folder .front{font-size:.78rem!important;gap:6px!important;padding:8px 2px!important}
+  #about .folder .front b{font-size:1.45rem!important}
+  #about .folder .go{right:1px!important;bottom:11px!important;font-size:.82rem!important}
+}
