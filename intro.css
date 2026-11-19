@@ -14,14 +14,14 @@
 .gs-intro-ambient{position:absolute;inset:-25%;pointer-events:none;opacity:.7;filter:blur(65px);background:radial-gradient(ellipse at 50% 44%,rgba(210,165,111,.12),transparent 38%);animation:gsIntroAmbient 11s ease-in-out infinite alternate}
 @keyframes gsIntroAmbient{from{transform:scale(.9);opacity:.35}to{transform:scale(1.12);opacity:.72}}
 .gs-intro-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 25%,rgba(0,0,0,.25) 65%,rgba(0,0,0,.72) 100%)}
-#gsIntroLogo{position:absolute;left:calc(50% + clamp(16px,2.5vw,22px));top:calc(43% + var(--gs-center-shift,0px));width:min(58vw,350px);height:auto;transform:translate(-50%,-50%) scale(.96);transform-origin:top left;overflow:visible;filter:drop-shadow(0 0 24px rgba(217,165,102,.16));opacity:1;z-index:3}
+#gsIntroLogo{position:absolute;left:50%;top:calc(43% + var(--gs-center-shift,0px));width:min(58vw,350px);height:auto;transform:translate(-50%,-50%) scale(.96);transform-origin:center;overflow:visible;filter:drop-shadow(0 0 24px rgba(217,165,102,.16));opacity:1;z-index:3}
 #gsIntroLogo .gs-hex,#gsIntroLogo .gs-mark-light,#gsIntroLogo .gs-mark-blue{fill:none;stroke-dasharray:1;stroke-dashoffset:1}
 #gsIntroLogo .gs-hex{stroke:url(#gsGoldStroke);stroke-width:13;stroke-linejoin:miter}
 #gsIntroLogo .gs-mark-light{stroke:#fff;stroke-width:3.5;stroke-linejoin:round}
 #gsIntroLogo .gs-mark-blue{stroke:#7892f1;stroke-width:3.5;stroke-linejoin:round}
 #gsIntroLogo .gs-mark-fill-light{fill:#fff;opacity:0}
 #gsIntroLogo .gs-mark-fill-blue{fill:#1b2f7d;opacity:0}
-#gsIntroWordmark{position:absolute;top:calc(43% + min(30vw,185px) + var(--gs-center-shift,0px));left:calc(50% + clamp(16px,2.5vw,22px));right:auto;width:max-content;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translate(-50%,18px);filter:blur(6px);color:#fff;white-space:nowrap;transform-origin:top left}
+#gsIntroWordmark{position:absolute;top:calc(43% + min(30vw,185px) + var(--gs-center-shift,0px));left:50%;right:auto;width:max-content;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translate(-50%,18px);filter:blur(6px);color:#fff;white-space:nowrap;transform-origin:top left}
 .gs-intro-name{font:400 clamp(18px,4.5vw,29px)/1.2 Montserrat,Inter,sans-serif;letter-spacing:.19em}
 .gs-intro-studio{margin-top:8px;color:#b9c2ed;font:300 clamp(9px,2vw,12px)/1.2 Montserrat,Inter,sans-serif;letter-spacing:.48em;padding-left:.48em}
 .gs-intro-rule{width:0;height:1px;margin-top:16px;background:linear-gradient(90deg,transparent,#d9a566,transparent)}
