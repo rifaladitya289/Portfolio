@@ -129,10 +129,10 @@
   function sound(kind){
     if(reduce)return;
     /* Restrained desktop-style ticks: sine tone, short envelope, no arcade melody. */
-    if(kind==="hover")tone(920,760,.035,.045);
-    if(kind==="click")tone(520,410,.055,.085);
-    if(kind==="open")tone(390,300,.085,.095);
-    if(kind==="success")tone(660,540,.10,.085);
+    if(kind==="hover")tone(920,760,.045,.12);
+    if(kind==="click")tone(520,410,.065,.20);
+    if(kind==="open")tone(390,300,.095,.22);
+    if(kind==="success")tone(660,540,.11,.19);
   }
   /* Desktop hover: cursor movement alone triggers the soft UI response. */
   const hoverTargets=[
