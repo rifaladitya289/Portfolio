@@ -2831,3 +2831,100 @@ body.portfolio-modal-open{overflow:hidden}
   #about .folder .front b{font-size:1.45rem!important}
   #about .folder .go{right:1px!important;bottom:11px!important;font-size:.82rem!important}
 }
+
+
+/* ABOUT COLLECTIONS — restore the original layered digital-folder design */
+#about .folders{
+  display:flex!important;flex-wrap:wrap!important;
+  justify-content:center!important;align-items:flex-end!important;
+  gap:clamp(18px,3vw,30px)!important;
+  margin:clamp(38px,6vh,72px) auto 0!important;padding:18px 0 8px!important;
+}
+#about .folder,
+#about .folder:hover,
+#about .folder:focus-visible{
+  position:relative!important;display:block!important;
+  flex:0 1 220px!important;width:220px!important;max-width:30%!important;
+  height:158px!important;min-height:158px!important;
+  padding:0!important;margin:0!important;
+  border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+  overflow:visible!important;transform:none!important;
+  isolation:isolate!important;
+}
+#about .folder .back{
+  display:block!important;position:absolute!important;
+  inset:26px 0 0!important;z-index:0!important;
+  border:1px solid rgba(170,194,245,.24)!important;
+  border-radius:8px 15px 13px 13px!important;
+  background:linear-gradient(145deg,rgba(31,48,82,.68),rgba(5,12,28,.78))!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.22),inset 0 1px rgba(220,232,255,.10)!important;
+  backdrop-filter:blur(5px)!important;
+}
+#about .folder .back::before{
+  display:block!important;content:""!important;
+  position:absolute!important;top:-15px!important;left:0!important;
+  width:43%!important;height:16px!important;
+  border:1px solid rgba(170,194,245,.24)!important;border-bottom:0!important;
+  border-radius:9px 12px 0 0!important;
+  background:linear-gradient(135deg,rgba(39,58,96,.78),rgba(12,23,47,.82))!important;
+}
+#about .folder .peek{
+  display:block!important;position:absolute!important;
+  left:16px!important;right:16px!important;top:2px!important;
+  width:auto!important;height:91px!important;z-index:1!important;
+  overflow:hidden!important;border:1px solid rgba(178,202,255,.28)!important;
+  border-radius:7px!important;opacity:1!important;
+  background:linear-gradient(135deg,rgba(72,103,164,.55),rgba(12,23,46,.8))!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.26)!important;
+  transform:translateY(0)!important;
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease!important;
+}
+#about .folder .peek img{
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:cover!important;opacity:.9!important;mix-blend-mode:normal!important;
+}
+#about .folder .front{
+  position:absolute!important;inset:47px 0 0!important;z-index:2!important;
+  display:flex!important;flex-direction:column!important;
+  align-items:flex-start!important;justify-content:flex-end!important;
+  gap:5px!important;padding:12px 15px!important;
+  border:1px solid rgba(172,196,246,.22)!important;
+  border-radius:8px 8px 13px 13px!important;
+  background:linear-gradient(105deg,rgba(8,17,36,.88),rgba(13,25,49,.66))!important;
+  backdrop-filter:blur(9px)!important;-webkit-backdrop-filter:blur(9px)!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.20),inset 0 1px rgba(222,233,255,.09)!important;
+  color:#edf3ff!important;font:650 .92rem var(--f-head)!important;
+}
+#about .folder .front b{
+  margin:0 0 1px!important;font:750 1.7rem/.95 var(--f-head)!important;
+  color:#b9ccff!important;text-shadow:0 0 18px rgba(119,157,245,.24)!important;
+}
+#about .folder .go{
+  right:11px!important;bottom:10px!important;
+  width:27px!important;height:25px!important;
+  display:grid!important;place-items:center!important;
+  border:1px solid rgba(173,198,249,.24)!important;border-radius:7px!important;
+  background:rgba(104,139,211,.13)!important;
+  color:#c9d8ff!important;box-shadow:none!important;
+}
+#about .folder:hover .peek,
+#about .folder:focus-visible .peek{
+  transform:translateY(-15px) rotate(-1.5deg)!important;
+  box-shadow:0 15px 28px rgba(0,0,0,.34),0 0 20px rgba(100,139,225,.12)!important;
+}
+#about .folder:hover .back,
+#about .folder:focus-visible .back{border-color:rgba(177,201,255,.38)!important}
+@media(max-width:700px){
+  #about .folders{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important;margin-top:32px!important}
+  #about .folder,#about .folder:hover,#about .folder:focus-visible{
+    width:100%!important;max-width:none!important;min-width:0!important;
+    height:116px!important;min-height:116px!important;flex:none!important;
+  }
+  #about .folder .back{inset:22px 0 0!important;border-radius:6px 10px 9px 9px!important}
+  #about .folder .back::before{top:-11px!important;height:12px!important}
+  #about .folder .peek{left:8px!important;right:8px!important;top:5px!important;height:58px!important}
+  #about .folder .front{inset:39px 0 0!important;padding:8px 8px!important;gap:3px!important;border-radius:6px 6px 9px 9px!important;font-size:.72rem!important}
+  #about .folder .front b{font-size:1.25rem!important}
+  #about .folder .go{right:6px!important;bottom:6px!important;width:20px!important;height:19px!important;font-size:.65rem!important}
+}
