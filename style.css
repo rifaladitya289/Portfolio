@@ -3413,3 +3413,27 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
 
 /* ABOUT PORTRAIT · MIRROR BOTH PHOTO LAYERS */
 
+
+
+/* ===== SUBTLE CONTOUR LINES · KEEP HOME UNTOUCHED ===== */
+#about>.topo,
+#portfolio>.topo,
+#contact>.topo{
+  opacity:.085!important;
+  background-size:cover!important;
+  mix-blend-mode:normal!important;
+}
+#about>.topo{opacity:.10!important}
+#portfolio>.topo,
+#contact>.topo{opacity:.065!important}
+
+/* ===== NO VISIBLE PAGE DIVIDER ===== */
+#pageTrack,
+#pageTrack>section{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+#pageTrack>section{
+  background-clip:border-box!important;
+}
