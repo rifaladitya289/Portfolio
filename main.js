@@ -214,7 +214,7 @@ addEventListener("resize",()=>{
   let targetX=0,targetY=0,currentX=0,currentY=0,raf=0,active=false;
   function setTarget(e){
     const r=photo.getBoundingClientRect();
-    targetX=Math.max(0,Math.min(r.width,e.clientX-r.left));
+    targetX=Math.max(0,Math.min(r.width,r.width-(e.clientX-r.left)));
     targetY=Math.max(0,Math.min(r.height,e.clientY-r.top));
     if(!active){
       currentX=targetX;currentY=targetY;active=true;
