@@ -52,6 +52,10 @@
     const local=r=>({left:r.left-overlayRect.left,top:r.top-overlayRect.top,width:r.width,height:r.height});
     const fromLogo=local(logo.getBoundingClientRect()),fromWord=local(word.getBoundingClientRect());
     const toLogo=local(brandIcon.getBoundingClientRect()),toWord=local(brandCopy.getBoundingClientRect());
+    // Stop the entrance animations before docking. Their fill effects otherwise keep
+    // overriding the new transform and make the logo jump or drift away.
+    logo.getAnimations().forEach(a=>a.cancel());
+    word.getAnimations().forEach(a=>a.cancel());
     const place=(el,r)=>{
       el.style.position="absolute";el.style.left=r.left+"px";el.style.top=r.top+"px";
       el.style.right="auto";el.style.bottom="auto";el.style.width=r.width+"px";el.style.height=r.height+"px";
