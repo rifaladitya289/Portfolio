@@ -2718,3 +2718,37 @@ body.portfolio-modal-open{overflow:hidden}
 #portfolio>.portfolio-heading,#portfolio>#tabs,#portfolio>#stageP,#contact>.contact-shell{
   position:relative!important;z-index:2!important;
 }
+
+
+/* CINEMATIC GRADE — subdued moving texture, deep navy atmosphere */
+#about,#portfolio,#contact{
+  isolation:isolate!important;
+  background:#050b1b!important;
+}
+#about>.ambient-motion-bg,
+#portfolio>.ambient-motion-bg,
+#contact>.ambient-motion-bg{
+  z-index:0!important;
+  opacity:.34!important;
+  filter:brightness(.62) saturate(.72) contrast(1.06)!important;
+  -webkit-filter:brightness(.62) saturate(.72) contrast(1.06)!important;
+  mix-blend-mode:screen!important;
+}
+#about::before,#portfolio::before,#contact::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(180deg,rgba(3,8,22,.62) 0%,rgba(4,10,27,.42) 42%,rgba(3,8,20,.72) 100%),
+    radial-gradient(ellipse at 50% 35%,rgba(32,65,132,.13),transparent 68%)!important;
+}
+#about>.topo,#portfolio>.topo,#contact>.topo{z-index:1!important;opacity:.035!important}
+#about>:not(.ambient-motion-bg):not(.topo),
+#portfolio>:not(.ambient-motion-bg):not(.topo),
+#contact>:not(.ambient-motion-bg):not(.topo){
+  position:relative!important;
+  z-index:2!important;
+}
