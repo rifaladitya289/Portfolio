@@ -3233,3 +3233,100 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
 @media(prefers-reduced-motion:reduce){
   #portfolio .featured-work,#portfolio .work-card,#contact .contact-socials a{transition:none!important}
 }
+
+
+/* ===== FOLDER CARDS · REFERENCE-MATCH MOTION PASS ===== */
+#about .folders .folder{
+  --folder-lift:0px;
+  position:relative!important;
+  transform:translate3d(0,var(--folder-lift),0)!important;
+  transform-origin:50% 82%;
+  transition:
+    transform .58s cubic-bezier(.2,.8,.2,1),
+    filter .48s ease!important;
+  will-change:transform;
+}
+#about .folders .folder:nth-child(1){--folder-delay:0ms}
+#about .folders .folder:nth-child(2){--folder-delay:130ms}
+#about .folders .folder:nth-child(3){--folder-delay:260ms}
+#about .folders .folder.gs-visible .back{
+  animation-delay:var(--folder-delay,0ms)!important;
+  transition:transform .58s cubic-bezier(.2,.8,.2,1),border-color .4s ease,box-shadow .5s ease!important;
+  transform-origin:50% 100%;
+}
+#about .folders .folder.gs-visible .peek{
+  animation-delay:calc(var(--folder-delay,0ms) + 110ms)!important;
+  transition:transform .62s cubic-bezier(.18,.82,.22,1),box-shadow .5s ease!important;
+  transform-origin:50% 100%;
+}
+#about .folders .folder.gs-visible .front{
+  animation-delay:calc(var(--folder-delay,0ms) + 210ms)!important;
+  transition:transform .52s cubic-bezier(.2,.8,.2,1),box-shadow .48s ease,border-color .4s ease,background .4s ease!important;
+}
+#about .folders .folder .go{
+  transition:transform .42s cubic-bezier(.18,.9,.25,1),background .35s ease,border-color .35s ease!important;
+}
+@media(hover:hover) and (pointer:fine){
+  #about .folders .folder:hover,
+  #about .folders .folder:focus-visible{
+    --folder-lift:-7px;
+    filter:brightness(1.08)!important;
+  }
+  #about .folders .folder:hover .back,
+  #about .folders .folder:focus-visible .back{
+    transform:translateY(-2px) scale(1.012)!important;
+    border-color:rgba(190,211,255,.48)!important;
+    box-shadow:0 20px 38px rgba(0,0,0,.30),inset 0 1px rgba(230,240,255,.15)!important;
+  }
+  #about .folders .folder:hover .peek,
+  #about .folders .folder:focus-visible .peek{
+    transform:translate3d(0,-23px,0) rotate(-2.2deg) scale(1.025)!important;
+    box-shadow:0 18px 30px rgba(0,0,0,.38),0 0 24px rgba(111,151,238,.18)!important;
+  }
+  #about .folders .folder:hover .front,
+  #about .folders .folder:focus-visible .front{
+    transform:translateY(3px)!important;
+    border-color:rgba(190,211,255,.4)!important;
+    box-shadow:0 17px 34px rgba(0,0,0,.32),inset 0 1px rgba(230,240,255,.14)!important;
+    background:linear-gradient(105deg,rgba(12,24,49,.94),rgba(17,32,61,.78))!important;
+  }
+  #about .folders .folder:hover .go,
+  #about .folders .folder:focus-visible .go{
+    transform:translate3d(3px,-3px,0) rotate(4deg)!important;
+    background:rgba(104,139,211,.28)!important;
+    border-color:rgba(190,211,255,.48)!important;
+  }
+}
+#about .folders .folder:active,
+#about .folders .folder.touch-active{
+  --folder-lift:-2px;
+  filter:brightness(1.12)!important;
+  transition-duration:.16s!important;
+}
+#about .folders .folder:active .peek,
+#about .folders .folder.touch-active .peek{
+  transform:translate3d(0,-16px,0) rotate(-1deg) scale(1.015)!important;
+}
+#about .folders .folder:active .front,
+#about .folders .folder.touch-active .front{
+  transform:translateY(2px) scale(.99)!important;
+}
+#about .folders .folder:active .go,
+#about .folders .folder.touch-active .go{
+  transform:translate3d(2px,-2px,0)!important;
+}
+@media(max-width:700px){
+  #about .folders .folder{transition:filter .3s ease,transform .3s ease!important}
+  #about .folders .folder.gs-visible .peek{transition-duration:.42s!important}
+  #about .folders .folder:active .peek,
+  #about .folders .folder.touch-active .peek{transform:translateY(-12px) rotate(-1deg)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #about .folders .folder,
+  #about .folders .folder .back,
+  #about .folders .folder .peek,
+  #about .folders .folder .front,
+  #about .folders .folder .go{
+    animation:none!important;transition:none!important;transform:none!important;filter:none!important;
+  }
+}
