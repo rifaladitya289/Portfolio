@@ -49,31 +49,30 @@
     const logoStart=logo.getBoundingClientRect();
     const wordStart=word.getBoundingClientRect();
     const overlayRect=intro.getBoundingClientRect();
-    const setAbsolute=(el,rect)=>{
+    const place=(el,rect)=>{
       el.style.left=(rect.left-overlayRect.left)+"px";
       el.style.top=(rect.top-overlayRect.top)+"px";
       el.style.right="auto";el.style.bottom="auto";
       el.style.width=rect.width+"px";el.style.height=rect.height+"px";
       el.style.transform="none";
     };
-    setAbsolute(logo,logoStart);
-    setAbsolute(word,wordStart);
-    word.classList.add("gs-wordmark-docking");
-    const logoScale=iconTarget.width/logoStart.width;
-    const wordScaleX=copyTarget.width/wordStart.width;
-    const wordScaleY=copyTarget.height/wordStart.height;
-    const move=(from,to,scaleX,scaleY)=>({
-      left:[(from.left-overlayRect.left)+"px",(to.left-overlayRect.left)+"px"],
-      top:[(from.top-overlayRect.top)+"px",(to.top-overlayRect.top)+"px"],
-      width:[from.width+"px",to.width+"px"],height:[from.height+"px",to.height+"px"],
-      transform:["scale(1)","scale(1)"]
-    });
-    const a=animate(logo,[move(logoStart,iconTarget,logoScale,logoScale)],{duration:1150,easing:"cubic-bezier(.18,.82,.22,1)"});
-    const b=animate(word,[move(wordStart,copyTarget,wordScaleX,wordScaleY)],{duration:1150,delay:70,easing:"cubic-bezier(.18,.82,.22,1)"});
-    Promise.allSettled([a.finished,b.finished]).then(()=>{
+    place(logo,logoStart);
+    place(word,wordStart);
+    const moveFrames=(from,to)=>[
+      {transform:"translate3d(0,0,0) scale(1,1)"},
+      {transform:"translate3d("+(to.left-from.left)+"px,"+(to.top-from.top)+"px,0) scale("+(to.width/from.width)+","+(to.height/from.height)+")"}
+    ];
+    const opts={duration:1650,easing:"cubic-bezier(.16,1,.3,1)",fill:"both"};
+    const la=logo.animate(moveFrames(logoStart,iconTarget),opts);
+    const wa=word.animate(moveFrames(wordStart,copyTarget),{...opts,delay:90});
+    Promise.allSettled([la.finished,wa.finished]).then(()=>{
+      place(logo,iconTarget);
+      place(word,copyTarget);
+      word.classList.add("gs-wordmark-docking");
+      logo.style.transform="none";word.style.transform="none";
       brand.classList.add("gs-brand-visible");
       intro.classList.add("gs-intro-out");
-      window.setTimeout(()=>intro.remove(),1150);
+      window.setTimeout(()=>intro.remove(),1700);
     });
   }
   function run(){
