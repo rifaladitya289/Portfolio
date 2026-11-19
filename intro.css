@@ -1,94 +1,42 @@
-/* GALLAGHER'S STUDIO — AUTOMATIC LUXURY CINEMATIC INTRO */
-#gsBrand{
-  position:fixed;z-index:56;top:18px;left:clamp(16px,3vw,34px);
-  display:flex;align-items:center;gap:9px;color:#f7f4ee;text-decoration:none;
-  opacity:0;pointer-events:none;transform:translateY(-5px);
-  transition:opacity .55s ease,transform .65s cubic-bezier(.2,.8,.2,1);
-}
+/* GALLAGHER'S STUDIO — PREMIUM CINEMATIC OPENING */
+#gsBrand{position:fixed;z-index:56;top:18px;left:clamp(16px,3vw,34px);display:flex;align-items:center;gap:9px;color:#f7f4ee;text-decoration:none;opacity:0;pointer-events:none;transform:translateY(-5px);transition:opacity .8s ease,transform 1s cubic-bezier(.16,1,.3,1)}
 #gsBrand.gs-brand-visible{opacity:1;pointer-events:auto;transform:none}
-#gsBrand svg{width:31px;height:31px;flex:0 0 31px;overflow:visible;filter:drop-shadow(0 0 7px rgba(217,165,102,.16))}
+#gsBrand svg{width:31px;height:31px;flex:0 0 31px;filter:drop-shadow(0 0 8px rgba(217,165,102,.18))}
 #gsBrand .brand-hex{fill:none;stroke:#d9a566;stroke-width:13;stroke-linejoin:miter}
 .gs-brand-copy{display:flex;flex-direction:column;line-height:1.05;letter-spacing:.13em}
 .gs-brand-copy strong{font:500 11px/1.2 Montserrat,Inter,sans-serif;letter-spacing:.12em}
 .gs-brand-copy small{margin-top:3px;color:#d5b78e;font:400 7px/1 Montserrat,Inter,sans-serif;letter-spacing:.38em}
-#gsIntro{
-  position:fixed;inset:0;z-index:200;overflow:hidden;isolation:isolate;
-  background:#10121d;color:#fff;opacity:1;visibility:visible;
-  transition:opacity 1.05s cubic-bezier(.22,.75,.25,1),visibility 0s linear 1.05s;
-}
+#gsIntro{position:fixed;inset:0;z-index:200;overflow:hidden;isolation:isolate;background:#080a10;color:#fff;opacity:1;visibility:visible;transition:opacity 1.65s cubic-bezier(.22,.75,.25,1),visibility 0s linear 1.65s}
 #gsIntro.gs-intro-out{opacity:0;visibility:hidden;pointer-events:none}
-.gs-intro-bg{position:absolute;inset:0;background:
-  radial-gradient(ellipse at 50% 43%,rgba(49,49,69,.72) 0%,rgba(25,27,42,.5) 35%,transparent 70%),
-  linear-gradient(145deg,#171927 0%,#10121d 54%,#0b0d16 100%)}
-.gs-intro-grid{position:absolute;inset:0;opacity:.12;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
-  background-size:64px 64px;mask-image:radial-gradient(ellipse at center,#000,transparent 72%)}
-.gs-intro-ambient{position:absolute;inset:-20%;pointer-events:none;opacity:.55;filter:blur(24px);
-  background:radial-gradient(ellipse at 50% 45%,rgba(217,165,102,.1),transparent 42%);
-  animation:gsIntroAmbient 9s ease-in-out infinite alternate}
-@keyframes gsIntroAmbient{from{transform:scale(.92);opacity:.3}to{transform:scale(1.12);opacity:.68}}
-.gs-intro-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.58) 100%)}
-#gsIntroLogo{
-  position:absolute;left:50%;top:43%;width:min(66vw,390px);height:auto;
-  transform:translate(-50%,-50%) scale(.94);transform-origin:center center;overflow:visible;
-  filter:drop-shadow(0 0 20px rgba(217,165,102,.12));opacity:1;z-index:3
-}
-#gsIntroLogo .gs-hex,#gsIntroLogo .gs-mark-light,#gsIntroLogo .gs-mark-blue{
-  fill:none;stroke-dasharray:1;stroke-dashoffset:1
-}
+.gs-intro-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 43%,rgba(70,68,72,.42) 0%,rgba(31,31,38,.28) 28%,transparent 65%),radial-gradient(ellipse at 50% 110%,rgba(151,106,61,.13),transparent 48%),linear-gradient(135deg,#101117 0%,#090b11 48%,#05060a 100%);transform:scale(1.04);animation:gsCinematicDrift 14s ease-in-out infinite alternate}
+@keyframes gsCinematicDrift{from{transform:scale(1.04) translate3d(-.3%,0,0)}to{transform:scale(1.12) translate3d(.3%,-.5%,0)}}
+.gs-intro-grid{display:none}
+.gs-intro-ambient{position:absolute;inset:-25%;pointer-events:none;opacity:.7;filter:blur(65px);background:radial-gradient(ellipse at 50% 44%,rgba(210,165,111,.12),transparent 38%);animation:gsIntroAmbient 11s ease-in-out infinite alternate}
+@keyframes gsIntroAmbient{from{transform:scale(.9);opacity:.35}to{transform:scale(1.12);opacity:.72}}
+.gs-intro-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 25%,rgba(0,0,0,.25) 65%,rgba(0,0,0,.72) 100%)}
+#gsIntroLogo{position:absolute;left:50%;top:43%;width:min(58vw,350px);height:auto;transform:translate(-50%,-50%) scale(.96);transform-origin:top left;overflow:visible;filter:drop-shadow(0 0 24px rgba(217,165,102,.16));opacity:1;z-index:3}
+#gsIntroLogo .gs-hex,#gsIntroLogo .gs-mark-light,#gsIntroLogo .gs-mark-blue{fill:none;stroke-dasharray:1;stroke-dashoffset:1}
 #gsIntroLogo .gs-hex{stroke:url(#gsGoldStroke);stroke-width:13;stroke-linejoin:miter}
 #gsIntroLogo .gs-mark-light{stroke:#fff;stroke-width:3.5;stroke-linejoin:round}
 #gsIntroLogo .gs-mark-blue{stroke:#7892f1;stroke-width:3.5;stroke-linejoin:round}
 #gsIntroLogo .gs-mark-fill-light{fill:#fff;opacity:0}
 #gsIntroLogo .gs-mark-fill-blue{fill:#1b2f7d;opacity:0}
-#gsIntroWordmark{
-  position:absolute;top:calc(43% + min(34vw,205px));left:0;right:0;z-index:3;
-  display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;
-  transform:translateY(14px);filter:blur(4px);color:#fff;white-space:nowrap
-}
+#gsIntroWordmark{position:absolute;top:calc(43% + min(30vw,185px));left:0;right:0;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;transform:translateY(18px);filter:blur(6px);color:#fff;white-space:nowrap;transform-origin:top left}
 .gs-intro-name{font:400 clamp(18px,4.5vw,29px)/1.2 Montserrat,Inter,sans-serif;letter-spacing:.19em}
 .gs-intro-studio{margin-top:8px;color:#b9c2ed;font:300 clamp(9px,2vw,12px)/1.2 Montserrat,Inter,sans-serif;letter-spacing:.48em;padding-left:.48em}
 .gs-intro-rule{width:0;height:1px;margin-top:16px;background:linear-gradient(90deg,transparent,#d9a566,transparent)}
-.gs-intro-tagline{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 58px);
-  text-align:center;color:#c5c7d3;font:300 9px/1.5 Montserrat,Inter,sans-serif;letter-spacing:.22em;opacity:0}
-.gs-intro-flare{position:absolute;z-index:4;left:12%;right:12%;top:43%;height:2px;opacity:0;transform:scaleX(0);transform-origin:center;
-  background:linear-gradient(90deg,transparent,rgba(236,192,132,.9) 34%,#fff 50%,rgba(150,175,255,.85) 66%,transparent);
-  filter:blur(.7px) drop-shadow(0 0 9px rgba(255,235,200,.8));pointer-events:none}
-.gs-letterbox{position:absolute;left:0;right:0;height:9%;background:#05060a;z-index:5;pointer-events:none}
+.gs-intro-tagline{position:absolute;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 58px);text-align:center;color:#c5c7d3;font:300 9px/1.5 Montserrat,Inter,sans-serif;letter-spacing:.22em;opacity:0}
+.gs-intro-flare{position:absolute;z-index:4;left:18%;right:18%;top:43%;height:1px;opacity:0;transform:scaleX(0);transform-origin:center;background:linear-gradient(90deg,transparent,rgba(236,192,132,.55) 38%,rgba(255,255,255,.85) 50%,rgba(150,175,255,.45) 62%,transparent);filter:blur(1px) drop-shadow(0 0 12px rgba(255,235,200,.45));pointer-events:none}
+.gs-letterbox{position:absolute;left:0;right:0;height:7%;background:#030407;z-index:5;pointer-events:none}
 .gs-letterbox-top{top:0;transform-origin:top}.gs-letterbox-bottom{bottom:0;transform-origin:bottom}
-.gs-intro-particles{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}
-.gs-intro-particle{position:absolute;width:2px;height:2px;border-radius:50%;background:#f1cb98;opacity:0;
-  box-shadow:0 0 9px rgba(217,165,102,.7);animation:gsParticleFloat var(--duration,7s) ease-in-out infinite}
-@keyframes gsParticleFloat{0%{opacity:0;transform:translate3d(0,18px,0) scale(.5)}20%{opacity:var(--alpha,.32)}80%{opacity:var(--alpha,.32)}100%{opacity:0;transform:translate3d(var(--drift,18px),-80px,0) scale(1.1)}}
-@media(max-height:600px){
-  #gsIntroLogo{width:min(43vh,300px);top:42%}
-  #gsIntroWordmark{top:calc(42% + min(23vh,150px))}
-  .gs-intro-flare{top:42%}
-  .gs-intro-tagline{bottom:24px}
-}
-@media(max-width:700px){
-  #gsBrand{top:12px;left:14px}
-  #gsBrand svg{width:27px;height:27px;flex-basis:27px}
-  .gs-brand-copy strong{font-size:10px}
-  #nav{top:66px}
-}
-@media(prefers-reduced-motion:reduce){
-  .gs-intro-ambient,.gs-intro-particle{animation:none!important}
-  #gsIntro,#gsBrand{transition-duration:.01ms!important}
-}
-
-/* Wordmark contracts into the compact two-line header identity during docking. */
-#gsIntroWordmark.gs-wordmark-docking{
-  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
-  text-align:left;transform:none;filter:none;white-space:nowrap;overflow:visible;
-}
-#gsIntroWordmark.gs-wordmark-docking .gs-intro-name{
-  font-size:11px;line-height:1.15;letter-spacing:.12em;
-}
-#gsIntroWordmark.gs-wordmark-docking .gs-intro-studio{
-  margin-top:3px;font-size:7px;line-height:1;letter-spacing:.38em;padding-left:0;
-}
+.gs-intro-particles{display:none}
+.gs-intro-particle{display:none}
+@media(max-height:600px){#gsIntroLogo{width:min(39vh,270px);top:42%}#gsIntroWordmark{top:calc(42% + min(22vh,140px))}.gs-intro-flare{top:42%}.gs-intro-tagline{bottom:24px}}
+@media(max-width:700px){#gsBrand{top:12px;left:14px}#gsBrand svg{width:27px;height:27px;flex-basis:27px}.gs-brand-copy strong{font-size:10px}#nav{top:66px}}
+@media(prefers-reduced-motion:reduce){.gs-intro-bg,.gs-intro-ambient{animation:none!important}#gsIntro,#gsBrand{transition-duration:.01ms!important}}
+/* Compact identity styling is applied only after the wordmark docks. */
+#gsIntroWordmark.gs-wordmark-docking{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;transform:none;filter:none;white-space:nowrap;overflow:visible}
+#gsIntroWordmark.gs-wordmark-docking .gs-intro-name{font-size:11px;line-height:1.15;letter-spacing:.12em}
+#gsIntroWordmark.gs-wordmark-docking .gs-intro-studio{margin-top:3px;font-size:7px;line-height:1;letter-spacing:.38em;padding-left:0}
 #gsIntroWordmark.gs-wordmark-docking .gs-intro-rule{display:none}
-@media(max-width:700px){
-  #gsIntroWordmark.gs-wordmark-docking .gs-intro-name{font-size:10px}
-}
+@media(max-width:700px){#gsIntroWordmark.gs-wordmark-docking .gs-intro-name{font-size:10px}}
