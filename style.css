@@ -3244,3 +3244,19 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
   background-size:64px 64px,64px 64px,auto,auto!important;
   mask-image:linear-gradient(135deg,rgba(0,0,0,.7),transparent 78%);
 }
+
+
+/* ABOUT — make the same subtle grid as Portfolio and Contact visible */
+#about::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.22;
+  background-image:
+    linear-gradient(rgba(114,145,205,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(114,145,205,.12) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:linear-gradient(135deg,rgba(0,0,0,.7),transparent 78%);
+}
