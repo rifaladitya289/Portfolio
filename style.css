@@ -3399,6 +3399,6 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
 
 /* ABOUT PORTRAIT · ALIGN SPIDER-MAN WITH BASE PORTRAIT */
 #about .a-photo .about-spider{
-  transform:translateY(4.5%) scale(1.16)!important;
+  transform:translateY(1.5%) scale(1.30) scaleX(-1)!important;
   transform-origin:center bottom!important;
 }
