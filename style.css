@@ -3330,3 +3330,32 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
     animation:none!important;transition:none!important;transform:none!important;filter:none!important;
   }
 }
+
+
+/* ===== SEAMLESS PAGE TRACK · HIDE HAIRLINE GAPS ===== */
+#pageTrack{
+  position:relative!important;
+  isolation:isolate!important;
+  background:#050b1b!important;
+}
+#pageTrack>section{
+  box-sizing:border-box!important;
+  flex:0 0 calc(25% + 1px)!important;
+  width:calc(25% + 1px)!important;
+  margin-right:-1px!important;
+  border:0!important;
+  outline:0!important;
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+}
+#pageTrack>section::marker{content:none!important}
+#pageTrack>#home,
+#pageTrack>#about,
+#pageTrack>#portfolio,
+#pageTrack>#contact{
+  outline:0!important;
+  box-shadow:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+  #pageTrack>section{transform:none!important}
+}
