@@ -44,30 +44,43 @@
     }catch(e){}
   }
   function dockBrand(){
-    const brandIcon=brand.querySelector("svg");
-    const brandCopy=brand.querySelector(".gs-brand-copy");
+    const brandIcon=brand.querySelector("svg"),brandCopy=brand.querySelector(".gs-brand-copy");
     if(!brandIcon||!brandCopy)return;
+    // Measure the final brand without its hidden-state offset, so the handoff cannot jump.
+    brand.style.transform="none";
     const overlayRect=intro.getBoundingClientRect();
-    const rects={logoFrom:logo.getBoundingClientRect(),wordFrom:word.getBoundingClientRect(),logoTo:brandIcon.getBoundingClientRect(),wordTo:brandCopy.getBoundingClientRect()};
     const local=r=>({left:r.left-overlayRect.left,top:r.top-overlayRect.top,width:r.width,height:r.height});
-    const fromLogo=local(rects.logoFrom),toLogo=local(rects.logoTo),fromWord=local(rects.wordFrom),toWord=local(rects.wordTo);
+    const fromLogo=local(logo.getBoundingClientRect()),fromWord=local(word.getBoundingClientRect());
+    const toLogo=local(brandIcon.getBoundingClientRect()),toWord=local(brandCopy.getBoundingClientRect());
     const place=(el,r)=>{
       el.style.position="absolute";el.style.left=r.left+"px";el.style.top=r.top+"px";
       el.style.right="auto";el.style.bottom="auto";el.style.width=r.width+"px";el.style.height=r.height+"px";
-      el.style.transform="none";el.style.transformOrigin="top left";el.style.margin="0";
+      el.style.margin="0";el.style.transformOrigin="top left";el.style.transform="none";
     };
     place(logo,fromLogo);place(word,fromWord);
-    const frames=(from,to)=>[{left:from.left+"px",top:from.top+"px",width:from.width+"px",height:from.height+"px"},{left:to.left+"px",top:to.top+"px",width:to.width+"px",height:to.height+"px"}];
-    const opts={duration:1850,easing:"cubic-bezier(.22,1,.36,1)",fill:"forwards"};
-    const la=logo.animate(frames(fromLogo,toLogo),opts);
-    const wa=word.animate(frames(fromWord,toWord),{...opts,delay:70});
+    const move=(from,to)=>[
+      {transform:"translate3d(0,0,0) scale(1,1)"},
+      {transform:"translate3d("+(to.left-from.left)+"px,"+(to.top-from.top)+"px,0) scale("+(to.width/from.width)+","+(to.height/from.height)+")"}
+    ];
+    const opts={duration:2200,easing:"cubic-bezier(.22,1,.36,1)",fill:"both"};
+    const la=logo.animate(move(fromLogo,toLogo),opts);
+    const wa=word.animate(move(fromWord,toWord),{...opts,delay:100});
     Promise.allSettled([la.finished,wa.finished]).then(()=>{
-      la.cancel();wa.cancel();place(logo,toLogo);place(word,toWord);
-      word.classList.add("gs-wordmark-docking");brand.classList.add("gs-brand-visible");
-      intro.classList.add("gs-intro-out");window.setTimeout(()=>intro.remove(),1750);
+      la.cancel();wa.cancel();
+      place(logo,toLogo);place(word,toWord);
+      word.classList.add("gs-wordmark-docking");
+      // Reveal the real header identity underneath the matching overlay elements.
+      brand.classList.add("gs-brand-visible");
+      intro.classList.add("gs-intro-out");
+      window.setTimeout(()=>intro.remove(),1750);
     });
   }
   function run(){
+    // Center the complete logo + wordmark lockup as one visual composition.
+    const lr=logo.getBoundingClientRect(),wr=word.getBoundingClientRect();
+    const top=Math.min(lr.top,wr.top),bottom=Math.max(lr.bottom,wr.bottom);
+    const shift=window.innerHeight/2-(top+bottom)/2;
+    intro.style.setProperty("--gs-center-shift",shift+"px");
     makeParticles();
     if(reduced){
       brand.classList.add("gs-brand-visible");
