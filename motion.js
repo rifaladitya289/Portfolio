@@ -6,15 +6,25 @@
   const coarse=window.matchMedia&&window.matchMedia("(pointer: coarse)").matches;
   const revealSelectors=[
     "#home .hero-copy > *",
+    "#home .hero-side-mark",
+    "#home .hero-footnote",
     "#about .about-heading > *",
     "#about .about-grid > *",
     "#about .tl > div",
+    "#about .tl h3",
+    "#about .tl .item",
     "#about .about-section-label",
     "#about .folders .folder",
     "#portfolio .portfolio-heading > *",
+    "#portfolio .category-copy > *",
     "#portfolio #tabs button",
     "#contact .contact-intro > *",
     "#contact .contact-form-card",
+    "#contact .contact-field",
+    "#contact .contact-submit-row",
+    "#contact .contact-socials a",
+    "#contact .contact-comment",
+    "#contact .contact-comments",
     "#contact .contact-lower > *"
   ];
   const seen=new WeakSet();
