@@ -111,22 +111,28 @@
   }
   document.addEventListener("pointerdown",unlockAudio,{capture:true,passive:true});
   document.addEventListener("keydown",unlockAudio,{capture:true});
-  function tone(freq,duration,volume,shape){
+  function tone(startFreq,endFreq,duration,volume){
     if(!audio||!audioUnlocked||audio.state!=="running")return;
-    const ctx=audio,osc=ctx.createOscillator(),gain=ctx.createGain();
-    osc.type=shape||"sine";osc.frequency.setValueAtTime(freq,ctx.currentTime);
-    gain.gain.setValueAtTime(.0001,ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),ctx.currentTime+.012);
-    gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+duration);
-    osc.connect(gain);gain.connect(ctx.destination);
-    osc.start();osc.stop(ctx.currentTime+duration+.025);
+    const ctx=audio,now=ctx.currentTime;
+    const osc=ctx.createOscillator(),gain=ctx.createGain(),filter=ctx.createBiquadFilter();
+    osc.type="sine";
+    osc.frequency.setValueAtTime(startFreq,now);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(40,endFreq),now+duration);
+    filter.type="lowpass";
+    filter.frequency.setValueAtTime(1800,now);
+    gain.gain.setValueAtTime(.0001,now);
+    gain.gain.exponentialRampToValueAtTime(volume,now+.006);
+    gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
+    osc.connect(filter);filter.connect(gain);gain.connect(ctx.destination);
+    osc.start(now);osc.stop(now+duration+.015);
   }
   function sound(kind){
     if(reduce)return;
-    if(kind==="hover")tone(620,.095,.20,"triangle");
-    if(kind==="click")tone(480,.11,.24,"triangle");
-    if(kind==="open"){tone(430,.14,.22,"triangle");window.setTimeout(()=>tone(650,.16,.19,"triangle"),65);}
-    if(kind==="success"){tone(560,.15,.20,"triangle");window.setTimeout(()=>tone(760,.19,.18,"triangle"),105);}
+    /* Restrained desktop-style ticks: sine tone, short envelope, no arcade melody. */
+    if(kind==="hover")tone(920,760,.035,.045);
+    if(kind==="click")tone(520,410,.055,.085);
+    if(kind==="open")tone(390,300,.085,.095);
+    if(kind==="success")tone(660,540,.10,.085);
   }
   /* Desktop hover: cursor movement alone triggers the soft UI response. */
   const hoverTargets=[
