@@ -3398,14 +3398,12 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
 
 
 /* ABOUT PORTRAIT · ALIGN SPIDER-MAN WITH BASE PORTRAIT */
-#about .a-photo .about-spider{
+#about .a-photo .about-spider,
+#about .a-photo .about-base{
   transform:translateY(1.5%) scale(1.30) scaleX(-1)!important;
   transform-origin:center bottom!important;
 }
 
 
 /* ABOUT PORTRAIT · MIRROR BOTH PHOTO LAYERS */
-#about .a-photo .about-base{
-  transform:scaleX(-1)!important;
-  transform-origin:center bottom!important;
-}
+
