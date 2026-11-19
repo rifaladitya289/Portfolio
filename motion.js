@@ -126,11 +126,21 @@
     if(kind==="open"){tone(460,.09,.014,"sine");window.setTimeout(()=>tone(690,.12,.012,"sine"),55);}
     if(kind==="success"){tone(620,.12,.014,"sine");window.setTimeout(()=>tone(830,.16,.012,"sine"),95);}
   }
+  /* Desktop hover: cursor movement alone triggers the soft UI response. */
+  const hoverTargets=[
+    "button","a","[role='button']","summary",
+    ".folder",".work-card",".featured-work",".contact-field",
+    ".contact-send",".contact-socials a",".tabs button",
+    ".arr",".portfolio-category",".project-item"
+  ].join(",");
   document.addEventListener("pointerover",e=>{
     if(coarse||e.pointerType!=="mouse")return;
-    const target=e.target.closest("button,a,[role='button'],summary");
+    const target=e.target.closest(hoverTargets);
     if(!target||target.contains(e.relatedTarget))return;
-    const now=performance.now();if(now-lastHover<100)return;lastHover=now;sound("hover");
+    const now=performance.now();
+    if(now-lastHover<115)return;
+    lastHover=now;
+    sound("hover");
   },{passive:true});
   document.addEventListener("click",e=>{
     const target=e.target.closest("button,a,[role='button'],summary");
