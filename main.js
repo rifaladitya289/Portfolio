@@ -147,7 +147,7 @@ function activate(id){
       panel.classList.remove("page-arrive-next","page-arrive-prev");
       void panel.offsetWidth;
       panel.classList.add(direction==="next"?"page-arrive-next":"page-arrive-prev");
-      window.setTimeout(()=>panel.classList.remove("page-arrive-next","page-arrive-prev"),900);
+      window.setTimeout(()=>panel.classList.remove("page-arrive-next","page-arrive-prev"),1450);
     }
     if(!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches))wipe();
   }
