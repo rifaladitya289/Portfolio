@@ -22,9 +22,40 @@
 -->
 <script src="fit.js?v=responsive-v2-20261118"></script>
 <link rel="stylesheet" href="style.css?v=about-glass-pages-v1">
+<link rel="stylesheet" href="intro.css?v=cinematic-opening-v1">
 </head>
 <body>
 
+<a id="gsBrand" href="#home" aria-label="Gallagher's Studio — Home">
+  <svg viewBox="200 160 624 704" aria-hidden="true">
+    <path d="M512 180 800 345V680L512 845 223 680V345Z" class="brand-hex"/>
+    <path d="M500 245 273 372V650L500 778V450L372 520V607L448 563V692L322 620V400L500 300Z" fill="#fff"/>
+    <path d="M525 248 752 375V430L575 330V400L752 500V650L525 778V598L575 628V690L702 618V575L525 470Z" fill="#1b2f7d"/>
+  </svg>
+  <span class="gs-brand-copy"><strong>Gallagher's</strong><small>STUDIO</small></span>
+</a>
+<div id="gsIntro" aria-hidden="true">
+  <div class="gs-intro-bg"></div><div class="gs-intro-grid"></div>
+  <div class="gs-intro-ambient"></div><div class="gs-intro-vignette"></div>
+  <div class="gs-intro-particles" id="gsIntroParticles"></div>
+  <div class="gs-intro-flare" id="gsIntroFlare"></div>
+  <div class="gs-letterbox gs-letterbox-top"></div><div class="gs-letterbox gs-letterbox-bottom"></div>
+  <svg id="gsIntroLogo" viewBox="200 160 624 704" role="presentation">
+    <defs><linearGradient id="gsGoldStroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f1cb98"/><stop offset=".52" stop-color="#d9a566"/><stop offset="1" stop-color="#9f7145"/>
+    </linearGradient></defs>
+    <path class="gs-hex" pathLength="1" d="M512 180 800 345V680L512 845 223 680V345Z"/>
+    <path class="gs-mark-light" pathLength="1" d="M500 245 273 372V650L500 778V450L372 520V607L448 563V692L322 620V400L500 300Z"/>
+    <path class="gs-mark-blue" pathLength="1" d="M525 248 752 375V430L575 330V400L752 500V650L525 778V598L575 628V690L702 618V575L525 470Z"/>
+    <path class="gs-mark-fill-light" d="M500 245 273 372V650L500 778V450L372 520V607L448 563V692L322 620V400L500 300Z"/>
+    <path class="gs-mark-fill-blue" d="M525 248 752 375V430L575 330V400L752 500V650L525 778V598L575 628V690L702 618V575L525 470Z"/>
+  </svg>
+  <div id="gsIntroWordmark">
+    <span class="gs-intro-name">Gallagher's</span><span class="gs-intro-studio">STUDIO</span>
+    <i class="gs-intro-rule"></i>
+  </div>
+  <p class="gs-intro-tagline">IDEAS SHAPED INTO DIGITAL EXPERIENCES</p>
+</div>
 <nav id="nav"><span id="pill"></span>
   <span id="mascot"><svg viewBox="0 0 24 28"><circle cx="12" cy="11" r="10" fill="currentColor"/><circle cx="8.3" cy="10" r="1.7" fill="var(--eye)"/><circle cx="15.7" cy="10" r="1.7" fill="var(--eye)"/><path d="M9 20l3 7 3-7z" fill="currentColor"/></svg></span>
   <a href="#home" class="on">Home</a><a href="#about">About</a><a href="#portfolio">Portfolio</a><a href="#contact">Contact</a>
@@ -177,6 +208,7 @@
 
 <script src="main.js?v=page-transition-v2"></script>
 <script src="motion.js?v=linux-ui-sound-v2" defer></script>
+<script src="intro.js?v=cinematic-opening-v1" defer></script>
 </body>
 </html>
 
