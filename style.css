@@ -2559,3 +2559,42 @@ body.portfolio-modal-open{overflow:hidden}
 #about .item .sub{color:#9baac9;font-size:.72rem;letter-spacing:.015em}
 #about .item time{background:transparent;border:0;border-left:1px solid rgba(143,173,239,.35);padding-left:10px;color:#c6d7ff}
 @media(max-width:700px){#about .tl{grid-template-columns:1fr;gap:34px}#about .list{height:auto!important}}
+
+
+/* ===== ABOUT · FLAT CINEMATIC TRANSPARENT CARDS ===== */
+#about .about-grid{
+  background:transparent;
+  border:1px solid rgba(146,174,230,.10);
+  box-shadow:none;
+  border-radius:18px;
+}
+#about .about-grid::before{
+  background:linear-gradient(115deg,rgba(100,139,222,.035),transparent 48%);
+}
+#about .tl>div{
+  background:transparent;
+  border:1px solid rgba(146,174,230,.10);
+  box-shadow:none;
+  border-radius:12px;
+}
+#about .folder{
+  background:transparent;
+  border:1px solid rgba(146,174,230,.10);
+  box-shadow:none;
+  border-radius:10px;
+  transition:border-color .25s ease,background .25s ease;
+}
+#about .folder .front{
+  background:linear-gradient(90deg,rgba(5,10,22,.46),rgba(5,10,22,.16));
+  backdrop-filter:blur(1px);
+}
+#about .folder:hover{
+  transform:none;
+  border-color:rgba(132,166,245,.26);
+  background:rgba(125,158,235,.025);
+}
+@media(max-width:700px){
+  #about .about-grid{border-radius:14px}
+  #about .tl>div{border-radius:10px}
+  #about .folder{border-radius:9px}
+}
