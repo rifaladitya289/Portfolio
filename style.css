@@ -2673,3 +2673,28 @@ body.portfolio-modal-open{overflow:hidden}
   backdrop-filter:none!important;
 }
 #about .folder .go{background:transparent!important;box-shadow:none!important}
+
+
+/* SHARED PAGE VIDEO — keep the uploaded footage crisp and clearly visible */
+#about,#portfolio,#contact{
+  background:transparent!important;
+}
+#about>.ambient-motion-bg,
+#portfolio>.ambient-motion-bg,
+#contact>.ambient-motion-bg{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  opacity:.92!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+  transform:none!important;
+  z-index:0!important;
+  mix-blend-mode:normal!important;
+}
+#about::before,#portfolio::before,#contact::before{
+  background:linear-gradient(135deg,rgba(3,8,20,.22),rgba(3,8,20,.34) 55%,rgba(3,8,20,.24))!important;
+}
