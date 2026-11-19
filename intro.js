@@ -62,7 +62,7 @@
       {transform:"translate3d(0,0,0) scale(1,1)"},
       {transform:"translate3d("+(to.left-from.left)+"px,"+(to.top-from.top)+"px,0) scale("+(to.width/from.width)+","+(to.height/from.height)+")"}
     ];
-    const opts={duration:2200,easing:"cubic-bezier(.22,1,.36,1)",fill:"both"};
+    const opts={duration:2600,easing:"cubic-bezier(.65,0,.35,1)",fill:"both"};
     const la=logo.animate(move(fromLogo,toLogo),opts);
     const wa=word.animate(move(fromWord,toWord),{...opts,delay:100});
     Promise.allSettled([la.finished,wa.finished]).then(()=>{
@@ -72,7 +72,7 @@
       // Reveal the real header identity underneath the matching overlay elements.
       brand.classList.add("gs-brand-visible");
       intro.classList.add("gs-intro-out");
-      window.setTimeout(()=>intro.remove(),1750);
+      window.setTimeout(()=>intro.remove(),2200);
     });
   }
   function run(){
