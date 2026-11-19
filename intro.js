@@ -44,35 +44,27 @@
     }catch(e){}
   }
   function dockBrand(){
-    const iconTarget=brand.querySelector("svg").getBoundingClientRect();
-    const copyTarget=brand.querySelector(".gs-brand-copy").getBoundingClientRect();
-    const logoStart=logo.getBoundingClientRect();
-    const wordStart=word.getBoundingClientRect();
+    const brandIcon=brand.querySelector("svg");
+    const brandCopy=brand.querySelector(".gs-brand-copy");
+    if(!brandIcon||!brandCopy)return;
     const overlayRect=intro.getBoundingClientRect();
-    const place=(el,rect)=>{
-      el.style.left=(rect.left-overlayRect.left)+"px";
-      el.style.top=(rect.top-overlayRect.top)+"px";
-      el.style.right="auto";el.style.bottom="auto";
-      el.style.width=rect.width+"px";el.style.height=rect.height+"px";
-      el.style.transform="none";
+    const rects={logoFrom:logo.getBoundingClientRect(),wordFrom:word.getBoundingClientRect(),logoTo:brandIcon.getBoundingClientRect(),wordTo:brandCopy.getBoundingClientRect()};
+    const local=r=>({left:r.left-overlayRect.left,top:r.top-overlayRect.top,width:r.width,height:r.height});
+    const fromLogo=local(rects.logoFrom),toLogo=local(rects.logoTo),fromWord=local(rects.wordFrom),toWord=local(rects.wordTo);
+    const place=(el,r)=>{
+      el.style.position="absolute";el.style.left=r.left+"px";el.style.top=r.top+"px";
+      el.style.right="auto";el.style.bottom="auto";el.style.width=r.width+"px";el.style.height=r.height+"px";
+      el.style.transform="none";el.style.transformOrigin="top left";el.style.margin="0";
     };
-    place(logo,logoStart);
-    place(word,wordStart);
-    const moveFrames=(from,to)=>[
-      {transform:"translate3d(0,0,0) scale(1,1)"},
-      {transform:"translate3d("+(to.left-from.left)+"px,"+(to.top-from.top)+"px,0) scale("+(to.width/from.width)+","+(to.height/from.height)+")"}
-    ];
-    const opts={duration:1650,easing:"cubic-bezier(.16,1,.3,1)",fill:"both"};
-    const la=logo.animate(moveFrames(logoStart,iconTarget),opts);
-    const wa=word.animate(moveFrames(wordStart,copyTarget),{...opts,delay:90});
+    place(logo,fromLogo);place(word,fromWord);
+    const frames=(from,to)=>[{left:from.left+"px",top:from.top+"px",width:from.width+"px",height:from.height+"px"},{left:to.left+"px",top:to.top+"px",width:to.width+"px",height:to.height+"px"}];
+    const opts={duration:1850,easing:"cubic-bezier(.22,1,.36,1)",fill:"forwards"};
+    const la=logo.animate(frames(fromLogo,toLogo),opts);
+    const wa=word.animate(frames(fromWord,toWord),{...opts,delay:70});
     Promise.allSettled([la.finished,wa.finished]).then(()=>{
-      place(logo,iconTarget);
-      place(word,copyTarget);
-      word.classList.add("gs-wordmark-docking");
-      logo.style.transform="none";word.style.transform="none";
-      brand.classList.add("gs-brand-visible");
-      intro.classList.add("gs-intro-out");
-      window.setTimeout(()=>intro.remove(),1700);
+      la.cancel();wa.cancel();place(logo,toLogo);place(word,toWord);
+      word.classList.add("gs-wordmark-docking");brand.classList.add("gs-brand-visible");
+      intro.classList.add("gs-intro-out");window.setTimeout(()=>intro.remove(),1750);
     });
   }
   function run(){
