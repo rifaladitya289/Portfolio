@@ -3359,3 +3359,39 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
 @media(prefers-reduced-motion:reduce){
   #pageTrack>section{transform:none!important}
 }
+
+
+/* ===== ABOUT PORTRAIT · CLEAN SPIDER-MAN REVEAL MASK ===== */
+#about .a-photo .about-base{
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+}
+#about .a-photo.is-revealing .about-base{
+  -webkit-mask-image:radial-gradient(
+    circle var(--reveal-size,72px) at var(--reveal-x,50%) var(--reveal-y,50%),
+    transparent 0 60%,
+    rgba(0,0,0,.94) 78%,
+    #000 100%
+  )!important;
+  mask-image:radial-gradient(
+    circle var(--reveal-size,72px) at var(--reveal-x,50%) var(--reveal-y,50%),
+    transparent 0 60%,
+    rgba(0,0,0,.94) 78%,
+    #000 100%
+  )!important;
+}
+#about .a-photo .about-spider{
+  -webkit-mask-image:radial-gradient(
+    circle var(--reveal-size,72px) at var(--reveal-x,50%) var(--reveal-y,50%),
+    #000 0 60%,
+    rgba(0,0,0,.94) 78%,
+    transparent 100%
+  )!important;
+  mask-image:radial-gradient(
+    circle var(--reveal-size,72px) at var(--reveal-x,50%) var(--reveal-y,50%),
+    #000 0 60%,
+    rgba(0,0,0,.94) 78%,
+    transparent 100%
+  )!important;
+}
+#about .a-photo.is-revealing{--reveal-size:72px!important}
