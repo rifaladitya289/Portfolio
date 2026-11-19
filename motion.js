@@ -121,10 +121,10 @@
   }
   function sound(kind){
     if(reduce)return;
-    if(kind==="hover")tone(720,.055,.045,"sine");
-    if(kind==="click")tone(510,.065,.060,"sine");
-    if(kind==="open"){tone(460,.10,.055,"sine");window.setTimeout(()=>tone(690,.13,.048,"sine"),55);}
-    if(kind==="success"){tone(620,.13,.055,"sine");window.setTimeout(()=>tone(830,.17,.048,"sine"),95);}
+    if(kind==="hover")tone(620,.095,.20,"triangle");
+    if(kind==="click")tone(480,.11,.24,"triangle");
+    if(kind==="open"){tone(430,.14,.22,"triangle");window.setTimeout(()=>tone(650,.16,.19,"triangle"),65);}
+    if(kind==="success"){tone(560,.15,.20,"triangle");window.setTimeout(()=>tone(760,.19,.18,"triangle"),105);}
   }
   /* Desktop hover: cursor movement alone triggers the soft UI response. */
   const hoverTargets=[
