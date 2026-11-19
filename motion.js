@@ -50,6 +50,7 @@
   }
   function boot(){
     prepare(document);
+    enablePageReplay();
     document.body.classList.add("gs-motion-ready");
     const stage=document.getElementById("stageP");
     if(stage&&"MutationObserver"in window){
