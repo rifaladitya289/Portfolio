@@ -3095,3 +3095,47 @@ body.gs-motion-ready .gs-reveal.gs-visible{
   #about .folders .folder.gs-visible .peek,
   #about .folders .folder.gs-visible .front{animation:none!important;opacity:1!important;filter:none!important}
 }
+
+
+/* ===== GALLAGHER'S STUDIO · CINEMATIC MOTION PASS ===== */
+@media(prefers-reduced-motion:no-preference){
+  #home .vid{animation:gs-hero-film 26s cubic-bezier(.45,0,.55,1) infinite alternate}
+  #about .ambient-motion-bg,#portfolio .ambient-motion-bg,#contact .ambient-motion-bg{animation:gs-ambient-film 34s ease-in-out infinite alternate}
+  #about>.topo,#portfolio>.topo,#contact>.topo{animation:gs-topo-drift 48s ease-in-out infinite alternate}
+  #home .hero-live,#contact .contact-pulse{animation:gs-status-pulse 2.8s ease-in-out infinite}
+  #home .hero-foot-line{transform-origin:left center;animation:gs-line-travel 3.2s cubic-bezier(.4,0,.2,1) infinite}
+  #home .hero-side-mark{animation:gs-mark-float 7s ease-in-out infinite}
+  #about .tl .item .num{transition:transform .45s cubic-bezier(.2,.8,.2,1),background .3s,color .3s}
+  #about .tl .item:hover .num{transform:scale(1.16)}
+  #about .tl .item{transition:transform .42s cubic-bezier(.2,.8,.2,1),opacity .42s ease}
+  #about .tl .item:hover{transform:translateX(5px)}
+  #portfolio .work-card .work-image img,#portfolio .featured-preview img{transition:transform .9s cubic-bezier(.2,.75,.2,1),filter .7s ease}
+  #portfolio .work-card:hover .work-image img,#portfolio .featured-work:hover .featured-preview img{transform:scale(1.055);filter:saturate(1.08)}
+  #portfolio .work-card:hover .work-arrow,#portfolio .featured-work:hover .featured-bottom>b{transform:translate(4px,-3px)}
+  #portfolio .work-arrow,#portfolio .featured-bottom>b{transition:transform .38s cubic-bezier(.2,.8,.2,1)}
+  #contact .contact-field input,#contact .contact-field textarea{transition:border-color .28s ease,box-shadow .28s ease,transform .28s ease,background .28s ease}
+  #contact .contact-field input:focus,#contact .contact-field textarea:focus{transform:translateY(-2px);box-shadow:0 9px 24px rgba(47,107,255,.10)}
+  #contact .contact-socials a{transition:transform .38s cubic-bezier(.2,.8,.2,1),border-color .3s ease,color .3s ease}
+  #contact .contact-socials a:hover{transform:translateX(7px)}
+}
+@keyframes gs-hero-film{from{transform:scale(1);filter:saturate(.96)}to{transform:scale(1.075);filter:saturate(1.08)}}
+@keyframes gs-ambient-film{from{transform:scale(1.015) translate3d(-.6%,0,0)}to{transform:scale(1.09) translate3d(.6%,-.5%,0)}}
+@keyframes gs-topo-drift{from{background-position:48% 50%}to{background-position:53% 47%}}
+@keyframes gs-status-pulse{0%,100%{opacity:.72;filter:brightness(1)}50%{opacity:1;filter:brightness(1.55)}}
+@keyframes gs-line-travel{0%,100%{transform:scaleX(.35);opacity:.55}50%{transform:scaleX(1);opacity:1}}
+@keyframes gs-mark-float{0%,100%{translate:0 0}50%{translate:0 -8px}}
+body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezier(.16,.78,.18,1)}
+#about .tl .item.gs-reveal:not(.gs-visible),#contact .contact-field.gs-reveal:not(.gs-visible){transform:translate3d(0,18px,0) scale(.99)}
+#about .tl .item.gs-visible,#contact .contact-field.gs-visible{transition-duration:.68s}
+#portfolio .work-card.card-enter{animation:gs-work-card-enter .88s cubic-bezier(.16,.78,.18,1) both;animation-delay:calc(var(--card-index,0)*95ms)}
+@keyframes gs-work-card-enter{from{opacity:0;transform:translate3d(0,42px,0) rotateX(7deg) scale(.965);filter:blur(9px)}to{opacity:1;transform:translate3d(0,0,0) rotateX(0) scale(1);filter:blur(0)}}
+@media(max-width:700px){
+  #home .vid{animation-duration:34s}
+  #about .ambient-motion-bg,#portfolio .ambient-motion-bg,#contact .ambient-motion-bg{animation-duration:42s}
+  #portfolio .work-card.card-enter{animation-duration:.68s;animation-delay:calc(var(--card-index,0)*65ms)}
+  #about .tl .item:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  #home .vid,#about .ambient-motion-bg,#portfolio .ambient-motion-bg,#contact .ambient-motion-bg,#about>.topo,#portfolio>.topo,#contact>.topo,#home .hero-live,#contact .contact-pulse,#home .hero-foot-line,#home .hero-side-mark,#portfolio .work-card.card-enter{animation:none!important}
+  #about .tl .item:hover,#contact .contact-socials a:hover{transform:none!important}
+}
