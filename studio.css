@@ -454,3 +454,88 @@ body.portfolio-modal-open{overflow:hidden}
 .folder[data-tab="visuals"] .front::before{content:"COLLECTION / 03 · VISUALS"}
 #mascot{opacity:0}
 #nav:hover #mascot,#nav:focus-within #mascot{opacity:1}
+
+
+/* Refined interaction layer — restrained, tactile, and consistent */
+.folder{
+  transform:translate3d(0,0,0);
+  transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.2,.75,.2,1),filter .55s ease;
+}
+.folder::before{
+  transition:transform .55s cubic-bezier(.2,.75,.2,1),background .45s ease,border-color .45s ease;
+}
+.folder .back{
+  transform:translate3d(0,0,0) rotate(-2deg);
+  transition:transform .65s cubic-bezier(.2,.75,.2,1),border-color .45s ease,background .45s ease;
+}
+.folder .peek{
+  transform:translate3d(0,0,0) rotate(1deg);
+  transition:transform .65s cubic-bezier(.2,.75,.2,1),border-color .45s ease,background .45s ease;
+}
+.folder .front{
+  transition:transform .55s cubic-bezier(.2,.75,.2,1),color .35s ease;
+}
+.folder .go{
+  transition:transform .45s cubic-bezier(.2,.75,.2,1),color .35s ease;
+}
+.folder:hover,.folder:focus-visible{
+  transform:translate3d(0,-4px,0);
+  filter:drop-shadow(0 12px 22px rgba(0,0,0,.16));
+}
+.folder:hover::before,.folder:focus-visible::before{
+  transform:translateY(-3px);
+  border-color:rgba(201,167,123,.62);
+  background:linear-gradient(180deg,rgba(201,167,123,.22),rgba(201,167,123,.06));
+}
+.folder:hover .back,.folder:focus-visible .back{
+  transform:translate3d(0,-3px,0) rotate(-.5deg);
+  border-color:rgba(201,167,123,.7);
+  background:linear-gradient(145deg,rgba(201,167,123,.14),rgba(10,12,15,.3));
+}
+.folder:hover .peek,.folder:focus-visible .peek{
+  transform:translate3d(0,-9px,0) rotate(.2deg);
+  border-color:rgba(240,236,228,.2);
+}
+.folder:hover .front,.folder:focus-visible .front{transform:translate3d(0,-5px,0)}
+.folder:hover .go,.folder:focus-visible .go{transform:translate3d(4px,-4px,0);color:var(--ivory)}
+.folder:active,.folder.is-pressed{transform:translate3d(0,-1px,0) scale(.99);filter:none}
+.folder.is-opening .back{transform:translate3d(0,-13px,0) rotate(0deg);border-color:var(--gold)}
+.folder.is-opening .peek{transform:translate3d(0,-19px,0) rotate(0deg);border-color:rgba(201,167,123,.38)}
+.folder.is-opening .front{transform:translate3d(0,-7px,0)}
+.folder.is-opening .go{transform:translate3d(6px,-6px,0);color:var(--ivory)}
+.folder.is-opening::before{transform:translateY(-5px);border-color:var(--gold)}
+.folder:focus-visible{outline:1px solid var(--gold);outline-offset:7px}
+
+/* Small, purposeful responses across the interface */
+.home-latest-primary,.btn,.contact-send,.contact-socials a,.portfolio-banner-bottom a{
+  transform:translateZ(0);
+  transition:color .35s ease,border-color .35s ease,gap .35s ease,background .35s ease,transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.home-latest-primary:active,.btn:active,.contact-send:active{transform:scale(.985)}
+.contact-comment summary i{display:inline-block;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.contact-comment[open] summary i{transform:rotate(45deg)}
+.contact-comment-form{animation:commentReveal .45s cubic-bezier(.2,.8,.2,1) both;transform-origin:top}
+@keyframes commentReveal{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:translateY(0)}}
+.contact-field input,.contact-field textarea{transition:border-color .35s ease,background .35s ease}
+.contact-field.is-filled input,.contact-field.is-filled textarea{background:linear-gradient(90deg,rgba(201,167,123,.035),transparent 70%)}
+.contact-field.is-invalid input,.contact-field.is-invalid textarea{border-color:rgba(210,125,105,.65)}
+.contact-field.is-valid input,.contact-field.is-valid textarea{border-color:rgba(201,167,123,.55)}
+.clist .c{animation:noteArrive .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes noteArrive{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.gs-interactive{touch-action:manipulation}
+.is-pressed{filter:brightness(1.12)}
+@media(hover:none){
+  .folder:hover{transform:none;filter:none}
+  .folder:hover .back{transform:rotate(-2deg)}
+  .folder:hover .peek{transform:rotate(1deg)}
+  .folder:hover .front{transform:none}
+  .folder:active{transform:translateY(-2px) scale(.99)}
+}
+@media(prefers-reduced-motion:reduce){
+  .folder,.folder::before,.folder .back,.folder .peek,.folder .front,.folder .go,
+  .home-latest-primary,.btn,.contact-send,.contact-socials a,.portfolio-banner-bottom a,
+  .contact-comment summary i,.contact-comment-form,.clist .c{
+    animation:none!important;transition:none!important;transform:none!important
+  }
+}
