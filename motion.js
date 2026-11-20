@@ -57,7 +57,7 @@
     });
     /* Keep the marquee container visible immediately: its tracks must move
        as soon as Portfolio is rendered, not only after a navigation reveal. */
-    root.querySelectorAll("#stageP .category-copy > *, #stageP .portfolio-endline, #stageP .featured-work, #stageP .work-card").forEach((el,i)=>{
+    root.querySelectorAll("#stageP .category-copy > *, #stageP .portfolio-endline, #stageP .featured-work").forEach((el,i)=>{
       if(seen.has(el))return;
       seen.add(el);
       el.classList.add("gs-reveal");
@@ -90,7 +90,7 @@
     let activePanel=null;
     const pageObserver=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
-        if(!entry.isIntersecting||entry.intersectionRatio<.58)return;
+        if(!entry.isIntersecting)return;
         if(activePanel===entry.target)return;
         activePanel=entry.target;
         entry.target.querySelectorAll(".gs-reveal").forEach(el=>{
@@ -98,7 +98,7 @@
           if(observer)observer.observe(el);
         });
       });
-    },{root:null,threshold:[.18,.42]});
+    },{root:null,threshold:0});
     sections.forEach(section=>pageObserver.observe(section));
   }
 
