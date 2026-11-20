@@ -435,3 +435,10 @@ body.portfolio-modal-open{overflow:hidden}
   .contact-send{align-self:flex-start}
   footer{font-size:8px}
 }
+
+/* Collection identity on each folder */
+.folder[data-tab="projects"] .front::before{content:"COLLECTION / 01 · PROJECTS"}
+.folder[data-tab="designs"] .front::before{content:"COLLECTION / 02 · DESIGNS"}
+.folder[data-tab="visuals"] .front::before{content:"COLLECTION / 03 · VISUALS"}
+#mascot{opacity:.78}
+#nav:hover #mascot{opacity:1}
