@@ -198,7 +198,12 @@ viewport.addEventListener("scroll",()=>{
 },{passive:true});
 addEventListener("load",()=>{
   movePill($("nav a.on"));
-  activate("home");
+  const requested=(location.hash||"").slice(1);
+  const initial=panels.some(p=>p.id===requested)?requested:"home";
+  if(initial!=="home"){
+    viewport.scrollLeft=panels.findIndex(p=>p.id===initial)*viewport.clientWidth;
+    activate(initial);
+  }else activate("home");
   if($("#stageP")&&!$("#stageP").children.length)showTab("projects");
 });
 addEventListener("resize",()=>{
