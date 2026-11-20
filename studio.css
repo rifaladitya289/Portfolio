@@ -666,9 +666,12 @@ body.portfolio-modal-open{overflow:hidden}
 .marquee-window:hover .marquee-track{animation-play-state:running!important}
 .work-card--placeholder{opacity:1!important;visibility:visible!important}
 @media(hover:none){
-  .folder:hover{transform:none!important;filter:none!important}
-  .folder:hover::before{transform:none!important}
-  .folder:hover .back,.folder:hover .peek,.folder:hover .front,.folder:hover .go{transform:none!important}
+  .folder:not(.is-opening):hover{transform:none!important;filter:none!important}
+  .folder:not(.is-opening):hover::before{transform:none!important}
+  .folder:not(.is-opening):hover .back,
+  .folder:not(.is-opening):hover .peek,
+  .folder:not(.is-opening):hover .front,
+  .folder:not(.is-opening):hover .go{transform:none!important}
   .folder:active,.folder.is-opening{transform:translate3d(0,-2px,0) scale(.995)!important}
 }
 @media(prefers-reduced-motion:reduce){
