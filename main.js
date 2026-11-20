@@ -240,39 +240,21 @@ window.addEventListener("load",()=>{
   photo.addEventListener("pointercancel",hide);
 })();
 
-// ---------- Timeline: 3 item tampil, sisanya di-scroll + efek fokus ----------
-const SHOW=3;
-function focusList(l){
-  const it=$$(".item",l),st=l.scrollTop;let k=0,best=1e9;
-  it.forEach((x,i)=>{const d=Math.abs(x.offsetTop-it[0].offsetTop-st);if(d<best){best=d;k=i}});
-  it.forEach((x,i)=>{const d=Math.abs(i-k);x.classList.toggle("act",d===0);x.style.opacity=d===0?1:d===1?.82:.68});
-}
+// ---------- Timeline: natural document flow, no nested scrolling ----------
 function fitLists(){
   $$(".tl .list").forEach(l=>{
-    const it=$$(".item",l);
-    if(it.length>SHOW){
-      l.style.height=(it[SHOW].offsetTop-it[0].offsetTop)+"px";
-    }else l.style.height="auto";
-    focusList(l);
-  });
-}
-$(".tl .list").forEach(l=>{
-  l.addEventListener("scroll",()=>requestAnimationFrame(()=>focusList(l)),{passive:true});
-  l.addEventListener("click",e=>{
-    const item=e.target.closest(".item");
-    if(!item||!l.contains(item))return;
-    const items=$(".item",l);
-    const first=items[0];
-    const top=item.offsetTop-first.offsetTop;
-    l.scrollTo({top,behavior:"smooth"});
-    items.forEach(x=>{
-      const active=x===item;
-      x.classList.toggle("act",active);
-      x.style.opacity=active?1:.68;
+    l.style.height="auto";
+    l.style.maxHeight="none";
+    l.style.overflow="visible";
+    $$(".item",l).forEach(item=>{
+      item.classList.remove("act");
+      item.style.opacity="1";
     });
   });
-});
-fitLists();addEventListener("load",fitLists);addEventListener("resize",fitLists);
+}
+fitLists();
+addEventListener("load",fitLists);
+addEventListener("resize",fitLists);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitLists);
 
 // ---------- Portfolio folders: counts only; artwork is generated with CSS ----------
