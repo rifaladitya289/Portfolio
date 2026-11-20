@@ -121,49 +121,27 @@ const layers=document.querySelectorAll(".layer, .vid");
 function parallax(){const z=parseFloat(document.documentElement.style.zoom)||1,y=scrollY/z;layers.forEach(l=>l.style.transform=`translateY(${y*l.dataset.s}px)`)}
 addEventListener("scroll",parallax,{passive:true});parallax();
 
-// ---------- Navbar: pill, maskot, tema terang/gelap, transisi wipe ----------
+// ---------- Native vertical navigation + animated pill ----------
 const links=$$("nav a"),pill=$("#pill"),mas=$("#mascot");
+const panels=$$("#pageTrack>section");
 function movePill(a){
   if(!a||!pill)return;
   pill.style.left=a.offsetLeft+"px";
   pill.style.width=a.offsetWidth+"px";
   if(mas)mas.style.left=(a.offsetLeft+a.offsetWidth/2-12)+"px";
 }
-let lastSec="home";
-function wipe(){
-  const w=$("#wipe");if(!w)return;
-  w.classList.remove("go");void w.offsetWidth;w.classList.add("go");
-  w.addEventListener("animationend",()=>w.classList.remove("go"),{once:true});
-}
-const viewport=$("#pageViewport"),panels=$$("#pageTrack>section");
+let lastSec="";
 function activate(id){
   const a=links.find(x=>x.hash==="#"+id);
   if(!a)return;
-  const changed=lastSec!==id;
-  if(changed){
-    const panel=panels.find(p=>p.id===id);
-    if(panel){
-      const direction=panels.findIndex(p=>p.id===id)>panels.findIndex(p=>p.id===lastSec)?"next":"prev";
-      panel.classList.remove("page-arrive-next","page-arrive-prev");
-      void panel.offsetWidth;
-      panel.classList.add(direction==="next"?"page-arrive-next":"page-arrive-prev");
-      window.setTimeout(()=>panel.classList.remove("page-arrive-next","page-arrive-prev"),1450);
-    }
-    if(!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches))wipe();
-  }
-  links.forEach(x=>x.classList.toggle("on",x===a));movePill(a);
-  document.body.classList.toggle("light",id==="portfolio"||id==="contact");
+  links.forEach(x=>x.classList.toggle("on",x===a));
+  movePill(a);
   lastSec=id;
 }
-const verticalFlow=()=>true; // One vertical scroll experience on every device.
 function goTo(id){
-  const index=panels.findIndex(p=>p.id===id);
-  if(index<0)return;
-  if(verticalFlow()){
-    panels[index].scrollIntoView({behavior:"smooth",block:"start"});
-  }else{
-    viewport.scrollTo({left:index*viewport.clientWidth,top:0,behavior:"smooth"});
-  }
+  const panel=panels.find(p=>p.id===id);
+  if(!panel)return;
+  panel.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
   activate(id);
 }
 links.forEach(a=>a.addEventListener("click",e=>{
@@ -176,60 +154,34 @@ document.addEventListener("click",e=>{
   const id=a.getAttribute("href").slice(1);
   if(panels.some(p=>p.id===id)){e.preventDefault();goTo(id)}
 });
-// ---------- Swipe horizontal khusus layar sentuh ---------- 
-let swipeStart=null;
-viewport.addEventListener("touchstart",e=>{
-  if(verticalFlow()){swipeStart=null;return}
-  if(e.touches.length!==1){swipeStart=null;return}
-  swipeStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
-},{passive:true});
-viewport.addEventListener("touchend",e=>{
-  if(verticalFlow()){swipeStart=null;return}
-  if(!swipeStart||!e.changedTouches.length)return;
-  const dx=e.changedTouches[0].clientX-swipeStart.x;
-  const dy=e.changedTouches[0].clientY-swipeStart.y;
-  swipeStart=null;
-  if(Math.abs(dx)<48||Math.abs(dx)<Math.abs(dy)*1.2)return;
-  const current=Math.max(0,Math.min(panels.length-1,Math.round(viewport.scrollLeft/viewport.clientWidth)));
-  const next=Math.max(0,Math.min(panels.length-1,current+(dx<0?1:-1)));
-  if(next!==current)goTo(panels[next].id);
-},{passive:true});
-let scrollTick=0;
-window.addEventListener("scroll",()=>{
-  if(scrollTick)return;
-  scrollTick=requestAnimationFrame(()=>{
-    scrollTick=0;
-    let index;
-    if(verticalFlow()){
-      const marker=window.scrollY+window.innerHeight*.45;
-      const top=p=>p.getBoundingClientRect().top+window.scrollY;
-      index=panels.reduce((best,p,i)=>Math.abs(top(p)-marker)<Math.abs(top(panels[best])-marker)?i:best,0);
-    }else{
-      index=Math.max(0,Math.min(panels.length-1,Math.round(viewport.scrollLeft/viewport.clientWidth)));
-    }
-    activate(panels[index].id);
+let navTick=0;
+function syncNavigation(){
+  if(navTick)return;
+  navTick=requestAnimationFrame(()=>{
+    navTick=0;
+    const marker=window.innerHeight*.38;
+    let current=panels[0];
+    panels.forEach(panel=>{
+      const rect=panel.getBoundingClientRect();
+      if(rect.top<=marker&&rect.bottom>marker)current=panel;
+    });
+    if(current)activate(current.id);
   });
+}
+window.addEventListener("scroll",syncNavigation,{passive:true});
+window.addEventListener("resize",()=>{
+  movePill(links.find(a=>a.classList.contains("on"))||links[0]);
+  syncNavigation();
 },{passive:true});
-addEventListener("load",()=>{
-  movePill($("nav a.on"));
+window.addEventListener("load",()=>{
+  movePill(links.find(a=>a.classList.contains("on"))||links[0]);
   const requested=(location.hash||"").slice(1);
-  const initial=panels.some(p=>p.id===requested)?requested:"home";
-  if(initial!=="home"){
-    if(verticalFlow())window.scrollTo({top:panels.find(p=>p.id===initial).getBoundingClientRect().top+window.scrollY,behavior:"auto"});
-    else viewport.scrollLeft=panels.findIndex(p=>p.id===initial)*viewport.clientWidth;
-    activate(initial);
-  }else activate("home");
-  if($("#stageP")&&!$("#stageP").children.length)showTab("projects");
-});
-addEventListener("resize",()=>{
-  const active=$("nav a.on");movePill(active);
-  const index=panels.findIndex(p=>"#"+p.id===active.hash);
-  if(index>=0){
-    if(verticalFlow())window.scrollTo({top:panels[index].getBoundingClientRect().top+window.scrollY,behavior:"auto"});
-    else viewport.scrollLeft=index*viewport.clientWidth;
-  }
-});
-
+  if(panels.some(p=>p.id===requested)){
+    const target=panels.find(p=>p.id===requested);
+    window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY,behavior:"auto"});
+    activate(requested);
+  }else syncNavigation();
+},{once:true});
 // ---------- Spider-Man reveal: smooth pointer + touch morph ---------- 
 (function(){
   const photo=$("#spiderReveal");
