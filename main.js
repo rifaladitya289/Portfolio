@@ -677,3 +677,13 @@ renderC();
   });
 })();
 
+
+
+// Keep one continuous copy of the original Home video behind the entire document.
+(function(){
+  const sharedBg=document.querySelector("#home .home-latest-bg");
+  if(sharedBg && sharedBg.parentElement!==document.body){
+    document.body.appendChild(sharedBg);
+    sharedBg.setAttribute("aria-hidden","true");
+  }
+})();
