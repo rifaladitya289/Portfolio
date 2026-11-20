@@ -86,6 +86,7 @@
     const la=logo.animate(move(fromLogo,toLogo),opts);
     const wa=word.animate(move(fromWord,toWord),{...opts,delay:100});
     Promise.allSettled([la.finished,wa.finished]).then(()=>{
+      if(introFinished)return;
       la.cancel();wa.cancel();
       place(logo,toLogo);place(word,toWord);
       word.classList.add("gs-wordmark-docking");
@@ -103,8 +104,17 @@
     intro.style.setProperty("--gs-center-shift",shift+"px");
     makeParticles();
     if(reduced){
-      brand.classList.add("gs-brand-visible");
-      intro.remove();
+      // Respect reduced-motion preferences while keeping the skip control available.
+      logo.style.opacity="1";
+      word.style.opacity="1";
+      word.style.transform="translate(-50%,0)";
+      word.style.filter="none";
+      dockTimer=window.setTimeout(()=>{
+        if(introFinished)return;
+        brand.classList.add("gs-brand-visible");
+        intro.classList.add("gs-intro-out");
+        window.setTimeout(()=>{if(intro.isConnected)intro.remove()},2200);
+      },1800);
       return;
     }
     playAmbient();
