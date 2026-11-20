@@ -5,21 +5,26 @@
   const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const coarse=window.matchMedia&&window.matchMedia("(pointer: coarse)").matches;
   const revealSelectors=[
-    "#home .hero-copy > *",
-    "#home .hero-side-mark",
-    "#home .hero-footnote",
+    "#home .home-latest-eyebrow",
+    "#home .home-latest-content h1",
+    "#home .home-latest-bottom",
+    "#home .home-latest-primary",
+    "#home .home-latest-foot",
     "#about .about-heading > *",
     "#about .about-grid > *",
+    "#about .about-rule",
     "#about .tl > div",
     "#about .tl h3",
     "#about .tl .item",
     "#about .about-section-label",
     "#about .folders .folder",
     "#portfolio .portfolio-heading > *",
+    "#portfolio .portfolio-banner-bottom",
     "#portfolio .category-copy > *",
     "#portfolio #tabs button",
     "#contact .contact-intro > *",
     "#contact .contact-form-card",
+    "#contact .contact-card-head",
     "#contact .contact-field",
     "#contact .contact-submit-row",
     "#contact .contact-socials a",
@@ -70,7 +75,7 @@
       el.classList.add("gs-interactive");
     });
     if(!reduce){
-      const intro=document.querySelector("#home .hero-copy");
+      const intro=document.querySelector("#home .home-latest-content");
       if(intro)intro.classList.add("gs-opening");
     }
   }
@@ -97,62 +102,4 @@
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 
-  /* AudioContext is unlocked on the first real user gesture, then reused. */
-  let audio=null,audioUnlocked=false,lastHover=0;
-  function unlockAudio(){
-    if(!audio){
-      const Ctx=window.AudioContext||window.webkitAudioContext;
-      if(!Ctx)return;
-      audio=new Ctx();
-    }
-    if(audio.state==="running"){audioUnlocked=true;return;}
-    audio.resume().then(()=>{audioUnlocked=audio.state==="running";}).catch(()=>{});
-  }
-  document.addEventListener("pointerdown",unlockAudio,{capture:true,passive:true});
-  document.addEventListener("keydown",unlockAudio,{capture:true});
-  function tone(startFreq,endFreq,duration,volume){
-    if(!audio||!audioUnlocked||audio.state!=="running")return;
-    const ctx=audio,now=ctx.currentTime;
-    const osc=ctx.createOscillator(),gain=ctx.createGain(),filter=ctx.createBiquadFilter();
-    osc.type="sine";
-    osc.frequency.setValueAtTime(startFreq,now);
-    osc.frequency.exponentialRampToValueAtTime(Math.max(40,endFreq),now+duration);
-    filter.type="lowpass";
-    filter.frequency.setValueAtTime(1800,now);
-    gain.gain.setValueAtTime(.0001,now);
-    gain.gain.exponentialRampToValueAtTime(volume,now+.006);
-    gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
-    osc.connect(filter);filter.connect(gain);gain.connect(ctx.destination);
-    osc.start(now);osc.stop(now+duration+.015);
-  }
-  function sound(kind){
-    if(reduce)return;
-    /* Restrained desktop-style ticks: sine tone, short envelope, no arcade melody. */
-    if(kind==="hover")tone(920,760,.045,.12);
-    if(kind==="click")tone(520,410,.065,.20);
-    if(kind==="open")tone(390,300,.095,.22);
-    if(kind==="success")tone(660,540,.11,.19);
-  }
-  /* Desktop hover: cursor movement alone triggers the soft UI response. */
-  const hoverTargets=[
-    "button","a","[role='button']","summary",
-    ".folder",".work-card",".featured-work",".contact-field",
-    ".contact-send",".contact-socials a",".tabs button",
-    ".arr",".portfolio-category",".project-item"
-  ].join(",");
-  document.addEventListener("pointerover",e=>{
-    if(coarse||e.pointerType!=="mouse")return;
-    const target=e.target.closest(hoverTargets);
-    if(!target||target.contains(e.relatedTarget))return;
-    const now=performance.now();
-    if(now-lastHover<115)return;
-    lastHover=now;
-    sound("hover");
-  },{passive:true});
-  document.addEventListener("click",e=>{
-    const target=e.target.closest("button,a,[role='button'],summary");
-    if(!target)return;
-    sound(target.classList.contains("folder")||target.classList.contains("work-card")?"open":"click");
-  },true);
-  document.addEventListener("submit",()=>sound("success"),true);
 })();
