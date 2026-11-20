@@ -131,12 +131,14 @@
   }
   /* Sound only for deliberate, important actions — never for navigation,
      scrolling, ordinary links, tabs, fields, or decorative cards. */
-  document.addEventListener("pointerdown",e=>{
+  document.addEventListener("click",e=>{
+    /* Navbar and ordinary links are always silent. */
+    if(e.target.closest("#nav,nav,a"))return;
     const control=e.target.closest(".home-latest-primary,.a-right .btn,.folder");
     if(!control)return;
     unlockAudio();
     softTone(control.matches(".folder")?310:285,.06,.006);
-  },{passive:true});
+  });
   /* Success sound is emitted only after a comment is actually saved locally. */
   document.addEventListener("gs:success",()=>{
     if(!audioReady)return;
