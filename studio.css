@@ -244,7 +244,7 @@ footer{padding:26px var(--page-pad) 36px;border-top:1px solid var(--line);color:
 .work-card--placeholder{flex:0 0 clamp(220px,27vw,350px);width:clamp(220px,27vw,350px);padding:0;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:rgba(12,14,17,.45)}
 .work-card--placeholder .work-image{height:auto;aspect-ratio:1.48;width:100%;background:radial-gradient(ellipse at 70% 20%,rgba(201,167,123,.17),transparent 35%),linear-gradient(135deg,#1b1e22,#08090b)}
 .work-card--placeholder .work-image--designs{background:radial-gradient(ellipse at 20% 20%,rgba(201,167,123,.14),transparent 38%),linear-gradient(135deg,#181b20,#08090b)}
-.work-card--placeholder .work-image--visuals{background:radial-gradient(ellipse at 70% 20%,rgba(170,164,154,.16),transparent 38%),linear-gradient(135deg,#202024,#090a0c)}
+.work-card--placeholder .work-image--showcase{background:radial-gradient(ellipse at 70% 20%,rgba(170,164,154,.16),transparent 38%),linear-gradient(135deg,#202024,#090a0c)}
 @keyframes marqueeRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 @keyframes marqueeLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.marquee-track--right,.marquee-track--left{animation:none;transform:none}}
@@ -254,7 +254,7 @@ footer{padding:26px var(--page-pad) 36px;border-top:1px solid var(--line);color:
 .work-card.is-featured-duplicate{display:none!important}
 .work-image{position:relative;display:block;width:100%;height:clamp(190px,27vw,340px);overflow:hidden;background:radial-gradient(ellipse at 70% 20%,rgba(201,167,123,.17),transparent 35%),linear-gradient(135deg,#1b1e22,#08090b)}
 .work-image--designs{background:radial-gradient(ellipse at 20% 20%,rgba(201,167,123,.14),transparent 38%),linear-gradient(135deg,#181b20,#08090b)}
-.work-image--visuals{background:radial-gradient(ellipse at 70% 20%,rgba(170,164,154,.16),transparent 38%),linear-gradient(135deg,#202024,#090a0c)}
+.work-image--showcase{background:radial-gradient(ellipse at 70% 20%,rgba(170,164,154,.16),transparent 38%),linear-gradient(135deg,#202024,#090a0c)}
 .work-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 .work-card:hover .work-image img{transform:scale(1.035)}
 .art-orbit{position:absolute;left:50%;top:50%;width:44%;aspect-ratio:1;border:1px solid rgba(201,167,123,.25);border-radius:50%;transform:translate(-50%,-50%)}
@@ -451,7 +451,7 @@ body.portfolio-modal-open{overflow:hidden}
 /* Collection identity on each folder */
 .folder[data-tab="projects"] .front::before{content:"COLLECTION / 01 · PROJECTS"}
 .folder[data-tab="designs"] .front::before{content:"COLLECTION / 02 · DESIGNS"}
-.folder[data-tab="visuals"] .front::before{content:"COLLECTION / 03 · VISUALS"}
+.folder[data-tab="showcase"] .front::before{content:"COLLECTION / 03 · SHOWCASE"}
 #mascot{opacity:0}
 #nav:hover #mascot,#nav:focus-within #mascot{opacity:1}
 
