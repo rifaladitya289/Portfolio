@@ -140,8 +140,8 @@ footer{padding:26px var(--page-pad) 36px;border-top:1px solid var(--line);color:
 .a-photo{grid-area:portrait;position:relative;min-height:440px;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(145deg,#242321,#0b0d10);border-left:1px solid var(--gold-soft)}
 .a-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.5));pointer-events:none}
 .a-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%}
-.a-photo .about-spider{opacity:0;clip-path:circle(0 at var(--reveal-x,50%) var(--reveal-y,50%));transition:opacity .4s ease}
-.a-photo.is-revealing .about-spider{opacity:1;clip-path:circle(38% at var(--reveal-x,50%) var(--reveal-y,50%))}
+.a-photo .about-spider{opacity:0;clip-path:circle(0 at var(--reveal-x,50%) var(--reveal-y,50%));transition:opacity .16s ease;will-change:clip-path,opacity}
+.a-photo.is-revealing .about-spider{opacity:1;clip-path:circle(21% at var(--reveal-x,50%) var(--reveal-y,50%))}
 .portrait-mark{position:absolute;z-index:2;right:18px;bottom:16px;color:rgba(255,255,255,.55);font-size:8px;letter-spacing:.18em}
 .a-right{grid-area:bio;max-width:570px;align-self:start}
 .a-right p{margin:10px 0 24px;color:var(--muted);font-size:13px;line-height:2}
