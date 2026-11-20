@@ -155,7 +155,7 @@ function activate(id){
   document.body.classList.toggle("light",id==="portfolio"||id==="contact");
   lastSec=id;
 }
-const verticalFlow=()=>window.matchMedia&&window.matchMedia("(max-width:900px), (pointer:coarse)").matches;
+const verticalFlow=()=>true; // One vertical scroll experience on every device.
 function goTo(id){
   const index=panels.findIndex(p=>p.id===id);
   if(index<0)return;
