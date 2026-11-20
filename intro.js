@@ -43,7 +43,23 @@
       window.setTimeout(()=>{try{ctx.close()}catch(e){}},11000);
     }catch(e){}
   }
+  let introFinished=false;
+  let dockTimer=null;
+  function skipIntro(){
+    if(introFinished)return;
+    introFinished=true;
+    if(dockTimer)window.clearTimeout(dockTimer);
+    animations.forEach(a=>{try{a.cancel()}catch(e){}});
+    logo.getAnimations().forEach(a=>a.cancel());
+    word.getAnimations().forEach(a=>a.cancel());
+    brand.classList.add("gs-brand-visible");
+    intro.classList.add("gs-intro-out");
+    window.setTimeout(()=>{if(intro.isConnected)intro.remove()},450);
+  }
+  const skipButton=document.getElementById("gsSkipIntro");
+  if(skipButton)skipButton.addEventListener("click",skipIntro);
   function dockBrand(){
+    if(introFinished)return;
     const brandIcon=brand.querySelector("svg"),brandCopy=brand.querySelector(".gs-brand-copy");
     if(!brandIcon||!brandCopy)return;
     // Measure the final brand without its hidden-state offset, so the handoff cannot jump.
@@ -113,7 +129,7 @@
     animate(word,[{opacity:0,transform:"translate(-50%,16px)",filter:"blur(5px)"},{opacity:1,transform:"translate(-50%,0)",filter:"blur(0)"}],{duration:1150,delay:5950,easing:ease});
     animate(word.querySelector(".gs-intro-rule"),[{width:"0px",opacity:0},{width:"112px",opacity:1}],{duration:850,delay:6850,easing:ease});
     animate(document.querySelector(".gs-intro-tagline"),[{opacity:0,transform:"translateY(7px)"},{opacity:.72,transform:"translateY(0)"}],{duration:1000,delay:7200,easing:ease});
-    window.setTimeout(dockBrand,8250);
+    dockTimer=window.setTimeout(dockBrand,8250);
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run,{once:true});else run();
 })();
