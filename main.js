@@ -281,10 +281,10 @@ function showTab(k){
   const names={projects:"Digital Projects",designs:"Interface & Experience Design",visuals:"Visual Explorations"};
   const descriptions={projects:"A space reserved for future digital projects.",designs:"A space reserved for future interface and experience designs.",visuals:"A space reserved for future visual explorations."};
   const makeRow=(direction,row)=> {
-    const cards=Array.from({length:6},(_,n)=>`<div class="work-card work-card--${k} work-card--placeholder" aria-hidden="true">
-      <div class="work-image work-image--${k}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${(n%3)+1}</span></div>
+    const cards=Array.from({length:3},(_,n)=>`<div class="work-card work-card--${k} work-card--placeholder" aria-hidden="true">
+      <div class="work-image work-image--${k}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${n+1}</span></div>
     </div>`).join("");
-    return `<div class="marquee-window marquee-window--${direction}" aria-hidden="true"><div class="marquee-track marquee-track--${direction}">${cards}</div></div>`;
+    return `<div class="marquee-window marquee-window--${direction}" aria-hidden="true"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${cards}</div><div class="marquee-group" aria-hidden="true">${cards}</div></div></div>`;
   };
   box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","visuals"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>00</strong><span>WORKS</span></div></div>
   <div class="portfolio-marquee">${makeRow("right",0)}${makeRow("left",1)}</div>
