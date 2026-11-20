@@ -184,7 +184,9 @@ function syncNavigation(){
     let current=panels[0];
     panels.forEach(panel=>{
       const rect=panel.getBoundingClientRect();
-      if(rect.top<=marker&&rect.bottom>marker)current=panel;
+      // Keep the latest section whose top has crossed the navigation marker.
+      // This also keeps Contact active near the document's bottom edge.
+      if(rect.top<=marker)current=panel;
     });
     if(current)activate(current.id);
   });
