@@ -78,7 +78,7 @@ footer{padding:26px var(--page-pad) 36px;border-top:1px solid var(--line);color:
   transition:left .55s cubic-bezier(.2,.8,.2,1),width .55s cubic-bezier(.2,.8,.2,1)
 }
 #mascot{position:absolute;z-index:3;top:-7px;left:50%;width:24px;height:28px;color:var(--gold);opacity:0;pointer-events:none;transition:left .55s cubic-bezier(.2,.8,.2,1),opacity .35s ease}
-#nav:hover #mascot,#mascot{opacity:.0}
+#nav:hover #mascot,#nav:focus-within #mascot{opacity:.9}
 #wipe{display:none!important}
 
 /* Shared editorial details */
@@ -440,5 +440,5 @@ body.portfolio-modal-open{overflow:hidden}
 .folder[data-tab="projects"] .front::before{content:"COLLECTION / 01 · PROJECTS"}
 .folder[data-tab="designs"] .front::before{content:"COLLECTION / 02 · DESIGNS"}
 .folder[data-tab="visuals"] .front::before{content:"COLLECTION / 03 · VISUALS"}
-#mascot{opacity:.78}
-#nav:hover #mascot{opacity:1}
+#mascot{opacity:0}
+#nav:hover #mascot,#nav:focus-within #mascot{opacity:1}
