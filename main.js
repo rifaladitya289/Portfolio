@@ -1,20 +1,8 @@
 // ================= DATA (ganti dengan datamu) =================
 const DATA = {
-  projects:[
-    {t:"StudyTrack X",d:"A student productivity platform for learning, schedules, tasks, and personal progress.",img:"assets/projects/1.jpg",type:"DIGITAL PROJECT",tools:"HTML · CSS · JAVASCRIPT",url:""},
-    {t:"Gallagher's Studio",d:"A cinematic personal portfolio showcasing digital work and creative identity.",img:"assets/projects/2.jpg",type:"PERSONAL PORTFOLIO",tools:"HTML · CSS · JAVASCRIPT",url:""},
-    {t:"STADIUM AI",d:"An AI-versus-AI football match simulation concept.",img:"assets/projects/3.jpg",type:"GAME PROTOTYPE",tools:"ANDROID · GAME CONCEPT",url:""}
-  ],
-  designs:[
-    {t:"Portfolio UI",d:"A cinematic portfolio interface concept.",img:"assets/designs/1.jpg",type:"WEB UI DESIGN",tools:"LAYOUT · TYPOGRAPHY"},
-    {t:"Dashboard UI",d:"A student dashboard interface concept.",img:"assets/designs/2.jpg",type:"DASHBOARD DESIGN",tools:"UI · UX"},
-    {t:"Game UI",d:"A football simulation interface concept.",img:"assets/designs/3.jpg",type:"GAME INTERFACE",tools:"UI · VISUAL SYSTEM"}
-  ],
-  visuals:[
-    {t:"Automotive Emblem",d:"A minimal automotive-inspired emblem design.",img:"assets/visuals/1.jpg",type:"LOGO DESIGN",tools:"GRAPHIC · IDENTITY"},
-    {t:"Suit Artwork",d:"A superhero suit design exploration.",img:"assets/visuals/2.jpg",type:"CHARACTER ARTWORK",tools:"DIGITAL ART"},
-    {t:"Digital Artwork",d:"A minimalist digital visual exploration.",img:"assets/visuals/3.jpg",type:"DIGITAL ARTWORK",tools:"COMPOSITION · COLOR"}
-  ]
+  projects:[],
+  designs:[],
+  visuals:[]
 };
 const SOCIAL_NOTE="";
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -289,32 +277,21 @@ function showTab(k){
   if(!DATA[k])return;
   cur=k;
   $$("#tabs button").forEach(b=>{const active=b.dataset.tab===k;b.classList.toggle("on",active);b.setAttribute("aria-selected",String(active))});
-  const box=$("#stageP"),list=DATA[k],total=list.length;
+  const box=$("#stageP");
   const names={projects:"Digital Projects",designs:"Interface & Experience Design",visuals:"Visual Explorations"};
-  const descriptions={projects:"Websites, applications, and digital products built from ideas.",designs:"Website layouts, dashboards, and interface concepts shaped with intention.",visuals:"Graphic works, identities, posters, and experiments in visual storytelling."};
-  const cards=list.map((item,n)=>`<article class="work-card work-card--${k} work-card--${String(n+1).padStart(2,"0")} ${k==='projects'&&n===0?'is-featured-duplicate':''}" tabindex="0" role="button" aria-label="Open ${esc(item.t)}" data-i="${n}">
-    <div class="work-image work-image--${k} work-image--${String(n+1).padStart(2,"0")} ${k==="designs"?"art-design":k==="visuals"?"art-visual":"art-project"}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="art-caption">${esc(item.type||"CREATIVE WORK")}</span><span class="work-index">0${n+1}</span><span class="work-open" aria-hidden="true">↗</span></div>
-    <div class="work-meta"><div><span class="work-type">${esc(item.type||"CREATIVE WORK")}</span><h3>${esc(item.t)}</h3><p>${esc(item.d)}</p></div><span class="work-arrow">↗</span></div>
+  const descriptions={projects:"A space reserved for future digital projects.",designs:"A space reserved for future interface and experience designs.",visuals:"A space reserved for future visual explorations."};
+  // Three visual-only placeholders preserve the card layout without inventing portfolio entries.
+  const cards=Array.from({length:3},(_,n)=>`<article class="work-card work-card--${k} work-card--${String(n+1).padStart(2,"0")} work-card--placeholder" aria-hidden="true">
+    <div class="work-image work-image--${k} work-image--${String(n+1).padStart(2,"0")} ${k==="designs"?"art-design":k==="visuals"?"art-visual":"art-project"}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${n+1}</span></div>
   </article>`).join("");
-  const featured=k==="projects"&&list.length?`<button class="featured-work" type="button" data-feature="0"><span class="featured-label">FEATURED PROJECT <i>✳</i></span><span class="featured-preview art-project"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="featured-number">01</span></span><span class="featured-bottom"><span><small>SPOTLIGHT / 2026</small><strong>${esc(list[0].t)}</strong><em>${esc(list[0].d)}</em></span><b>Explore ↗</b></span></button>`:"";
-  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","visuals"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(total).padStart(2,"0")}</strong><span>ITEMS</span></div></div>
-  ${featured}
+  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","visuals"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>03</strong><span>LAYOUTS</span></div></div>
   <div class="work-grid ${k==="visuals"?"visual-grid":""}">${cards}</div>
-  <div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>END OF COLLECTION · ${String(total).padStart(2,"0")} WORKS</span></div></div>`;
+  <div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>COLLECTION LAYOUT</span></div></div>`;
   box.classList.remove("portfolio-shimmer-in");
   void box.offsetWidth;
   box.classList.add("portfolio-shimmer-in");
   box.addEventListener("animationend",e=>{if(e.animationName==="portfolio-shimmer")box.classList.remove("portfolio-shimmer-in")},{once:true});
-  const count=$("#portfolioCount");if(count)count.textContent=String(DATA.projects.length+DATA.designs.length+DATA.visuals.length).padStart(2,"0");
-  $(".work-card",box).forEach((card,index)=>{
-    card.style.setProperty("--card-index",index);
-    card.classList.add("card-enter");
-    const open=()=>openLb(list[Number(card.dataset.i)]);
-    card.addEventListener("click",open);
-    card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}});
-  });
-  const feature=$(".featured-work",box);
-  if(feature)feature.addEventListener("click",()=>openLb(list[0]));
+  const count=$("#portfolioCount");if(count)count.textContent="00";
 }
 $("#tabs").addEventListener("click",e=>{const button=e.target.closest("button[data-tab]");if(button&&$("#tabs").contains(button))showTab(button.dataset.tab)});
 $$(".folder").forEach(b=>b.addEventListener("click",()=>{
