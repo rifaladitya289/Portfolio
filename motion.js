@@ -105,7 +105,7 @@
 
 
   /* Quiet, restrained interface sound — no arcade-like beeps. */
-  let audio=null,audioReady=false,lastHover=0;
+  let audio=null,audioReady=false;
   function unlockAudio(){
     if(audioReady)return;
     const Audio=window.AudioContext||window.webkitAudioContext;
@@ -129,7 +129,9 @@
     osc.connect(gain);gain.connect(audio.destination);
     osc.start(start);osc.stop(start+duration+.015);
   }
-  document.addEventListener("pointerdown",()=>{
+  document.addEventListener("pointerdown",e=>{
+    const control=e.target.closest("button,a,.card,.folder,.work-card,.featured-work,input,textarea,select,summary");
+    if(!control)return;
     unlockAudio();
     softTone(285,.055,.007);
   },{passive:true});
