@@ -104,8 +104,7 @@
 
 
 
-  /* Original Linux-inspired UI tones. Audio is unlocked only after a real
-     user gesture because mobile browsers block autoplay audio. */
+  /* Quiet, restrained interface sound — no arcade-like beeps. */
   let audio=null,audioReady=false,lastHover=0;
   function unlockAudio(){
     if(audioReady)return;
@@ -117,42 +116,28 @@
       audioReady=true;
     }catch(e){}
   }
-  function tone(freq,delay,duration,volume,type){
+  function softTone(freq,duration,volume){
     if(!audio||!audioReady)return;
-    const start=audio.currentTime+delay;
+    const start=audio.currentTime;
     const osc=audio.createOscillator(),gain=audio.createGain();
-    osc.type=type||"sine";osc.frequency.setValueAtTime(freq,start);
+    osc.type="sine";
+    osc.frequency.setValueAtTime(freq,start);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(90,freq*.72),start+duration);
     gain.gain.setValueAtTime(.0001,start);
-    gain.gain.exponentialRampToValueAtTime(volume,start+.012);
+    gain.gain.exponentialRampToValueAtTime(volume,start+.008);
     gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
     osc.connect(gain);gain.connect(audio.destination);
-    osc.start(start);osc.stop(start+duration+.02);
+    osc.start(start);osc.stop(start+duration+.015);
   }
-  function uiSound(kind){
-    if(!audioReady)return;
-    if(kind==="hover"){
-      tone(740,0,.045,.012,"sine");
-    }else if(kind==="press"){
-      tone(520,0,.07,.025,"triangle");
-      tone(780,.045,.085,.014,"sine");
-    }else if(kind==="success"){
-      tone(660,0,.09,.018,"sine");
-      tone(880,.075,.12,.018,"sine");
-    }
-  }
-  document.addEventListener("pointerdown",e=>{
+  document.addEventListener("pointerdown",()=>{
     unlockAudio();
-    if(e.pointerType==="touch"||e.pointerType==="pen"||e.pointerType==="mouse")uiSound("press");
+    softTone(285,.055,.007);
   },{passive:true});
-  document.addEventListener("pointerover",e=>{
-    if(!audioReady||e.pointerType!=="mouse")return;
-    const el=e.target.closest("button,a,.card,.folder,.work-card,.featured-work,.contact-socials a");
-    if(!el||el.contains(e.relatedTarget))return;
-    const now=performance.now();
-    if(now-lastHover<90)return;
-    lastHover=now;uiSound("hover");
-  },{passive:true});
-  document.addEventListener("gs:success",()=>uiSound("success"));
+  /* No hover chirps: pointer movement stays silent and calm. */
+  document.addEventListener("gs:success",()=>{
+    if(!audioReady)return;
+    softTone(390,.075,.006);
+  });
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 
