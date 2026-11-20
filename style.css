@@ -4353,3 +4353,8 @@ nav{background:rgba(12,18,30,.78)!important;border:1px solid rgba(241,238,232,.1
     font-size:1.42rem!important;
   }
 }
+
+/* Precise archive labels for the three folder collections */
+#about .folder:nth-child(1) .front::before{content:"COLLECTION / 01 · PROJECTS"}
+#about .folder:nth-child(2) .front::before{content:"COLLECTION / 02 · DESIGNS"}
+#about .folder:nth-child(3) .front::before{content:"COLLECTION / 03 · VISUALS"}
