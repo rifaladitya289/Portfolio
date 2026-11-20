@@ -281,10 +281,10 @@ function showTab(k){
   const names={projects:"Digital Projects",designs:"Interface & Experience Design",showcase:"Client Showcase"};
   const descriptions={projects:"A space reserved for future digital projects.",designs:"A space reserved for future interface and experience designs.",showcase:"A space reserved for commissioned client projects."};
   const makeRow=(direction,row)=> {
-    const cards=Array.from({length:3},(_,n)=>`<div class="work-card work-card--${k} work-card--placeholder" aria-hidden="true">
+    const cards=Array.from({length:3},(_,n)=>`<div class="work-card work-card--${k} work-card--placeholder" tabindex="0" role="group" aria-label="Preview ${n+1} — ${names[k]}">
       <div class="work-image work-image--${k}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${n+1}</span></div>
     </div>`).join("");
-    return `<div class="marquee-window marquee-window--${direction}" aria-hidden="true"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${cards}</div><div class="marquee-group" aria-hidden="true">${cards}</div></div></div>`;
+    return `<div class="marquee-window marquee-window--${direction}" role="region" aria-label="${direction==="right"?"Portfolio previews moving right":"Portfolio previews moving left"}"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${cards}</div><div class="marquee-group" aria-hidden="true">${cards}</div></div></div>`;
   };
   box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>00</strong><span>WORKS</span></div></div>
   <div class="portfolio-marquee">${makeRow("right",0)}${makeRow("left",1)}</div>
@@ -304,6 +304,15 @@ $(".folder").forEach(b=>b.addEventListener("click",()=>{
   if(index>=0)goTo("portfolio");
 }));
 showTab("projects");
+
+/* Touch users can pause a moving preview row with a tap, inspect it,
+   then tap the row again to resume. Pointer hover and keyboard focus pause in CSS. */
+document.addEventListener("pointerdown",e=>{
+  if(e.pointerType!=="touch")return;
+  const row=e.target instanceof Element?e.target.closest(".marquee-window"):null;
+  if(!row)return;
+  row.classList.toggle("is-paused");
+});
 
 // ---------- Kontak & komentar (sementara disimpan di browser) ----------
 const KEY="portfolio-komentar-v2";
