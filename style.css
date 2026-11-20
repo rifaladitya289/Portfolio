@@ -3910,3 +3910,70 @@ nav{background:rgba(12,18,30,.78)!important;border:1px solid rgba(241,238,232,.1
     border-radius:12px!important;
   }
 }
+
+
+/* ===== FINAL TONE MATCH · HOME'S CHARCOAL / WARM IVORY / MUTED GOLD =====
+   Remove extra blue UI accents from secondary pages; retain blue only in the
+   shared video atmosphere exactly as on Home. */
+#pageTrack>#about,
+#pageTrack>#portfolio,
+#pageTrack>#contact{
+  background:#090a0d!important;
+}
+#pageTrack>#about::before,
+#pageTrack>#portfolio::before,
+#pageTrack>#contact::before{
+  background:linear-gradient(180deg,rgba(7,8,10,.12),rgba(7,8,10,.28))!important;
+}
+#pageTrack>#about .lg,
+#pageTrack>#about .folder .go,
+#pageTrack>#portfolio .tabs button.on,
+#pageTrack>#portfolio .work-open,
+#pageTrack>#contact .contact-pulse,
+#pageTrack>#contact .contact-progress span,
+#pill{
+  background:rgba(201,167,123,.16)!important;
+  color:#e4d2b9!important;
+  border-color:rgba(201,167,123,.42)!important;
+}
+#pageTrack>#portfolio .tabs button.on{
+  background:rgba(201,167,123,.18)!important;
+  color:#f1eee8!important;
+  box-shadow:inset 0 0 0 1px rgba(201,167,123,.18)!important;
+}
+#pageTrack>#about .num,
+#pageTrack>#about .folder .front,
+#pageTrack>#about .folder .back,
+#pageTrack>#portfolio .tabs,
+#pageTrack>#portfolio .work-card,
+#pageTrack>#portfolio .featured-work,
+#pageTrack>#contact .contact-form-card,
+#pageTrack>#contact .contact-lower{
+  background-color:rgba(13,14,16,.72)!important;
+  border-color:rgba(241,238,232,.14)!important;
+}
+#pageTrack>#about .item.act .num{
+  background:#c9a77b!important;color:#090a0d!important;
+}
+#pageTrack>#about .lg{color:#e4d2b9!important}
+#pageTrack>#portfolio .tabs button{color:#aaa39a!important}
+#pageTrack>#portfolio .tabs button.on{color:#f1eee8!important}
+#pageTrack>#contact .contact-socials a{
+  background:rgba(13,14,16,.52)!important;
+  border-color:rgba(241,238,232,.14)!important;
+}
+#pageTrack>#about .btn,
+#pageTrack>#contact .contact-send{
+  background:rgba(201,167,123,.09)!important;
+  border-color:rgba(201,167,123,.48)!important;
+  color:#f1eee8!important;
+}
+#pageTrack>#about .about-eyebrow,
+#pageTrack>#about .about-kicker,
+#pageTrack>#portfolio .portfolio-banner-top,
+#pageTrack>#portfolio .portfolio-banner-bottom,
+#pageTrack>#contact .contact-eyebrow,
+#pageTrack>#contact .contact-card-head,
+#pageTrack>#contact .contact-field>span{
+  color:#c9a77b!important;
+}
