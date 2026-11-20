@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#090a0d">
 <title>Rifal — Portfolio</title>
+<link rel="stylesheet" href="intro.css?v=portfolio-logo-intro-v1">
+<script src="intro.js?v=portfolio-logo-intro-v1" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -57,6 +59,30 @@ h1 span{display:block;color:#aaa39a;font-style:italic;font-weight:400;margin-lef
 </style>
 </head>
 <body>
+<div id="gsIntro" aria-hidden="true">
+  <button id="gsSkipIntro" type="button" aria-label="Click anywhere to skip intro">CLICK FOR SKIP <span aria-hidden="true">↗</span></button>
+  <div class="gs-intro-bg"></div><div class="gs-intro-grid"></div>
+  <div class="gs-intro-ambient"></div><div class="gs-intro-vignette"></div>
+  <div class="gs-intro-particles" id="gsIntroParticles"></div>
+  <div class="gs-intro-flare" id="gsIntroFlare"></div>
+  <div class="gs-letterbox gs-letterbox-top"></div><div class="gs-letterbox gs-letterbox-bottom"></div>
+  <svg id="gsIntroLogo" viewBox="200 160 624 704" role="presentation">
+    <defs><linearGradient id="gsGoldStroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f1cb98"/><stop offset=".52" stop-color="#d9a566"/><stop offset="1" stop-color="#9f7145"/>
+    </linearGradient></defs>
+    <path class="gs-hex" pathLength="1" d="M512 180 800 345V680L512 845 223 680V345Z"/>
+    <path class="gs-mark-light" pathLength="1" d="M500 245 273 372V650L500 778V450L372 520V607L448 563V692L322 620V400L500 300Z"/>
+    <path class="gs-mark-blue" pathLength="1" d="M525 248 752 375V430L575 330V400L752 500V650L525 778V598L575 628V690L702 618V575L525 470Z"/>
+    <path class="gs-mark-fill-light" d="M500 245 273 372V650L500 778V450L372 520V607L448 563V692L322 620V400L500 300Z"/>
+    <path class="gs-mark-fill-blue" d="M525 248 752 375V430L575 330V400L752 500V650L525 778V598L575 628V690L702 618V575L525 470Z"/>
+  </svg>
+  <div id="gsIntroWordmark">
+    <span class="gs-intro-name">Gallagher's</span><span class="gs-intro-studio">STUDIO</span>
+    <i class="gs-intro-rule"></i>
+  </div>
+  <p class="gs-intro-tagline">IDEAS SHAPED INTO DIGITAL EXPERIENCES</p>
+</div>
+
 <video id="coverBgVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="assets/cover-bg-blue.mp4" type="video/mp4"></video>
 <header class="site-head"><span class="availability"><i class="dot"></i> Independent creator</span><span>Based in Indonesia</span></header>
 <main>
