@@ -6,8 +6,8 @@
 .gs-brand-copy{display:flex;flex-direction:column;line-height:1.05;letter-spacing:.13em}
 .gs-brand-copy strong{font:500 13px/1.2 Montserrat,Inter,sans-serif;letter-spacing:.12em}
 .gs-brand-copy small{margin-top:4px;color:#d5b78e;font:400 8px/1 Montserrat,Inter,sans-serif;letter-spacing:.38em}
-#gsIntro{position:fixed;inset:0;z-index:200;overflow:hidden;isolation:isolate;background:#080a10;color:#fff;opacity:1;visibility:visible;transition:opacity 2.1s cubic-bezier(.65,0,.35,1),visibility 0s linear 2.1s}
-#gsIntro.gs-intro-out{opacity:0;visibility:hidden;pointer-events:none}
+#gsIntro{position:fixed;inset:0;z-index:200;overflow:hidden;isolation:isolate;background:#080a10;color:#fff;opacity:1;visibility:visible;transition:opacity 2.1s cubic-bezier(.65,0,.35,1),visibility 0s linear 2.1s,transform 2.1s cubic-bezier(.65,0,.35,1),filter 2.1s cubic-bezier(.65,0,.35,1)}
+#gsIntro.gs-intro-out{opacity:0;visibility:hidden;pointer-events:none;transform:scale(1.018);filter:blur(5px)}
 .gs-intro-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 43%,rgba(70,68,72,.42) 0%,rgba(31,31,38,.28) 28%,transparent 65%),radial-gradient(ellipse at 50% 110%,rgba(151,106,61,.13),transparent 48%),linear-gradient(135deg,#101117 0%,#090b11 48%,#05060a 100%);transform:scale(1.04);animation:gsCinematicDrift 14s ease-in-out infinite alternate}
 @keyframes gsCinematicDrift{from{transform:scale(1.04) translate3d(-.3%,0,0)}to{transform:scale(1.12) translate3d(.3%,-.5%,0)}}
 .gs-intro-grid{display:none}
