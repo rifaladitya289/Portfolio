@@ -206,28 +206,25 @@ window.addEventListener("load",()=>{
     activate(requested);
   }else syncNavigation();
 },{once:true});
-// ---------- Spider-Man reveal: smooth pointer + touch morph ---------- 
+// ---------- Spider-Man reveal: direct, low-latency pointer + touch ---------- 
 (function(){
   const photo=$("#spiderReveal");
   if(!photo)return;
-  let targetX=0,targetY=0,currentX=0,currentY=0,raf=0,active=false;
+  let latestX=0,latestY=0,raf=0,active=false;
   function setTarget(e){
     const r=photo.getBoundingClientRect();
-    targetX=Math.max(0,Math.min(r.width,r.width-(e.clientX-r.left)));
-    targetY=Math.max(0,Math.min(r.height,e.clientY-r.top));
+    // Use the natural left-to-right coordinate; do not mirror the gesture.
+    latestX=Math.max(0,Math.min(r.width,e.clientX-r.left));
+    latestY=Math.max(0,Math.min(r.height,e.clientY-r.top));
     if(!active){
-      currentX=targetX;currentY=targetY;active=true;
+      active=true;
       photo.classList.add("is-revealing");
     }
-    if(!raf)raf=requestAnimationFrame(track);
-  }
-  function track(){
-    const dx=targetX-currentX,dy=targetY-currentY;
-    currentX+=dx*.24;currentY+=dy*.24;
-    photo.style.setProperty("--reveal-x",currentX+"px");
-    photo.style.setProperty("--reveal-y",currentY+"px");
-    if(Math.abs(dx)>.18||Math.abs(dy)>.18)raf=requestAnimationFrame(track);
-    else raf=0;
+    if(!raf)raf=requestAnimationFrame(()=>{
+      photo.style.setProperty("--reveal-x",latestX+"px");
+      photo.style.setProperty("--reveal-y",latestY+"px");
+      raf=0;
+    });
   }
   function hide(){
     active=false;
@@ -235,13 +232,12 @@ window.addEventListener("load",()=>{
   }
   photo.addEventListener("pointermove",e=>{
     if(e.pointerType==="mouse"||active)setTarget(e);
-  });
-  photo.addEventListener("pointerdown",setTarget);
+  },{passive:true});
+  photo.addEventListener("pointerdown",setTarget,{passive:true});
   photo.addEventListener("pointerleave",e=>{if(e.pointerType==="mouse")hide()});
   photo.addEventListener("pointerup",e=>{if(e.pointerType!=="mouse")hide()});
   photo.addEventListener("pointercancel",hide);
 })();
-
 // ---------- Timeline: natural document flow, no nested scrolling ----------
 function fitLists(){
   $$(".tl .list").forEach(l=>{
