@@ -155,7 +155,7 @@ function activate(id){
   document.body.classList.toggle("light",id==="portfolio"||id==="contact");
   lastSec=id;
 }
-const verticalFlow=()=>window.matchMedia&&window.matchMedia("(max-width:700px)").matches;
+const verticalFlow=()=>window.matchMedia&&window.matchMedia("(max-width:900px), (pointer:coarse)").matches;
 function goTo(id){
   const index=panels.findIndex(p=>p.id===id);
   if(index<0)return;
@@ -365,7 +365,7 @@ $("#tabs").addEventListener("click",e=>{const button=e.target.closest("button[da
 $$(".folder").forEach(b=>b.addEventListener("click",()=>{
   showTab(b.dataset.tab);
   const index=panels.findIndex(p=>p.id==="portfolio");
-  if(index>=0)viewport.scrollTo({left:index*viewport.clientWidth,behavior:"smooth"});
+  if(index>=0)goTo("portfolio");
 }));
 showTab("projects");
 
