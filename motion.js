@@ -104,45 +104,42 @@
 
 
 
-  /* Quiet, restrained interface sound — no arcade-like beeps. */
+  /* Quiet, audible UI sound for deliberate actions only. */
   let audio=null,audioReady=false;
   function unlockAudio(){
-    if(audioReady)return;
-    const Audio=window.AudioContext||window.webkitAudioContext;
-    if(!Audio)return;
+    const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+    if(!AudioContextClass)return Promise.resolve(false);
     try{
-      audio=audio||new Audio();
-      if(audio.state==="suspended")audio.resume();
+      if(!audio)audio=new AudioContextClass();
       audioReady=true;
-    }catch(e){}
+      return audio.state==="suspended"?audio.resume().then(()=>true).catch(()=>false):Promise.resolve(true);
+    }catch(e){return Promise.resolve(false)}
   }
   function softTone(freq,duration,volume){
-    if(!audio||!audioReady)return;
+    if(!audio||!audioReady||audio.state!=="running")return;
     const start=audio.currentTime;
     const osc=audio.createOscillator(),gain=audio.createGain();
     osc.type="sine";
     osc.frequency.setValueAtTime(freq,start);
-    osc.frequency.exponentialRampToValueAtTime(Math.max(90,freq*.72),start+duration);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(90,freq*.78),start+duration);
     gain.gain.setValueAtTime(.0001,start);
-    gain.gain.exponentialRampToValueAtTime(volume,start+.008);
+    gain.gain.exponentialRampToValueAtTime(volume,start+.012);
     gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
     osc.connect(gain);gain.connect(audio.destination);
-    osc.start(start);osc.stop(start+duration+.015);
+    osc.start(start);osc.stop(start+duration+.02);
   }
-  /* Sound only for deliberate, important actions — never for navigation,
-     scrolling, ordinary links, tabs, fields, or decorative cards. */
+  /* Only primary CTA and folder opening make a sound. Navbar stays silent. */
   document.addEventListener("click",e=>{
-    /* Navbar and ordinary links are always silent. */
-    if(e.target.closest("#nav,nav,a"))return;
-    const control=e.target.closest(".home-latest-primary,.a-right .btn,.folder");
+    const target=e.target instanceof Element?e.target:null;
+    if(!target||target.closest("#nav,nav,a"))return;
+    const control=target.closest(".home-latest-primary,.a-right .btn,.folder");
     if(!control)return;
-    unlockAudio();
-    softTone(control.matches(".folder")?310:285,.06,.006);
+    unlockAudio().then(ok=>{
+      if(ok)softTone(control.matches(".folder")?330:295,.085,.025);
+    });
   });
-  /* Success sound is emitted only after a comment is actually saved locally. */
   document.addEventListener("gs:success",()=>{
-    if(!audioReady)return;
-    softTone(390,.075,.006);
+    if(audioReady)softTone(415,.095,.022);
   });
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
