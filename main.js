@@ -160,7 +160,7 @@ function goTo(id){
   const index=panels.findIndex(p=>p.id===id);
   if(index<0)return;
   if(verticalFlow()){
-    viewport.scrollTo({left:0,top:panels[index].offsetTop,behavior:"smooth"});
+    panels[index].scrollIntoView({behavior:"smooth",block:"start"});
   }else{
     viewport.scrollTo({left:index*viewport.clientWidth,top:0,behavior:"smooth"});
   }
@@ -195,14 +195,15 @@ viewport.addEventListener("touchend",e=>{
   if(next!==current)goTo(panels[next].id);
 },{passive:true});
 let scrollTick=0;
-viewport.addEventListener("scroll",()=>{
+window.addEventListener("scroll",()=>{
   if(scrollTick)return;
   scrollTick=requestAnimationFrame(()=>{
     scrollTick=0;
     let index;
     if(verticalFlow()){
-      const marker=viewport.scrollTop+viewport.clientHeight*.45;
-      index=panels.reduce((best,p,i)=>Math.abs(p.offsetTop-marker)<Math.abs(panels[best].offsetTop-marker)?i:best,0);
+      const marker=window.scrollY+window.innerHeight*.45;
+      const top=p=>p.getBoundingClientRect().top+window.scrollY;
+      index=panels.reduce((best,p,i)=>Math.abs(top(p)-marker)<Math.abs(top(panels[best])-marker)?i:best,0);
     }else{
       index=Math.max(0,Math.min(panels.length-1,Math.round(viewport.scrollLeft/viewport.clientWidth)));
     }
@@ -214,7 +215,7 @@ addEventListener("load",()=>{
   const requested=(location.hash||"").slice(1);
   const initial=panels.some(p=>p.id===requested)?requested:"home";
   if(initial!=="home"){
-    if(verticalFlow())viewport.scrollTop=panels.find(p=>p.id===initial).offsetTop;
+    if(verticalFlow())window.scrollTo({top:panels.find(p=>p.id===initial).getBoundingClientRect().top+window.scrollY,behavior:"auto"});
     else viewport.scrollLeft=panels.findIndex(p=>p.id===initial)*viewport.clientWidth;
     activate(initial);
   }else activate("home");
@@ -224,7 +225,7 @@ addEventListener("resize",()=>{
   const active=$("nav a.on");movePill(active);
   const index=panels.findIndex(p=>"#"+p.id===active.hash);
   if(index>=0){
-    if(verticalFlow())viewport.scrollTop=panels[index].offsetTop;
+    if(verticalFlow())window.scrollTo({top:panels[index].getBoundingClientRect().top+window.scrollY,behavior:"auto"});
     else viewport.scrollLeft=index*viewport.clientWidth;
   }
 });
