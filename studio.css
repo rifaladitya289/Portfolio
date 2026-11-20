@@ -601,3 +601,78 @@ body.portfolio-modal-open{overflow:hidden}
     transform:translate3d(0,0,0)!important;
   }
 }
+
+
+/* FINAL INTERACTION PASS — straight folder geometry + continuous portfolio motion. */
+.folder,.folder::before,.folder::after,.folder .back,.folder .peek,.folder .front,.folder .go{rotate:0deg!important}
+.folder .back,.folder .peek{
+  transform:translate3d(0,0,0)!important;
+  transition:transform .72s cubic-bezier(.2,.8,.2,1),border-color .55s ease,background .55s ease,box-shadow .55s ease!important;
+}
+.folder{
+  transform:translate3d(0,0,0)!important;
+  transition:transform .72s cubic-bezier(.2,.8,.2,1),filter .72s ease!important;
+}
+.folder::before{
+  transform:translate3d(0,0,0)!important;
+  transition:transform .72s cubic-bezier(.2,.8,.2,1),border-color .55s ease,background .55s ease!important;
+}
+.folder::after{
+  content:"";position:absolute;z-index:1;inset:35px 1px 1px;border-radius:3px 8px 8px 8px;
+  pointer-events:none;opacity:0;
+  background:linear-gradient(112deg,transparent 18%,rgba(240,236,228,.13) 47%,rgba(201,167,123,.10) 52%,transparent 78%);
+  transform:translateX(-115%);
+}
+.folder .front{
+  transform:translate3d(0,0,0)!important;
+  transition:transform .72s cubic-bezier(.2,.8,.2,1),color .5s ease,text-shadow .5s ease!important;
+}
+.folder .go{transform:translate3d(0,0,0)!important;transition:transform .55s cubic-bezier(.2,.8,.2,1),color .45s ease!important}
+.folder:hover,.folder:focus-visible{transform:translate3d(0,-7px,0)!important;filter:drop-shadow(0 18px 28px rgba(0,0,0,.24))!important}
+.folder:hover::before,.folder:focus-visible::before{
+  transform:translate3d(0,-5px,0)!important;border-color:rgba(201,167,123,.82)!important;
+  background:linear-gradient(180deg,rgba(201,167,123,.26),rgba(201,167,123,.07))!important;
+}
+.folder:hover .back,.folder:focus-visible .back{
+  transform:translate3d(0,-5px,0)!important;border-color:rgba(201,167,123,.8)!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.16)!important;
+}
+.folder:hover .peek,.folder:focus-visible .peek{
+  transform:translate3d(0,-13px,0)!important;border-color:rgba(240,236,228,.3)!important;
+  background:linear-gradient(140deg,rgba(201,167,123,.15),rgba(255,255,255,.035) 48%,transparent 75%)!important;
+}
+.folder:hover .front,.folder:focus-visible .front{transform:translate3d(0,-8px,0)!important;text-shadow:0 8px 24px rgba(0,0,0,.24)}
+.folder:hover .go,.folder:focus-visible .go{transform:translate3d(5px,-5px,0)!important;color:var(--ivory)!important}
+.folder:hover::after,.folder:focus-visible::after,.folder.is-opening::after{animation:folderSheen 1.05s cubic-bezier(.2,.8,.2,1) both}
+@keyframes folderSheen{
+  0%{opacity:0;transform:translateX(-115%)}
+  18%{opacity:1}
+  78%{opacity:.7}
+  100%{opacity:0;transform:translateX(115%)}
+}
+.folder.is-opening{transform:translate3d(0,-3px,0) scale(1.012)!important;filter:drop-shadow(0 20px 34px rgba(0,0,0,.28))!important}
+.folder.is-opening::before{transform:translate3d(0,-8px,0)!important;border-color:var(--gold)!important}
+.folder.is-opening .back{transform:translate3d(0,-17px,0)!important;border-color:var(--gold)!important}
+.folder.is-opening .peek{transform:translate3d(0,-26px,0)!important;border-color:rgba(201,167,123,.55)!important}
+.folder.is-opening .front{transform:translate3d(0,-11px,0)!important}
+.folder.is-opening .go{transform:translate3d(8px,-7px,0)!important;color:var(--ivory)!important}
+.folder:active,.folder.is-pressed{transform:translate3d(0,-1px,0) scale(.99)!important}
+
+/* Marquee stays in motion without requiring a Portfolio navbar click. */
+.portfolio-marquee{visibility:visible!important;opacity:1!important}
+.marquee-window{overflow:hidden}
+.marquee-track--right{animation:marqueeRight 34s linear infinite!important;animation-play-state:running!important}
+.marquee-track--left{animation:marqueeLeft 38s linear infinite!important;animation-play-state:running!important}
+.marquee-window:hover .marquee-track{animation-play-state:running!important}
+.work-card--placeholder{opacity:1!important;visibility:visible!important}
+@media(hover:none){
+  .folder:hover{transform:none!important;filter:none!important}
+  .folder:hover::before{transform:none!important}
+  .folder:hover .back,.folder:hover .peek,.folder:hover .front,.folder:hover .go{transform:none!important}
+  .folder:active,.folder.is-opening{transform:translate3d(0,-2px,0) scale(.995)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .folder::after{animation:none!important}
+  .folder,.folder::before,.folder .back,.folder .peek,.folder .front,.folder .go{transition:none!important}
+  .marquee-track--right,.marquee-track--left{animation:none!important}
+}
