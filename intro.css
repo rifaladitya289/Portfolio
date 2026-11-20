@@ -48,3 +48,7 @@
 @keyframes gsSkipPulse{0%,100%{opacity:.32}50%{opacity:.9}}
 #gsIntro.gs-intro-out #gsSkipIntro{opacity:0!important;visibility:hidden!important;pointer-events:none!important;animation:none}
 @media(prefers-reduced-motion:reduce){#gsSkipIntro{animation:none;opacity:.7}}
+
+/* The full intro surface is an accessible skip target */
+#gsIntro{cursor:pointer}
+#gsSkipIntro{pointer-events:none}
