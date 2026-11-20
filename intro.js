@@ -6,6 +6,15 @@
   const word=document.getElementById("gsIntroWordmark");
   const brand=document.getElementById("gsBrand");
   if(!intro||!logo||!word)return;
+  // Tampilkan intro hanya sekali per sesi browser. Navigasi Home tidak mengulang opening.
+  try{
+    if(sessionStorage.getItem("gsIntroSeen")==="1"){
+      intro.remove();
+      if(brand)brand.classList.add("gs-brand-visible");
+      return;
+    }
+    sessionStorage.setItem("gsIntroSeen","1");
+  }catch(e){}
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const ease="cubic-bezier(.22,1,.36,1)";
   const animations=[];
