@@ -44,20 +44,15 @@
     }catch(e){}
   }
   let introFinished=false;
+  let skipRequested=false;
   let dockTimer=null;
   function skipIntro(){
-    if(introFinished)return;
-    introFinished=true;
+    if(introFinished||skipRequested)return;
+    skipRequested=true;
     if(dockTimer)window.clearTimeout(dockTimer);
-    animations.forEach(a=>{try{a.cancel()}catch(e){}});
-    logo.getAnimations().forEach(a=>a.cancel());
-    word.getAnimations().forEach(a=>a.cancel());
-    brand.classList.add("gs-brand-visible");
-    intro.classList.add("gs-intro-out");
-    window.setTimeout(()=>{if(intro.isConnected)intro.remove()},450);
+    dockBrand();
   }
-  const skipButton=document.getElementById("gsSkipIntro");
-  if(skipButton)skipButton.addEventListener("click",skipIntro);
+  intro.addEventListener("click",skipIntro);
   function dockBrand(){
     if(introFinished)return;
     const brandIcon=brand.querySelector("svg"),brandCopy=brand.querySelector(".gs-brand-copy");
@@ -87,6 +82,7 @@
     const wa=word.animate(move(fromWord,toWord),{...opts,delay:100});
     Promise.allSettled([la.finished,wa.finished]).then(()=>{
       if(introFinished)return;
+      introFinished=true;
       la.cancel();wa.cancel();
       place(logo,toLogo);place(word,toWord);
       word.classList.add("gs-wordmark-docking");
@@ -109,12 +105,7 @@
       word.style.opacity="1";
       word.style.transform="translate(-50%,0)";
       word.style.filter="none";
-      dockTimer=window.setTimeout(()=>{
-        if(introFinished)return;
-        brand.classList.add("gs-brand-visible");
-        intro.classList.add("gs-intro-out");
-        window.setTimeout(()=>{if(intro.isConnected)intro.remove()},2200);
-      },1800);
+      dockTimer=window.setTimeout(dockBrand,1800);
       return;
     }
     playAmbient();
