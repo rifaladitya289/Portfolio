@@ -102,8 +102,6 @@
     sections.forEach(section=>pageObserver.observe(section));
   }
 
-
-
   /* Quiet, audible UI sound for deliberate actions only. */
   let audio=null,audioReady=false;
   function unlockAudio(){
