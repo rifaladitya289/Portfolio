@@ -10,7 +10,7 @@
   --page-pad:clamp(22px,6vw,92px);
   --nav-height:58px;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{min-height:100%;scroll-behavior:smooth;scroll-padding-top:100px;background:var(--ink);overflow-x:hidden}
 body{
   margin:0;min-height:100%;overflow-x:hidden;background:transparent;color:var(--ivory);
