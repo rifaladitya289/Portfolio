@@ -2,7 +2,7 @@
 const DATA = {
   projects:[],
   designs:[],
-  visuals:[]
+  showcase:[]
 };
 const SOCIAL_NOTE="";
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -244,7 +244,7 @@ addEventListener("resize",fitLists);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitLists);
 
 // ---------- Portfolio folders: counts only; artwork is generated with CSS ----------
-["projects","designs","visuals"].forEach(k=>{const count=$("#n-"+k);if(count)count.textContent=DATA[k].length;});
+["projects","designs","showcase"].forEach(k=>{const count=$("#n-"+k);if(count)count.textContent=DATA[k].length;});
 const $lb=$("#lb");
 // Detail viewer: click card to inspect artwork and project information.
 (function(){
@@ -278,15 +278,15 @@ function showTab(k){
   cur=k;
   $$("#tabs button").forEach(b=>{const active=b.dataset.tab===k;b.classList.toggle("on",active);b.setAttribute("aria-selected",String(active))});
   const box=$("#stageP");
-  const names={projects:"Digital Projects",designs:"Interface & Experience Design",visuals:"Visual Explorations"};
-  const descriptions={projects:"A space reserved for future digital projects.",designs:"A space reserved for future interface and experience designs.",visuals:"A space reserved for future visual explorations."};
+  const names={projects:"Digital Projects",designs:"Interface & Experience Design",showcase:"Client Showcase"};
+  const descriptions={projects:"A space reserved for future digital projects.",designs:"A space reserved for future interface and experience designs.",showcase:"A space reserved for commissioned client projects."};
   const makeRow=(direction,row)=> {
     const cards=Array.from({length:3},(_,n)=>`<div class="work-card work-card--${k} work-card--placeholder" aria-hidden="true">
       <div class="work-image work-image--${k}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${n+1}</span></div>
     </div>`).join("");
     return `<div class="marquee-window marquee-window--${direction}" aria-hidden="true"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${cards}</div><div class="marquee-group" aria-hidden="true">${cards}</div></div></div>`;
   };
-  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","visuals"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>00</strong><span>WORKS</span></div></div>
+  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>00</strong><span>WORKS</span></div></div>
   <div class="portfolio-marquee">${makeRow("right",0)}${makeRow("left",1)}</div>
   <div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>CONTINUOUS MOTION STUDY</span></div></div>`;
   box.classList.remove("portfolio-shimmer-in");
