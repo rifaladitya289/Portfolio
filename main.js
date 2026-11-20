@@ -126,9 +126,16 @@ const links=$$("nav a"),pill=$("#pill"),mas=$("#mascot");
 const panels=$$("#pageTrack>section");
 function movePill(a){
   if(!a||!pill)return;
-  pill.style.left=a.offsetLeft+"px";
-  pill.style.width=a.offsetWidth+"px";
-  if(mas)mas.style.left=(a.offsetLeft+a.offsetWidth/2-12)+"px";
+  const navRect=$("#nav").getBoundingClientRect();
+  const linkRect=a.getBoundingClientRect();
+  const left=linkRect.left-navRect.left;
+  pill.style.left=left+"px";
+  pill.style.width=linkRect.width+"px";
+  if(mas)mas.style.left=(left+linkRect.width/2-12)+"px";
+}
+function refreshPill(){
+  const active=links.find(a=>a.classList.contains("on"))||links[0];
+  if(active)movePill(active);
 }
 let lastSec="";
 function activate(id){
@@ -144,10 +151,24 @@ function goTo(id){
   panel.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
   activate(id);
 }
-links.forEach(a=>a.addEventListener("click",e=>{
+links.forEach(a=>{
+  a.addEventListener("pointerenter",e=>{
+    if(e.pointerType==="mouse")movePill(a);
+  });
+  a.addEventListener("focus",()=>movePill(a));
+  a.addEventListener("click",e=>{
   const id=a.hash.slice(1);
   if(panels.some(p=>p.id===id)){e.preventDefault();goTo(id)}
-}));
+  });
+});
+$("#nav").addEventListener("pointerleave",e=>{
+  if(e.pointerType==="mouse")refreshPill();
+});
+$("#nav").addEventListener("focusout",()=>{
+  requestAnimationFrame(()=>{
+    if(!$("#nav").contains(document.activeElement))refreshPill();
+  });
+});
 document.addEventListener("click",e=>{
   const a=e.target.closest('a[href^="#"]');
   if(!a||a.closest("nav"))return;
@@ -170,11 +191,12 @@ function syncNavigation(){
 }
 window.addEventListener("scroll",syncNavigation,{passive:true});
 window.addEventListener("resize",()=>{
-  movePill(links.find(a=>a.classList.contains("on"))||links[0]);
+  refreshPill();
   syncNavigation();
 },{passive:true});
 window.addEventListener("load",()=>{
-  movePill(links.find(a=>a.classList.contains("on"))||links[0]);
+  refreshPill();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refreshPill);
   const requested=(location.hash||"").slice(1);
   if(panels.some(p=>p.id===requested)){
     const target=panels.find(p=>p.id===requested);
