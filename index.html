@@ -3,63 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#090a0d">
-<title>Rifal — Portfolio</title>
-<link rel="stylesheet" href="intro.css?v=portfolio-logo-intro-v2">
-<script src="intro.js?v=portfolio-logo-intro-v3" defer></script>
+<title>Gallagher's Studio — Rifal Muhamad Aditya</title>
+<meta name="description" content="Personal portfolio of Rifal Muhamad Aditya — web development, creative exploration, and digital experiences.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{color-scheme:dark;--bg:#090a0d;--paper:#f1eee8;--muted:#92918e;--gold:#c9a77b;--line:rgba(241,238,232,.15);--serif:"Cormorant Garamond",Georgia,serif;--sans:"Manrope",Arial,sans-serif}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;min-height:100%;background:var(--bg);color:var(--paper)}
-body{font-family:var(--sans);overflow:hidden}
-#coverBgVideo{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.58;pointer-events:none}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 72% 42%,rgba(47,107,255,.13),transparent 38%),linear-gradient(115deg,rgba(3,7,18,.35),rgba(3,7,18,.72));z-index:1}
-body:after{content:"";position:fixed;inset:18px;border:1px solid rgba(190,210,255,.09);pointer-events:none;z-index:2}
-#gsBrand{z-index:60}
-.gs-brand-copy strong{font-family:var(--sans)!important}
-.site-head{position:fixed;top:27px;right:clamp(22px,5vw,72px);z-index:20;display:flex;align-items:center;gap:28px;color:var(--muted);font-size:9px;letter-spacing:.2em;text-transform:uppercase}
-.site-head .availability{display:flex;align-items:center;gap:9px}.site-nav{display:flex;align-items:center;gap:22px}.site-nav a{color:inherit;text-decoration:none;transition:color .3s}.site-nav a:hover,.site-nav a[aria-current="page"]{color:var(--paper)}
-.site-head .dot{width:5px;height:5px;border-radius:50%;background:#9eae91;box-shadow:0 0 12px rgba(158,174,145,.6)}
-main{position:relative;z-index:3;min-height:100svh;display:flex;align-items:center;padding:120px clamp(28px,11vw,160px) 110px}
-.hero{width:min(100%,1100px);margin:0 auto;position:relative}
-.eyebrow{display:flex;align-items:center;gap:14px;color:var(--gold);font-size:9px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;margin-bottom:34px}
-.eyebrow:before{content:"";width:34px;height:1px;background:var(--gold);opacity:.8}
-h1{font-family:var(--serif);font-weight:400;font-size:clamp(4.3rem,10.2vw,9.8rem);line-height:.78;letter-spacing:-.055em;max-width:1000px}
-h1 span{display:block;color:#aaa39a;font-style:italic;font-weight:400;margin-left:clamp(22px,9vw,130px)}
-.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-top:clamp(44px,8vh,82px);padding-top:22px;border-top:1px solid var(--line)}
-.intro-copy{max-width:330px;color:#aaa9a4;font-size:12px;line-height:1.9;font-weight:300}
-.intro-copy strong{display:block;color:var(--paper);font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
-.hero-meta{text-align:right;color:var(--muted);font-size:9px;letter-spacing:.2em;line-height:2;text-transform:uppercase}
-.hero-meta b{display:block;color:var(--paper);font-weight:500}
-.explore-btn{display:inline-flex;align-items:center;gap:24px;margin-top:34px;padding:13px 20px;border:1px solid rgba(111,151,255,.58);border-radius:999px;background:rgba(25,65,170,.22);color:#edf2ff;font:600 9px/1 var(--sans);letter-spacing:.19em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(12px);transition:background .25s,border-color .25s,transform .25s,box-shadow .25s}
-.explore-btn span{font-size:15px;line-height:.7;color:#9bb6ff;transition:transform .25s}
-.explore-btn:hover,.explore-btn.is-active{background:rgba(47,107,255,.34);border-color:#8eacff;box-shadow:0 8px 28px rgba(23,72,190,.22);transform:translateY(-2px)}
-.explore-btn:hover span,.explore-btn.is-active span{transform:translate(3px,-2px)}
-.corner-index{position:fixed;right:clamp(28px,5vw,72px);bottom:40px;color:#777671;font-size:9px;letter-spacing:.22em;z-index:5}
-.corner-index span{color:var(--gold)}
-.scroll-note{position:fixed;left:clamp(28px,5vw,72px);bottom:40px;display:flex;align-items:center;gap:12px;color:#777671;font-size:8px;letter-spacing:.24em;text-transform:uppercase;z-index:5}
-.scroll-note i{display:block;width:34px;height:1px;background:var(--gold);opacity:.7}
-@media(max-width:650px){
- body:after{inset:9px}
- .site-head{top:27px;right:clamp(22px,5vw,72px);bottom:auto;font-size:9px}
- main{padding:145px 28px 150px;align-items:center}
- .eyebrow{font-size:8px;letter-spacing:.22em;margin-bottom:30px}
- h1{font-size:clamp(4rem,17vw,6.8rem);line-height:.82}
- h1 span{margin-left:24px}
- .hero-bottom{margin-top:48px;align-items:flex-start;flex-direction:column;gap:18px}
- .hero-meta{text-align:left}
- .explore-btn{margin-top:26px;padding:13px 18px}
- .scroll-note{bottom:28px;left:26px}
- .corner-index{bottom:28px;right:26px}
-}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<!--
+ STRUKTUR ASET:
+  assets/all-background-page.mp4                     video background hero
+  assets/bg/poster.jpg                poster/fallback background hero
+  assets/images/hero-person.png            foto cutout untuk hero (opsional)
+  assets/images/about.png                  foto cutout untuk About (opsional)
+  assets/images/profile.jpg                foto profil bagian Find Me (opsional)
+  assets/logo/                             simpan logo website di sini
+  assets/projects/1.jpg, 2.jpg, 3.jpg      gambar proyek
+  assets/designs/1.jpg, 2.jpg, 3.jpg       desain website
+  assets/visuals/1.jpg, 2.jpg, ...           karya visual
+  cv.pdf                                   file CV di root repository
+-->
+<script src="fit.js?v=unified-portfolio-v1"></script>
+<link rel="stylesheet" href="style.css?v=unified-portfolio-v1">
+<link rel="stylesheet" href="intro.css?v=unified-intro-v1">
+<script src="intro.js?v=unified-intro-v1" defer></script>
 </head>
 <body>
-<a id="gsBrand" class="gs-brand-visible" href="index.html" aria-label="Portfolio — Home">
+
+<div id="gsIntro" aria-hidden="true">
+<button id="gsSkipIntro" type="button" aria-label="Click anywhere to skip intro">CLICK FOR SKIP <span aria-hidden="true">↗</span></button>
+<div class="gs-intro-bg"></div><div class="gs-intro-grid"></div><div class="gs-intro-ambient"></div><div class="gs-intro-vignette"></div>
+<div class="gs-intro-particles" id="gsIntroParticles"></div><div class="gs-intro-flare" id="gsIntroFlare"></div>
+<div class="gs-letterbox gs-letterbox-top"></div><div class="gs-letterbox gs-letterbox-bottom"></div>
+<svg id="gsIntroLogo" viewBox="200 160 624 704" role="presentation">
+<defs><linearGradient id="gsGoldStroke" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1cb98"/><stop offset=".52" stop-color="#d9a566"/><stop offset="1" stop-color="#9f7145"/></linearGradient></defs>
+<path class="gs-hex" pathLength="1" d="M512 180 800 345V680L512 845 223 680V345Z"/>
+<path class="gs-mark-light" pathLength="1" d="M500 245 273 372V650L500 778V450L372 520V607L448 563V692L322 620V400L500 300Z"/>
+<path class="gs-mark-blue" pathLength="1" d="M525 248 752 375V430L575 330V400L752 500V650L525 778V598L575 628V690L702 618V575L525 470Z"/>
+<path class="gs-mark-fill-light" d="M500 245 273 372V650L500 778V450L372 520V607L448 563V692L322 620V400L500 300Z"/>
+<path class="gs-mark-fill-blue" d="M525 248 752 375V430L575 330V400L752 500V650L525 778V598L575 628V690L702 618V575L525 470Z"/>
+</svg>
+<div id="gsIntroWordmark"><span class="gs-intro-name">Gallagher's</span><span class="gs-intro-studio">STUDIO</span><i class="gs-intro-rule"></i></div>
+<p class="gs-intro-tagline">IDEAS SHAPED INTO DIGITAL EXPERIENCES</p>
+</div>
+
+<a id="gsBrand" class="gs-brand-visible" href="#home" aria-label="Portfolio — Home">
   <svg viewBox="200 160 624 704" aria-hidden="true">
     <path d="M512 180 800 345V680L512 845 223 680V345Z" class="brand-hex"/>
     <path d="M500 245 273 372V650L500 778V450L372 520V607L448 563V692L322 620V400L500 300Z" fill="#fff"/>
@@ -67,45 +53,146 @@ h1 span{display:block;color:#aaa39a;font-style:italic;font-weight:400;margin-lef
   </svg>
   <span class="gs-brand-copy"><strong>Gallagher's</strong><small>STUDIO</small></span>
 </a>
+<nav id="nav"><span id="pill"></span>
+  <span id="mascot"><svg viewBox="0 0 24 28"><circle cx="12" cy="11" r="10" fill="currentColor"/><circle cx="8.3" cy="10" r="1.7" fill="var(--eye)"/><circle cx="15.7" cy="10" r="1.7" fill="var(--eye)"/><path d="M9 20l3 7 3-7z" fill="currentColor"/></svg></span>
+  <a href="#home" class="on">Home</a><a href="#about">About</a><a href="#portfolio">Portfolio</a><a href="#contact">Contact</a>
+</nav>
+<div id="wipe"></div>
 
-<div id="gsIntro" aria-hidden="true">
-  <button id="gsSkipIntro" type="button" aria-label="Click anywhere to skip intro">CLICK FOR SKIP <span aria-hidden="true">↗</span></button>
-  <div class="gs-intro-bg"></div><div class="gs-intro-grid"></div>
-  <div class="gs-intro-ambient"></div><div class="gs-intro-vignette"></div>
-  <div class="gs-intro-particles" id="gsIntroParticles"></div>
-  <div class="gs-intro-flare" id="gsIntroFlare"></div>
-  <div class="gs-letterbox gs-letterbox-top"></div><div class="gs-letterbox gs-letterbox-bottom"></div>
-  <svg id="gsIntroLogo" viewBox="200 160 624 704" role="presentation">
-    <defs><linearGradient id="gsGoldStroke" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#f1cb98"/><stop offset=".52" stop-color="#d9a566"/><stop offset="1" stop-color="#9f7145"/>
-    </linearGradient></defs>
-    <path class="gs-hex" pathLength="1" d="M512 180 800 345V680L512 845 223 680V345Z"/>
-    <path class="gs-mark-light" pathLength="1" d="M500 245 273 372V650L500 778V450L372 520V607L448 563V692L322 620V400L500 300Z"/>
-    <path class="gs-mark-blue" pathLength="1" d="M525 248 752 375V430L575 330V400L752 500V650L525 778V598L575 628V690L702 618V575L525 470Z"/>
-    <path class="gs-mark-fill-light" d="M500 245 273 372V650L500 778V450L372 520V607L448 563V692L322 620V400L500 300Z"/>
-    <path class="gs-mark-fill-blue" d="M525 248 752 375V430L575 330V400L752 500V650L525 778V598L575 628V690L702 618V575L525 470Z"/>
-  </svg>
-  <div id="gsIntroWordmark">
-    <span class="gs-intro-name">Gallagher's</span><span class="gs-intro-studio">STUDIO</span>
-    <i class="gs-intro-rule"></i>
+<div id="pageViewport"><main id="pageTrack">
+
+<!-- HOME · LATEST HOMEPAGE CONTENT, USING THE EXISTING PORTFOLIO NAVIGATION -->
+<section id="home" class="home-latest-page">
+  <div class="home-latest-bg" aria-hidden="true"></div>
+  <div class="home-latest-content">
+    <p class="home-latest-eyebrow">PERSONAL PORTFOLIO · 2026</p>
+    <h1>Ideas into<br><span>digital form.</span></h1>
+    <div class="home-latest-bottom">
+      <p class="home-latest-copy"><strong>Rifal Muhamad Aditya</strong>Exploring the space between technology, thoughtful design, and digital experiences.</p>
+      <p class="home-latest-meta"><b>Web development</b>Creative exploration<br>Selected work · 2026</p>
+    </div>
+    <a class="home-latest-primary" href="#about">Explore Studio <span>↗</span></a>
+    <div class="home-latest-foot"><span>A CLOSER LOOK AT MY WORK</span><span>HOME — 01</span></div>
   </div>
-  <p class="gs-intro-tagline">IDEAS SHAPED INTO DIGITAL EXPERIENCES</p>
-</div>
-
-<video id="coverBgVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="assets/cover-bg-blue.mp4" type="video/mp4"></video>
-<header class="site-head"><nav class="site-nav" aria-label="Main navigation"><a href="index.html#home" aria-current="page">Home</a><a href="portfolio-legacy.html#about">About</a><a href="portfolio-legacy.html#portfolio">Portfolio</a><a href="portfolio-legacy.html#contact">Contact</a></nav><span class="availability"><i class="dot"></i> Independent creator</span></header>
-<main>
-<section class="hero" aria-label="Portfolio introduction">
-<p class="eyebrow">Personal portfolio · 2026</p>
-<h1>Ideas into<br><span>digital form.</span></h1>
-<div class="hero-bottom">
-<p class="intro-copy"><strong>Rifal Muhamad Aditya</strong>Exploring the space between technology, thoughtful design, and digital experiences.</p>
-<p class="hero-meta"><b>Web development</b>Creative exploration<br>Selected work · 2026</p>
-</div>
-<a class="explore-btn" href="portfolio-legacy.html#about">Explore Studio <span aria-hidden="true">↗</span></a>
 </section>
-</main>
-<div class="scroll-note"><i></i> A closer look at my work</div>
-<div class="corner-index">HOME <span>—</span> 01</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <video class="ambient-motion-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="assets/all-background-page.mp4" type="video/mp4"></video>
+  <div class="topo l"></div>
+  <div class="about-heading">
+    <div class="about-heading-main">
+      <span class="about-eyebrow">GALLAGHER'S STUDIO <i></i> PERSONAL PROFILE</span>
+      <h2 class="sec-title">About <span>Me.</span></h2>
+      <p class="about-heading-note">A little introduction to the person, path, and curiosity behind the work.</p>
+    </div>
+    <div class="about-index"><strong>02</strong><span>THE<br>CREATOR</span></div>
+  </div>
+
+  <div class="about-grid">
+    <div class="a-left"><span class="about-kicker">THE PERSON BEHIND THE PIXELS</span><h2>Hi, I'm <span>Rifal Muhamad Aditya</span></h2><div class="about-rule"><i></i><span>STUDENT · CREATIVE DEVELOPER</span></div></div>
+    <div class="a-photo" id="spiderReveal"><i></i><img class="about-base" src="assets/gw.jpg" alt="Foto Rifal" onerror="this.remove()"><img class="about-spider" src="assets/spidermannnn.jpg" alt="" aria-hidden="true" draggable="false" onerror="this.remove()"><span class="portrait-mark">GS / 026</span></div>
+    <div class="a-right"><span class="about-kicker">A SHORT INTRODUCTION</span><p>A student with an interest in technology and web development. I enjoy exploring new ideas, learning digital skills, and turning creative concepts into meaningful projects. I'm always looking for opportunities to grow, learn, and improve.</p><a class="btn" href="#portfolio">Explore My Work <span>↗</span></a></div>
+  </div>
+
+  <div class="about-section-label"><span>01 / BACKGROUND & CAPABILITIES</span><i></i><span>THE JOURNEY SO FAR</span></div>
+  <div class="tl">
+    <div><h3>Education</h3>
+      <div class="list" tabindex="0" aria-label="Education">
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">SM</i>SMKN 1 Ciamis</span><time>Saat ini</time></div><strong>Sekolah Menengah Kejuruan</strong><div class="sub">Pendidikan saat ini</div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">SP</i>SMPN 2 Ciamis</span></div><strong>Sekolah Menengah Pertama</strong></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">SD</i>Sekolah Dasar</span></div><strong>SDN 1 Cibadak – SDN 1 Pawindan</strong></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">TK</i>TK Plus Hidayatul Ittihad</span></div><strong>Taman Kanak-Kanak</strong></div>
+      </div>
+    </div>
+    <div><h3>Tech Stack</h3>
+      <div class="list" tabindex="0" aria-label="Tech Stack">
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">FE</i>Frontend Development</span></div><strong>HTML5 · CSS3 · JavaScript</strong><div class="sub">Web development</div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">TP</i>Tools &amp; Platforms</span></div><strong>GitHub · Supabase · Canva</strong><div class="sub">Development and design tools</div></div>
+        <div class="item"><span class="num"></span><div class="row"><span class="org"><i class="lg">LA</i>Logic &amp; Algorithms</span></div><strong>Algoritma · Flowgorithm</strong><div class="sub">Computational thinking</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-section-label about-archive-label"><span>02 / SELECTED CREATIVE AREAS</span><i></i><span>EXPLORE THE COLLECTIONS</span></div>
+  <div class="folders">
+    <button class="folder" data-tab="projects"><div class="back"></div><div class="peek" id="pk-projects"></div><div class="front"><b id="n-projects">0</b>Projects<i class="go">↗</i></div></button>
+    <button class="folder" data-tab="designs"><div class="back"></div><div class="peek" id="pk-designs"></div><div class="front"><b id="n-designs">0</b>Designs<i class="go">↗</i></div></button>
+    <button class="folder" data-tab="visuals"><div class="back"></div><div class="peek" id="pk-visuals"></div><div class="front"><b id="n-visuals">0</b>Visuals<i class="go">↗</i></div></button>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <video class="ambient-motion-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="assets/all-background-page.mp4" type="video/mp4"></video>
+  <div class="topo l"></div>
+  <header class="portfolio-heading portfolio-type-banner">
+    <div class="portfolio-banner-top"><span>GALLAGHER'S STUDIO</span><span>SELECTED WORKS · 2026</span></div>
+    <h2 class="portfolio-banner-title">PORTFOLIO<span>.</span></h2>
+    <div class="portfolio-banner-bottom"><p>A COLLECTION OF DIGITAL WORKS</p><a href="#stageP">EXPLORE THE COLLECTION <span>↗</span></a></div>
+  </header>
+  <div class="tabs" id="tabs">
+    <button data-tab="projects" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg>Projects</button>
+    <button data-tab="designs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.500-7"/></svg>Designs</button>
+    <button data-tab="visuals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 21h8"/></svg>Visuals</button>
+  </div>
+  <div id="stageP"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-cinematic">
+  <video class="ambient-motion-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="assets/all-background-page.mp4" type="video/mp4"></video>
+  <div class="topo l"></div>
+  <div class="contact-shell">
+    <header class="contact-intro">
+      <div class="contact-eyebrow"><span class="contact-pulse"></span> GALLAGHER'S STUDIO <i>— OPEN TO IDEAS</i><b class="contact-status">IDEAS WELCOME</b></div>
+      <p class="contact-index">04 <span>/ CONTACT</span></p>
+      <h1>LET'S MAKE<br><em>SOMETHING</em><br>MATTER<span class="contact-dot">.</span></h1>
+      <p class="contact-lead">Punya ide, pertanyaan, atau ingin berkolaborasi? Ceritakan rencanamu. Mari mulai percakapan yang bermakna.</p>
+      <div class="contact-orbit" aria-hidden="true"><span></span><i></i><b></b></div>
+      <div class="contact-socials">
+        <a href="https://www.instagram.com/ifaall_true?obrf=Y2czY3VqYjNoZnJj" target="_blank" rel="noopener"><span>01</span><b>Instagram</b><i>↗</i></a>
+        <a href="https://www.tiktok.com/@ifalltruee?_r=1&_t=ZS-9BUNJW1Ife1" target="_blank" rel="noopener"><span>02</span><b>TikTok</b><i>↗</i></a>
+      </div>
+    </header>
+    <div class="contact-right">
+      <div class="contact-form-card">
+        <div class="contact-card-head"><span>START A CONVERSATION</span><b>01 — 02</b></div>
+        <h2>Tell me about<br>your <em>idea.</em></h2>
+        <p class="contact-card-copy">Isi detail singkat di bawah ini. Aku akan tahu apa yang ingin kamu diskusikan.</p>
+        <form id="msgForm" class="contact-form" novalidate>
+          <div class="contact-progress" aria-label="Form completion"><span id="contactProgress"></span></div><p class="contact-progress-label" id="contactProgressLabel">0% completed</p>
+          <label class="contact-field"><span>YOUR NAME</span><input type="text" name="n" placeholder="Nama kamu" autocomplete="name" required></label>
+          <label class="contact-field"><span>EMAIL ADDRESS</span><input type="email" name="e" placeholder="nama@email.com" autocomplete="email" required></label>
+          <label class="contact-field"><span>MESSAGE</span><textarea name="m" placeholder="Ceritakan ide atau pertanyaanmu..." rows="4" required></textarea></label>
+          <div class="contact-submit-row"><small>Pesan melalui form ini belum terhubung ke email.</small><button class="contact-send" type="submit"><span>Send message</span><i>↗</i></button></div>
+          <p class="contact-feedback" id="msgFeedback" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="contact-lower">
+        <div class="contact-note"><span>ALSO, LEAVE A NOTE</span><p>Bagikan komentar singkat untuk halaman ini.</p></div>
+        <details class="contact-comment">
+          <summary><span>Write a public comment</span><i>＋</i></summary>
+          <form id="cmtForm" class="contact-comment-form">
+            <label class="contact-field"><span>NAME</span><input type="text" name="n" placeholder="Nama kamu" required></label>
+            <label class="contact-field"><span>COMMENT</span><textarea name="c" placeholder="Tulis komentar kamu..." rows="3" required></textarea></label>
+            <div class="contact-field"><span>PROFILE PHOTO (OPTIONAL)</span><label class="file"><input type="file" name="p" accept="image/*"><span id="fname">Choose Profile Photo</span></label></div>
+            <small class="hintf">Max file: 1MB</small>
+            <button class="contact-send contact-send-small" type="submit"><span>Post comment</span><i>↗</i></button>
+          </form>
+        </details>
+        <div class="contact-comments"><h3>COMMUNITY NOTES <span id="cn">0</span></h3><div class="clist" id="cmts"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>© 2026 Nama Kamu</footer>
+</main></div>
+<div id="lb"><div><div class="lb-art art-project"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span></div><p></p></div></div>
+
+<script src="main.js?v=unified-portfolio-v1"></script>
+<script src="motion.js?v=linux-ui-sound-v2" defer></script>
+
 </body>
 </html>
+
