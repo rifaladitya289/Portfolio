@@ -539,3 +539,41 @@ body.portfolio-modal-open{overflow:hidden}
     animation:none!important;transition:none!important;transform:none!important
   }
 }
+
+ 
+/* Always-on portfolio motion + tactile hover language */
+.portfolio-category{visibility:visible}
+.portfolio-marquee{visibility:visible;contain:layout paint}
+.marquee-track{animation-play-state:running!important}
+.work-card--placeholder{
+  position:relative;transform:translateZ(0);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .45s ease,box-shadow .45s ease,filter .45s ease;
+}
+.work-card--placeholder::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(115deg,transparent 25%,rgba(240,236,228,.09) 48%,transparent 70%);
+  transform:translateX(-120%);transition:opacity .35s ease;
+}
+.work-card--placeholder:hover{
+  z-index:2;transform:translateY(-6px) scale(1.025);
+  border-color:rgba(201,167,123,.62);
+  box-shadow:0 16px 38px rgba(0,0,0,.28);
+  filter:brightness(1.08);
+}
+.work-card--placeholder:hover::after{opacity:1;animation:cardSheen 1s ease both}
+@keyframes cardSheen{to{transform:translateX(120%)}}
+.gs-interactive{position:relative;isolation:isolate;transition:transform .32s cubic-bezier(.2,.8,.2,1),color .3s ease,border-color .3s ease,background .3s ease,filter .3s ease}
+.gs-interactive:hover{filter:brightness(1.1)}
+.gs-interactive:active,.gs-interactive.is-pressed{transform:translateY(1px) scale(.975)}
+.tabs button:hover,.contact-socials a:hover{transform:translateY(-2px)}
+.btn:hover,.home-latest-primary:hover,.contact-send:hover{transform:translateY(-2px)}
+.folder:hover{will-change:transform}
+@media(hover:none){
+  .work-card--placeholder:hover{transform:none;box-shadow:none;filter:none}
+  .work-card--placeholder:hover::after{animation:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .work-card--placeholder,.gs-interactive,.tabs button,.contact-socials a,.btn,.home-latest-primary,.contact-send{
+    animation:none!important;transition:none!important;transform:none!important
+  }
+}
