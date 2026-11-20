@@ -155,10 +155,15 @@ function activate(id){
   document.body.classList.toggle("light",id==="portfolio"||id==="contact");
   lastSec=id;
 }
+const verticalFlow=()=>window.matchMedia&&window.matchMedia("(max-width:700px)").matches;
 function goTo(id){
   const index=panels.findIndex(p=>p.id===id);
   if(index<0)return;
-  viewport.scrollTo({left:index*viewport.clientWidth,top:0,behavior:"smooth"});
+  if(verticalFlow()){
+    viewport.scrollTo({left:0,top:panels[index].offsetTop,behavior:"smooth"});
+  }else{
+    viewport.scrollTo({left:index*viewport.clientWidth,top:0,behavior:"smooth"});
+  }
   activate(id);
 }
 links.forEach(a=>a.addEventListener("click",e=>{
@@ -174,10 +179,12 @@ document.addEventListener("click",e=>{
 // ---------- Swipe horizontal khusus layar sentuh ---------- 
 let swipeStart=null;
 viewport.addEventListener("touchstart",e=>{
+  if(verticalFlow()){swipeStart=null;return}
   if(e.touches.length!==1){swipeStart=null;return}
   swipeStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
 },{passive:true});
 viewport.addEventListener("touchend",e=>{
+  if(verticalFlow()){swipeStart=null;return}
   if(!swipeStart||!e.changedTouches.length)return;
   const dx=e.changedTouches[0].clientX-swipeStart.x;
   const dy=e.changedTouches[0].clientY-swipeStart.y;
@@ -192,7 +199,13 @@ viewport.addEventListener("scroll",()=>{
   if(scrollTick)return;
   scrollTick=requestAnimationFrame(()=>{
     scrollTick=0;
-    const index=Math.max(0,Math.min(panels.length-1,Math.round(viewport.scrollLeft/viewport.clientWidth)));
+    let index;
+    if(verticalFlow()){
+      const marker=viewport.scrollTop+viewport.clientHeight*.45;
+      index=panels.reduce((best,p,i)=>Math.abs(p.offsetTop-marker)<Math.abs(panels[best].offsetTop-marker)?i:best,0);
+    }else{
+      index=Math.max(0,Math.min(panels.length-1,Math.round(viewport.scrollLeft/viewport.clientWidth)));
+    }
     activate(panels[index].id);
   });
 },{passive:true});
@@ -201,7 +214,8 @@ addEventListener("load",()=>{
   const requested=(location.hash||"").slice(1);
   const initial=panels.some(p=>p.id===requested)?requested:"home";
   if(initial!=="home"){
-    viewport.scrollLeft=panels.findIndex(p=>p.id===initial)*viewport.clientWidth;
+    if(verticalFlow())viewport.scrollTop=panels.find(p=>p.id===initial).offsetTop;
+    else viewport.scrollLeft=panels.findIndex(p=>p.id===initial)*viewport.clientWidth;
     activate(initial);
   }else activate("home");
   if($("#stageP")&&!$("#stageP").children.length)showTab("projects");
@@ -209,7 +223,10 @@ addEventListener("load",()=>{
 addEventListener("resize",()=>{
   const active=$("nav a.on");movePill(active);
   const index=panels.findIndex(p=>"#"+p.id===active.hash);
-  if(index>=0)viewport.scrollLeft=index*viewport.clientWidth;
+  if(index>=0){
+    if(verticalFlow())viewport.scrollTop=panels[index].offsetTop;
+    else viewport.scrollLeft=index*viewport.clientWidth;
+  }
 });
 
 // ---------- Spider-Man reveal: smooth pointer + touch morph ---------- 
