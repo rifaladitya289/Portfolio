@@ -319,8 +319,10 @@ $("#cmtForm input[type=file]").addEventListener("change",e=>{const f=e.target.fi
 $("#cmtForm").addEventListener("submit",async e=>{
   e.preventDefault();const f=e.target,p=await shrink(f.p.files[0]),a=load();
   a.unshift({n:f.n.value,c:f.c.value,p,d:new Date().toLocaleDateString("id-ID",{day:"2-digit",month:"short",year:"numeric"})});
-  try{localStorage.setItem(KEY,JSON.stringify(a))}catch(x){}
+  let saved=false;
+  try{localStorage.setItem(KEY,JSON.stringify(a));saved=true}catch(x){}
   f.reset();$("#fname").textContent="Choose Profile Photo";renderC();
+  if(saved)document.dispatchEvent(new Event("gs:success"));
 });
 (function(){
  const form=$("#msgForm");if(!form)return;
