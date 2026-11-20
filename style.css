@@ -3343,8 +3343,8 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
 }
 #pageTrack>section{
   box-sizing:border-box!important;
-  flex:0 0 25%!important;
-  width:25%!important;
+  flex:0 0 33.333333%!important;
+  width:33.333333%!important;
   margin:0!important;
   border:0!important;
   outline:0!important;
@@ -3448,83 +3448,6 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
   }
 }
 
-
-/* ===== LATEST HOME PAGE · MATCH INDEX HOMEPAGE ===== */
-#home.home-latest-page{
-  position:relative!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  min-height:calc(var(--h,1vh)*100)!important;
-  height:calc(var(--h,1vh)*100)!important;
-  padding:clamp(110px,14vh,150px) clamp(28px,11vw,160px) 100px!important;
-  overflow:hidden!important;
-  isolation:isolate;
-  color:#f1eee8!important;
-  background:#090a0d!important;
-}
-#home .home-latest-bg{
-  position:absolute;inset:0;z-index:-2;pointer-events:none;
-  background:
-    radial-gradient(ellipse at 72% 42%,rgba(177,148,111,.09),transparent 34%),
-    linear-gradient(115deg,rgba(255,255,255,.018),transparent 45%),
-    #090a0d;
-}
-#home .home-latest-content{width:min(100%,1100px);margin:0 auto;position:relative;z-index:1}
-#home .home-latest-eyebrow{
-  display:flex;align-items:center;gap:14px;color:#c9a77b;
-  font-size:9px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;margin-bottom:34px
-}
-#home .home-latest-eyebrow:before{content:"";width:34px;height:1px;background:#c9a77b;opacity:.8}
-#home .home-latest-content h1{
-  font-family:"Cormorant Garamond",Georgia,serif!important;font-weight:400!important;
-  font-size:clamp(4.3rem,10.2vw,9.8rem)!important;line-height:.78!important;
-  letter-spacing:-.055em!important;max-width:1000px;color:#f1eee8!important
-}
-#home .home-latest-content h1 span{
-  display:block;color:#aaa39a;font-style:italic;font-weight:400;margin-left:clamp(22px,9vw,130px)
-}
-#home .home-latest-bottom{
-  display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
-  margin-top:clamp(44px,8vh,82px);padding-top:22px;border-top:1px solid rgba(241,238,232,.15)
-}
-#home .home-latest-copy{max-width:330px;color:#aaa9a4;font-size:12px;line-height:1.9;font-weight:300}
-#home .home-latest-copy strong{display:block;color:#f1eee8;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
-#home .home-latest-meta{text-align:right;color:#92918e;font-size:9px;letter-spacing:.2em;line-height:2;text-transform:uppercase}
-#home .home-latest-meta b{display:block;color:#f1eee8;font-weight:500}
-#home .home-latest-actions{display:flex;align-items:center;gap:22px;margin-top:30px}
-#home .home-latest-primary,#home .home-latest-secondary{
-  display:inline-flex;align-items:center;gap:18px;text-decoration:none;
-  font:600 9px/1 var(--f-body);letter-spacing:.19em;text-transform:uppercase;
-  transition:color .3s,background .3s,border-color .3s,transform .3s
-}
-#home .home-latest-primary{
-  padding:13px 20px;border:1px solid rgba(201,167,123,.55);border-radius:999px;
-  background:rgba(201,167,123,.08);color:#f1eee8
-}
-#home .home-latest-primary span{font-size:15px;color:#c9a77b}
-#home .home-latest-secondary{color:#aaa9a4;padding:13px 4px}
-#home .home-latest-foot{
-  position:absolute;left:0;right:0;bottom:-78px;display:flex;justify-content:space-between;
-  color:#777671;font-size:8px;letter-spacing:.22em
-}
-@media(hover:hover) and (pointer:fine){
- #home .home-latest-primary:hover{background:rgba(201,167,123,.16);border-color:#c9a77b;transform:translateY(-2px)}
- #home .home-latest-secondary:hover{color:#f1eee8}
-}
-@media(max-width:700px){
- #home.home-latest-page{padding:145px 28px 120px!important}
- #home .home-latest-eyebrow{font-size:8px;letter-spacing:.22em;margin-bottom:30px}
- #home .home-latest-content h1{font-size:clamp(4rem,17vw,6.8rem)!important;line-height:.82!important}
- #home .home-latest-content h1 span{margin-left:24px}
- #home .home-latest-bottom{margin-top:48px;align-items:flex-start;flex-direction:column;gap:18px}
- #home .home-latest-meta{text-align:left}
- #home .home-latest-foot{bottom:-78px;gap:16px;font-size:7px}
- #home .home-latest-actions{gap:14px;flex-wrap:wrap}
-}
-@media(max-width:380px){
- #home .home-latest-content h1{font-size:clamp(3.4rem,16vw,4.4rem)!important}
-}
 
 /* Remove Android/mobile blue tap flash without hiding desktop keyboard focus. */
 :where(a,button,[role="button"],input,textarea,select,[tabindex]){
