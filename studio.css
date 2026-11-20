@@ -679,3 +679,21 @@ body.portfolio-modal-open{overflow:hidden}
   .folder,.folder::before,.folder .back,.folder .peek,.folder .front,.folder .go{transition:none!important}
   .marquee-track--right,.marquee-track--left{animation:none!important}
 }
+
+
+/* Marquee interaction: auto-run on load, pause to inspect, resume on exit. */
+.portfolio-marquee{visibility:visible!important;opacity:1!important}
+.marquee-window{overflow:hidden;touch-action:pan-y;cursor:grab}
+.marquee-track--right{animation:marqueeRight 34s linear infinite!important;animation-play-state:running!important}
+.marquee-track--left{animation:marqueeLeft 38s linear infinite!important;animation-play-state:running!important}
+.marquee-window:hover .marquee-track,
+.marquee-window:focus-within .marquee-track,
+.marquee-window.is-paused .marquee-track{animation-play-state:paused!important}
+.marquee-window:active{cursor:grabbing}
+.work-card--placeholder{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+.work-card--placeholder:focus-visible{outline:1px solid var(--gold);outline-offset:-5px}
+@media(prefers-reduced-motion:reduce){
+  /* The user explicitly wants the portfolio preview loop; keep it gentle and slow. */
+  .marquee-track--right{animation:marqueeRight 48s linear infinite!important}
+  .marquee-track--left{animation:marqueeLeft 52s linear infinite!important}
+}
