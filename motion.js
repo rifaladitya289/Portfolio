@@ -55,7 +55,9 @@
         el.style.setProperty("--gs-delay",Math.min(index++%8,7)*85+"ms");
       });
     });
-    root.querySelectorAll("#stageP .portfolio-category, #stageP .featured-work, #stageP .work-card, #stageP .portfolio-endline").forEach((el,i)=>{
+    /* Keep the marquee container visible immediately: its tracks must move
+       as soon as Portfolio is rendered, not only after a navigation reveal. */
+    root.querySelectorAll("#stageP .category-copy > *, #stageP .portfolio-endline, #stageP .featured-work, #stageP .work-card").forEach((el,i)=>{
       if(seen.has(el))return;
       seen.add(el);
       el.classList.add("gs-reveal");
@@ -99,6 +101,58 @@
     },{root:null,threshold:[.18,.42]});
     sections.forEach(section=>pageObserver.observe(section));
   }
+
+
+
+  /* Original Linux-inspired UI tones. Audio is unlocked only after a real
+     user gesture because mobile browsers block autoplay audio. */
+  let audio=null,audioReady=false,lastHover=0;
+  function unlockAudio(){
+    if(audioReady)return;
+    const Audio=window.AudioContext||window.webkitAudioContext;
+    if(!Audio)return;
+    try{
+      audio=audio||new Audio();
+      if(audio.state==="suspended")audio.resume();
+      audioReady=true;
+    }catch(e){}
+  }
+  function tone(freq,delay,duration,volume,type){
+    if(!audio||!audioReady)return;
+    const start=audio.currentTime+delay;
+    const osc=audio.createOscillator(),gain=audio.createGain();
+    osc.type=type||"sine";osc.frequency.setValueAtTime(freq,start);
+    gain.gain.setValueAtTime(.0001,start);
+    gain.gain.exponentialRampToValueAtTime(volume,start+.012);
+    gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
+    osc.connect(gain);gain.connect(audio.destination);
+    osc.start(start);osc.stop(start+duration+.02);
+  }
+  function uiSound(kind){
+    if(!audioReady)return;
+    if(kind==="hover"){
+      tone(740,0,.045,.012,"sine");
+    }else if(kind==="press"){
+      tone(520,0,.07,.025,"triangle");
+      tone(780,.045,.085,.014,"sine");
+    }else if(kind==="success"){
+      tone(660,0,.09,.018,"sine");
+      tone(880,.075,.12,.018,"sine");
+    }
+  }
+  document.addEventListener("pointerdown",e=>{
+    unlockAudio();
+    if(e.pointerType==="touch"||e.pointerType==="pen"||e.pointerType==="mouse")uiSound("press");
+  },{passive:true});
+  document.addEventListener("pointerover",e=>{
+    if(!audioReady||e.pointerType!=="mouse")return;
+    const el=e.target.closest("button,a,.folder,.work-card,.contact-socials a");
+    if(!el||el.contains(e.relatedTarget))return;
+    const now=performance.now();
+    if(now-lastHover<90)return;
+    lastHover=now;uiSound("hover");
+  },{passive:true});
+  document.addEventListener("gs:success",()=>uiSound("success"));
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 
