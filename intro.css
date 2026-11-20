@@ -41,8 +41,10 @@
 #gsIntroWordmark.gs-wordmark-docking .gs-intro-rule{display:none}
 @media(max-width:700px){#gsIntroWordmark.gs-wordmark-docking .gs-intro-name{font-size:11px}#gsIntroWordmark.gs-wordmark-docking .gs-intro-studio{font-size:7px;margin-top:3px}}
 
-/* Skip control */
-#gsSkipIntro{position:absolute;z-index:20;top:calc(env(safe-area-inset-top,0px) + 22px);right:clamp(18px,4vw,42px);display:inline-flex;align-items:center;gap:12px;padding:11px 15px;border:1px solid rgba(217,165,102,.42);border-radius:999px;background:rgba(8,10,16,.48);color:#e9e5dc;font:500 9px/1 Montserrat,Inter,sans-serif;letter-spacing:.2em;cursor:pointer;backdrop-filter:blur(10px);transition:background .2s,border-color .2s,opacity .2s}
-#gsSkipIntro span{color:#d9a566;font-size:14px}
-#gsSkipIntro:hover{background:rgba(217,165,102,.14);border-color:#d9a566}
-#gsIntro.gs-intro-out #gsSkipIntro{opacity:0;pointer-events:none}
+/* Minimal Skip Intro: centered bottom text with a soft looping pulse */
+#gsSkipIntro{position:absolute;z-index:20;left:50%;right:auto;top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 30px);transform:translateX(-50%);display:block;margin:0;padding:10px 14px;border:0;border-radius:0;background:transparent;color:rgba(235,237,245,.66);font:500 9px/1 Montserrat,Inter,sans-serif;letter-spacing:.28em;text-align:center;white-space:nowrap;cursor:pointer;box-shadow:none;backdrop-filter:none;animation:gsSkipPulse 2.2s ease-in-out infinite;transition:color .25s,opacity .25s}
+#gsSkipIntro span{display:none}
+#gsSkipIntro:hover{color:rgba(255,255,255,.96)}
+@keyframes gsSkipPulse{0%,100%{opacity:.32}50%{opacity:.9}}
+#gsIntro.gs-intro-out #gsSkipIntro{opacity:0;pointer-events:none;animation:none}
+@media(prefers-reduced-motion:reduce){#gsSkipIntro{animation:none;opacity:.7}}
