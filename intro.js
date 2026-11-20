@@ -52,13 +52,14 @@
     if(dockTimer)window.clearTimeout(dockTimer);
     dockBrand();
   }
-  intro.addEventListener("click",skipIntro);
+  intro.addEventListener("click",skipIntro,true);
+  intro.addEventListener("pointerup",skipIntro,true);
   function dockBrand(){
     if(introFinished)return;
     if(!brand){
       introFinished=true;
       intro.classList.add("gs-intro-out");
-      window.setTimeout(()=>intro.remove(),1400);
+      window.setTimeout(()=>intro.remove(),2300);
       return;
     }
     const brandIcon=brand.querySelector("svg"),brandCopy=brand.querySelector(".gs-brand-copy");
