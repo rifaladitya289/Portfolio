@@ -3742,3 +3742,171 @@ nav{background:rgba(12,18,30,.78)!important;border:1px solid rgba(241,238,232,.1
   #pageTrack>#portfolio>.ambient-motion-bg,
   #pageTrack>#contact>.ambient-motion-bg{display:block!important}
 }
+
+
+/* ===== GALLAGHER'S STUDIO · COMPLETE HOME-LED DESIGN SYSTEM =====
+   Keep each page's content/layout unique, but share Home's visual language. */
+:root{
+  --gs-bg:#090a0d;
+  --gs-paper:#f1eee8;
+  --gs-muted:#aaa39a;
+  --gs-blue:#7899e8;
+  --gs-gold:#c9a77b;
+  --gs-line:rgba(241,238,232,.15);
+  --gs-glass:rgba(13,19,32,.48);
+  --gs-glass-strong:rgba(13,19,32,.72);
+  --gs-serif:"Cormorant Garamond",Georgia,serif;
+  --gs-sans:"Manrope",Arial,sans-serif;
+}
+
+/* One identical moving blue atmosphere on every page after Home. */
+#pageTrack>#about,
+#pageTrack>#portfolio,
+#pageTrack>#contact{
+  background:var(--gs-bg)!important;
+  color:var(--gs-paper)!important;
+}
+#pageTrack>#about>.ambient-motion-bg,
+#pageTrack>#portfolio>.ambient-motion-bg,
+#pageTrack>#contact>.ambient-motion-bg{
+  opacity:.54!important;
+  filter:blur(9px) brightness(.48) saturate(.92) hue-rotate(205deg)!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+#pageTrack>#about::before,
+#pageTrack>#portfolio::before,
+#pageTrack>#contact::before{
+  background:
+    linear-gradient(180deg,rgba(5,8,15,.12),rgba(5,8,15,.30)),
+    radial-gradient(ellipse at 18% 18%,rgba(53,98,220,.10),transparent 52%),
+    radial-gradient(ellipse at 84% 78%,rgba(53,98,220,.08),transparent 48%)!important;
+}
+#pageTrack>#about>.topo,
+#pageTrack>#portfolio>.topo,
+#pageTrack>#contact>.topo{opacity:.075!important}
+
+/* Shared editorial typography and muted supporting copy. */
+#pageTrack>#about h1,#pageTrack>#about h2,#pageTrack>#about h3,
+#pageTrack>#portfolio h1,#pageTrack>#portfolio h2,#pageTrack>#portfolio h3,
+#pageTrack>#contact h1,#pageTrack>#contact h2,#pageTrack>#contact h3{
+  font-family:var(--gs-serif)!important;
+  color:var(--gs-paper)!important;
+  font-weight:400!important;
+  letter-spacing:-.04em!important;
+}
+#pageTrack>#about p,#pageTrack>#portfolio p,#pageTrack>#contact p{
+  color:#aaa9a4;
+}
+#pageTrack>#about .about-eyebrow,
+#pageTrack>#about .about-kicker,
+#pageTrack>#about .about-section-label,
+#pageTrack>#portfolio .portfolio-banner-top,
+#pageTrack>#portfolio .portfolio-banner-bottom,
+#pageTrack>#contact .contact-eyebrow,
+#pageTrack>#contact .contact-card-head,
+#pageTrack>#contact .contact-note>span,
+#pageTrack>#contact .contact-comments h3{
+  color:var(--gs-gold)!important;
+  font-family:var(--gs-sans)!important;
+  letter-spacing:.19em!important;
+}
+
+/* Shared hairline dividers, quiet glass surfaces, and subtle blue highlights. */
+#pageTrack>#about .about-grid,
+#pageTrack>#about .tl>div,
+#pageTrack>#about .list,
+#pageTrack>#portfolio .portfolio-type-banner,
+#pageTrack>#portfolio .work-card,
+#pageTrack>#portfolio .featured-work,
+#pageTrack>#contact .contact-form-card,
+#pageTrack>#contact .contact-lower{
+  background:linear-gradient(135deg,rgba(17,27,46,.54),rgba(9,14,24,.34))!important;
+  border:1px solid var(--gs-line)!important;
+  box-shadow:0 16px 42px rgba(0,0,0,.20),inset 0 1px rgba(241,238,232,.035)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(110%)!important;
+  backdrop-filter:blur(14px) saturate(110%)!important;
+}
+#pageTrack>#about .about-grid,
+#pageTrack>#about .tl>div,
+#pageTrack>#portfolio .portfolio-type-banner,
+#pageTrack>#portfolio .work-card,
+#pageTrack>#portfolio .featured-work,
+#pageTrack>#contact .contact-form-card,
+#pageTrack>#contact .contact-lower{border-radius:14px!important}
+#pageTrack>#about .about-section-label,
+#pageTrack>#about .item,
+#pageTrack>#contact .contact-socials a,
+#pageTrack>#contact .contact-lower,
+#pageTrack>#contact .contact-form-card{border-color:var(--gs-line)!important}
+
+/* All actions share Home's understated rounded gold treatment. */
+#pageTrack>#about .btn,
+#pageTrack>#portfolio .work-open,
+#pageTrack>#contact .contact-send,
+#pageTrack>#contact .contact-socials a{
+  border-radius:999px!important;
+  font-family:var(--gs-sans)!important;
+  letter-spacing:.12em!important;
+  transition:background .3s ease,border-color .3s ease,transform .3s ease,color .3s ease!important;
+}
+#pageTrack>#about .btn,
+#pageTrack>#contact .contact-send{
+  background:rgba(201,167,123,.10)!important;
+  color:var(--gs-paper)!important;
+  border:1px solid rgba(201,167,123,.48)!important;
+}
+#pageTrack>#portfolio .tabs{
+  background:rgba(13,19,32,.68)!important;
+  border:1px solid var(--gs-line)!important;
+  border-radius:999px!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  backdrop-filter:blur(14px)!important;
+}
+#pageTrack>#portfolio .tabs button.on{
+  background:var(--gs-blue)!important;
+  color:#090a0d!important;
+  border-radius:999px!important;
+}
+#pageTrack>#about .folder .front,
+#pageTrack>#about .folder .back{
+  background:rgba(13,19,32,.72)!important;
+  border-color:var(--gs-line)!important;
+}
+#pageTrack>#contact .contact-field input,
+#pageTrack>#contact .contact-field textarea{
+  background:rgba(5,9,17,.48)!important;
+  border:1px solid var(--gs-line)!important;
+  color:var(--gs-paper)!important;
+  border-radius:9px!important;
+  font-family:var(--gs-sans)!important;
+}
+#pageTrack>#contact .contact-field>span{color:var(--gs-gold)!important}
+#pageTrack>#contact .contact-progress span{background:var(--gs-gold)!important}
+#pageTrack>#contact .contact-socials a{
+  background:rgba(13,19,32,.48)!important;
+  color:var(--gs-paper)!important;
+}
+@media(hover:hover) and (pointer:fine){
+  #pageTrack>#about .btn:hover,
+  #pageTrack>#contact .contact-send:hover,
+  #pageTrack>#contact .contact-socials a:hover{
+    background:rgba(201,167,123,.17)!important;
+    border-color:var(--gs-gold)!important;
+    transform:translateY(-2px);
+  }
+}
+@media(max-width:700px){
+  #pageTrack>#about,#pageTrack>#portfolio,#pageTrack>#contact{
+    background-attachment:scroll!important;
+  }
+  #pageTrack>#about .about-grid,
+  #pageTrack>#about .tl>div,
+  #pageTrack>#portfolio .portfolio-type-banner,
+  #pageTrack>#portfolio .work-card,
+  #pageTrack>#portfolio .featured-work,
+  #pageTrack>#contact .contact-form-card,
+  #pageTrack>#contact .contact-lower{
+    border-radius:12px!important;
+  }
+}
