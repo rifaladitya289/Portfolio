@@ -4358,3 +4358,49 @@ nav{background:rgba(12,18,30,.78)!important;border:1px solid rgba(241,238,232,.1
 #about .folder:nth-child(1) .front::before{content:"COLLECTION / 01 · PROJECTS"}
 #about .folder:nth-child(2) .front::before{content:"COLLECTION / 02 · DESIGNS"}
 #about .folder:nth-child(3) .front::before{content:"COLLECTION / 03 · VISUALS"}
+
+
+/* ===== CINEMATIC VERTICAL EXPERIENCE · ALL VIEWPORTS =====
+   Manual scroll is the primary navigation; navbar remains an animated shortcut. */
+html,body{
+  width:100%!important;height:100%!important;min-height:100%!important;
+  overflow:hidden!important;
+}
+#pageViewport{
+  position:fixed!important;inset:0!important;
+  width:100%!important;height:100vh!important;height:100dvh!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  touch-action:pan-y!important;
+  overscroll-behavior-x:none!important;
+  overscroll-behavior-y:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  scroll-behavior:smooth!important;
+  scroll-padding-top:90px!important;
+}
+#pageTrack{
+  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
+  width:100%!important;height:auto!important;min-height:0!important;
+  transform:none!important;
+}
+#pageTrack>section{
+  box-sizing:border-box!important;position:relative!important;
+  display:block!important;flex:0 0 auto!important;
+  width:100%!important;height:auto!important;
+  min-height:100vh!important;min-height:100dvh!important;
+  max-height:none!important;overflow:visible!important;
+  scroll-margin-top:0!important;
+}
+#pageTrack>#home{
+  display:flex!important;flex:0 0 100vh!important;flex:0 0 100dvh!important;
+  width:100%!important;height:100vh!important;height:100dvh!important;
+  min-height:100vh!important;min-height:100dvh!important;
+  max-height:none!important;overflow:hidden!important;
+}
+#pageTrack>#about,#pageTrack>#portfolio,#pageTrack>#contact{
+  height:auto!important;min-height:100vh!important;min-height:100dvh!important;
+  max-height:none!important;overflow:visible!important;
+}
+#pageTrack>#contact{padding-bottom:clamp(56px,8vh,100px)!important}
+@media(prefers-reduced-motion:reduce){
+  #pageViewport{scroll-behavior:auto!important}
+}
