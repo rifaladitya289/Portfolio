@@ -3437,3 +3437,13 @@ body.gs-motion-ready .gs-reveal.gs-visible{transition-timing-function:cubic-bezi
 #pageTrack>section{
   background-clip:border-box!important;
 }
+
+/* Remove the pale-blue focus ring produced by touch taps on mobile.
+   Keep a visible focus indicator for keyboard navigation on desktop. */
+@media (hover: none) and (pointer: coarse){
+  :where(a,button,[role="button"],input,textarea,select,[tabindex]):focus,
+  :where(a,button,[role="button"],input,textarea,select,[tabindex]):focus-visible{
+    outline:none!important;
+    -webkit-tap-highlight-color:transparent!important;
+  }
+}
