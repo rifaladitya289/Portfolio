@@ -18,7 +18,7 @@ function topo(stroke){
 }
 document.documentElement.style.setProperty("--topo-d",topo("#16264d"));
 document.documentElement.style.setProperty("--topo-l",topo("#d3d9e6"));
- 
+
 // ---------- Cek aset gambar (hero, person, about) ----------
 [["assets/bg/poster.jpg","has-hero"],["assets/images/hero-person.png","has-person"],["assets/gw.jpg","has-about"]].forEach(([src,cls])=>{
   const im=new Image();im.onload=()=>document.body.classList.add(cls);im.src=src;
@@ -194,7 +194,7 @@ window.addEventListener("load",()=>{
     activate(requested);
   }else syncNavigation();
 },{once:true});
-// ---------- Spider-Man reveal: direct, low-latency pointer + touch ---------- 
+// ---------- Spider-Man reveal: direct, low-latency pointer + touch ----------
 (function(){
   const photo=$("#spiderReveal");
   if(!photo)return;
@@ -362,8 +362,6 @@ $("#cmtForm").addEventListener("submit",async e=>{
 })();
 renderC();
 
-
-
 // ---------- Global Motion Foundation: pointer feedback + reduced motion ----------
 (function(){
   const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -379,7 +377,6 @@ renderC();
     el.style.setProperty("--motion-y",(e.clientY-r.top)+"px");
   },{passive:true});
 })();
-
 
 // ---------- Stage 2: delegated press feedback + subtle 3D card tilt ----------
 (function(){
@@ -418,7 +415,6 @@ renderC();
     card.style.setProperty("--tilt-y","0deg");
   },{passive:true});
 })();
-
 
 // ---------- Stage 3: cinematic reveal when sections enter view ----------
 (function(){
@@ -467,7 +463,6 @@ renderC();
   });
 })();
 
-
 // ---------- Stage 4: tactile feedback, media arrival & keyboard activation ----------
 (function(){
   const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -507,7 +502,6 @@ renderC();
     item.click();
   });
 })();
-
 
 // ---------- STAGE 5: real pointer + touch interaction ----------
 (function(){
@@ -554,7 +548,6 @@ renderC();
     el.style.setProperty("--iy","50%");
   });
 })();
-
 
 /* ===== GALLAGHER'S STUDIO · ROTATING HOME MOTIVATION ===== */
 (function(){
@@ -622,8 +615,6 @@ renderC();
     },{passive:true});
   });
 })();
-
-
 
 // Keep one continuous copy of the original Home video behind the entire document.
 (function(){
