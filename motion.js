@@ -78,9 +78,8 @@
   /* Replay staggered reveals whenever a page panel is entered again. */
   function enablePageReplay(){
     if(reduce||!("IntersectionObserver"in window))return;
-    const viewport=document.getElementById("pageViewport");
     const sections=[...document.querySelectorAll("#pageTrack>section")];
-    if(!viewport||!sections.length)return;
+    if(!sections.length)return;
     let activePanel=null;
     const pageObserver=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
@@ -92,7 +91,7 @@
           if(observer)observer.observe(el);
         });
       });
-    },{root:viewport,threshold:[.58,.75]});
+    },{root:null,threshold:[.18,.42]});
     sections.forEach(section=>pageObserver.observe(section));
   }
 
