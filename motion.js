@@ -129,13 +129,15 @@
     osc.connect(gain);gain.connect(audio.destination);
     osc.start(start);osc.stop(start+duration+.015);
   }
+  /* Sound only for deliberate, important actions — never for navigation,
+     scrolling, ordinary links, tabs, fields, or decorative cards. */
   document.addEventListener("pointerdown",e=>{
-    const control=e.target.closest("button,a,.card,.folder,.work-card,.featured-work,input,textarea,select,summary");
+    const control=e.target.closest(".home-latest-primary,.a-right .btn,.folder");
     if(!control)return;
     unlockAudio();
-    softTone(285,.055,.007);
+    softTone(control.matches(".folder")?310:285,.06,.006);
   },{passive:true});
-  /* No hover chirps: pointer movement stays silent and calm. */
+  /* Success sound is emitted only after a comment is actually saved locally. */
   document.addEventListener("gs:success",()=>{
     if(!audioReady)return;
     softTone(390,.075,.006);
