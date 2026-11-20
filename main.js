@@ -296,7 +296,9 @@ function showTab(k){
   const count=$("#portfolioCount");if(count)count.textContent="00";
 }
 $("#tabs").addEventListener("click",e=>{const button=e.target.closest("button[data-tab]");if(button&&$("#tabs").contains(button))showTab(button.dataset.tab)});
-$$(".folder").forEach(b=>b.addEventListener("click",()=>{
+$(".folder").forEach(b=>b.addEventListener("click",()=>{
+  b.classList.add("is-opening");
+  window.setTimeout(()=>b.classList.remove("is-opening"),680);
   showTab(b.dataset.tab);
   const index=panels.findIndex(p=>p.id==="portfolio");
   if(index>=0)goTo("portfolio");
