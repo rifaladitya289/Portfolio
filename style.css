@@ -4573,6 +4573,7 @@ html,body{
 
 /* ===== NATIVE PAGE FLOW + ONE CONTINUOUS CINEMATIC BACKGROUND ===== */
 html{
+  background:#08090b!important;
   height:auto!important;min-height:100%!important;
   overflow-x:hidden!important;overflow-y:auto!important;
   scroll-behavior:smooth!important;
@@ -4581,7 +4582,7 @@ body{
   position:relative!important;
   width:100%!important;height:auto!important;min-height:100%!important;
   overflow-x:hidden!important;overflow-y:visible!important;
-  background:#08090b!important;color:#f1eee8!important;
+  background:transparent!important;color:#f1eee8!important;isolation:isolate!important;
 }
 /* The page itself owns scrolling. No fixed inner viewport or forced slide track. */
 #pageViewport{
