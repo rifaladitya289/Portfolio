@@ -3668,3 +3668,77 @@ nav{background:rgba(12,18,30,.78)!important;border:1px solid rgba(241,238,232,.1
     object-fit:cover!important;
   }
 }
+
+
+/* ===== SHARED HOME ATMOSPHERE · ALL PORTFOLIO SECTIONS ===== */
+#pageTrack>#about,
+#pageTrack>#portfolio,
+#pageTrack>#contact{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:#090a0d!important;
+  color:#f1eee8!important;
+}
+#pageTrack>#about>.ambient-motion-bg,
+#pageTrack>#portfolio>.ambient-motion-bg,
+#pageTrack>#contact>.ambient-motion-bg{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:100%!important;
+  min-height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  opacity:.54!important;
+  filter:blur(9px) brightness(.48) saturate(.92) hue-rotate(205deg)!important;
+  transform:scale(1.045)!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+#pageTrack>#about::before,
+#pageTrack>#portfolio::before,
+#pageTrack>#contact::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(135deg,rgba(4,7,15,.70),rgba(5,10,22,.78) 55%,rgba(8,14,28,.72)),
+    radial-gradient(ellipse at 18% 16%,rgba(58,103,220,.18),transparent 48%),
+    radial-gradient(ellipse at 85% 78%,rgba(58,103,220,.12),transparent 44%)!important;
+}
+#pageTrack>#about>.topo,
+#pageTrack>#portfolio>.topo,
+#pageTrack>#contact>.topo{
+  z-index:1!important;
+  opacity:.08!important;
+}
+#pageTrack>#about> :not(.ambient-motion-bg):not(.topo),
+#pageTrack>#portfolio> :not(.ambient-motion-bg):not(.topo),
+#pageTrack>#contact> :not(.ambient-motion-bg):not(.topo){
+  position:relative;
+  z-index:2;
+}
+@media(max-width:700px){
+  #pageTrack>#about>.ambient-motion-bg,
+  #pageTrack>#portfolio>.ambient-motion-bg,
+  #pageTrack>#contact>.ambient-motion-bg{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #pageTrack>#about>.ambient-motion-bg,
+  #pageTrack>#portfolio>.ambient-motion-bg,
+  #pageTrack>#contact>.ambient-motion-bg{display:block!important}
+}
