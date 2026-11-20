@@ -40,3 +40,9 @@
 #gsIntroWordmark.gs-wordmark-docking .gs-intro-studio{margin-top:4px;font-family:Montserrat,Inter,sans-serif;font-size:8px;font-weight:400;line-height:1;letter-spacing:.38em;padding-left:0}
 #gsIntroWordmark.gs-wordmark-docking .gs-intro-rule{display:none}
 @media(max-width:700px){#gsIntroWordmark.gs-wordmark-docking .gs-intro-name{font-size:11px}#gsIntroWordmark.gs-wordmark-docking .gs-intro-studio{font-size:7px;margin-top:3px}}
+
+/* Skip control */
+#gsSkipIntro{position:absolute;z-index:20;top:calc(env(safe-area-inset-top,0px) + 22px);right:clamp(18px,4vw,42px);display:inline-flex;align-items:center;gap:12px;padding:11px 15px;border:1px solid rgba(217,165,102,.42);border-radius:999px;background:rgba(8,10,16,.48);color:#e9e5dc;font:500 9px/1 Montserrat,Inter,sans-serif;letter-spacing:.2em;cursor:pointer;backdrop-filter:blur(10px);transition:background .2s,border-color .2s,opacity .2s}
+#gsSkipIntro span{color:#d9a566;font-size:14px}
+#gsSkipIntro:hover{background:rgba(217,165,102,.14);border-color:#d9a566}
+#gsIntro.gs-intro-out #gsSkipIntro{opacity:0;pointer-events:none}
