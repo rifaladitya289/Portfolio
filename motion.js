@@ -73,7 +73,7 @@
     if(stage&&"MutationObserver"in window){
       new MutationObserver(()=>prepare(stage)).observe(stage,{childList:true,subtree:true});
     }
-    document.querySelectorAll("button,.btn,a.hero-primary,a.hero-secondary,.contact-send,.contact-socials a").forEach(el=>{
+    document.querySelectorAll("button,.btn,a.hero-primary,a.hero-secondary,.contact-send,.contact-socials a,.card,.folder,.work-card,.featured-work").forEach(el=>{
       el.classList.add("gs-interactive");
     });
     if(!reduce){
@@ -146,7 +146,7 @@
   },{passive:true});
   document.addEventListener("pointerover",e=>{
     if(!audioReady||e.pointerType!=="mouse")return;
-    const el=e.target.closest("button,a,.folder,.work-card,.contact-socials a");
+    const el=e.target.closest("button,a,.card,.folder,.work-card,.featured-work,.contact-socials a");
     if(!el||el.contains(e.relatedTarget))return;
     const now=performance.now();
     if(now-lastHover<90)return;
