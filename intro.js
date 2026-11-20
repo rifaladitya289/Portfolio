@@ -5,7 +5,7 @@
   const logo=document.getElementById("gsIntroLogo");
   const word=document.getElementById("gsIntroWordmark");
   const brand=document.getElementById("gsBrand");
-  if(!intro||!logo||!word||!brand)return;
+  if(!intro||!logo||!word)return;
   const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const ease="cubic-bezier(.22,1,.36,1)";
   const animations=[];
@@ -55,6 +55,12 @@
   intro.addEventListener("click",skipIntro);
   function dockBrand(){
     if(introFinished)return;
+    if(!brand){
+      introFinished=true;
+      intro.classList.add("gs-intro-out");
+      window.setTimeout(()=>intro.remove(),1400);
+      return;
+    }
     const brandIcon=brand.querySelector("svg"),brandCopy=brand.querySelector(".gs-brand-copy");
     if(!brandIcon||!brandCopy)return;
     // Measure the final brand without its hidden-state offset, so the handoff cannot jump.
