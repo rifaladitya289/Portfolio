@@ -577,3 +577,27 @@ body.portfolio-modal-open{overflow:hidden}
     animation:none!important;transition:none!important;transform:none!important
   }
 }
+
+
+/* Folder artwork alignment: keep every folder layer straight and parallel. */
+.folder .back,
+.folder .peek{
+  transform:translate3d(0,0,0)!important;
+}
+.folder:hover .back,.folder:focus-visible .back{
+  transform:translate3d(0,-3px,0)!important;
+}
+.folder:hover .peek,.folder:focus-visible .peek{
+  transform:translate3d(0,-9px,0)!important;
+}
+.folder.is-opening .back{
+  transform:translate3d(0,-13px,0)!important;
+}
+.folder.is-opening .peek{
+  transform:translate3d(0,-19px,0)!important;
+}
+@media(hover:none){
+  .folder:hover .back,.folder:hover .peek{
+    transform:translate3d(0,0,0)!important;
+  }
+}
