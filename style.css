@@ -4569,3 +4569,96 @@ html,body{
   #contact .contact-submit-row small{max-width:100%!important}
   #contact .contact-send{max-width:100%!important}
 }
+
+
+/* ===== NATIVE PAGE FLOW + ONE CONTINUOUS CINEMATIC BACKGROUND ===== */
+html{
+  height:auto!important;min-height:100%!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  scroll-behavior:smooth!important;
+}
+body{
+  position:relative!important;
+  width:100%!important;height:auto!important;min-height:100%!important;
+  overflow-x:hidden!important;overflow-y:visible!important;
+  background:#08090b!important;color:#f1eee8!important;
+}
+/* The page itself owns scrolling. No fixed inner viewport or forced slide track. */
+#pageViewport{
+  position:relative!important;inset:auto!important;
+  display:block!important;width:100%!important;height:auto!important;
+  min-height:0!important;max-height:none!important;
+  overflow:visible!important;touch-action:pan-y!important;
+  overscroll-behavior:auto!important;scroll-behavior:auto!important;
+}
+#pageTrack{
+  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
+  width:100%!important;height:auto!important;min-height:0!important;
+  transform:none!important;overflow:visible!important;
+}
+#pageTrack>section,
+#pageTrack>#home,
+#pageTrack>#about,
+#pageTrack>#portfolio,
+#pageTrack>#contact{
+  position:relative!important;display:block!important;
+  flex:0 0 auto!important;width:100%!important;min-width:0!important;max-width:100%!important;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  padding:clamp(112px,14vh,150px) clamp(22px,6vw,88px) clamp(64px,9vh,100px)!important;
+  overflow:visible!important;scroll-margin-top:0!important;
+  background:transparent!important;isolation:isolate!important;
+}
+#pageTrack>#home{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  min-height:100svh!important;height:auto!important;
+  padding:clamp(150px,20vh,210px) clamp(24px,8vw,120px) 110px!important;
+  overflow:visible!important;
+}
+#pageTrack>#home .home-latest-content{width:min(100%,1100px)!important}
+#pageTrack>#home .home-latest-foot{position:static!important;margin-top:44px!important}
+#pageTrack>#about,#pageTrack>#portfolio,#pageTrack>#contact{
+  min-height:70vh!important;
+}
+/* Move the original Home video to the document by JS; one video runs behind every section. */
+body>.home-latest-bg{
+  position:fixed!important;inset:0!important;z-index:-2!important;
+  display:block!important;width:100vw!important;height:100vh!important;height:100dvh!important;
+  object-fit:cover!important;object-position:center!important;
+  opacity:.54!important;filter:blur(9px) brightness(.48) saturate(.92) hue-rotate(205deg)!important;
+  transform:scale(1.045)!important;pointer-events:none!important;
+}
+body::before{
+  content:""!important;position:fixed!important;inset:0!important;z-index:-1!important;
+  pointer-events:none!important;
+  background:linear-gradient(135deg,rgba(5,7,10,.68),rgba(7,9,12,.73) 52%,rgba(5,6,9,.76))!important;
+}
+#pageTrack>#home .home-latest-bg{display:none!important}
+#pageTrack>#about>.ambient-motion-bg,
+#pageTrack>#portfolio>.ambient-motion-bg,
+#pageTrack>#contact>.ambient-motion-bg{display:none!important}
+#pageTrack>#about::before,
+#pageTrack>#portfolio::before,
+#pageTrack>#contact::before{display:none!important}
+#pageTrack>#about>.topo,
+#pageTrack>#portfolio>.topo,
+#pageTrack>#contact>.topo{display:none!important}
+#pageTrack>section>*:not(.ambient-motion-bg):not(.home-latest-bg){position:relative;z-index:1}
+#pageTrack>section{scroll-margin-top:0!important}
+@media(max-width:700px){
+  #pageTrack>section,
+  #pageTrack>#about,#pageTrack>#portfolio,#pageTrack>#contact{
+    padding:112px 22px 68px!important;
+  }
+  #pageTrack>#home{
+    min-height:calc(100svh - 12px)!important;
+    padding:145px 26px 76px!important;
+  }
+  #pageTrack>#home .home-latest-content h1{
+    font-size:clamp(3.8rem,16vw,6.1rem)!important;
+    line-height:.84!important;
+  }
+  #pageTrack>#home .home-latest-foot{margin-top:36px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+}
