@@ -3977,3 +3977,164 @@ nav{background:rgba(12,18,30,.78)!important;border:1px solid rgba(241,238,232,.1
 #pageTrack>#contact .contact-field>span{
   color:#c9a77b!important;
 }
+
+
+/* ===== HOME-LED EDITORIAL LAYOUT · REMOVE DASHBOARD / CARD LANGUAGE =====
+   Secondary pages use open composition, typography and hairline dividers.
+   Keep the Home hero untouched. */
+#about,#portfolio,#contact{
+  background:#090a0d!important;
+}
+#about:after,#portfolio:after,#contact:after{
+  background:linear-gradient(180deg,rgba(7,8,10,.18),rgba(7,8,10,.42))!important;
+}
+/* ABOUT — open profile, no framed portrait or boxed timeline columns */
+#about .about-grid{
+  padding:0!important;border:0!important;background:transparent!important;
+  box-shadow:none!important;
+}
+#about .a-photo{
+  border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+}
+#about .about-grid:before,#about .a-photo:before{display:none!important}
+#about .tl{
+  display:grid!important;grid-template-columns:1fr 1fr!important;
+  gap:clamp(28px,5vw,76px)!important;
+  max-width:1160px;margin:0 auto 64px!important;
+}
+#about .tl>div{
+  padding:0!important;border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+  overflow:visible!important;transform:none!important;
+}
+#about .tl>div:before{display:none!important}
+#about .tl h3{
+  padding:0 0 15px!important;margin:0 0 18px!important;
+  border-bottom:1px solid rgba(241,238,232,.22)!important;
+  color:#f1eee8!important;
+}
+#about .list{height:auto!important;max-height:340px;padding-left:12px}
+#about .item{border-left:1px solid rgba(201,167,123,.32)!important}
+#about .num{background:#090a0d!important;border-color:rgba(201,167,123,.5)!important;color:#d8c2a4!important}
+#about .item .org{color:#e9e4dc!important}
+#about .lg{background:transparent!important;border:1px solid rgba(201,167,123,.35)!important;color:#d8c2a4!important}
+#about .item time{background:transparent!important;border:0!important;color:#c9a77b!important}
+#about .item strong{color:#f1eee8!important}
+#about .item .sub{color:#aaa39a!important}
+/* Collections become editorial text links, not mini cards */
+#about .folders{
+  display:flex!important;flex-direction:column!important;gap:0!important;
+  max-width:1160px;margin:22px auto 0!important;
+  border-top:1px solid rgba(241,238,232,.18);
+}
+#about .folder{
+  width:100%!important;height:auto!important;min-height:0!important;
+  padding:22px 4px!important;display:flex!important;
+  border:0!important;border-bottom:1px solid rgba(241,238,232,.16)!important;
+  border-radius:0!important;background:transparent!important;box-shadow:none!important;
+  overflow:visible!important;transform:none!important;
+}
+#about .folder:before,#about .folder .peek,#about .folder .back{display:none!important}
+#about .folder .front{
+  position:relative!important;inset:auto!important;
+  display:flex!important;flex-direction:row!important;align-items:center!important;
+  justify-content:flex-start!important;gap:18px!important;
+  padding:0!important;background:transparent!important;border:0!important;
+  color:#f1eee8!important;font:500 clamp(1.25rem,2.5vw,1.8rem) var(--f-head)!important;
+}
+#about .folder .front b{
+  margin:0!important;color:#c9a77b!important;
+  font:500 1rem var(--f-body)!important;min-width:36px;
+}
+#about .folder .go{
+  position:absolute!important;right:4px!important;bottom:50%!important;
+  transform:translateY(50%)!important;background:transparent!important;
+  border:0!important;color:#c9a77b!important;
+}
+#about .folder:hover,#about .folder:focus-visible{transform:none!important;box-shadow:none!important}
+#about .folder:hover .front{color:#c9a77b!important}
+/* PORTFOLIO — no card shells; single editorial sequence */
+#portfolio .featured-work{
+  border:0!important;border-top:1px solid rgba(241,238,232,.2)!important;
+  border-bottom:1px solid rgba(241,238,232,.2)!important;
+  border-radius:0!important;box-shadow:none!important;
+  background:transparent!important;
+}
+#portfolio .featured-work:hover{transform:none!important;box-shadow:none!important}
+#portfolio .featured-label{padding-left:0!important}
+#portfolio .featured-bottom{padding-left:0!important}
+#portfolio .work-grid{
+  display:grid!important;grid-template-columns:1fr!important;
+  gap:0!important;
+}
+#portfolio .work-card{
+  display:grid!important;grid-template-columns:minmax(0,1.05fr) minmax(220px,.95fr);
+  align-items:center;gap:clamp(20px,4vw,54px);
+  padding:26px 0!important;margin:0!important;
+  border:0!important;border-bottom:1px solid rgba(241,238,232,.16)!important;
+  border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;transform:none!important;
+}
+#portfolio .work-card:hover{transform:none!important}
+#portfolio .work-image{
+  grid-column:2;grid-row:1;height:clamp(170px,22vw,260px)!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+#portfolio .work-meta{
+  grid-column:1;grid-row:1;padding:12px 0!important;
+  border:0!important;align-self:center;
+}
+#portfolio .work-meta h3{font-size:clamp(1.5rem,3vw,2.4rem)!important}
+#portfolio .work-index{left:0!important;top:0!important}
+#portfolio .work-open{right:12px!important;bottom:12px!important}
+#portfolio .visual-grid{grid-template-columns:1fr!important}
+#portfolio .visual-grid .work-card{grid-template-columns:minmax(0,1fr) minmax(160px,.72fr)}
+#portfolio .visual-grid .work-image{height:clamp(130px,18vw,205px)!important}
+#portfolio #tabs{
+  background:transparent!important;border:0!important;border-bottom:1px solid rgba(241,238,232,.18)!important;
+  border-radius:0!important;box-shadow:none!important;backdrop-filter:none!important;
+  padding:0 0 12px!important;
+}
+#portfolio #tabs button.on{background:transparent!important;box-shadow:none!important;color:#f1eee8!important}
+#portfolio #tabs button.on:after{background:#c9a77b!important;box-shadow:none!important}
+#portfolio .category-total strong,#portfolio .category-kicker{color:#c9a77b!important}
+/* CONTACT — remove card surfaces and let form/socials sit in the page */
+#contact .contact-form-card,#contact .contact-lower{
+  border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+  backdrop-filter:none!important;padding-left:0!important;padding-right:0!important;
+}
+#contact .contact-form-card{border-top:1px solid rgba(241,238,232,.2)!important}
+#contact .contact-lower{border-top:1px solid rgba(241,238,232,.16)!important}
+#contact .contact-card-head,#contact .contact-progress,
+#contact .contact-field input,#contact .contact-field textarea{
+  border-radius:0!important;
+}
+#contact .contact-field input,#contact .contact-field textarea{
+  background:rgba(255,255,255,.025)!important;
+  border:0!important;border-bottom:1px solid rgba(241,238,232,.22)!important;
+  padding-left:0!important;padding-right:0!important;
+}
+#contact .contact-socials a{
+  border-radius:0!important;background:transparent!important;
+  border-bottom:1px solid rgba(241,238,232,.16)!important;
+}
+#contact .contact-send{
+  border-radius:0!important;background:transparent!important;
+  border:1px solid rgba(201,167,123,.48)!important;color:#f1eee8!important;
+}
+@media(max-width:700px){
+  #about .tl{grid-template-columns:1fr!important;gap:34px!important}
+  #about .folders{display:flex!important}
+  #about .folder{min-height:0!important;height:auto!important}
+  #portfolio .work-card,#portfolio .visual-grid .work-card{
+    grid-template-columns:1fr!important;gap:14px!important;padding:22px 0!important;
+  }
+  #portfolio .work-image,#portfolio .visual-grid .work-image{
+    grid-column:1!important;grid-row:1!important;height:clamp(170px,48vw,235px)!important;
+  }
+  #portfolio .work-meta{grid-column:1!important;grid-row:2!important}
+  #portfolio .work-index{left:12px!important;top:12px!important}
+  #contact .contact-shell{gap:32px!important}
+}
