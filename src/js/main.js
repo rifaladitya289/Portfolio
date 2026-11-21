@@ -256,7 +256,7 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitLists);
     designs:{label:"WEBMOTION UI",sub:"INTERFACE DESIGN",screen:"<div class='folder-screen-bar'><i></i><i></i><i></i><b>Design system</b></div><div class='folder-screen-body folder-design-screen'><span>PRODUCT INTERFACE</span><strong>Designed<br>to review.</strong><div class='folder-design-lines'><i></i><i></i><i></i></div><small>LAYOUT · COMPONENTS · DETAILS</small></div>"},
     showcase:{label:"COMING NEXT",sub:"CLIENT COLLECTION",screen:"<div class='folder-screen-bar'><i></i><i></i><i></i><b>Showcase</b></div><div class='folder-screen-body'><span>COLLABORATIVE WORK</span><strong>Next<br>chapter.</strong><small>NEW WORK WILL APPEAR HERE</small></div>"}
   };
-  $(".folder").forEach(folder=>{
+  $$(".folder").forEach(folder=>{
     const data=previews[folder.dataset.tab],peek=$(".peek",folder);
     if(!data||!peek)return;
     peek.innerHTML=`<div class="folder-preview"><div class="folder-preview-screen">${data.screen}</div><div class="folder-preview-caption"><b>${data.label}</b><span>${data.sub}</span></div></div>`;
@@ -296,6 +296,36 @@ const $lb=$("#lb");
 })();
 function openLb(item){window.stxOpenPortfolioDetail?.(item)}
 function closeLb(){$lb.classList.remove("on");document.body.classList.remove("portfolio-modal-open")}
+let activeCollectionRail=null,collectionRailFrame=0,collectionRailLast=0,collectionRailDragging=false;
+function setCollectionRail(row){
+  activeCollectionRail=row;
+  const track=row?.querySelector(".marquee-track");
+  const group=track?.querySelector(".marquee-group");
+  if(!track||!group)return;
+  track.querySelector(".marquee-group--clone")?.remove();
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+    const clone=group.cloneNode(true);
+    clone.classList.add("marquee-group--clone");
+    clone.setAttribute("aria-hidden","true");
+    clone.querySelectorAll("a,button").forEach(el=>{el.removeAttribute("href");el.tabIndex=-1});
+    track.append(clone);
+  }
+  collectionRailLast=0;
+  if(!collectionRailFrame)collectionRailFrame=requestAnimationFrame(animateCollectionRail);
+}
+function animateCollectionRail(now){
+  const row=activeCollectionRail;
+  if(row&&!collectionRailDragging&&!document.hidden&&!matchMedia("(prefers-reduced-motion: reduce)").matches){
+    const group=row.querySelector(".marquee-group:not(.marquee-group--clone)");
+    const elapsed=collectionRailLast?Math.min(now-collectionRailLast,40):16;
+    if(group&&group.scrollWidth>row.clientWidth){
+      row.scrollLeft+=elapsed*.018;
+      if(row.scrollLeft>=group.scrollWidth)row.scrollLeft-=group.scrollWidth;
+    }
+  }
+  collectionRailLast=now;
+  collectionRailFrame=requestAnimationFrame(animateCollectionRail);
+}
 let cur="projects";
 function showTab(k){
   if(!DATA[k])return;
@@ -339,9 +369,10 @@ function showTab(k){
   const availableCount=entries[k].filter(item=>item.kind==="available").length;
   const row=`<div class="marquee-window" role="region" aria-label="${names[k]} collection" tabindex="0"><div class="marquee-track"><div class="marquee-group">${cards}</div></div></div>`;
   box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(availableCount).padStart(2,"0")}</strong><span>AVAILABLE</span></div></div><div class="portfolio-marquee">${row}</div><div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>SELECTED WORK · ${availableCount?"FEATURED WORK + FUTURE SLOTS":"FUTURE COLLECTION SLOTS"}</span></div></div>`;
+  setCollectionRail(box.querySelector(".marquee-window"));
   box.classList.remove("portfolio-shimmer-in");void box.offsetWidth;box.classList.add("portfolio-shimmer-in");
   const count=$("#portfolioCount");if(count)count.textContent=String(availableCount).padStart(2,"0");
-  $$(".folder").forEach(folder=>{if(folder.dataset.tab===k){folder.setAttribute("aria-current","true")}else folder.removeAttribute("aria-current")});
+  $$$(".folder").forEach(folder=>{if(folder.dataset.tab===k){folder.setAttribute("aria-current","true")}else folder.removeAttribute("aria-current")});
 }
 document.addEventListener("click",e=>{
   const explore=e.target instanceof Element?e.target.closest('.portfolio-banner-bottom a[href="#stageP"]'):null;
@@ -351,10 +382,10 @@ document.addEventListener("click",e=>{
   if(target)target.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
 });
 $("#tabs").addEventListener("click",e=>{const button=e.target.closest("button[data-tab]");if(button&&$("#tabs").contains(button))showTab(button.dataset.tab)});
-$(".folder").forEach(b=>b.addEventListener("click",()=>{
+$$(".folder").forEach(b=>b.addEventListener("click",()=>{
   b.classList.add("is-opening");
   b.setAttribute("aria-expanded","true");
-  $(".folder").forEach(folder=>{if(folder!==b){folder.classList.remove("is-opening");folder.setAttribute("aria-expanded","false")}});
+  $$(".folder").forEach(folder=>{if(folder!==b){folder.classList.remove("is-opening");folder.setAttribute("aria-expanded","false")}});
   window.setTimeout(()=>{b.classList.remove("is-opening");b.setAttribute("aria-expanded","false")},1450);
   showTab(b.dataset.tab);
   const index=panels.findIndex(p=>p.id==="portfolio");
@@ -369,8 +400,8 @@ showTab("projects");
   const row=e.target instanceof Element?e.target.closest(".marquee-window"):null;
   if(!row||e.button!==0||e.target.closest("button"))return;
   drag={row,id:e.pointerId,x:e.clientX,scroll:row.scrollLeft,moved:false};
+  collectionRailDragging=true;
   row.classList.add("is-dragging");
-  row.querySelector(".marquee-track")?.style.setProperty("animation-play-state","paused");
 
  });
  document.addEventListener("pointermove",e=>{
@@ -383,7 +414,7 @@ showTab("projects");
   if(!drag||drag.id!==e.pointerId)return;
   const row=drag.row;
   row.classList.remove("is-dragging");
-  row.querySelector(".marquee-track")?.style.removeProperty("animation-play-state");
+  collectionRailDragging=false;
   drag=null;
  }
  document.addEventListener("pointerup",finish);
