@@ -286,33 +286,30 @@ function showTab(k){
   const box=$("#stageP");
   const names={projects:"Digital Projects",designs:"Interface & Experience Design",showcase:"Client Showcase"};
   const descriptions={projects:"A collection of digital products and tools built through experimentation and development.",designs:"A space reserved for future interface and experience designs.",showcase:"A space reserved for commissioned client projects."};
-  const projects=DATA.projects;
-  const projectMarkup=projects.map((item,index)=>`
-    <article class="featured-work project-feature">
-      <div class="featured-label"><span>0${index+1} / RELEASED PROJECT</span><span>LIVE · 2026</span></div>
-      <div class="featured-preview project-preview" aria-label="WebMotion project preview">
+  const projectCards=DATA.projects.length?DATA.projects.map((item,index)=>`
+    <article class="work-card work-card--placeholder work-card--projects project-marquee-card" aria-label="${esc(item.t)} project">
+      <div class="work-image work-image--projects project-marquee-art">
         <span class="project-preview-orbit"></span>
         <div class="project-preview-window"><div class="project-preview-bar"><i></i><i></i><i></i><b>WEBMOTION</b></div><div class="project-preview-screen"><span>PREVIEW.</span><strong>COMPARE.</strong><span>RECORD.</span><i></i></div></div>
-        <span class="project-preview-caption">RESPONSIVE WEB TOOL</span>
+        <span class="work-index">0${index+1}</span>
       </div>
-      <div class="featured-bottom">
+      <div class="project-marquee-info">
         <small>${esc(item.type)}</small>
         <strong>${esc(item.t)}</strong>
-        <em>${esc(item.d)}</em>
-        <b>${esc(item.attribution)}</b>
-        <div class="project-actions">
-          <a class="project-visit" href="${item.live}" target="_blank" rel="noopener noreferrer">Live Demo <span>↗</span></a>
-        </div>
+        <p>${esc(item.d)}</p>
+        <span class="project-marquee-credit">${esc(item.attribution)}</span>
+        <a class="project-visit" href="${item.live}" target="_blank" rel="noopener noreferrer">Live Demo <span>↗</span></a>
       </div>
-    </article>`).join("");
-  const makeRow=(direction)=> {
-    const cards=Array.from({length:3},(_,n)=>`<div class="work-card work-card--${k} work-card--placeholder" tabindex="0" role="group" aria-label="Preview ${n+1} — ${names[k]}">
+    </article>`).join(""):'<p class="project-empty">Projects will appear here as they are released.</p>';
+  const makeRow=(direction,cardsMarkup)=> {
+    const cards=cardsMarkup||Array.from({length:3},(_,n)=>`<div class="work-card work-card--${k} work-card--placeholder" tabindex="0" role="group" aria-label="Preview ${n+1} — ${names[k]}">
       <div class="work-image work-image--${k}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${n+1}</span></div>
     </div>`).join("");
-    return `<div class="marquee-window marquee-window--${direction}" role="region" aria-label="${direction==="right"?"Portfolio previews moving right":"Portfolio previews moving left"}"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${cards}</div><div class="marquee-group" aria-hidden="true">${cards}</div></div></div>`;
+    const repeated=cardsMarkup?cardsMarkup:cards;
+    return `<div class="marquee-window marquee-window--${direction}" role="region" aria-label="${direction==="right"?"Portfolio previews moving right":"Portfolio previews moving left"}" tabindex="0"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${repeated}</div><div class="marquee-group" aria-hidden="true" inert>${repeated.replace(/<a class="project-visit"/g,'<a tabindex="-1" class="project-visit"')}</div></div></div>`;
   };
   const content=k==="projects"
-    ? (projectMarkup||'<p class="project-empty">Projects will appear here as they are released.</p>')
+    ? (DATA.projects.length?`<div class="portfolio-marquee">${makeRow("right",projectCards)}${makeRow("left",projectCards)}</div>`:'<p class="project-empty">Projects will appear here as they are released.</p>')
     : `<div class="portfolio-marquee">${makeRow("right")}${makeRow("left")}</div>`;
   box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(DATA[k].length).padStart(2,"0")}</strong><span>WORKS</span></div></div>
   ${content}
