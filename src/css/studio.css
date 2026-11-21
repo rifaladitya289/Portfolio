@@ -1066,3 +1066,11 @@ body{overflow-x:hidden;overflow-y:visible;min-height:100vh}
  .marquee-window{mask-image:none}
  .work-image--webmotion .art-window{width:72%;height:62%}
 }
+
+/* Collection rail: continuous auto-glide with a real scrollable track */
+.marquee-window{overflow-x:auto!important;overflow-y:hidden!important;touch-action:pan-y;scroll-behavior:auto}
+.marquee-track{display:flex!important;position:relative;width:max-content!important;min-width:0;max-width:none;transform:none!important;animation:none!important;will-change:auto}
+.marquee-group{display:flex!important;flex:0 0 auto;align-items:stretch}
+.marquee-group--clone{pointer-events:none;user-select:none}
+.marquee-group--clone a{pointer-events:none}
+@media(prefers-reduced-motion:reduce){.marquee-group--clone{display:none!important}}
