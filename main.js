@@ -3,7 +3,7 @@ const DATA = {
   projects:[{
     t:"WebMotion",
     type:"WEB DEVELOPMENT · DEVELOPER TOOL",
-    d:"A responsive website preview tool for exploring layouts across desktop, laptop, tablet, and mobile viewports.",
+    d:"I built WebMotion as a focused workspace for previewing websites across screen sizes and recording the details that matter during a manual review.",
     attribution:"A product by Gallagher's Studio",
     live:"https://rifaladitya289.github.io/WebMotion/"
   }],
@@ -285,7 +285,7 @@ function showTab(k){
   $$("#tabs button").forEach(b=>{const active=b.dataset.tab===k;b.classList.toggle("on",active);b.setAttribute("aria-selected",String(active))});
   const box=$("#stageP");
   const names={projects:"Digital Projects",designs:"Interface & Experience Design",showcase:"Client Showcase"};
-  const descriptions={projects:"A collection of digital products and tools built through experimentation and development.",designs:"A space reserved for future interface and experience designs.",showcase:"A space reserved for commissioned client projects."};
+  const descriptions={projects:"Projects shaped by curiosity, practical problem-solving, and the work of turning an idea into something people can use.",designs:"A closer look at the visual decisions, interface details, and experiences behind selected work.",showcase:"Selected work made for others. This collection will grow as client projects come along."};
   const projectCards=DATA.projects.length?DATA.projects.map((item,index)=>`
     <article class="work-card work-card--placeholder work-card--projects project-marquee-card" aria-label="${esc(item.t)} project">
       <div class="work-image work-image--projects project-marquee-art">
@@ -300,7 +300,7 @@ function showTab(k){
         <span class="project-marquee-credit">${esc(item.attribution)}</span>
         <a class="project-visit" href="${item.live}" target="_blank" rel="noopener noreferrer">Live Demo <span>↗</span></a>
       </div>
-    </article>`).join(""):'<p class="project-empty">Projects will appear here as they are released.</p>';
+    </article>`).join(""):'<p class="project-empty">The next project will appear here when it is ready to share.</p>';
   const makeRow=(direction,cardsMarkup)=> {
     const cards=cardsMarkup||Array.from({length:3},(_,n)=>`<div class="work-card work-card--${k} work-card--placeholder" tabindex="0" role="group" aria-label="Preview ${n+1} — ${names[k]}">
       <div class="work-image work-image--${k}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${n+1}</span></div>
@@ -309,7 +309,7 @@ function showTab(k){
     return `<div class="marquee-window marquee-window--${direction}" role="region" aria-label="${direction==="right"?"Portfolio previews moving right":"Portfolio previews moving left"}" tabindex="0"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${repeated}</div><div class="marquee-group" aria-hidden="true" inert>${repeated.replace(/<a class="project-visit"/g,'<a tabindex="-1" class="project-visit"')}</div></div></div>`;
   };
   const content=k==="projects"
-    ? (DATA.projects.length?`<div class="portfolio-marquee">${makeRow("right",projectCards)}${makeRow("left",projectCards)}</div>`:'<p class="project-empty">Projects will appear here as they are released.</p>')
+    ? (DATA.projects.length?`<div class="portfolio-marquee">${makeRow("right",projectCards)}${makeRow("left",projectCards)}</div>`:'<p class="project-empty">The next project will appear here when it is ready to share.</p>')
     : `<div class="portfolio-marquee">${makeRow("right")}${makeRow("left")}</div>`;
   box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(DATA[k].length).padStart(2,"0")}</strong><span>WORKS</span></div></div>
   ${content}
@@ -361,18 +361,18 @@ const KEY="portfolio-komentar-v2";
 function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
 function renderC(){
   const a=load();$("#cn").textContent=a.length;
-  $("#cmts").innerHTML=a.length?a.map(c=>`<div class="c"><div class="av">${c.p?`<img src="${c.p}" alt="">`:esc(c.n.slice(0,1).toUpperCase())}</div><div class="t"><div><b>${esc(c.n)}</b><small>${esc(c.d)}</small></div><p>${esc(c.c)}</p></div></div>`).join(""):'<p class="s" style="color:#8a95ad;font-size:.85rem">Belum ada komentar. Jadilah yang pertama!</p>';
+  $("#cmts").innerHTML=a.length?a.map(c=>`<div class="c"><div class="av">${c.p?`<img src="${c.p}" alt="">`:esc(c.n.slice(0,1).toUpperCase())}</div><div class="t"><div><b>${esc(c.n)}</b><small>${esc(c.d)}</small></div><p>${esc(c.c)}</p></div></div>`).join(""):'<p class="s" style="color:#8a95ad;font-size:.85rem">No notes yet. You can be the first to leave one.</p>';
 }
 function shrink(file){return new Promise(res=>{
   if(!file||file.size>1048576)return res("");
   const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement("canvas");c.width=c.height=64;const x=c.getContext("2d"),s=Math.min(im.width,im.height);x.drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,64,64);res(c.toDataURL("image/jpeg",.8))};im.onerror=()=>res("");im.src=fr.result};fr.onerror=()=>res("");fr.readAsDataURL(file)})}
-$("#cmtForm input[type=file]").addEventListener("change",e=>{const f=e.target.files[0];$("#fname").textContent=f?(f.size>1048576?"File lebih dari 1MB":f.name):"Choose Profile Photo"});
+$("#cmtForm input[type=file]").addEventListener("change",e=>{const f=e.target.files[0];$("#fname").textContent=f?(f.size>1048576?"File exceeds 1 MB":f.name):"Choose a profile photo"});
 $("#cmtForm").addEventListener("submit",async e=>{
   e.preventDefault();const f=e.target,p=await shrink(f.p.files[0]),a=load();
   a.unshift({n:f.n.value,c:f.c.value,p,d:new Date().toLocaleDateString("id-ID",{day:"2-digit",month:"short",year:"numeric"})});
   let saved=false;
   try{localStorage.setItem(KEY,JSON.stringify(a));saved=true}catch(x){}
-  f.reset();$("#fname").textContent="Choose Profile Photo";renderC();
+  f.reset();$("#fname").textContent="Choose a profile photo";renderC();
   if(saved)document.dispatchEvent(new Event("gs:success"));
 });
 (function(){
@@ -397,8 +397,8 @@ $("#cmtForm").addEventListener("submit",async e=>{
  },{passive:true});
  form.addEventListener("submit",e=>{
   e.preventDefault();update();
-  if(!form.checkValidity()){form.reportValidity();if(feedback)feedback.textContent="Periksa kembali data yang masih belum valid.";return;}
-  if(feedback)feedback.textContent="Semua data sudah valid. Form ini belum terhubung ke layanan email, jadi pesan belum dikirim.";
+  if(!form.checkValidity()){form.reportValidity();if(feedback)feedback.textContent="A few details need another look before you continue.";return;}
+  if(feedback)feedback.textContent="Your details look complete. This form is not connected to an email service yet, so your message has not been sent.";
  });
  update();
 })();
