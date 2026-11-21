@@ -305,21 +305,42 @@ function showTab(k){
   const names={projects:"Digital Projects",designs:"Interface & Experience Design",showcase:"Client Showcase"};
   const descriptions={projects:"A growing collection of digital products built with curiosity and intent.",designs:"Selected interface work, visual decisions, and product experiences.",showcase:"Client and collaborative work will appear here when available."};
   const entries={
-    projects:[{title:"WebMotion",meta:"WEB DEVELOPMENT · DEVELOPER TOOL",desc:"A responsive workspace for previewing websites across screen sizes.",href:"pages/project-detail.html",kind:"available"}],
-    designs:[{title:"WebMotion Design",meta:"PRODUCT INTERFACE · UI DESIGN",desc:"The interface and visual system behind WebMotion.",href:"pages/design-detail.html",kind:"available"}],
-    showcase:[]
+    projects:[
+      {title:"WebMotion",meta:"WEB DEVELOPMENT · DEVELOPER TOOL",desc:"A responsive workspace for previewing websites across screen sizes.",href:"pages/project-detail.html",kind:"available"},
+      {title:"Future Project",meta:"PROJECT SLOT 02",desc:"A space reserved for the next digital product.",kind:"placeholder"},
+      {title:"Future Project",meta:"PROJECT SLOT 03",desc:"A space reserved for a project currently in development.",kind:"placeholder"},
+      {title:"Future Project",meta:"PROJECT SLOT 04",desc:"A new project will appear here when it is ready.",kind:"placeholder"}
+    ],
+    designs:[
+      {title:"WebMotion Design",meta:"PRODUCT INTERFACE · UI DESIGN",desc:"The interface and visual system behind WebMotion.",href:"pages/design-detail.html",kind:"available"},
+      {title:"Future Design",meta:"DESIGN SLOT 02",desc:"Reserved for a future interface or visual exploration.",kind:"placeholder"},
+      {title:"Future Design",meta:"DESIGN SLOT 03",desc:"A place for another design collection when ready.",kind:"placeholder"},
+      {title:"Future Design",meta:"DESIGN SLOT 04",desc:"New visual work will be added here in the future.",kind:"placeholder"}
+    ],
+    showcase:[
+      {title:"Available Soon",meta:"SHOWCASE SLOT 01",desc:"A space reserved for future client or collaborative work.",kind:"placeholder"},
+      {title:"Available Soon",meta:"SHOWCASE SLOT 02",desc:"Client work will appear here when it is ready to share.",kind:"placeholder"},
+      {title:"Available Soon",meta:"SHOWCASE SLOT 03",desc:"Reserved for a future collaboration.",kind:"placeholder"}
+    ]
   };
-  const cards=entries[k].map((item,index)=>`
-    <a class="work-card work-card--placeholder collection-card is-available" href="${item.href}">
-      <div class="work-image work-image--webmotion collection-card-art" aria-hidden="true"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">01</span><span class="collection-status">OPEN COLLECTION</span></div>
-      <div class="collection-card-copy"><small>${esc(item.meta)}</small><strong>${esc(item.title)}</strong><p>${esc(item.desc)}</p><span class="collection-card-link">Explore details ↗</span></div>
-    </a>`).join("");
-  const empty=k==="showcase"?'<div class="collection-empty"><span>COLLECTION 03</span><strong>Nothing published here yet.</strong><p>Client and collaborative work will appear when a project is ready to share.</p></div>':"";
-  const group=cards;
-  const row=cards?`<div class="marquee-window" role="region" aria-label="${names[k]} collection" tabindex="0"><div class="marquee-track"><div class="marquee-group">${group}</div></div></div>`:empty;
-  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(entries[k].length).padStart(2,"0")}</strong><span>AVAILABLE</span></div></div><div class="portfolio-marquee">${row}</div><div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>SELECTED WORK · ${entries[k].length?"ONE FEATURED COLLECTION":"UPDATES WHEN READY"}</span></div></div>`;
+  const cards=entries[k].map((item,index)=>{
+    const number=String(index+1).padStart(2,"0");
+    if(item.kind==="available")return `
+      <a class="work-card work-card--placeholder collection-card is-available" href="${item.href}">
+        <div class="work-image work-image--webmotion collection-card-art" aria-hidden="true"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">${number}</span><span class="collection-status">OPEN COLLECTION</span></div>
+        <div class="collection-card-copy"><small>${esc(item.meta)}</small><strong>${esc(item.title)}</strong><p>${esc(item.desc)}</p><span class="collection-card-link">Explore details ↗</span></div>
+      </a>`;
+    return `
+      <article class="work-card work-card--placeholder collection-card is-placeholder" aria-label="${esc(item.meta)} — not published">
+        <div class="work-image work-image--future" aria-hidden="true"><span class="placeholder-folder-icon"><i></i></span><span class="work-index">${number}</span><span class="collection-status">IN THE WORKS</span><span class="placeholder-watermark">COMING<br>SOON</span></div>
+        <div class="collection-card-copy"><small>${esc(item.meta)}</small><strong>${esc(item.title)}</strong><p>${esc(item.desc)}</p><span class="collection-card-link collection-card-link--muted">Not published yet</span></div>
+      </article>`;
+  }).join("");
+  const availableCount=entries[k].filter(item=>item.kind==="available").length;
+  const empty="";
+  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(availableCount).padStart(2,"0")}</strong><span>AVAILABLE</span></div></div><div class="portfolio-marquee">${row}</div><div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>SELECTED WORK · ${availableCount?"FEATURED WORK + FUTURE SLOTS":"FUTURE COLLECTION SLOTS"}</span></div></div>`;
   box.classList.remove("portfolio-shimmer-in");void box.offsetWidth;box.classList.add("portfolio-shimmer-in");
-  const count=$("#portfolioCount");if(count)count.textContent=String(entries[k].length).padStart(2,"0");
+  const count=$("#portfolioCount");if(count)count.textContent=String(availableCount).padStart(2,"0");
   $$(".folder").forEach(folder=>{if(folder.dataset.tab===k){folder.setAttribute("aria-current","true")}else folder.removeAttribute("aria-current")});
 }
 document.addEventListener("click",e=>{
