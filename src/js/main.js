@@ -372,7 +372,7 @@ function showTab(k){
   setCollectionRail(box.querySelector(".marquee-window"));
   box.classList.remove("portfolio-shimmer-in");void box.offsetWidth;box.classList.add("portfolio-shimmer-in");
   const count=$("#portfolioCount");if(count)count.textContent=String(availableCount).padStart(2,"0");
-  $$$(".folder").forEach(folder=>{if(folder.dataset.tab===k){folder.setAttribute("aria-current","true")}else folder.removeAttribute("aria-current")});
+  $$(".folder").forEach(folder=>{if(folder.dataset.tab===k){folder.setAttribute("aria-current","true")}else folder.removeAttribute("aria-current")});
 }
 document.addEventListener("click",e=>{
   const explore=e.target instanceof Element?e.target.closest('.portfolio-banner-bottom a[href="#stageP"]'):null;
