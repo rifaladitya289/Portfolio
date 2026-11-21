@@ -7,7 +7,7 @@ const DATA = {
     attribution:"A product by Gallagher's Studio",
     live:"https://rifaladitya289.github.io/WebMotion/"
   }],
-  designs:[],
+  designs:[{t:"WebMotion Design",type:"PRODUCT INTERFACE · UI DESIGN",d:"A visual record of the WebMotion interface, its responsive layouts, and the tools that shape the review experience.",attribution:"A product by Gallagher's Studio"}],
   showcase:[]
 };
 const SOCIAL_NOTE="";
@@ -293,14 +293,14 @@ function showTab(k){
   };
   const cards=entries[k].map((item,index)=>`
     <a class="work-card work-card--placeholder collection-card ${item.kind==="available"?"is-available":"is-coming-soon"}" ${item.href?'href="'+item.href+'"':'aria-disabled="true"'}>
-      <div class="work-image work-image--${k} collection-card-art"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${index+1}</span><span class="collection-status">${item.kind==="available"?"OPEN COLLECTION":"COMING SOON"}</span></div>
+      <div class="work-image ${item.kind==="available"?"work-image--webmotion":"work-image--"+k} collection-card-art"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${index+1}</span><span class="collection-status">${item.kind==="available"?"OPEN COLLECTION":"COMING SOON"}</span></div>
       <div class="collection-card-copy"><small>${esc(item.meta)}</small><strong>${esc(item.title)}</strong><p>${esc(item.desc)}</p><span class="collection-card-link">${item.href?"Explore details ↗":"In the works"}</span></div>
     </a>`).join("");
   const group=cards;
   const makeRow=(direction)=>`<div class="marquee-window marquee-window--${direction}" role="region" aria-label="Swipe or drag to browse ${k}" tabindex="0"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${group}</div><div class="marquee-group" aria-hidden="true" inert>${group.replace(/<a /g,'<a tabindex="-1" ')}</div></div></div>`;
-  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(DATA[k].length).padStart(2,"0")}</strong><span>AVAILABLE</span></div></div><div class="portfolio-marquee">${makeRow("right")}${makeRow("left")}</div><div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>SELECTED WORK · CONTINUOUS MOTION</span></div></div>`;
+  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(entries[k].filter(item=>item.kind==="available").length).padStart(2,"0")}</strong><span>AVAILABLE</span></div></div><div class="portfolio-marquee">${makeRow("right")}${makeRow("left")}</div><div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>SELECTED WORK · CONTINUOUS MOTION</span></div></div>`;
   box.classList.remove("portfolio-shimmer-in");void box.offsetWidth;box.classList.add("portfolio-shimmer-in");
-  const count=$("#portfolioCount");if(count)count.textContent=String(DATA[k].length).padStart(2,"0");
+  const count=$("#portfolioCount");if(count)count.textContent=String(entries[k].filter(item=>item.kind==="available").length).padStart(2,"0");
 }
 $("#tabs").addEventListener("click",e=>{const button=e.target.closest("button[data-tab]");if(button&&$("#tabs").contains(button))showTab(button.dataset.tab)});
 $(".folder").forEach(b=>b.addEventListener("click",()=>{
