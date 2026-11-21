@@ -285,39 +285,21 @@ function showTab(k){
   $$("#tabs button").forEach(b=>{const active=b.dataset.tab===k;b.classList.toggle("on",active);b.setAttribute("aria-selected",String(active))});
   const box=$("#stageP");
   const names={projects:"Digital Projects",designs:"Interface & Experience Design",showcase:"Client Showcase"};
-  const descriptions={projects:"Projects shaped by curiosity, practical problem-solving, and the work of turning an idea into something people can use.",designs:"A closer look at the visual decisions, interface details, and experiences behind selected work.",showcase:"Selected work made for others. This collection will grow as client projects come along."};
-  const projectCards=DATA.projects.length?DATA.projects.map((item,index)=>`
-    <article class="work-card work-card--placeholder work-card--projects project-marquee-card" aria-label="${esc(item.t)} project">
-      <div class="work-image work-image--projects project-marquee-art">
-        <span class="project-preview-orbit"></span>
-        <div class="project-preview-window"><div class="project-preview-bar"><i></i><i></i><i></i><b>WEBMOTION</b></div><div class="project-preview-screen"><span>PREVIEW.</span><strong>COMPARE.</strong><span>RECORD.</span><i></i></div></div>
-        <span class="work-index">0${index+1}</span>
-      </div>
-      <div class="project-marquee-info">
-        <small>${esc(item.type)}</small>
-        <strong>${esc(item.t)}</strong>
-        <p>${esc(item.d)}</p>
-        <span class="project-marquee-credit">${esc(item.attribution)}</span>
-        <a class="project-visit" href="${item.live}" target="_blank" rel="noopener noreferrer">Live Demo <span>↗</span></a>
-      </div>
-    </article>`).join(""):'<p class="project-empty">The next project will appear here when it is ready to share.</p>';
-  const makeRow=(direction,cardsMarkup)=> {
-    const cards=cardsMarkup||Array.from({length:3},(_,n)=>`<div class="work-card work-card--${k} work-card--placeholder" tabindex="0" role="group" aria-label="Preview ${n+1} — ${names[k]}">
-      <div class="work-image work-image--${k}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${n+1}</span></div>
-    </div>`).join("");
-    const repeated=cardsMarkup?cardsMarkup:cards;
-    return `<div class="marquee-window marquee-window--${direction}" role="region" aria-label="${direction==="right"?"Portfolio previews moving right":"Portfolio previews moving left"}" tabindex="0"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${repeated}</div><div class="marquee-group" aria-hidden="true" inert>${repeated.replace(/<a class="project-visit"/g,'<a tabindex="-1" class="project-visit"')}</div></div></div>`;
+  const descriptions={projects:"A growing collection of digital products built with curiosity and intent.",designs:"Selected interface work, visual decisions, and product experiences.",showcase:"Client and collaborative work will appear here when available."};
+  const entries={
+    projects:[{title:"WebMotion",meta:"WEB DEVELOPMENT · DEVELOPER TOOL",desc:"A responsive workspace for previewing websites across screen sizes.",href:"project-detail.html",kind:"available"},{title:"Project 02",meta:"NEXT RELEASE",desc:"The next project will be introduced here when it is ready.",kind:"soon"},{title:"Project 03",meta:"IN DEVELOPMENT",desc:"A future project. Details will be added after it exists.",kind:"soon"}],
+    designs:[{title:"WebMotion Design",meta:"PRODUCT INTERFACE · UI DESIGN",desc:"The interface and visual system behind WebMotion.",href:"design-detail.html",kind:"available"},{title:"Design Collection 02",meta:"UPCOMING COLLECTION",desc:"More selected design work will be added here.",kind:"soon"},{title:"Design Collection 03",meta:"UPCOMING COLLECTION",desc:"A future collection, shown when work is ready.",kind:"soon"}],
+    showcase:[{title:"Client Showcase",meta:"COMING SOON",desc:"Client and collaboration work will be featured here when available.",kind:"soon"},{title:"Showcase 02",meta:"COMING SOON",desc:"No client work has been published here yet.",kind:"soon"},{title:"Showcase 03",meta:"COMING SOON",desc:"This space is reserved for future collaborations.",kind:"soon"}]
   };
-  const content=k==="projects"
-    ? (DATA.projects.length?`<div class="portfolio-marquee">${makeRow("right",projectCards)}${makeRow("left",projectCards)}</div>`:'<p class="project-empty">The next project will appear here when it is ready to share.</p>')
-    : `<div class="portfolio-marquee">${makeRow("right")}${makeRow("left")}</div>`;
-  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(DATA[k].length).padStart(2,"0")}</strong><span>WORKS</span></div></div>
-  ${content}
-  <div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>${k==="projects"?"SELECTED DIGITAL PROJECTS":"CONTINUOUS MOTION STUDY"}</span></div></div>`;
-  box.classList.remove("portfolio-shimmer-in");
-  void box.offsetWidth;
-  box.classList.add("portfolio-shimmer-in");
-  box.addEventListener("animationend",e=>{if(e.animationName==="portfolio-shimmer")box.classList.remove("portfolio-shimmer-in")},{once:true});
+  const cards=entries[k].map((item,index)=>`
+    <a class="work-card work-card--placeholder collection-card ${item.kind==="available"?"is-available":"is-coming-soon"}" ${item.href?'href="'+item.href+'"':'aria-disabled="true"'}>
+      <div class="work-image work-image--${k} collection-card-art"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${index+1}</span><span class="collection-status">${item.kind==="available"?"OPEN COLLECTION":"COMING SOON"}</span></div>
+      <div class="collection-card-copy"><small>${esc(item.meta)}</small><strong>${esc(item.title)}</strong><p>${esc(item.desc)}</p><span class="collection-card-link">${item.href?"Explore details ↗":"In the works"}</span></div>
+    </a>`).join("");
+  const group=cards;
+  const makeRow=(direction)=>`<div class="marquee-window marquee-window--${direction}" role="region" aria-label="Swipe or drag to browse ${k}" tabindex="0"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${group}</div><div class="marquee-group" aria-hidden="true" inert>${group.replace(/<a /g,'<a tabindex="-1" ')}</div></div></div>`;
+  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(DATA[k].length).padStart(2,"0")}</strong><span>AVAILABLE</span></div></div><div class="portfolio-marquee">${makeRow("right")}${makeRow("left")}</div><div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>SELECTED WORK · CONTINUOUS MOTION</span></div></div>`;
+  box.classList.remove("portfolio-shimmer-in");void box.offsetWidth;box.classList.add("portfolio-shimmer-in");
   const count=$("#portfolioCount");if(count)count.textContent=String(DATA[k].length).padStart(2,"0");
 }
 $("#tabs").addEventListener("click",e=>{const button=e.target.closest("button[data-tab]");if(button&&$("#tabs").contains(button))showTab(button.dataset.tab)});
@@ -330,32 +312,33 @@ $(".folder").forEach(b=>b.addEventListener("click",()=>{
 }));
 showTab("projects");
 
-/* Manual drag for mouse, pen, and touch; automatic marquee resumes after release. */
+/* Manual swipe/drag: pause the CSS marquee while the user controls it. */
 (function(){
-  let drag=null;
-  document.addEventListener("pointerdown",e=>{
-    const row=e.target instanceof Element?e.target.closest(".marquee-window"):null;
-    if(!row||e.button!==0||e.target.closest("a,button"))return;
-    drag={row,id:e.pointerId,startX:e.clientX,startScroll:row.scrollLeft,moved:false};
-    row.classList.add("is-dragging");
-    row.setPointerCapture?.(e.pointerId);
-  });
-  document.addEventListener("pointermove",e=>{
-    if(!drag||e.pointerId!==drag.id)return;
-    const dx=e.clientX-drag.startX;
-    if(Math.abs(dx)>4)drag.moved=true;
-    if(drag.moved)drag.row.scrollLeft=drag.startScroll-dx;
-  });
-  function finish(e){
-    if(!drag||e.pointerId!==drag.id)return;
-    const row=drag.row;
-    row.classList.remove("is-dragging");
-    drag=null;
-  }
-  document.addEventListener("pointerup",finish);
-  document.addEventListener("pointercancel",finish);
+ let drag=null;
+ document.addEventListener("pointerdown",e=>{
+  const row=e.target instanceof Element?e.target.closest(".marquee-window"):null;
+  if(!row||e.button!==0||e.target.closest("a,button"))return;
+  drag={row,id:e.pointerId,x:e.clientX,scroll:row.scrollLeft,moved:false};
+  row.classList.add("is-dragging");
+  row.querySelector(".marquee-track")?.style.setProperty("animation-play-state","paused");
+  row.setPointerCapture?.(e.pointerId);
+ });
+ document.addEventListener("pointermove",e=>{
+  if(!drag||drag.id!==e.pointerId)return;
+  const dx=e.clientX-drag.x;
+  if(Math.abs(dx)>4)drag.moved=true;
+  if(drag.moved)drag.row.scrollLeft=drag.scroll-dx;
+ });
+ function finish(e){
+  if(!drag||drag.id!==e.pointerId)return;
+  const row=drag.row;
+  row.classList.remove("is-dragging");
+  row.querySelector(".marquee-track")?.style.removeProperty("animation-play-state");
+  drag=null;
+ }
+ document.addEventListener("pointerup",finish);
+ document.addEventListener("pointercancel",finish);
 })();
-
 // ---------- Kontak & komentar (sementara disimpan di browser) ----------
 const KEY="portfolio-komentar-v2";
 function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
