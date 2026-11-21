@@ -192,6 +192,52 @@ footer{padding:26px var(--page-pad) 36px;border-top:1px solid var(--line);color:
 .folder:hover{transform:translateY(-5px)}
 .folder:hover .back{transform:rotate(0) translateY(-5px);border-color:var(--gold)}
 
+/* Interactive archive folders — visible previews with a gentle lift */
+.folder .peek{
+  overflow:visible;z-index:1;transform:translateY(0) rotate(1deg);
+  transition:transform .65s cubic-bezier(.2,.8,.2,1),border-color .45s ease,background .45s ease;
+  background:linear-gradient(140deg,rgba(255,255,255,.045),rgba(10,12,15,.55));
+}
+.folder-preview{position:absolute;inset:9px 10px 12px;display:flex;flex-direction:column;gap:8px;transform:translateY(0);transition:transform .65s cubic-bezier(.2,.8,.2,1)}
+.folder-preview-screen{position:relative;flex:1;min-height:0;overflow:hidden;border:1px solid rgba(201,167,123,.24);background:linear-gradient(145deg,#1a1e26,#090b10);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.folder-screen-bar{height:18px;display:flex;align-items:center;gap:4px;padding:0 7px;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035)}
+.folder-screen-bar i{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.7}
+.folder-screen-bar b{margin-left:5px;color:rgba(240,236,228,.55);font:500 6px var(--sans);letter-spacing:.1em}
+.folder-screen-body{position:absolute;inset:18px 0 0;padding:12px 10px;background:radial-gradient(ellipse at 78% 30%,rgba(102,111,177,.2),transparent 48%)}
+.folder-screen-body>span,.folder-screen-body>small{display:block;color:var(--gold);font:600 6px var(--sans);letter-spacing:.15em}
+.folder-screen-body strong{display:block;margin:8px 0 7px;color:#f0ece4;font:500 clamp(15px,2vw,23px)/.9 var(--serif);letter-spacing:-.03em}
+.folder-screen-body strong span{color:#aeb8ef}
+.folder-device-row{display:flex;align-items:end;gap:5px;height:25px;margin:4px 0}
+.folder-device-row i{display:block;width:24%;height:22px;border:1px solid rgba(201,167,123,.45);border-radius:3px;background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(70,80,120,.12))}
+.folder-device-row i:nth-child(2){height:17px;width:15%}
+.folder-device-row i:nth-child(3){height:20px;width:19%}
+.folder-design-screen{background:radial-gradient(ellipse at 80% 20%,rgba(201,167,123,.2),transparent 50%),linear-gradient(145deg,#202027,#090b10)}
+.folder-design-screen strong{font-size:clamp(16px,2.2vw,25px)}
+.folder-design-lines{display:flex;gap:4px;margin:7px 0}
+.folder-design-lines i{height:3px;width:24%;background:rgba(201,167,123,.5)}
+.folder-preview-caption{display:flex;justify-content:space-between;gap:5px;color:var(--gold);font:600 6px var(--sans);letter-spacing:.12em}
+.folder-preview-caption span{color:var(--muted);text-align:right}
+.folder.is-peeking .peek,.folder:focus-visible .peek,.folder.is-opening .peek{transform:translateY(-17px) rotate(0);border-color:var(--gold);background:rgba(201,167,123,.08)}
+.folder.is-peeking .folder-preview,.folder:focus-visible .folder-preview,.folder.is-opening .folder-preview{transform:translateY(-4px)}
+.folder.is-opening .back{transform:rotate(0) translateY(-9px);border-color:var(--gold)}
+.folder.is-opening .front{transform:translateY(2px)}
+.folder .front{z-index:3;transition:transform .45s ease}
+.folder .go{transition:transform .35s ease}
+.folder:hover .go,.folder.is-opening .go{transform:translate(3px,-3px)}
+@keyframes folderPreviewFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.folder-preview-screen{animation:folderPreviewFloat 5s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.folder-preview-screen{animation:none}.folder .peek,.folder-preview,.folder .front{transition:none}}
+@media(max-width:640px){.folders{grid-template-columns:1fr;gap:14px}.folder{min-height:168px}.folder .peek{inset:32px 10px 10px}.folder-preview{inset:8px 9px 10px}.folder-preview-screen{max-width:100%}}
+
+/* Collection artwork animates on its own; navigation clicks only change sections */
+.collection-card-art .art-orbit{animation:collectionOrbit 18s linear infinite}
+.collection-card-art .art-window{animation:collectionWindow 5.5s ease-in-out infinite}
+.collection-card-art .work-index{animation:collectionIndex 4.5s ease-in-out infinite}
+@keyframes collectionOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes collectionWindow{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-7px)}}
+@keyframes collectionIndex{0%,100%{opacity:.65}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.collection-card-art .art-orbit,.collection-card-art .art-window,.collection-card-art .work-index{animation:none}}
+
 /* Portfolio — collection index, no dashboard cards */
 #portfolio{padding-top:132px}
 .portfolio-heading{padding:0 0 24px;border-bottom:1px solid var(--line)}
