@@ -249,6 +249,24 @@ addEventListener("load",fitLists);
 addEventListener("resize",fitLists);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitLists);
 
+// ---------- Folder previews: show real collection content before opening ---------- 
+(function(){
+  const previews={
+    projects:{label:"WEBMOTION",sub:"WEB DEVELOPMENT",screen:"<div class='folder-screen-bar'><i></i><i></i><i></i><b>WebMotion</b></div><div class='folder-screen-body'><span>RESPONSIVE PREVIEW</span><strong>Web<span>Motion</span></strong><div class='folder-device-row'><i></i><i></i><i></i></div><small>DESKTOP · TABLET · MOBILE</small></div>"},
+    designs:{label:"WEBMOTION UI",sub:"INTERFACE DESIGN",screen:"<div class='folder-screen-bar'><i></i><i></i><i></i><b>Design system</b></div><div class='folder-screen-body folder-design-screen'><span>PRODUCT INTERFACE</span><strong>Designed<br>to review.</strong><div class='folder-design-lines'><i></i><i></i><i></i></div><small>LAYOUT · COMPONENTS · DETAILS</small></div>"},
+    showcase:{label:"COMING NEXT",sub:"CLIENT COLLECTION",screen:"<div class='folder-screen-bar'><i></i><i></i><i></i><b>Showcase</b></div><div class='folder-screen-body'><span>COLLABORATIVE WORK</span><strong>Next<br>chapter.</strong><small>NEW WORK WILL APPEAR HERE</small></div>"}
+  };
+  $(".folder").forEach(folder=>{
+    const data=previews[folder.dataset.tab],peek=$(".peek",folder);
+    if(!data||!peek)return;
+    peek.innerHTML=`<div class="folder-preview"><div class="folder-preview-screen">${data.screen}</div><div class="folder-preview-caption"><b>${data.label}</b><span>${data.sub}</span></div></div>`;
+    folder.setAttribute("aria-expanded","false");
+    folder.addEventListener("pointerenter",e=>{if(e.pointerType==="mouse")folder.classList.add("is-peeking")});
+    folder.addEventListener("pointerleave",()=>folder.classList.remove("is-peeking"));
+    folder.addEventListener("focus",()=>folder.classList.add("is-peeking"));
+    folder.addEventListener("blur",()=>folder.classList.remove("is-peeking"));
+  });
+})();
 // ---------- Portfolio folders: counts only; artwork is generated with CSS ----------
 ["projects","designs","showcase"].forEach(k=>{const count=$("#n-"+k);if(count)count.textContent=DATA[k].length;});
 const $lb=$("#lb");
@@ -314,7 +332,9 @@ document.addEventListener("click",e=>{
 $("#tabs").addEventListener("click",e=>{const button=e.target.closest("button[data-tab]");if(button&&$("#tabs").contains(button))showTab(button.dataset.tab)});
 $(".folder").forEach(b=>b.addEventListener("click",()=>{
   b.classList.add("is-opening");
-  window.setTimeout(()=>b.classList.remove("is-opening"),980);
+  b.setAttribute("aria-expanded","true");
+  $(".folder").forEach(folder=>{if(folder!==b){folder.classList.remove("is-opening");folder.setAttribute("aria-expanded","false")}});
+  window.setTimeout(()=>{b.classList.remove("is-opening");b.setAttribute("aria-expanded","false")},1450);
   showTab(b.dataset.tab);
   const index=panels.findIndex(p=>p.id==="portfolio");
   if(index>=0)goTo("portfolio");
