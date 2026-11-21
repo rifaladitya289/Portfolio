@@ -265,6 +265,21 @@ footer{padding:26px var(--page-pad) 36px;border-top:1px solid var(--line);color:
 }
 @media(prefers-reduced-motion:reduce){.marquee-track{animation:none!important}}
 
+/* Honest future slots: visual placeholders, not fabricated projects */
+.work-card.is-placeholder{cursor:default;opacity:.76}
+.work-card.is-placeholder:hover{transform:none;border-color:var(--line)}
+.work-image--future{
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 50% 45%,rgba(201,167,123,.13),transparent 45%),linear-gradient(145deg,#191b20,#090a0d)
+}
+.placeholder-folder-icon{position:relative;display:block;width:66px;height:48px;border:1px solid rgba(201,167,123,.42);border-radius:4px 7px 7px 7px;background:linear-gradient(145deg,rgba(201,167,123,.13),rgba(255,255,255,.015));transform:translateY(2px);transition:transform .55s cubic-bezier(.2,.8,.2,1),border-color .4s ease}
+.placeholder-folder-icon::before{content:"";position:absolute;left:0;top:-9px;width:27px;height:9px;border:1px solid rgba(201,167,123,.42);border-bottom:0;border-radius:4px 4px 0 0;background:rgba(201,167,123,.1)}
+.placeholder-folder-icon i{position:absolute;inset:8px 10px;border:1px dashed rgba(240,236,228,.18);border-radius:2px}
+.work-card.is-placeholder:hover .placeholder-folder-icon{transform:translateY(-5px);border-color:var(--gold)}
+.placeholder-watermark{position:absolute;right:16px;bottom:14px;color:rgba(240,236,228,.2);font:500 9px/1.15 var(--sans);letter-spacing:.2em;text-align:right}
+.collection-card-link--muted{color:var(--muted);opacity:.75}
+.work-card.is-placeholder .collection-status{color:var(--muted)}
+
 /* Portfolio — collection index, no dashboard cards */
 #portfolio{padding-top:132px}
 .portfolio-heading{padding:0 0 24px;border-bottom:1px solid var(--line)}
