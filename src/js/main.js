@@ -26,7 +26,7 @@ document.documentElement.style.setProperty("--topo-d",topo("#16264d"));
 document.documentElement.style.setProperty("--topo-l",topo("#d3d9e6"));
  
 // ---------- Cek aset gambar (hero, person, about) ----------
-[["assets/bg/poster.jpg","has-hero"],["assets/images/hero-person.png","has-person"],["assets/images/portrait-gw.jpg","has-about"]].forEach(([src,cls])=>{
+[["assets/bg/poster.jpg","has-hero"],["assets/images/portrait-gw.jpg","has-about"]].forEach(([src,cls])=>{
   const im=new Image();im.onload=()=>document.body.classList.add(cls);im.src=src;
 });
 
