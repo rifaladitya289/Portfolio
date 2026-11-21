@@ -330,14 +330,31 @@ $(".folder").forEach(b=>b.addEventListener("click",()=>{
 }));
 showTab("projects");
 
-/* Touch users can pause a moving preview row with a tap, inspect it,
-   then tap the row again to resume. Pointer hover and keyboard focus pause in CSS. */
-document.addEventListener("pointerdown",e=>{
-  if(e.pointerType!=="touch")return;
-  const row=e.target instanceof Element?e.target.closest(".marquee-window"):null;
-  if(!row)return;
-  row.classList.toggle("is-paused");
-});
+/* Manual drag for mouse, pen, and touch; automatic marquee resumes after release. */
+(function(){
+  let drag=null;
+  document.addEventListener("pointerdown",e=>{
+    const row=e.target instanceof Element?e.target.closest(".marquee-window"):null;
+    if(!row||e.button!==0||e.target.closest("a,button"))return;
+    drag={row,id:e.pointerId,startX:e.clientX,startScroll:row.scrollLeft,moved:false};
+    row.classList.add("is-dragging");
+    row.setPointerCapture?.(e.pointerId);
+  });
+  document.addEventListener("pointermove",e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    const dx=e.clientX-drag.startX;
+    if(Math.abs(dx)>4)drag.moved=true;
+    if(drag.moved)drag.row.scrollLeft=drag.startScroll-dx;
+  });
+  function finish(e){
+    if(!drag||e.pointerId!==drag.id)return;
+    const row=drag.row;
+    row.classList.remove("is-dragging");
+    drag=null;
+  }
+  document.addEventListener("pointerup",finish);
+  document.addEventListener("pointercancel",finish);
+})();
 
 // ---------- Kontak & komentar (sementara disimpan di browser) ----------
 const KEY="portfolio-komentar-v2";
