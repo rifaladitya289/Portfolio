@@ -314,10 +314,10 @@ showTab("projects");
 
 /* Manual swipe/drag: pause the CSS marquee while the user controls it. */
 (function(){
- let drag=null;
+ let drag=null,suppressClick=false;
  document.addEventListener("pointerdown",e=>{
   const row=e.target instanceof Element?e.target.closest(".marquee-window"):null;
-  if(!row||e.button!==0||e.target.closest("a,button"))return;
+  if(!row||e.button!==0||e.target.closest("button"))return;
   drag={row,id:e.pointerId,x:e.clientX,scroll:row.scrollLeft,moved:false};
   row.classList.add("is-dragging");
   row.querySelector(".marquee-track")?.style.setProperty("animation-play-state","paused");
@@ -327,7 +327,7 @@ showTab("projects");
   if(!drag||drag.id!==e.pointerId)return;
   const dx=e.clientX-drag.x;
   if(Math.abs(dx)>4)drag.moved=true;
-  if(drag.moved)drag.row.scrollLeft=drag.scroll-dx;
+  if(drag.moved){drag.row.scrollLeft=drag.scroll-dx;suppressClick=true;}
  });
  function finish(e){
   if(!drag||drag.id!==e.pointerId)return;
@@ -338,6 +338,7 @@ showTab("projects");
  }
  document.addEventListener("pointerup",finish);
  document.addEventListener("pointercancel",finish);
+ document.addEventListener("click",e=>{if(!suppressClick)return;suppressClick=false;e.preventDefault();e.stopPropagation();},true);
 })();
 // ---------- Kontak & komentar (sementara disimpan di browser) ----------
 const KEY="portfolio-komentar-v2";
