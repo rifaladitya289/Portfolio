@@ -734,3 +734,112 @@ body.portfolio-modal-open{overflow:hidden}
   .project-preview-screen{padding:20px 16px}
   .project-actions{gap:14px}
 }
+
+
+/* RESPONSIVE REFINEMENT — centered navigation + balanced Contact layout. */
+@media (max-width:900px){
+  /* Keep the brand at the upper-left and place navigation centered beneath it. */
+  #nav{
+    top:58px!important;
+    left:50%!important;
+    right:auto!important;
+    transform:translateX(-50%)!important;
+    width:max-content!important;
+    max-width:calc(100vw - 28px)!important;
+    min-height:44px!important;
+    box-sizing:border-box!important;
+    justify-content:center!important;
+  }
+  #nav a{
+    min-width:0!important;
+    padding:8px clamp(9px,2.2vw,15px)!important;
+    white-space:nowrap!important;
+  }
+  #pill{top:4px!important;height:calc(100% - 8px)!important}
+  #mascot{display:none!important}
+
+  /* Tablet Contact: avoid squeezing the intro and form into narrow columns. */
+  #contact .contact-shell{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:42px!important;
+    width:100%!important;
+    max-width:780px!important;
+    margin-inline:auto!important;
+  }
+  #contact .contact-intro,
+  #contact .contact-right{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+  }
+  #contact .contact-intro{padding-top:12px!important}
+  #contact .contact-index{margin:34px 0 18px!important}
+  #contact .contact-intro h1{
+    font-size:clamp(3.7rem,10vw,6.4rem)!important;
+    line-height:.88!important;
+    overflow-wrap:normal!important;
+  }
+  #contact .contact-lead{max-width:58ch!important}
+  #contact .contact-socials{max-width:560px!important;margin-top:28px!important}
+  #contact .contact-form-card,
+  #contact .contact-lower{width:100%!important;min-width:0!important}
+  #contact .contact-form{width:100%!important;min-width:0!important}
+  #contact .contact-field input,
+  #contact .contact-field textarea{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+}
+
+@media (max-width:640px){
+  #nav{
+    top:58px!important;
+    width:max-content!important;
+    max-width:calc(100vw - 24px)!important;
+    padding:4px!important;
+  }
+  #nav a{padding:8px clamp(8px,2.1vw,11px)!important;font-size:9px!important}
+  #pageTrack>section,
+  #pageTrack>#about,
+  #pageTrack>#portfolio,
+  #pageTrack>#contact{
+    padding-top:128px!important;
+  }
+  #pageTrack>#home{padding-top:156px!important}
+
+  #contact .contact-shell{gap:34px!important}
+  #contact .contact-eyebrow{gap:7px!important;line-height:1.7!important}
+  #contact .contact-status{margin-left:0!important}
+  #contact .contact-intro h1{
+    font-size:clamp(3.25rem,14.2vw,5rem)!important;
+    line-height:.9!important;
+    letter-spacing:-.065em!important;
+  }
+  #contact .contact-lead{font-size:12px!important;line-height:1.85!important}
+  #contact .contact-socials{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:0 18px!important;
+    width:100%!important;
+    max-width:100%!important;
+  }
+  #contact .contact-form-card{
+    padding:0 0 26px!important;
+    border-bottom:1px solid var(--line)!important;
+  }
+  #contact .contact-card-head{align-items:center!important}
+  #contact .contact-form-card h2{font-size:clamp(2.6rem,11vw,3.4rem)!important}
+  #contact .contact-submit-row{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    gap:14px!important;
+  }
+  #contact .contact-send{align-self:flex-start!important}
+  #contact .contact-lower{margin-top:24px!important}
+  #contact .contact-comment-form{width:100%!important;min-width:0!important}
+  #contact .contact-comment-form .file{max-width:100%!important}
+}
