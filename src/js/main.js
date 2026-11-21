@@ -337,7 +337,7 @@ function showTab(k){
       </article>`;
   }).join("");
   const availableCount=entries[k].filter(item=>item.kind==="available").length;
-  const empty="";
+  const row=`<div class="marquee-window" role="region" aria-label="${names[k]} collection" tabindex="0"><div class="marquee-track"><div class="marquee-group">${cards}</div></div></div>`;
   box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(availableCount).padStart(2,"0")}</strong><span>AVAILABLE</span></div></div><div class="portfolio-marquee">${row}</div><div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>SELECTED WORK · ${availableCount?"FEATURED WORK + FUTURE SLOTS":"FUTURE COLLECTION SLOTS"}</span></div></div>`;
   box.classList.remove("portfolio-shimmer-in");void box.offsetWidth;box.classList.add("portfolio-shimmer-in");
   const count=$("#portfolioCount");if(count)count.textContent=String(availableCount).padStart(2,"0");
