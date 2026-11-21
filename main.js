@@ -1,6 +1,13 @@
 // ================= DATA (ganti dengan datamu) =================
 const DATA = {
-  projects:[],
+  projects:[{
+    t:"WebMotion",
+    type:"WEB DEVELOPMENT · DEVELOPER TOOL",
+    d:"A responsive website preview tool for exploring layouts across desktop, laptop, tablet, and mobile viewports.",
+    attribution:"A product by Gallagher's Studio",
+    live:"https://rifaladitya289.github.io/WebMotion/",
+    source:"https://github.com/rifaladitya289/WebMotion"
+  }],
   designs:[],
   showcase:[]
 };
@@ -279,21 +286,44 @@ function showTab(k){
   $$("#tabs button").forEach(b=>{const active=b.dataset.tab===k;b.classList.toggle("on",active);b.setAttribute("aria-selected",String(active))});
   const box=$("#stageP");
   const names={projects:"Digital Projects",designs:"Interface & Experience Design",showcase:"Client Showcase"};
-  const descriptions={projects:"A space reserved for future digital projects.",designs:"A space reserved for future interface and experience designs.",showcase:"A space reserved for commissioned client projects."};
-  const makeRow=(direction,row)=> {
+  const descriptions={projects:"A collection of digital products and tools built through experimentation and development.",designs:"A space reserved for future interface and experience designs.",showcase:"A space reserved for commissioned client projects."};
+  const projects=DATA.projects;
+  const projectMarkup=projects.map((item,index)=>`
+    <article class="featured-work project-feature">
+      <div class="featured-label"><span>0${index+1} / RELEASED PROJECT</span><span>LIVE · 2026</span></div>
+      <div class="featured-preview project-preview" aria-label="WebMotion project preview">
+        <span class="project-preview-orbit"></span>
+        <div class="project-preview-window"><div class="project-preview-bar"><i></i><i></i><i></i><b>WEBMOTION</b></div><div class="project-preview-screen"><span>PREVIEW.</span><strong>COMPARE.</strong><span>RECORD.</span><i></i></div></div>
+        <span class="project-preview-caption">RESPONSIVE WEB TOOL</span>
+      </div>
+      <div class="featured-bottom">
+        <small>${esc(item.type)}</small>
+        <strong>${esc(item.t)}</strong>
+        <em>${esc(item.d)}</em>
+        <b>${esc(item.attribution)}</b>
+        <div class="project-actions">
+          <a class="project-visit" href="${item.live}" target="_blank" rel="noopener noreferrer">Live Demo <span>↗</span></a>
+          <a class="project-source" href="${item.source}" target="_blank" rel="noopener noreferrer">Source Code ↗</a>
+        </div>
+      </div>
+    </article>`).join("");
+  const makeRow=(direction)=> {
     const cards=Array.from({length:3},(_,n)=>`<div class="work-card work-card--${k} work-card--placeholder" tabindex="0" role="group" aria-label="Preview ${n+1} — ${names[k]}">
       <div class="work-image work-image--${k}"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${n+1}</span></div>
     </div>`).join("");
     return `<div class="marquee-window marquee-window--${direction}" role="region" aria-label="${direction==="right"?"Portfolio previews moving right":"Portfolio previews moving left"}"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${cards}</div><div class="marquee-group" aria-hidden="true">${cards}</div></div></div>`;
   };
-  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>00</strong><span>WORKS</span></div></div>
-  <div class="portfolio-marquee">${makeRow("right",0)}${makeRow("left",1)}</div>
-  <div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>CONTINUOUS MOTION STUDY</span></div></div>`;
+  const content=k==="projects"
+    ? (projectMarkup||'<p class="project-empty">Projects will appear here as they are released.</p>')
+    : `<div class="portfolio-marquee">${makeRow("right")}${makeRow("left")}</div>`;
+  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(DATA[k].length).padStart(2,"0")}</strong><span>WORKS</span></div></div>
+  ${content}
+  <div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>${k==="projects"?"SELECTED DIGITAL PROJECTS":"CONTINUOUS MOTION STUDY"}</span></div></div>`;
   box.classList.remove("portfolio-shimmer-in");
   void box.offsetWidth;
   box.classList.add("portfolio-shimmer-in");
   box.addEventListener("animationend",e=>{if(e.animationName==="portfolio-shimmer")box.classList.remove("portfolio-shimmer-in")},{once:true});
-  const count=$("#portfolioCount");if(count)count.textContent="00";
+  const count=$("#portfolioCount");if(count)count.textContent=String(DATA[k].length).padStart(2,"0");
 }
 $("#tabs").addEventListener("click",e=>{const button=e.target.closest("button[data-tab]");if(button&&$("#tabs").contains(button))showTab(button.dataset.tab)});
 $(".folder").forEach(b=>b.addEventListener("click",()=>{
