@@ -952,3 +952,29 @@ body.portfolio-modal-open{overflow:hidden}
  .design-gallery-item{grid-template-columns:1fr;gap:16px}
  .design-gallery-item:nth-child(even) .design-gallery-visual{order:0}
 }
+
+
+/* Collection interaction repair — one clean row until more work is published. */
+html{overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:auto}
+body{overflow-x:hidden;overflow-y:visible;min-height:100vh}
+#pageViewport,#pageTrack{height:auto;min-height:0;overflow:visible}
+#pageTrack>section{height:auto;max-height:none;overflow:visible}
+.portfolio-marquee{display:block;overflow:visible;gap:0;padding:6px 0 18px}
+.marquee-window{width:100%;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-y;cursor:grab;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
+.marquee-window::-webkit-scrollbar{display:none}
+.marquee-track{display:flex;width:max-content;max-width:none;transform:none!important;animation:none!important;will-change:auto}
+.marquee-group{display:flex;flex:0 0 auto;gap:18px;padding-right:18px}
+.collection-card{flex:0 0 min(100%,560px);width:min(100%,560px);max-width:100%}
+.collection-card-art{width:100%;height:auto;aspect-ratio:16/9;min-height:0;overflow:hidden}
+.work-image--webmotion .art-orbit{position:absolute;left:50%;top:50%;width:54%;height:auto;aspect-ratio:1;transform:translate(-50%,-50%) rotate(-24deg) scaleY(.42)}
+.work-image--webmotion .art-window{position:absolute;left:50%;top:50%;width:68%;height:64%;padding:0 0 10px;transform:translate(-50%,-50%) perspective(900px) rotateY(-7deg) rotateX(2deg);overflow:hidden}
+.work-image--webmotion .art-window b{height:38%;margin:8px 10px 0}
+.collection-empty{min-height:160px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:8px;padding:24px;border:1px solid var(--line);background:rgba(12,14,20,.35)}
+.collection-empty span{font-size:9px;letter-spacing:.18em;color:var(--gold)}
+.collection-empty strong{font:500 clamp(22px,3vw,32px)/1.2 var(--serif)}
+.collection-empty p{margin:0;color:var(--muted);font-size:12px}
+@media(max-width:640px){
+ .collection-card{flex-basis:100%;width:100%}
+ .marquee-window{mask-image:none}
+ .work-image--webmotion .art-window{width:72%;height:62%}
+}
