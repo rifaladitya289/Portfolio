@@ -5,8 +5,7 @@ const DATA = {
     type:"WEB DEVELOPMENT · DEVELOPER TOOL",
     d:"A responsive website preview tool for exploring layouts across desktop, laptop, tablet, and mobile viewports.",
     attribution:"A product by Gallagher's Studio",
-    live:"https://rifaladitya289.github.io/WebMotion/",
-    source:"https://github.com/rifaladitya289/WebMotion"
+    live:"https://rifaladitya289.github.io/WebMotion/"
   }],
   designs:[],
   showcase:[]
@@ -303,7 +302,6 @@ function showTab(k){
         <b>${esc(item.attribution)}</b>
         <div class="project-actions">
           <a class="project-visit" href="${item.live}" target="_blank" rel="noopener noreferrer">Live Demo <span>↗</span></a>
-          <a class="project-source" href="${item.source}" target="_blank" rel="noopener noreferrer">Source Code ↗</a>
         </div>
       </div>
     </article>`).join("");
