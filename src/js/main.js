@@ -26,7 +26,7 @@ document.documentElement.style.setProperty("--topo-d",topo("#16264d"));
 document.documentElement.style.setProperty("--topo-l",topo("#d3d9e6"));
  
 // ---------- Cek aset gambar (hero, person, about) ----------
-[["assets/bg/poster.jpg","has-hero"],["assets/images/hero-person.png","has-person"],["assets/gw.jpg","has-about"]].forEach(([src,cls])=>{
+[["assets/bg/poster.jpg","has-hero"],["assets/images/portrait-gw.jpg","has-about"]].forEach(([src,cls])=>{
   const im=new Image();im.onload=()=>document.body.classList.add(cls);im.src=src;
 });
 
@@ -287,21 +287,30 @@ function showTab(k){
   const names={projects:"Digital Projects",designs:"Interface & Experience Design",showcase:"Client Showcase"};
   const descriptions={projects:"A growing collection of digital products built with curiosity and intent.",designs:"Selected interface work, visual decisions, and product experiences.",showcase:"Client and collaborative work will appear here when available."};
   const entries={
-    projects:[{title:"WebMotion",meta:"WEB DEVELOPMENT · DEVELOPER TOOL",desc:"A responsive workspace for previewing websites across screen sizes.",href:"project-detail.html",kind:"available"},{title:"Project 02",meta:"NEXT RELEASE",desc:"The next project will be introduced here when it is ready.",kind:"soon"},{title:"Project 03",meta:"IN DEVELOPMENT",desc:"A future project. Details will be added after it exists.",kind:"soon"}],
-    designs:[{title:"WebMotion Design",meta:"PRODUCT INTERFACE · UI DESIGN",desc:"The interface and visual system behind WebMotion.",href:"design-detail.html",kind:"available"},{title:"Design Collection 02",meta:"UPCOMING COLLECTION",desc:"More selected design work will be added here.",kind:"soon"},{title:"Design Collection 03",meta:"UPCOMING COLLECTION",desc:"A future collection, shown when work is ready.",kind:"soon"}],
-    showcase:[{title:"Client Showcase",meta:"COMING SOON",desc:"Client and collaboration work will be featured here when available.",kind:"soon"},{title:"Showcase 02",meta:"COMING SOON",desc:"No client work has been published here yet.",kind:"soon"},{title:"Showcase 03",meta:"COMING SOON",desc:"This space is reserved for future collaborations.",kind:"soon"}]
+    projects:[{title:"WebMotion",meta:"WEB DEVELOPMENT · DEVELOPER TOOL",desc:"A responsive workspace for previewing websites across screen sizes.",href:"pages/project-detail.html",kind:"available"}],
+    designs:[{title:"WebMotion Design",meta:"PRODUCT INTERFACE · UI DESIGN",desc:"The interface and visual system behind WebMotion.",href:"pages/design-detail.html",kind:"available"}],
+    showcase:[]
   };
   const cards=entries[k].map((item,index)=>`
-    <a class="work-card work-card--placeholder collection-card ${item.kind==="available"?"is-available":"is-coming-soon"}" ${item.href?'href="'+item.href+'"':'aria-disabled="true"'}>
-      <div class="work-image ${item.kind==="available"?"work-image--webmotion":"work-image--"+k} collection-card-art"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">0${index+1}</span><span class="collection-status">${item.kind==="available"?"OPEN COLLECTION":"COMING SOON"}</span></div>
-      <div class="collection-card-copy"><small>${esc(item.meta)}</small><strong>${esc(item.title)}</strong><p>${esc(item.desc)}</p><span class="collection-card-link">${item.href?"Explore details ↗":"In the works"}</span></div>
+    <a class="work-card work-card--placeholder collection-card is-available" href="${item.href}">
+      <div class="work-image work-image--webmotion collection-card-art" aria-hidden="true"><span class="art-orbit"></span><span class="art-window"><i></i><i></i><i></i><b></b></span><span class="work-index">01</span><span class="collection-status">OPEN COLLECTION</span></div>
+      <div class="collection-card-copy"><small>${esc(item.meta)}</small><strong>${esc(item.title)}</strong><p>${esc(item.desc)}</p><span class="collection-card-link">Explore details ↗</span></div>
     </a>`).join("");
+  const empty=k==="showcase"?'<div class="collection-empty"><span>COLLECTION 03</span><strong>Nothing published here yet.</strong><p>Client and collaborative work will appear when a project is ready to share.</p></div>':"";
   const group=cards;
-  const makeRow=(direction)=>`<div class="marquee-window marquee-window--${direction}" role="region" aria-label="Swipe or drag to browse ${k}" tabindex="0"><div class="marquee-track marquee-track--${direction}"><div class="marquee-group">${group}</div><div class="marquee-group" aria-hidden="true" inert>${group.replace(/<a /g,'<a tabindex="-1" ')}</div></div></div>`;
-  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(entries[k].filter(item=>item.kind==="available").length).padStart(2,"0")}</strong><span>AVAILABLE</span></div></div><div class="portfolio-marquee">${makeRow("right")}${makeRow("left")}</div><div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>SELECTED WORK · CONTINUOUS MOTION</span></div></div>`;
+  const row=cards?`<div class="marquee-window" role="region" aria-label="${names[k]} collection" tabindex="0"><div class="marquee-track"><div class="marquee-group">${group}</div></div></div>`:empty;
+  box.innerHTML=`<div class="portfolio-category"><div class="category-copy"><div><span class="category-kicker">0${["projects","designs","showcase"].indexOf(k)+1} / COLLECTION</span><h2>${names[k]}</h2><p>${descriptions[k]}</p></div><div class="category-total"><strong>${String(entries[k].length).padStart(2,"0")}</strong><span>AVAILABLE</span></div></div><div class="portfolio-marquee">${row}</div><div class="portfolio-endline"><span>GALLAGHER'S STUDIO</span><span>SELECTED WORK · ${entries[k].length?"ONE FEATURED COLLECTION":"UPDATES WHEN READY"}</span></div></div>`;
   box.classList.remove("portfolio-shimmer-in");void box.offsetWidth;box.classList.add("portfolio-shimmer-in");
-  const count=$("#portfolioCount");if(count)count.textContent=String(entries[k].filter(item=>item.kind==="available").length).padStart(2,"0");
+  const count=$("#portfolioCount");if(count)count.textContent=String(entries[k].length).padStart(2,"0");
+  $$(".folder").forEach(folder=>{if(folder.dataset.tab===k){folder.setAttribute("aria-current","true")}else folder.removeAttribute("aria-current")});
 }
+document.addEventListener("click",e=>{
+  const explore=e.target instanceof Element?e.target.closest('.portfolio-banner-bottom a[href="#stageP"]'):null;
+  if(!explore)return;
+  e.preventDefault();
+  const target=$("#stageP");
+  if(target)target.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+});
 $("#tabs").addEventListener("click",e=>{const button=e.target.closest("button[data-tab]");if(button&&$("#tabs").contains(button))showTab(button.dataset.tab)});
 $(".folder").forEach(b=>b.addEventListener("click",()=>{
   b.classList.add("is-opening");
@@ -321,7 +330,7 @@ showTab("projects");
   drag={row,id:e.pointerId,x:e.clientX,scroll:row.scrollLeft,moved:false};
   row.classList.add("is-dragging");
   row.querySelector(".marquee-track")?.style.setProperty("animation-play-state","paused");
-  row.setPointerCapture?.(e.pointerId);
+
  });
  document.addEventListener("pointermove",e=>{
   if(!drag||drag.id!==e.pointerId)return;
