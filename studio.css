@@ -873,3 +873,24 @@ body.portfolio-modal-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   .project-marquee-art .project-preview-window{transform:none}
 }
+
+
+/* ---------- Collection cards: consistent motion, touch and drag ---------- */
+.portfolio-marquee{gap:16px}
+.marquee-window{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;touch-action:pan-y;cursor:grab}
+.marquee-window::-webkit-scrollbar{display:none}
+.marquee-window.is-dragging{cursor:grabbing;user-select:none}
+.marquee-window.is-dragging .marquee-track,.marquee-window:focus-within .marquee-track{animation-play-state:paused}
+.collection-card{display:flex;flex-direction:column;flex:0 0 clamp(230px,29vw,360px);width:clamp(230px,29vw,360px);min-height:100%;color:inherit;text-decoration:none;cursor:pointer}
+.collection-card[aria-disabled="true"]{cursor:default;pointer-events:none}
+.collection-card-art{position:relative;aspect-ratio:1.48;height:auto;min-height:0}
+.collection-status{position:absolute;right:14px;bottom:12px;padding:7px 10px;border:1px solid rgba(220,205,180,.28);background:rgba(8,10,14,.72);font-size:9px;letter-spacing:.16em;color:#e6d8c5}
+.collection-card-copy{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 16px 18px}
+.collection-card-copy small{font-size:9px;letter-spacing:.16em;color:var(--gold-soft,#c9a77b)}
+.collection-card-copy strong{font-family:inherit;font-size:clamp(17px,2vw,22px);font-weight:500;letter-spacing:.01em}
+.collection-card-copy p{margin:0;color:rgba(230,232,238,.68);font-size:12px;line-height:1.7}
+.collection-card-link{margin-top:5px;font-size:11px;letter-spacing:.08em;color:var(--gold-soft,#c9a77b)}
+.collection-card.is-available:hover .collection-card-link{text-decoration:underline;text-underline-offset:4px}
+@media(hover:hover){.marquee-window:hover .marquee-track{animation-play-state:paused}}
+@media(max-width:640px){.collection-card{flex-basis:min(78vw,310px);width:min(78vw,310px)}.marquee-group{gap:12px;padding-right:12px}}
+@media(prefers-reduced-motion:reduce){.marquee-window{overflow-x:auto}.marquee-track--right,.marquee-track--left{animation:none;transform:none}}
