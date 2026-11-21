@@ -841,3 +841,35 @@ body.portfolio-modal-open{overflow:hidden}
   #contact .contact-comment-form{width:100%!important;min-width:0!important}
   #contact .contact-comment-form .file{max-width:100%!important}
 }
+
+
+/* Projects use the same two-row continuous marquee language as Designs and Showcase. */
+.project-marquee-card{cursor:default!important;display:flex!important;flex-direction:column!important}
+.project-marquee-art{
+  display:grid!important;place-items:center!important;position:relative!important;
+  aspect-ratio:1.48!important;height:auto!important;min-height:0!important;
+  background:radial-gradient(ellipse at 52% 48%,rgba(117,77,194,.25),transparent 48%),linear-gradient(135deg,#171421,#08090d)!important;
+}
+.project-marquee-art .project-preview-orbit{width:66%;pointer-events:none}
+.project-marquee-art .project-preview-window{width:min(72%,260px);padding-bottom:10px}
+.project-marquee-art .project-preview-bar{padding:8px 10px}
+.project-marquee-art .project-preview-screen{padding:17px 16px;font-size:clamp(11px,1.35vw,17px)}
+.project-marquee-art .work-index{position:absolute;right:12px;bottom:10px;z-index:2;color:rgba(240,236,228,.55);font-size:8px;letter-spacing:.16em}
+.project-marquee-info{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:15px 16px 17px;min-height:174px}
+.project-marquee-info>small{color:var(--gold);font-size:7px;line-height:1.5;letter-spacing:.14em}
+.project-marquee-info>strong{font:400 clamp(1.45rem,2.2vw,2rem)/1 var(--serif);color:var(--ivory)}
+.project-marquee-info>p{margin:0;color:var(--muted);font-size:9px;line-height:1.7}
+.project-marquee-credit{color:var(--gold);font-size:7px;letter-spacing:.1em;text-transform:uppercase}
+.project-marquee-info .project-visit{margin-top:auto;padding:8px 11px;font-size:8px}
+.marquee-window{cursor:grab;user-select:none;-webkit-user-select:none;touch-action:pan-y}
+.marquee-window.is-dragging{cursor:grabbing}
+.marquee-window.is-dragging .marquee-track{animation-play-state:paused!important}
+.marquee-window a{user-select:auto;-webkit-user-select:auto}
+@media(max-width:640px){
+  .project-marquee-info{min-height:184px;padding:13px}
+  .project-marquee-info>p{font-size:8px}
+  .project-marquee-art .project-preview-window{width:78%}
+}
+@media(prefers-reduced-motion:reduce){
+  .project-marquee-art .project-preview-window{transform:none}
+}
