@@ -238,6 +238,33 @@ footer{padding:26px var(--page-pad) 36px;border-top:1px solid var(--line);color:
 @keyframes collectionIndex{0%,100%{opacity:.65}50%{opacity:1}}
 @media(prefers-reduced-motion:reduce){.collection-card-art .art-orbit,.collection-card-art .art-window,.collection-card-art .work-index{animation:none}}
 
+/* Manual horizontal scrolling belongs to the card rails, never the page */
+.marquee-window{
+  width:100%;overflow-x:auto;overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+  touch-action:pan-x pan-y;scrollbar-width:none;cursor:grab;
+  scroll-snap-type:x proximity;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)
+}
+.marquee-window::-webkit-scrollbar{display:none}
+.marquee-window:active,.marquee-window.is-dragging{cursor:grabbing}
+.marquee-track{width:max-content;min-width:100%;transform:none!important;animation:none!important}
+.marquee-group{width:max-content;min-width:100%}
+.marquee-group>.work-card{scroll-snap-align:start;flex:0 0 clamp(250px,34vw,390px);width:clamp(250px,34vw,390px)}
+.folders{
+  display:flex;gap:clamp(16px,3vw,32px);width:100%;
+  overflow-x:auto;overflow-y:visible;padding:22px 4px 18px;
+  margin:12px 0 10px;-webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;touch-action:pan-x pan-y;
+  scroll-snap-type:x proximity;scrollbar-width:none
+}
+.folders::-webkit-scrollbar{display:none}
+.folders>.folder{flex:0 0 calc((100% - 2 * clamp(16px,3vw,32px))/3);min-width:0;scroll-snap-align:start}
+@media(max-width:760px){
+  .folders>.folder{flex:0 0 min(78vw,330px)}
+  .marquee-group>.work-card{flex-basis:min(78vw,350px);width:min(78vw,350px)}
+}
+@media(prefers-reduced-motion:reduce){.marquee-track{animation:none!important}}
+
 /* Portfolio — collection index, no dashboard cards */
 #portfolio{padding-top:132px}
 .portfolio-heading{padding:0 0 24px;border-bottom:1px solid var(--line)}
