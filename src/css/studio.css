@@ -1074,3 +1074,30 @@ body{overflow-x:hidden;overflow-y:visible;min-height:100vh}
 .marquee-group--clone{pointer-events:none;user-select:none}
 .marquee-group--clone a{pointer-events:none}
 @media(prefers-reduced-motion:reduce){.marquee-group--clone{display:none!important}}
+
+
+/* Final folder-preview motion override.
+   Earlier legacy hover rules were being overridden by later !important transforms. */
+.folder.is-peeking .peek,
+.folder:focus-visible .peek,
+.folder.is-opening .peek{
+  transform:translate3d(0,-18px,0) rotate(0)!important;
+  border-color:rgba(201,167,123,.62)!important;
+  background:linear-gradient(140deg,rgba(201,167,123,.16),rgba(255,255,255,.045) 48%,transparent 78%)!important;
+  box-shadow:0 18px 34px rgba(0,0,0,.24)!important;
+}
+.folder.is-peeking .folder-preview,
+.folder:focus-visible .folder-preview,
+.folder.is-opening .folder-preview{
+  transform:translate3d(0,-5px,0)!important;
+}
+@media(prefers-reduced-motion:reduce){
+  .folder.is-peeking .peek,
+  .folder:focus-visible .peek,
+  .folder.is-opening .peek,
+  .folder.is-peeking .folder-preview,
+  .folder:focus-visible .folder-preview,
+  .folder.is-opening .folder-preview{
+    transform:none!important;
+  }
+}
