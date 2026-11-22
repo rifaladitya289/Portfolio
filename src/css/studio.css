@@ -1101,3 +1101,114 @@ body{overflow-x:hidden;overflow-y:visible;min-height:100vh}
     transform:none!important;
   }
 }
+
+
+/* ===== FOLDER LAYOUT REPAIR · 2026-11 =====
+   One responsive layout system; preview and title occupy separate zones. */
+.folders{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:clamp(18px,3vw,34px)!important;
+  width:100%!important;
+  margin:22px 0 12px!important;
+  padding:12px 4px 18px!important;
+  overflow:visible!important;
+  touch-action:auto!important;
+  overscroll-behavior:initial!important;
+  scroll-snap-type:none!important;
+}
+.folders>.folder{
+  flex:none!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:194px!important;
+  margin:0!important;
+  scroll-snap-align:none!important;
+}
+.folder{position:relative!important;isolation:isolate!important}
+.folder::before{z-index:0!important}
+.folder .back{z-index:0!important;inset:45px 0 8px!important}
+.folder .peek{
+  z-index:1!important;
+  inset:36px 12px 68px!important;
+  overflow:hidden!important;
+  transform:translate3d(0,0,0)!important;
+}
+.folder-preview{
+  inset:7px 7px 6px!important;
+  min-width:0!important;
+  gap:5px!important;
+}
+.folder-preview-screen{
+  min-width:0!important;
+  min-height:0!important;
+  flex:1 1 auto!important;
+}
+.folder-screen-body{padding:8px 8px!important}
+.folder-screen-body strong{
+  margin:5px 0!important;
+  font-size:clamp(13px,1.45vw,18px)!important;
+  line-height:.98!important;
+}
+.folder-screen-bar{height:15px!important}
+.folder-screen-body{inset:15px 0 0!important}
+.folder-preview-caption{
+  min-width:0!important;
+  align-items:center!important;
+  font-size:5px!important;
+  line-height:1.2!important;
+  letter-spacing:.08em!important;
+}
+.folder-preview-caption b,.folder-preview-caption span{
+  min-width:0!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+.folder .front{
+  position:absolute!important;
+  z-index:3!important;
+  left:0!important;
+  right:0!important;
+  bottom:14px!important;
+  display:flex!important;
+  align-items:baseline!important;
+  gap:8px!important;
+  width:100%!important;
+  padding:0 10px!important;
+  font-size:clamp(1.45rem,2.4vw,2.15rem)!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+.folder .front::before{
+  left:10px!important;
+  bottom:calc(100% + 12px)!important;
+  font-size:7px!important;
+}
+.folder .front b{font-size:10px!important}
+.folder .go{font-size:14px!important;flex:0 0 auto!important}
+.folder.is-peeking .peek,.folder:focus-visible .peek,.folder.is-opening .peek{
+  transform:translate3d(0,-12px,0)!important;
+}
+.folder.is-peeking .folder-preview,.folder:focus-visible .folder-preview,.folder.is-opening .folder-preview{
+  transform:translate3d(0,-2px,0)!important;
+}
+@media(max-width:900px){
+  .folders{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .folder-screen-body strong{font-size:clamp(14px,2.2vw,18px)!important}
+}
+@media(max-width:600px){
+  .folders{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:16px!important;
+    padding:8px 2px 14px!important;
+  }
+  .folders>.folder{min-height:190px!important}
+  .folder .peek{inset:34px 12px 66px!important}
+  .folder .front{font-size:clamp(1.7rem,7vw,2.15rem)!important}
+  .folder-screen-body strong{font-size:17px!important}
+  .folder-preview-caption{font-size:6px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .folder .peek,.folder-preview,.folder .front{transition:none!important}
+}
